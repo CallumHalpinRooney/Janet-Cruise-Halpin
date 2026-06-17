@@ -939,23 +939,24 @@
     margin: 1.5rem 0 4rem;
   }
   .originals-grid {
-    columns: 3;
-    column-gap: 3px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
   }
   .original-card {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    break-inside: avoid;
-    margin-bottom: 3px;
   }
   .original-card-img {
     overflow: hidden;
     position: relative;
+    aspect-ratio: 1 / 1;
   }
   .original-card-img img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
     transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
     filter: brightness(0.92);
@@ -1935,7 +1936,7 @@
     .about-image { height: 60vw; }
     .about-content { padding: 3.5rem 2rem; }
     .prints-grid { grid-template-columns: repeat(2, 1fr); }
-    .originals-grid { columns: 2; }
+    .originals-grid { grid-template-columns: repeat(2, 1fr); }
     .contact-section { grid-template-columns: 1fr; }
     .contact-image { height: 55vw; }
     .contact-content { padding: 3.5rem 2rem; }
