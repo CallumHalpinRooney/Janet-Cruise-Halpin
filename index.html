@@ -1,0 +1,3975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Janet Cruise Halpin — Irish Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE7D9;
+    --forest: #2C4A35;
+    --forest-light: #3D6147;
+    --sage: #7A9E84;
+    --sage-light: #A8C4AC;
+    --navy: #2E3F5C;
+    --navy-light: #4A5F7A;
+    --ochre: #C8871A;
+    --ochre-light: #E0A842;
+    --slate: #6B7280;
+    --slate-dark: #4B5563;
+    --charcoal: #1C1C1A;
+    --white: #FDFAF5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  @keyframes pageReveal {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+    animation: pageReveal 0.6s ease forwards;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.75rem 3.5rem;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background 0.5s, box-shadow 0.5s, padding 0.4s, border-color 0.5s;
+  }
+  nav.scrolled {
+    background: rgba(245,240,232,0.98);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(28,28,26,0.07);
+    border-bottom-color: rgba(44,74,53,0.12);
+    padding: 1.25rem 3.5rem;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.5s;
+  }
+  nav.scrolled .nav-logo { color: var(--charcoal); }
+  .nav-links {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.3s;
+  }
+  nav.scrolled .nav-links a { color: var(--charcoal); }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: currentColor;
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--white); opacity: 1; }
+  nav.scrolled .nav-links a:hover { color: var(--forest); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 100vh;
+    min-height: 600px;
+    position: relative;
+    overflow: hidden;
+    background: #0e0d0b;
+  }
+
+  /* Full-screen painting background */
+  .hero-image-panel {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .hero-image-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.06);
+    animation: heroZoom 18s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    to { transform: scale(1); }
+  }
+  /* Two-layer overlay: strong bottom scrim + overall tint */
+  .hero-image-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top,
+        rgba(5,4,3,1)    0%,
+        rgba(5,4,3,0.88) 28%,
+        rgba(5,4,3,0.45) 55%,
+        rgba(5,4,3,0.15) 80%,
+        transparent      100%
+      ),
+      rgba(0,0,0,0.22);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero-image-panel::after { display: none; }
+
+  /* Painting credit badge — bottom right */
+  .hero-painting-label {
+    position: absolute;
+    bottom: 2rem;
+    right: 2.5rem;
+    z-index: 3;
+    text-align: right;
+    opacity: 0;
+    animation: fadeUp 0.7s 1.8s forwards;
+  }
+  .hero-painting-label span {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.06em;
+  }
+  .hero-painting-label span.label-meta {
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 0.2rem;
+  }
+
+  /* Text overlay anchored to bottom-left */
+  .hero-content {
+    position: absolute;
+    bottom: 0; left: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem 6rem 5.5rem;
+    max-width: 820px;
+    background: none;
+  }
+  .hero-content::before { display: none; }
+
+  .hero-eyebrow {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #b8d4bc;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: #b8d4bc;
+    flex-shrink: 0;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.8rem, 6vw, 7.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.9), 0 4px 60px rgba(0,0,0,0.7);
+  }
+  .hero-title em {
+    font-style: italic;
+    color: #b8d4bc;
+    display: block;
+  }
+  .hero-tagline {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .hero-desc {
+    font-size: 0.97rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.9);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1.25rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+  .hero-edition-note {
+    margin-top: 1.75rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    opacity: 0;
+    animation: fadeUp 0.8s 1.4s forwards;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .hero-edition-note::before {
+    content: '';
+    display: inline-block;
+    width: 16px; height: 1px;
+    background: rgba(255,255,255,0.5);
+    flex-shrink: 0;
+  }
+
+  /* Scroll-down indicator */
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.8s forwards;
+  }
+  .hero-scroll span {
+    font-size: 0.52rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    font-family: 'Jost', sans-serif;
+  }
+  .hero-scroll svg {
+    color: rgba(245,240,232,0.4);
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ── CREDENTIAL TICKER ── */
+  .ticker-wrap {
+    background: var(--forest);
+    padding: 0.85rem 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: tickerScroll 42s linear infinite;
+  }
+  .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+  @keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0 2.5rem;
+    white-space: nowrap;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.7);
+  }
+  .ticker-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--ochre-light);
+    flex-shrink: 0;
+  }
+
+  /* ── STUDIO JOURNAL QUOTE ── */
+  .studio-quote {
+    background: #0f1a12;
+    padding: 8rem 3.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .studio-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -3rem; left: 2.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .sq-left { display: flex; flex-direction: column; gap: 1.5rem; }
+  .sq-label {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+  }
+  .sq-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    font-weight: 300;
+    color: rgba(245,240,232,0.92);
+    line-height: 1.2;
+  }
+  .sq-title em { font-style: italic; color: var(--sage-light); }
+  .sq-divider { width: 40px; height: 1px; background: rgba(168,196,172,0.35); }
+  .sq-pullquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.45rem, 2vw, 2.1rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.65;
+    color: rgba(245,240,232,0.88);
+  }
+  .sq-attribution {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .sq-attribution::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: rgba(245,240,232,0.2);
+  }
+
+  /* ── COLLECTOR'S CIRCLE ── */
+  .collectors-circle {
+    background: var(--cream-dark);
+    padding: 7rem 3.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .collectors-circle::after {
+    content: '';
+    position: absolute;
+    bottom: -120px; right: -120px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    border: 1px solid rgba(44,74,53,0.1);
+    pointer-events: none;
+  }
+  .cc-eyebrow {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .cc-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 20px; height: 1px;
+    background: var(--ochre);
+  }
+  .cc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+  .cc-title em { font-style: italic; color: var(--forest); }
+  .cc-body {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--slate-dark);
+    margin-bottom: 1.75rem;
+  }
+  .cc-perks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 2.5rem;
+  }
+  .cc-perk {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    font-size: 0.83rem;
+    font-weight: 300;
+    color: var(--slate-dark);
+    line-height: 1.5;
+  }
+  .cc-perk-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--ochre);
+    flex-shrink: 0;
+    margin-top: 0.45rem;
+  }
+  .cc-form {
+    display: flex;
+    border: 1px solid rgba(44,74,53,0.25);
+    overflow: hidden;
+    transition: border-color 0.3s;
+    max-width: 440px;
+  }
+  .cc-form:focus-within { border-color: var(--forest); }
+  .cc-form input {
+    flex: 1;
+    padding: 0.9rem 1.1rem;
+    background: var(--white);
+    border: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    outline: none;
+    min-width: 0;
+  }
+  .cc-form input::placeholder { color: var(--slate); }
+  .cc-form button {
+    padding: 0.9rem 1.4rem;
+    background: var(--forest);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.3s;
+  }
+  .cc-form button:hover { background: var(--forest-light); }
+  .cc-privacy {
+    margin-top: 0.8rem;
+    font-size: 0.65rem;
+    color: var(--slate);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cc-success {
+    display: none;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.85rem 1.1rem;
+    background: rgba(44,74,53,0.08);
+    border: 1px solid rgba(44,74,53,0.2);
+    font-size: 0.82rem;
+    color: var(--forest);
+    max-width: 440px;
+    margin-top: 0.75rem;
+  }
+  .cc-success.show { display: flex; }
+  /* Right: blurred preview card */
+  .cc-preview-card {
+    background: var(--charcoal);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cc-preview-label {
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ochre-light);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cc-preview-label::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--ochre-light);
+    display: inline-block;
+    animation: ccPulse 2s ease-in-out infinite;
+  }
+  @keyframes ccPulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
+  .cc-preview-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    filter: blur(10px) brightness(0.45);
+    transition: filter 0.7s ease;
+  }
+  .cc-preview-card:hover .cc-preview-img { filter: blur(0) brightness(0.8); }
+  .cc-preview-caption {
+    position: absolute;
+    bottom: 2.5rem; left: 2.5rem; right: 2.5rem;
+    text-align: center;
+    pointer-events: none;
+    transition: opacity 0.5s;
+  }
+  .cc-preview-card:hover .cc-preview-caption { opacity: 0; }
+  .cc-preview-caption p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.55);
+  }
+  .cc-preview-caption span {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  @media (max-width: 900px) {
+    .studio-quote { grid-template-columns: 1fr; gap: 2.5rem; padding: 5rem 1.5rem; }
+    .collectors-circle { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; }
+    .cc-preview-card { display: none; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    background: var(--forest);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--forest);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--forest);
+  }
+  .btn-outline {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    background: transparent;
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.45);
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s, background 0.3s;
+  }
+  .btn-outline:hover {
+    border-color: rgba(255,255,255,0.9);
+    color: var(--white);
+    background: rgba(255,255,255,0.08);
+  }
+  .btn-ochre {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: var(--ochre);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--ochre);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+  .btn-ochre:hover {
+    background: transparent;
+    color: var(--ochre);
+  }
+
+  /* ── SECTION SHELLS ── */
+  section { position: relative; }
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--charcoal);
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--forest);
+  }
+
+  /* ── ABOUT STRIP ── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+    background: var(--cream-dark);
+  }
+  .about-image {
+    position: relative;
+    overflow: hidden;
+  }
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+  }
+  .about-image:hover img { transform: scale(1.03); }
+  .about-texture-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(44,74,53,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 5.5rem;
+  }
+  .about-content p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--slate-dark);
+    margin-bottom: 1.5rem;
+  }
+  .about-content p strong {
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+  .about-detail {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(44,74,53,0.15);
+  }
+  .about-detail-item { text-align: left; }
+  .about-detail-item .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--forest);
+    display: block;
+    line-height: 1;
+  }
+  .about-detail-item .lbl {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  /* ── SHOP / PRINTS ── */
+  .prints-section {
+    padding: 7rem 3.5rem;
+    background: var(--cream);
+  }
+  .prints-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+  }
+  .prints-header-left { max-width: 500px; }
+  .category-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .tab-btn {
+    padding: 0.5rem 1.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(28,28,26,0.2);
+    color: var(--slate);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .tab-btn.active {
+    background: var(--forest);
+    border-color: var(--forest);
+    color: var(--white);
+  }
+  .tab-btn:hover:not(.active) {
+    border-color: var(--forest);
+    color: var(--forest);
+  }
+  .prints-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .print-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream-dark);
+    cursor: pointer;
+    display: none;
+  }
+  .print-card.visible { display: block; }
+  .print-card-img {
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+  .print-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .print-card:hover .print-card-img img { transform: scale(1.07); }
+  .print-card-info {
+    padding: 1.25rem 1.25rem 1.5rem;
+    background: var(--white);
+  }
+  .print-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 0.25rem;
+  }
+  .print-card-meta {
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--slate);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .print-card-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--forest);
+    font-weight: 500;
+    margin-bottom: 0.85rem;
+  }
+  .print-sizes {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  .size-pill {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(28,28,26,0.2);
+    color: var(--slate);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    font-family: 'Jost', sans-serif;
+  }
+  .size-pill.active, .size-pill:hover {
+    background: var(--forest);
+    border-color: var(--forest);
+    color: var(--white);
+  }
+  .add-to-cart {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--forest);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .add-to-cart:hover { background: var(--forest-light); }
+  /* Paintings — Inquiry CTA */
+  .inquire-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    color: var(--navy);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--navy);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .inquire-btn:hover {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  /* ── ORIGINALS / PAINTINGS ── */
+  .originals-section {
+    padding: 7rem 3.5rem;
+    background: #f0eeea;
+    position: relative;
+    overflow: hidden;
+  }
+  .originals-section::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(42,74,53,0.06);
+    pointer-events: none;
+  }
+  .originals-section .section-label { color: var(--forest); }
+  .originals-section .section-title { color: var(--ink); }
+  .originals-section .section-title em { color: var(--forest); }
+  .originals-intro {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--slate);
+    max-width: 520px;
+    margin: 1.5rem 0 4rem;
+  }
+  .originals-grid {
+    columns: 3;
+    column-gap: 3px;
+  }
+  .original-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    break-inside: avoid;
+    margin-bottom: 3px;
+  }
+  .original-card-img {
+    overflow: hidden;
+    position: relative;
+  }
+  .original-card-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
+    filter: brightness(0.92);
+  }
+  .original-card:hover .original-card-img img {
+    transform: scale(1.04);
+    filter: brightness(1);
+  }
+  .original-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(12,18,24,0.92) 0%, rgba(12,18,24,0.45) 42%, transparent 68%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.6rem 1.4rem 1.4rem;
+    opacity: 0;
+    transition: opacity 0.45s cubic-bezier(.4,0,.2,1);
+  }
+  .original-card:hover .original-card-overlay { opacity: 1; }
+  .original-card-info {
+    padding: 1.1rem 1.25rem 1.4rem;
+    background: var(--charcoal);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .original-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.02em;
+  }
+  .original-card-size {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 0.9rem;
+  }
+  .original-overlay-btn {
+    display: block;
+    width: 100%;
+    padding: 0.65rem;
+    background: rgba(200,135,26,0.9);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-align: center;
+  }
+  .original-overlay-btn:hover { background: var(--ochre); }
+
+  /* ── INQUIRY MODAL ── */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,28,40,0.75);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .modal-bg.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal {
+    background: var(--cream);
+    max-width: 520px;
+    width: 90%;
+    padding: 3.5rem;
+    position: relative;
+    transform: translateY(24px);
+    transition: transform 0.4s;
+  }
+  .modal-bg.open .modal { transform: translateY(0); }
+  .modal-close {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--slate);
+    line-height: 1;
+    font-family: 'Jost', sans-serif;
+  }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+  }
+  .modal-subtitle {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--slate);
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+  .form-field { margin-bottom: 1.25rem; }
+  .form-field label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--slate-dark);
+    margin-bottom: 0.45rem;
+  }
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: var(--white);
+    border: 1px solid rgba(28,28,26,0.2);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus {
+    border-color: var(--forest);
+  }
+  .form-field textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--forest);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.3s;
+  }
+  .form-submit:hover { background: var(--forest-light); }
+
+  /* ── CART TOAST ── */
+  .cart-toast {
+    position: fixed;
+    bottom: 2.5rem; right: 2.5rem;
+    background: var(--forest);
+    color: var(--white);
+    padding: 1rem 2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    z-index: 300;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.4s;
+    pointer-events: none;
+  }
+  .cart-toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ── EXHIBITION STRIP ── */
+  .exhibition-strip {
+    padding: 5rem 3.5rem;
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .exhibition-strip::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(245,240,232,0.05);
+    transform: translate(40%, 40%);
+  }
+  .ex-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    color: var(--white);
+    flex: 0 0 auto;
+    max-width: 380px;
+    line-height: 1.2;
+  }
+  .ex-title em { font-style: italic; color: var(--ochre-light); }
+  .ex-items {
+    display: flex;
+    gap: 3rem;
+    flex: 1;
+  }
+  .ex-item {
+    padding: 1.5rem 2rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    min-width: 160px;
+  }
+  .ex-item-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--ochre-light);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .ex-item-name {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+  .ex-item-loc {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 65vh;
+  }
+  .contact-image {
+    overflow: hidden;
+  }
+  .contact-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .contact-content {
+    padding: 6rem 5.5rem;
+    background: var(--cream-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .contact-content p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--slate-dark);
+    margin: 1.5rem 0 2.5rem;
+  }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .contact-link-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(44,74,53,0.2);
+    text-decoration: none;
+    transition: all 0.3s;
+    background: transparent;
+  }
+  .contact-link-item:hover {
+    background: var(--forest);
+    border-color: var(--forest);
+  }
+  .contact-link-item:hover .cli-label,
+  .contact-link-item:hover .cli-val { color: var(--white); }
+  .cli-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    width: 70px;
+    flex: 0 0 auto;
+    transition: color 0.3s;
+  }
+  .cli-val {
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    transition: color 0.3s;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    padding: 3rem 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+  .footer-copy {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.4);
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.55);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+
+  /* ── DIVIDER ── */
+  .rule { height: 1px; background: rgba(44,74,53,0.12); margin: 0 3.5rem; }
+
+  /* ── OUT OF STOCK ── */
+  .out-of-stock-badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    background: rgba(28,28,26,0.82);
+    color: rgba(245,240,232,0.9);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+  }
+  .print-card-img { position: relative; }
+  .sold-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(245,240,232,0.18);
+    pointer-events: none;
+  }
+  .notify-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    color: var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid rgba(28,28,26,0.35);
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+  .notify-btn:hover {
+    background: var(--charcoal);
+    color: var(--white);
+    border-color: var(--charcoal);
+  }
+  .notify-btn svg { flex-shrink: 0; }
+
+  /* ── NOTIFY MODAL ── */
+  .notify-modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,28,40,0.72);
+    z-index: 250;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+  }
+  .notify-modal-bg.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .notify-modal {
+    background: var(--cream);
+    max-width: 460px;
+    width: 92%;
+    padding: 3rem 3rem 2.75rem;
+    position: relative;
+    transform: translateY(22px) scale(0.98);
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 32px 80px rgba(20,28,40,0.22);
+  }
+  .notify-modal-bg.open .notify-modal {
+    transform: translateY(0) scale(1);
+  }
+  .notify-modal-close {
+    position: absolute;
+    top: 1.25rem; right: 1.25rem;
+    background: none; border: none;
+    font-size: 1.1rem; cursor: pointer;
+    color: var(--slate); line-height: 1;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    transition: color 0.2s;
+  }
+  .notify-modal-close:hover { color: var(--charcoal); }
+  .notify-modal-icon {
+    width: 44px; height: 44px;
+    background: rgba(44,74,53,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .notify-modal-icon svg { color: var(--forest); }
+  .notify-modal-artwork-img {
+    width: 72px; height: 72px;
+    object-fit: cover;
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+    border: 1px solid rgba(28,28,26,0.1);
+  }
+  .notify-modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+    clear: none;
+  }
+  .notify-modal-artwork-name {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 0.6rem;
+  }
+  .notify-modal-sub {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+    clear: both;
+  }
+  .notify-input-row {
+    display: flex;
+    gap: 0;
+    border: 1px solid rgba(28,28,26,0.22);
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .notify-input-row:focus-within {
+    border-color: var(--forest);
+  }
+  .notify-input-row input {
+    flex: 1;
+    padding: 0.85rem 1rem;
+    background: var(--white);
+    border: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    outline: none;
+    min-width: 0;
+  }
+  .notify-input-row input::placeholder { color: var(--slate); }
+  .notify-input-submit {
+    padding: 0.85rem 1.4rem;
+    background: var(--forest);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  .notify-input-submit:hover { background: var(--forest-light); }
+  .notify-privacy {
+    font-size: 0.68rem;
+    color: var(--slate);
+    margin-top: 0.9rem;
+    line-height: 1.6;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  .notify-privacy svg { flex-shrink: 0; margin-top: 2px; }
+  /* Success state */
+  .notify-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0 0.5rem;
+  }
+  .notify-success.show { display: flex; }
+  .notify-success-icon {
+    width: 52px; height: 52px;
+    background: rgba(44,74,53,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+    animation: popIn 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .notify-success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400;
+    color: var(--charcoal); margin-bottom: 0.5rem;
+  }
+  .notify-success p {
+    font-size: 0.82rem; font-weight: 300;
+    color: var(--slate); line-height: 1.7; max-width: 300px;
+  }
+  .notify-form-inner { transition: opacity 0.25s; }
+  .notify-form-inner.hiding { opacity: 0; pointer-events: none; }
+
+  /* ── PRINT RUN / ON-DEMAND BADGES ── */
+  .print-run-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: rgba(44,74,53,0.88);
+    color: rgba(245,240,232,0.95);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.56rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 5px 10px; backdrop-filter: blur(4px);
+    pointer-events: none;
+  }
+  .on-demand-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: rgba(200,135,26,0.82);
+    color: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.56rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 5px 10px; backdrop-filter: blur(4px);
+    pointer-events: none;
+  }
+  .available-now-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(44,74,53,0.88);
+    color: rgba(245,240,232,0.95);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.56rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 5px 10px; backdrop-filter: blur(4px);
+    pointer-events: none;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .available-now-badge::before {
+    content: '';
+    display: inline-block;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #7fcc8a;
+    flex-shrink: 0;
+  }
+  .pill-qty-warn {
+    display: block;
+    font-size: 0.5rem; letter-spacing: 0.08em;
+    color: #c0392b; font-weight: 500;
+    line-height: 1; margin-top: 2px;
+  }
+  .od-note {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 0.65rem; color: var(--ochre);
+    letter-spacing: 0.06em; margin: 0.4rem 0 0.6rem;
+    font-weight: 400;
+  }
+
+  /* ── SIZE-LEVEL OOS ── */
+  .size-pill.oos {
+    opacity: 0.42;
+    cursor: pointer;
+    border-style: dashed;
+  }
+  .size-pill.oos:hover {
+    background: transparent;
+    border-color: var(--ochre);
+    color: var(--ochre);
+  }
+  .size-pill.oos.selected-oos {
+    background: transparent;
+    border-color: var(--ochre);
+    color: var(--ochre);
+    border-style: solid;
+    opacity: 1;
+  }
+
+  /* Inline notify strip */
+  .inline-notify {
+    display: none;
+    margin-top: 0.75rem;
+    background: rgba(200,135,26,0.07);
+    border: 1px solid rgba(200,135,26,0.25);
+    padding: 0.85rem 1rem;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .inline-notify.show { display: flex; }
+  .inline-notify-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .inline-notify-row {
+    display: flex;
+    border: 1px solid rgba(200,135,26,0.3);
+    overflow: hidden;
+  }
+  .inline-notify-row input {
+    flex: 1; min-width: 0;
+    padding: 0.6rem 0.75rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem; font-weight: 300;
+    background: var(--white);
+    border: none; outline: none;
+    color: var(--charcoal);
+  }
+  .inline-notify-row input::placeholder { color: var(--slate); }
+  .inline-notify-row button {
+    padding: 0.6rem 1rem;
+    background: var(--ochre);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    border: none; cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .inline-notify-row button:hover { background: #a8760f; }
+  .inline-notify-sent {
+    display: none;
+    font-size: 0.72rem; color: var(--forest);
+    align-items: center; gap: 6px; font-weight: 400;
+  }
+  .inline-notify-sent.show { display: flex; }
+
+  /* ── INLINE EDITING ── */
+  .print-card-info { position: relative; }
+  .edit-toggle {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: none; border: none;
+    color: var(--slate); cursor: pointer;
+    opacity: 0; transition: opacity 0.2s;
+    padding: 4px; line-height: 1;
+  }
+  .print-card:hover .edit-toggle { opacity: 1; }
+  .edit-toggle:hover { color: var(--forest); }
+  .edit-toggle.active { opacity: 1; color: var(--forest); }
+
+  .inline-edit-panel {
+    display: none;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    background: rgba(44,74,53,0.05);
+    border: 1px solid rgba(44,74,53,0.18);
+    margin-top: 0.75rem;
+  }
+  .inline-edit-panel.show { display: flex; }
+  .edit-field-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .edit-field-row label {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate);
+    font-weight: 500;
+  }
+  .edit-field-row input,
+  .edit-field-row select {
+    padding: 0.45rem 0.65rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    background: var(--white);
+    border: 1px solid rgba(28,28,26,0.2);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .edit-field-row input:focus,
+  .edit-field-row select:focus { border-color: var(--forest); }
+  .edit-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+  }
+  .edit-save {
+    flex: 1;
+    padding: 0.5rem;
+    background: var(--forest);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .edit-save:hover { background: var(--forest-light); }
+  .edit-cancel {
+    padding: 0.5rem 0.85rem;
+    background: none;
+    color: var(--slate);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(28,28,26,0.18);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .edit-cancel:hover { border-color: var(--charcoal); color: var(--charcoal); }
+  .edit-saved-flash {
+    font-size: 0.65rem;
+    color: var(--forest);
+    text-align: center;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0.3rem 0;
+  }
+  .edit-saved-flash.show { display: flex; }
+  .stock-pill-row {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .stock-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid rgba(28,28,26,0.2);
+    cursor: pointer;
+    background: var(--white);
+    color: var(--slate);
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .stock-toggle.in-stock { background: rgba(44,74,53,0.1); border-color: var(--forest); color: var(--forest); }
+  .stock-toggle.out-stock { background: rgba(200,135,26,0.1); border-color: var(--ochre); color: var(--ochre); border-style: dashed; }
+
+  /* ── PRINTFUL BANNER ── */
+  .printful-banner {
+    margin: 2rem 0 2.5rem;
+    border: 1px solid rgba(44,74,53,0.2);
+    background: rgba(44,74,53,0.04);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    align-items: start;
+  }
+  .pf-left {
+    display: flex; gap: 1rem; align-items: flex-start;
+    color: var(--forest);
+  }
+  .pf-left svg { flex-shrink: 0; margin-top: 2px; }
+  .pf-title {
+    font-size: 0.78rem; font-weight: 500; color: var(--forest);
+    letter-spacing: 0.04em; margin-bottom: 0.3rem;
+  }
+  .pf-sub {
+    font-size: 0.72rem; font-weight: 300; color: var(--slate);
+    line-height: 1.65; max-width: 380px;
+  }
+  .pf-costs {
+    display: flex; flex-direction: column; gap: 0.35rem;
+    min-width: 180px;
+    border-left: 1px solid rgba(44,74,53,0.15);
+    padding-left: 1.25rem;
+  }
+  .pf-cost-item {
+    display: flex; justify-content: space-between;
+    align-items: baseline; gap: 1rem;
+    font-size: 0.7rem; color: var(--slate);
+  }
+  .pf-cost-val { font-weight: 500; color: var(--charcoal); }
+  .pf-cost-margin {
+    border-top: 1px solid rgba(44,74,53,0.15);
+    padding-top: 0.35rem; margin-top: 0.1rem;
+  }
+  .pf-green { color: var(--forest) !important; }
+  .pf-setup-btn {
+    margin-top: 0.6rem;
+    padding: 0.5rem 0.85rem;
+    background: var(--forest); color: var(--white);
+    font-family: 'Jost', sans-serif; font-size: 0.6rem;
+    font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: background 0.2s;
+    align-self: flex-start;
+  }
+  .pf-setup-btn:hover { background: var(--forest-light); }
+  @media (max-width: 700px) {
+    .printful-banner { grid-template-columns: 1fr; }
+    .pf-costs { border-left: none; padding-left: 0; border-top: 1px solid rgba(44,74,53,0.15); padding-top: 1rem; }
+  }
+
+  /* ── SCROLL ANIMATE ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── CART BADGE ── */
+  .cart-nav {
+    position: relative;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+  }
+  nav.scrolled .cart-nav { color: var(--charcoal); }
+  .cart-nav:hover { color: var(--white); }
+  nav.scrolled .cart-nav:hover { color: var(--forest); }
+  .cart-count {
+    background: var(--ochre);
+    color: var(--white);
+    font-size: 0.6rem;
+    font-weight: 500;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+  }
+
+  /* ── LIGHTBOX ── */
+  .lightbox-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,8,0.94);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    padding: 2rem;
+  }
+  .lightbox-bg.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .lightbox-inner {
+    position: relative;
+    max-width: min(90vw, 1100px);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0.94);
+    transition: transform 0.35s ease;
+  }
+  .lightbox-bg.open .lightbox-inner {
+    transform: scale(1);
+  }
+  .lightbox-inner img {
+    max-width: 100%;
+    max-height: 82vh;
+    object-fit: contain;
+    display: block;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+  }
+  .lightbox-caption {
+    margin-top: 1.1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: rgba(245,240,232,0.75);
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+  .lightbox-close {
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    color: rgba(245,240,232,0.7);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    transition: color 0.2s;
+    z-index: 501;
+  }
+  .lightbox-close:hover { color: #fff; }
+  /* Make painting images show a magnify cursor */
+  .original-card-img img,
+  .print-card-img img {
+    cursor: zoom-in;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 1.5rem; }
+    nav.scrolled { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { height: 100svh; min-height: 560px; }
+    .hero-content { padding: 2rem 2rem 5rem; max-width: 100%; }
+    .hero-painting-label { right: 1.25rem; bottom: 1.5rem; }
+    .about { grid-template-columns: 1fr; }
+    .about-image { height: 60vw; }
+    .about-content { padding: 3.5rem 2rem; }
+    .prints-grid { grid-template-columns: repeat(2, 1fr); }
+    .originals-grid { columns: 2; }
+    .contact-section { grid-template-columns: 1fr; }
+    .contact-image { height: 55vw; }
+    .contact-content { padding: 3.5rem 2rem; }
+    .exhibition-strip { flex-direction: column; gap: 2.5rem; }
+    .ex-items { flex-wrap: wrap; gap: 1.5rem; }
+    .prints-section, .originals-section { padding: 5rem 1.5rem; }
+    .modal { padding: 2.5rem 1.75rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">Janet Cruise Halpin</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#prints">Prints</a></li>
+    <li><a href="#originals">Originals</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#prints" class="cart-nav">
+    Cart <span class="cart-count" id="cartCount">0</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-image-panel">
+    <img
+      src="https://res.cloudinary.com/dasjyomdb/image/upload/Janets_art_1_jpg"
+      alt="Janet Cruise Halpin — Original Painting"
+      loading="eager"
+    >
+    <div class="hero-painting-label">
+      <span>Original Painting</span>
+      <span class="label-meta">Oil on Canvas · Co. Wicklow</span>
+    </div>
+  </div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Wicklow, Ireland · Est. 1952</span>
+    <h1 class="hero-title">
+      Where land<br>meets <em>light</em>
+    </h1>
+    <p class="hero-tagline">Irish Artist &amp; Painter</p>
+    <p class="hero-desc">
+      Janet Cruise Halpin captures the living atmosphere of the Irish landscape — its forests, shores, and luminous skies — through layered oils that breathe with colour and texture.
+    </p>
+    <div class="hero-actions">
+      <a href="#prints" class="btn-primary">Shop Prints</a>
+      <a href="#originals" class="btn-outline">View Originals</a>
+    </div>
+    <p class="hero-edition-note">Giclée editions · Signed &amp; numbered · Ships worldwide</p>
+  </div>
+  <a href="#about" class="hero-scroll" aria-label="Scroll to explore">
+    <span>Explore</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </a>
+</section>
+
+<!-- CREDENTIAL TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack">
+    <div class="ticker-item">Tyrone Guthrie Centre Residency 2018<span class="ticker-dot"></span></div>
+    <div class="ticker-item">30+ Years Painting<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Laragh Studio · Co. Wicklow, Ireland<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Works Held in International Collections<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Flora · Land · Sea · Abstract<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Original Oil on Canvas<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Giclée Editions · Signed &amp; Numbered<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Glendalough, Ancient Oak Woodland<span class="ticker-dot"></span></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="ticker-item">Tyrone Guthrie Centre Residency 2018<span class="ticker-dot"></span></div>
+    <div class="ticker-item">30+ Years Painting<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Laragh Studio · Co. Wicklow, Ireland<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Works Held in International Collections<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Flora · Land · Sea · Abstract<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Original Oil on Canvas<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Giclée Editions · Signed &amp; Numbered<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Glendalough, Ancient Oak Woodland<span class="ticker-dot"></span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image">
+    <img
+      src="https://static.wixstatic.com/media/ee7591_853879be85f247e49b2884941a84da31~mv2.jpg/v1/fill/w_771,h_610,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Touching%20Green_120x150cm_Rev01.jpg"
+      alt="Touching Green — paint texture detail"
+      loading="lazy"
+    >
+    <div class="about-texture-overlay"></div>
+  </div>
+  <div class="about-content">
+    <p class="section-label reveal">The Artist</p>
+    <h2 class="section-title reveal">Grounded in the <em>wild</em></h2>
+    <p class="reveal" style="margin-top:1.5rem;">
+      <strong>Janet Cruise Halpin (b.1952)</strong> is a renowned Irish artist living and working in Laragh, Co. Wicklow — in the heart of the Wicklow Mountains. Her studio overlooks the ancient oak woodland of Glendalough, and that deep sense of place infuses every canvas.
+    </p>
+    <p class="reveal">
+      Working primarily in oil on canvas, Janet builds rich surface layers — ochre light through a forest canopy, the hush of morning mist over a lake, the muscular weight of stone. Her paintings have been exhibited widely across Ireland and are held in private collections internationally.
+    </p>
+    <div class="about-detail reveal">
+      <div class="about-detail-item">
+        <span class="num">30+</span>
+        <span class="lbl">Years Painting</span>
+      </div>
+      <div class="about-detail-item">
+        <span class="num">4</span>
+        <span class="lbl">Series</span>
+      </div>
+      <div class="about-detail-item">
+        <span class="num">Co. Wicklow</span>
+        <span class="lbl">Ireland</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGINALS -->
+<section class="originals-section" id="originals">
+  <p class="section-label reveal">Original Paintings</p>
+  <h2 class="section-title reveal">Works on <em>Canvas</em></h2>
+  <p class="originals-intro reveal">
+    Each original painting is a unique, one-of-a-kind work in oil on canvas. Prices vary by scale and are available on inquiry. Janet responds personally to all requests.
+  </p>
+  <div class="originals-grid">
+
+    <div class="original-card reveal">
+      <div class="original-card-img">
+        <img src="https://static.wixstatic.com/media/ee7591_448cd61779c74ae4a92918b51f426ad1~mv2.jpg/v1/fill/w_600,h_614,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Red%20Leaf_100x100cm_Rev01.jpg" alt="Red Leaf" loading="lazy">
+        <div class="original-card-overlay">
+          <button class="original-overlay-btn" onclick="openModal('Red Leaf', '100×100cm')">Inquire for Pricing</button>
+        </div>
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title">Red Leaf</p>
+        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Red Leaf', '100×100cm')">Inquire for Pricing</button>
+      </div>
+    </div>
+
+    <div class="original-card reveal">
+      <div class="original-card-img">
+        <img src="https://static.wixstatic.com/media/ee7591_e216074a8a9241549f89538c466d73d4~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Gliding%20Light_70x100cm_Rev02.jpg" alt="Gliding Light" loading="lazy">
+        <div class="original-card-overlay">
+          <button class="original-overlay-btn" onclick="openModal('Gliding Light', '100×70cm')">Inquire for Pricing</button>
+        </div>
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title">Gliding Light</p>
+        <p class="original-card-size">100×70 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Gliding Light', '100×70cm')">Inquire for Pricing</button>
+      </div>
+    </div>
+
+    <div class="original-card reveal">
+      <div class="original-card-img">
+        <img src="https://static.wixstatic.com/media/ee7591_5726b5fe2b70413f9a8af20e053e1707~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Just%20Summer_M-100x100cm_Websize.jpg" alt="Just Summer" loading="lazy">
+        <div class="original-card-overlay">
+          <button class="original-overlay-btn" onclick="openModal('Just Summer', '100×100cm')">Inquire for Pricing</button>
+        </div>
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title">Just Summer</p>
+        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Just Summer', '100×100cm')">Inquire for Pricing</button>
+      </div>
+    </div>
+
+    <div class="original-card reveal">
+      <div class="original-card-img">
+        <img src="https://static.wixstatic.com/media/ee7591_6a277e6d26ba47ecb20f50d7fb6476e5~mv2.jpg/v1/fill/w_525,h_525,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Leaf%20and%20Water_100x100cm_9in.jpg" alt="Leaf and Water" loading="lazy">
+        <div class="original-card-overlay">
+          <button class="original-overlay-btn" onclick="openModal('Leaf and Water', '100×100cm')">Inquire for Pricing</button>
+        </div>
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title">Leaf and Water</p>
+        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Leaf and Water', '100×100cm')">Inquire for Pricing</button>
+      </div>
+    </div>
+
+    <div class="original-card reveal">
+      <div class="original-card-img">
+        <img src="https://static.wixstatic.com/media/ee7591_59240fd6dffa40d7a234a9b223cb5f61~mv2.jpg/v1/fill/w_525,h_525,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Small%20Wilderness_M-100x100cm_Websize.jpg" alt="Small Wilderness" loading="lazy">
+        <div class="original-card-overlay">
+          <button class="original-overlay-btn" onclick="openModal('Small Wilderness', '100×100cm')">Inquire for Pricing</button>
+        </div>
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title">Small Wilderness</p>
+        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Small Wilderness', '100×100cm')">Inquire for Pricing</button>
+      </div>
+    </div>
+
+    <div class="original-card reveal">
+      <div class="original-card-img">
+        <img src="https://static.wixstatic.com/media/ee7591_79badb8260a54c5c8847880a3454dbc2~mv2.jpg/v1/fill/w_525,h_524,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH-Holly%2BBeech_80x80cm_10in.jpg" alt="Holly and Beech" loading="lazy">
+        <div class="original-card-overlay">
+          <button class="original-overlay-btn" onclick="openModal('Holly and Beech', '80×80cm')">Inquire for Pricing</button>
+        </div>
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title">Holly and Beech</p>
+        <p class="original-card-size">80×80 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Holly and Beech', '80×80cm')">Inquire for Pricing</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STUDIO JOURNAL QUOTE -->
+<section class="studio-quote">
+  <div class="sq-left reveal">
+    <p class="sq-label">Studio Journal</p>
+    <h2 class="sq-title">The voice<br>behind the <em>canvas</em></h2>
+    <div class="sq-divider"></div>
+  </div>
+  <div class="reveal">
+    <p class="sq-pullquote">
+      "I am drawn to the moment when light falls through leaves — not the leaves themselves, but what happens between them. The Wicklow forests hold a particular quality of green that I have spent thirty years trying to capture. I am still trying."
+    </p>
+    <p class="sq-attribution">Janet Cruise Halpin · Laragh Studio</p>
+  </div>
+</section>
+
+<!-- EXHIBITION STRIP -->
+<div class="exhibition-strip">
+  <h3 class="ex-title">An artist shaped by <em>residency</em> &amp; exhibition</h3>
+  <div class="ex-items">
+    <div class="ex-item">
+      <span class="ex-item-year">2018</span>
+      <p class="ex-item-name">Tyrone Guthrie Centre</p>
+      <p class="ex-item-loc">Artist Residency</p>
+    </div>
+    <div class="ex-item">
+      <span class="ex-item-year">Ongoing</span>
+      <p class="ex-item-name">Co. Wicklow Studio</p>
+      <p class="ex-item-loc">Laragh, Ireland</p>
+    </div>
+    <div class="ex-item">
+      <span class="ex-item-year">4</span>
+      <p class="ex-item-name">Series Shown</p>
+      <p class="ex-item-loc">Flora · Land · Sea · Abstract</p>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<!-- PRINTS SHOP -->
+<section class="prints-section" id="prints">
+  <div class="prints-header">
+    <div class="prints-header-left">
+      <p class="section-label reveal">The Shop</p>
+      <h2 class="section-title reveal">Fine Art <em>Prints</em></h2>
+      <div class="category-tabs reveal">
+        <button class="tab-btn active" data-cat="all">All Works</button>
+        <button class="tab-btn" data-cat="flora">Flora</button>
+        <button class="tab-btn" data-cat="landscape">Landscapes</button>
+        <button class="tab-btn" data-cat="seascape">Seascapes</button>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:0.82rem;font-weight:300;color:var(--slate);max-width:260px;text-align:right;line-height:1.7;">
+      Museum-quality Giclée prints on 310gsm cotton rag paper. Signed &amp; numbered edition of 50.
+    </p>
+  </div>
+
+  <!-- GELATO FULFILMENT BANNER -->
+  <div class="printful-banner reveal">
+    <div class="pf-left">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <div>
+        <p class="pf-title">Printed &amp; shipped automatically via Gelato · 100+ labs across 32 countries</p>
+        <p class="pf-sub">Every order triggers automatic fulfilment — printed on 200gsm archival matte paper using giclée inkjet, packed and dispatched locally to your customer. Zero handling by Janet. Orders placed in Ireland and the EU are produced at the nearest Gelato hub for fastest delivery.</p>
+      </div>
+    </div>
+    <div class="pf-costs">
+      <div class="pf-cost-item">
+        <span class="pf-cost-label">A3 · 297×420mm</span>
+        <span class="pf-cost-val">~€8–12</span>
+      </div>
+      <div class="pf-cost-item">
+        <span class="pf-cost-label">A2 · 420×594mm</span>
+        <span class="pf-cost-val">~€14–18</span>
+      </div>
+      <div class="pf-cost-item">
+        <span class="pf-cost-label">A1 · 594×841mm</span>
+        <span class="pf-cost-val">~€22–28</span>
+      </div>
+      <div class="pf-cost-item">
+        <span class="pf-cost-label">Shipping IE/EU</span>
+        <span class="pf-cost-val">€4–8</span>
+      </div>
+      <div class="pf-cost-item pf-cost-margin">
+        <span class="pf-cost-label">Your margin (A3 · €95)</span>
+        <span class="pf-cost-val pf-green">~€75–83</span>
+      </div>
+      <button class="pf-setup-btn" onclick="window.open('https://www.gelato.com','_blank')">Set up Gelato →</button>
+    </div>
+  </div>
+
+  <div class="prints-grid" id="printsGrid"></div>
+</section>
+
+<!-- COLLECTOR'S CIRCLE -->
+<section class="collectors-circle">
+  <div>
+    <p class="cc-eyebrow reveal">The Collector's Circle</p>
+    <h2 class="cc-title reveal">First access to<br><em>new works</em></h2>
+    <p class="cc-body reveal">
+      Janet releases new paintings and limited editions to her private list before they are shown publicly. Collectors receive studio updates, early viewing invitations, and occasional notes from Janet about works in progress.
+    </p>
+    <ul class="cc-perks reveal">
+      <li class="cc-perk"><span class="cc-perk-dot"></span>Preview new series before public release</li>
+      <li class="cc-perk"><span class="cc-perk-dot"></span>Personal studio notes from Janet on each new work</li>
+      <li class="cc-perk"><span class="cc-perk-dot"></span>First right of purchase on limited originals</li>
+      <li class="cc-perk"><span class="cc-perk-dot"></span>Invitations to private studio viewings in Co. Wicklow</li>
+    </ul>
+    <div class="cc-form reveal" id="ccForm">
+      <input type="email" id="ccEmail" placeholder="Your email address" onkeydown="if(event.key==='Enter')joinCircle()">
+      <button onclick="joinCircle()">Join</button>
+    </div>
+    <div class="cc-success" id="ccSuccess">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Welcome to the circle — Janet will be in touch.
+    </div>
+    <p class="cc-privacy reveal">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      No spam, ever. One or two emails a year. Unsubscribe any time.
+    </p>
+  </div>
+  <div class="cc-preview-card reveal">
+    <p class="cc-preview-label">Currently in the studio</p>
+    <img class="cc-preview-img"
+      src="https://static.wixstatic.com/media/ee7591_876e0d3648f64946a26bb5a9971033a6~mv2.jpg/v1/fill/w_600,h_480,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Mayloom_120x150cm_Websize.jpg"
+      alt="New work in progress"
+      loading="lazy">
+    <div class="cc-preview-caption">
+      <p>Hover to glimpse</p>
+      <span>Members see new work first</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-image">
+    <img
+      src="https://static.wixstatic.com/media/ee7591_d7a8391a2be9432890c4d4e82d2bc77f~mv2.jpg/v1/fill/w_525,h_524,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Petals%20on%20Green_80x80cm_Websize.jpg"
+      alt="Petals on Green"
+      loading="lazy"
+    >
+  </div>
+  <div class="contact-content">
+    <p class="section-label reveal">Get in Touch</p>
+    <h2 class="section-title reveal">Commission a <em>Painting</em></h2>
+    <p class="reveal">
+      Janet welcomes commissions and personal inquiries about original works. Whether you are an interior designer sourcing statement pieces or a collector seeking something bespoke — reach out directly for a conversation.
+    </p>
+    <div class="contact-links reveal">
+      <a class="contact-link-item" href="https://www.instagram.com/janetcruisehalpin/" target="_blank">
+        <span class="cli-label">Instagram</span>
+        <span class="cli-val">@janetcruisehalpin</span>
+      </a>
+      <a class="contact-link-item" href="https://co.pinterest.com/janetchalpin/_saved/" target="_blank">
+        <span class="cli-label">Pinterest</span>
+        <span class="cli-val">janetchalpin</span>
+      </a>
+      <a class="contact-link-item" href="https://www.northernsound.ie/podcasts/agriview-with-noel-murphy/cultural-tea-break-141381" target="_blank">
+        <span class="cli-label">Interview</span>
+        <span class="cli-val">Tyrone Guthrie Residency, 2018</span>
+      </a>
+    </div>
+    <div style="margin-top:2.5rem;">
+      <button class="btn-primary reveal" onclick="openModal('General Inquiry', '')">Send an Inquiry</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Janet Cruise Halpin</span>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#prints">Prints</a></li>
+    <li><a href="#originals">Originals</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Janet Cruise Halpin. All rights reserved.</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-bg" id="lightboxBg" onclick="handleLightboxBgClick(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-inner" id="lightboxInner">
+    <img id="lightboxImg" src="" alt="">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+</div>
+
+<!-- INQUIRY MODAL -->
+<div class="modal-bg" id="modalBg" onclick="handleModalBgClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <p class="modal-title" id="modalTitle">Inquire for Pricing</p>
+    <p class="modal-subtitle" id="modalSub">Send Janet a message about this work</p>
+    <div class="form-field">
+      <label>Your Name</label>
+      <input type="text" placeholder="e.g. Claire Murphy">
+    </div>
+    <div class="form-field">
+      <label>Email Address</label>
+      <input type="email" placeholder="claire@example.com">
+    </div>
+    <div class="form-field">
+      <label>Painting</label>
+      <input type="text" id="modalPainting" readonly>
+    </div>
+    <div class="form-field">
+      <label>Your Message</label>
+      <textarea placeholder="Tell Janet about your interest — scale, location, any specific questions…"></textarea>
+    </div>
+    <button class="form-submit" onclick="submitInquiry()">Send Inquiry</button>
+  </div>
+</div>
+
+<!-- CART TOAST -->
+<div class="cart-toast" id="cartToast">Added to cart</div>
+
+<!-- NOTIFY MODAL -->
+<div class="notify-modal-bg" id="notifyModalBg" onclick="handleNotifyBgClick(event)">
+  <div class="notify-modal" id="notifyModal">
+    <button class="notify-modal-close" onclick="closeNotifyModal()">✕</button>
+
+    <!-- Form state -->
+    <div class="notify-form-inner" id="notifyFormInner">
+      <img class="notify-modal-artwork-img" id="notifyArtworkImg" src="" alt="">
+      <div class="notify-modal-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </div>
+      <p class="notify-modal-artwork-name" id="notifyArtworkName"></p>
+      <h2 class="notify-modal-title">Back in stock?<br>You'll be first to know.</h2>
+      <p class="notify-modal-sub">This print is currently sold out. Leave your email below and Janet will notify you the moment it becomes available again — no spam, ever.</p>
+      <div class="notify-input-row">
+        <input type="email" id="notifyEmailInput" placeholder="your@email.com" onkeydown="if(event.key==='Enter') submitNotify()">
+        <button class="notify-input-submit" onclick="submitNotify()">Notify Me</button>
+      </div>
+      <p class="notify-privacy">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Your email is used only to notify you about this specific print. We never share or sell your data.
+      </p>
+    </div>
+
+    <!-- Success state -->
+    <div class="notify-success" id="notifySuccess">
+      <div class="notify-success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#2C4A35"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>You're on the list</h3>
+      <p>We'll send you a single email the moment <strong id="notifySuccessName"></strong> is back in stock. Thank you for your interest in Janet's work.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ── EMAILJS ───────────────────────────────────────────────────────────────
+  const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+  const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  // ── ALL PAINTINGS DATA ────────────────────────────────────────────────────
+  // printed: true  = limited physical run (10 printed, qty tracked per size)
+  // printed: false = on-demand only (ordered then printed, 1–2 wk lead time)
+  // qty: { A3, A2, A1 }  = physical copies remaining (only used when printed:true)
+  // stock: derived at render time from qty > 0
+  const paintings = [
+    // ── THE 10 BEST-SELLER PRINT RUN (10 copies each size) ───────────────────
+    { id:'mayloom', title:'Mayloom', meta:'120×150cm', cat:'flora', basePrice:95, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/ee7591_876e0d3648f64946a26bb5a9971033a6~mv2.jpg/v1/fill/w_600,h_480,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Mayloom_120x150cm_Websize.jpg' },
+    { id:'canopy', title:'Canopy', meta:'120×150cm', cat:'flora', basePrice:95, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/ee7591_13ca51288ac04b4d87e7f9d6217b9118~mv2.jpg/v1/fill/w_600,h_480,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Canopy_120x150cm_Rev01.jpg' },
+    { id:'touching-green', title:'Touching Green', meta:'150×120cm', cat:'flora', basePrice:95, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/ee7591_853879be85f247e49b2884941a84da31~mv2.jpg/v1/fill/w_771,h_610,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Touching%20Green_120x150cm_Rev01.jpg' },
+    { id:'sweet-summer', title:'Sweet Summer', meta:'100×100cm', cat:'flora', basePrice:85, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/ee7591_fc01400548594eb495976c9733768825~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Sweet%20Summer_100x100cm_Websize_.jpg' },
+    { id:'dancing', title:'Dancing', meta:'100×100cm', cat:'flora', basePrice:85, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/ee7591_5f7618aa76434edf963feb2dd6b5a072~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Dancing_100x100cm.jpg' },
+    { id:'moon-tree', title:'Moon Tree', meta:'70×70cm', cat:'landscape', basePrice:75, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/ee7591_ecdbf97b82414d96b5bee2573d995eed~mv2.jpg/v1/crop/x_0,y_8,w_800,h_784/fill/w_598,h_586,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Moon%20Tree_70x70cm_Rev02.jpg' },
+    { id:'red-leaf', title:'Red Leaf', meta:'100×100cm', cat:'flora', basePrice:85, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/ee7591_448cd61779c74ae4a92918b51f426ad1~mv2.jpg/v1/fill/w_600,h_614,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Red%20Leaf_100x100cm_Rev01.jpg' },
+    { id:'shades-of-evening', title:'Shades of Evening', meta:'80×80cm', cat:'flora', basePrice:80, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/ee7591_7d5b5822c99e42deb37f5538090d145d~mv2.jpg/v1/fill/w_525,h_525,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Shades%20of%20Evening_80x80cm_900px.jpg' },
+    { id:'land-edge', title:'Land Edge', meta:'80×80cm', cat:'seascape', basePrice:80, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/e74c97_ab9e4ef6614a4285a1e75a41f2a90435~mv2_d_1665_1662_s_2.png/v1/fill/w_526,h_524,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/03001%20Abstract%20-%20Return%2C%2080x80cm.png' },
+    { id:'aurora', title:'Aurora', meta:'70×100cm', cat:'landscape', basePrice:80, printed:true,
+      qty:{A3:10,A2:10,A1:10},
+      img:'https://static.wixstatic.com/media/e74c97_e88b2553a51d4c82b8ec672d43856df9~mv2_d_1474_2056_s_2.png/v1/fill/w_502,h_699,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2018-08-24%2015_35_42_edited.png' },
+
+    // ── ON-DEMAND ONLY (printed to order, 1–2 week lead time) ─────────────────
+    { id:'fragrant-blossoms', title:'Fragrant Blossoms', meta:'80×80cm', cat:'flora', basePrice:80, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_7d7e6245c78a48838f3aacdec0b89b6f~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Fragrant%20Blossoms_80x80cm.jpg' },
+    { id:'favourite-perfume', title:'Favourite Perfume', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_f0a33125cbcb4a9680a1a118fcb33bdb~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Favourite%20Perfume_100x100cm.jpg' },
+    { id:'as-i-remember', title:'As I Remember', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_bf0b2bf6bff1459d96139df57dbbffec~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/As%20I%20remember_100x100cm.jpg' },
+    { id:'happy-talk', title:'Happy Talk', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_4c493ba628ae49cea9feed0ddeabf600~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Happy%20Talk_100x100mm%20(1).jpg' },
+    { id:'maitree', title:'Maitree / Lovely Friend', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_98db53b0d64c47fb991c66523ea388f0~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Maitree_Lovely%20Friend_100x100cm.jpg' },
+    { id:'tall-story', title:'Tall Story', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_2c2076c0fea24848bdb3e0dd690fcf2c~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Tall%20Story_100x100cm.jpg' },
+    { id:'blossom-dearie', title:'Blossom Dearie', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_c248891de81e4fa48c361a34ce8e3d3c~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Blossom%20Dearie_100x100cm.jpg' },
+    { id:'shadowed-nature', title:'Shadowed Nature', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_bd207f2e5c5f490ba2b45c128fb0f671~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Shadowed%20Nature_100x100cm.jpg' },
+    { id:'breeze', title:'Breeze', meta:'70×70cm', cat:'flora', basePrice:75, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_66aa14a3babe4eb5af2d6608779a2570~mv2.jpg/v1/fill/w_525,h_525,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Breeze_70x70cm_9in.jpg' },
+    { id:'patterns', title:'Patterns', meta:'80cm circular', cat:'flora', basePrice:80, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_32afa52a2dbc4abc86dec2cca2a0e58b~mv2.jpg/v1/crop/x_6,y_3,w_2694,h_2694/fill/w_402,h_402,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Patterns_80cm-Circular.jpg' },
+    { id:'woods-in-mist', title:'Woods in Mist', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_d7fe738b347c4a5f91ea39f2ab9b44bd~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Woods%20in%20Mist_100x100cm.jpg' },
+    { id:'little-green', title:'Little Green', meta:'70×70cm', cat:'flora', basePrice:75, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_7d9feabd57d448f3960c2340b54bfc41~mv2.jpg/v1/fill/w_428,h_429,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Little%20Green_70x70cm.jpg' },
+    { id:'blue-mantel', title:'Blue Mantel', meta:'100×70cm', cat:'flora', basePrice:80, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_ab579c6fd38748bbbb5b3d3fc6d88909~mv2.jpg/v1/fill/w_420,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee7591_ab579c6fd38748bbbb5b3d3fc6d88909~mv2.jpg' },
+    { id:'just-summer', title:'Just Summer', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_5726b5fe2b70413f9a8af20e053e1707~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Just%20Summer_M-100x100cm_Websize.jpg' },
+    { id:'blue-falls', title:'Blue Falls', meta:'100×70cm', cat:'flora', basePrice:80, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_4b519cf4423e4fb0a0957b522f496820~mv2.jpg/v1/fill/w_420,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee7591_4b519cf4423e4fb0a0957b522f496820~mv2.jpg' },
+    { id:'small-wilderness', title:'Small Wilderness', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_59240fd6dffa40d7a234a9b223cb5f61~mv2.jpg/v1/fill/w_525,h_525,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Small%20Wilderness_M-100x100cm_Websize.jpg' },
+    { id:'leaf-and-water', title:'Leaf and Water', meta:'100×100cm', cat:'flora', basePrice:85, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_6a277e6d26ba47ecb20f50d7fb6476e5~mv2.jpg/v1/fill/w_525,h_525,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Leaf%20and%20Water_100x100cm_9in.jpg' },
+    { id:'true-green', title:'True Green', meta:'100×150cm', cat:'flora', basePrice:95, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_8990eeda24f047899b8f2b669b09f43f~mv2.jpg/v1/fill/w_788,h_525,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/True%20Green_100x150cm_9in.jpg' },
+    { id:'last-summer', title:'Last Summer', meta:'80×80cm', cat:'flora', basePrice:80, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_67b03ec39acf45cca82b48ef3be23904~mv2.jpg/v1/fill/w_525,h_524,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Last%20Summer_80x80cm_900px.jpg' },
+    { id:'petals-on-green', title:'Petals on Green', meta:'80×80cm', cat:'flora', basePrice:80, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_d7a8391a2be9432890c4d4e82d2bc77f~mv2.jpg/v1/fill/w_525,h_524,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Petals%20on%20Green_80x80cm_Websize.jpg' },
+    { id:'holly-and-beech', title:'Holly and Beech', meta:'80×80cm', cat:'flora', basePrice:80, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_79badb8260a54c5c8847880a3454dbc2~mv2.jpg/v1/fill/w_525,h_524,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH-Holly%2BBeech_80x80cm_10in.jpg' },
+    { id:'cool-mountain', title:'Cool Mountain', meta:'100×150cm', cat:'flora', basePrice:90, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_659b9d1be871453ca1c2e0361b4fa3c5~mv2.jpg/v1/fill/w_600,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Cool%20Mountain_100x150cm_Websize.jpg' },
+    { id:'synergos-1', title:'Synergos 1', meta:'70×70cm', cat:'flora', basePrice:75, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_5bb4d852810a4aa88369094c340c5d8a~mv2.jpg/v1/crop/x_1,y_0,w_798,h_800/fill/w_385,h_385,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Synergos-2_70x70cm_Rev01.jpg' },
+    { id:'synergos-2', title:'Synergos 2', meta:'70×70cm', cat:'flora', basePrice:75, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_b9a42a3e792c416bb5cbdc52239247d3~mv2.jpg/v1/crop/x_1,y_0,w_798,h_800/fill/w_385,h_385,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Synergos-1_70x70cm_Rev01.jpg' },
+    { id:'gliding-light', title:'Gliding Light', meta:'100×70cm', cat:'flora', basePrice:80, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_e216074a8a9241549f89538c466d73d4~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/JCH_Gliding%20Light_70x100cm_Rev02.jpg' },
+    { id:'stone-gap', title:'Stone Gap', meta:'70×70cm', cat:'landscape', basePrice:75, printed:false,
+      img:'https://static.wixstatic.com/media/ee7591_f969f374594e498ab17c65d8a723bfbf~mv2.jpg/v1/fill/w_435,h_435,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee7591_f969f374594e498ab17c65d8a723bfbf~mv2.jpg' },
+    { id:'west-alone', title:'West Alone', meta:'50×40cm', cat:'landscape', basePrice:65, printed:false,
+      img:'https://static.wixstatic.com/media/e74c97_5402c1554fef47d19bca348543a2c607~mv2_d_2255_1805_s_2.png/v1/fill/w_523,h_419,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2018-08-24%2015_13_18_edited.png' },
+    { id:'dusk', title:'Dusk', meta:'70×70cm', cat:'landscape', basePrice:75, printed:false,
+      img:'https://static.wixstatic.com/media/e74c97_50791afebe2d463490386cc5b66a8b93~mv2_d_1585_1591_s_2.png/v1/fill/w_528,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2018-08-24%2015_38_19.png' },
+    { id:'mist-of-sea', title:'Mist of Sea', meta:'80×80cm', cat:'seascape', basePrice:80, printed:false,
+      img:'https://static.wixstatic.com/media/e74c97_13bc527981e6420e9890e3a8adf4c325~mv2_d_1722_1716_s_2.png/v1/crop/x_0,y_0,w_1719,h_1716/fill/w_526,h_524,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/03002%20Abstract%20-%20Watermarks%2C%2080x80cm.png' },
+  ];
+
+  // Size price map (add-on above base price)
+  const sizeAddOn = { A3: 0, A2: 25, A1: 60 };
+
+  // ── LIVE DATA STORE ───────────────────────────────────────────────────────
+  // Derive stock from qty for printed items; on-demand items are always 'in'
+  const store = {};
+  paintings.forEach(p => {
+    const d = JSON.parse(JSON.stringify(p));
+    if (d.printed) {
+      d.stock = {
+        A3: d.qty.A3 > 0 ? 'in' : 'out',
+        A2: d.qty.A2 > 0 ? 'in' : 'out',
+        A1: d.qty.A1 > 0 ? 'in' : 'out',
+      };
+    } else {
+      d.stock = { A3: 'in', A2: 'in', A1: 'in' }; // on-demand: always orderable
+    }
+    store[d.id] = d;
+  });
+
+  // Decrement qty when item is added to cart (printed only)
+  function decrementQty(id, size) {
+    const d = store[id];
+    if (!d || !d.printed) return;
+    if (d.qty[size] > 0) {
+      d.qty[size]--;
+      d.stock[size] = d.qty[size] > 0 ? 'in' : 'out';
+    }
+  }
+
+  // ── RENDER ALL CARDS ──────────────────────────────────────────────────────
+  function renderGrid(filterCat = 'all') {
+    const grid = document.getElementById('printsGrid');
+    grid.innerHTML = '';
+    paintings.forEach(p => {
+      const d = store[p.id];
+      const visible  = filterCat === 'all' || d.cat === filterCat;
+      const isOD     = !d.printed; // on-demand
+      const allOut   = !isOD && Object.values(d.stock).every(v => v === 'out');
+      const anyOut   = !isOD && Object.values(d.stock).some(v => v === 'out');
+      const firstIn  = isOD ? 'A3' : Object.keys(d.stock).find(k => d.stock[k] === 'in');
+      const firstPrice = d.basePrice + sizeAddOn[firstIn || 'A3'];
+
+      // Badge
+      let badge = '';
+      if (d.printed && !allOut && !anyOut) {
+        const total = Object.values(d.qty).reduce((s,v)=>s+v,0);
+        badge = `<div class="print-run-badge">Limited · ${total} remaining</div>`;
+      } else if (d.printed && anyOut && !allOut) {
+        badge = `<div class="out-of-stock-badge" style="background:rgba(200,135,26,0.88)">Limited Sizes</div>`;
+      } else if (allOut) {
+        badge = `<div class="out-of-stock-badge">Sold Out</div>`;
+      } else if (isOD) {
+        badge = `<div class="on-demand-badge">Print to Order</div>`;
+      }
+
+      // Price label
+      const priceLabel = allOut
+        ? `<span style="text-decoration:line-through;color:var(--slate)">From €${d.basePrice}</span>`
+        : `From €${firstPrice}`;
+
+      // Size pills
+      const sizePills = ['A3','A2','A1'].map(s => {
+        const oos    = !isOD && d.stock[s] === 'out';
+        const isFirst = s === (firstIn || 'A3');
+        const qtyTip  = d.printed && d.qty[s] > 0 ? ` data-qty="${d.qty[s]}"` : '';
+        return `<button class="size-pill${isFirst && !allOut ? ' active' : ''}${oos ? ' oos' : ''}"
+          data-size="${s}" data-price="${d.basePrice + sizeAddOn[s]}" data-oos="${oos}"${qtyTip}
+          onclick="selectSizeG(this,'${d.id}')">${s}${d.printed && d.qty[s] <= 3 && d.qty[s] > 0 ? `<span class="pill-qty-warn">${d.qty[s]} left</span>` : ''}</button>`;
+      }).join('');
+
+      // On-demand lead time note
+      const odNote = isOD
+        ? `<p class="od-note">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Printed to order · ships in 5–7 days
+           </p>` : '';
+
+      const card = document.createElement('div');
+      card.className = `print-card${visible ? ' visible' : ''}`;
+      card.dataset.cat = d.cat;
+      card.dataset.id  = d.id;
+      if (d.printed) card.dataset.printed = 'true';
+      if (isOD)      card.dataset.onDemand = 'true';
+
+      card.innerHTML = `
+        <div class="print-card-img">
+          <img src="${d.img}" alt="${d.title}" loading="lazy"${allOut ? ' style="filter:grayscale(28%) brightness(0.88)"' : ''}>
+          ${badge}
+          ${!allOut && ['mayloom','canopy','touching-green','sweet-summer','dancing','moon-tree','red-leaf','last-summer','petals-on-green','holly-and-beech','leaf-and-water','blue-falls','blue-mantel'].includes(d.id) ? `<div class="available-now-badge">Available Now</div>` : ''}
+        </div>
+        <div class="print-card-info">
+          <button class="edit-toggle" title="Edit" onclick="toggleEdit('${d.id}',this)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <p class="print-card-title">${d.title}</p>
+          <p class="print-card-meta">Giclée Print · ${d.meta}</p>
+          <p class="print-card-price" id="${d.id}-price">${priceLabel}</p>
+          <div class="print-sizes" id="${d.id}-pills">${sizePills}</div>
+          ${odNote}
+          <div class="inline-notify" id="${d.id}-inline-notify" style="display:none">
+            <span class="inline-notify-label">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span id="${d.id}-notify-label">Size sold out — notify me</span>
+            </span>
+            <div class="inline-notify-row">
+              <input type="email" id="${d.id}-notify-email" placeholder="your@email.com"
+                onkeydown="if(event.key==='Enter')submitInlineNotify('${d.id}')">
+              <button onclick="submitInlineNotify('${d.id}')">Alert Me</button>
+            </div>
+            <div class="inline-notify-sent" id="${d.id}-notify-sent" style="display:none">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Done! We'll email you when it's back.
+            </div>
+          </div>
+          ${allOut
+            ? `<button class="notify-btn" onclick="openNotifyModal('${d.title}','${d.img}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                Notify Me When Available
+               </button>`
+            : `<button class="add-to-cart" id="${d.id}-atc"
+                onclick="addToCart(this,'${d.title}')">
+                ${isOD ? 'Order Print' : 'Add to Cart'}${firstIn && firstIn !== 'A3' ? ' — ' + firstIn : ''}
+               </button>`
+          }
+          <!-- INLINE EDIT PANEL -->
+          <div class="inline-edit-panel" id="${d.id}-edit">
+            <div class="edit-field-row">
+              <label>Title</label>
+              <input type="text" id="${d.id}-edit-title" value="${d.title}">
+            </div>
+            <div class="edit-field-row">
+              <label>Dimensions</label>
+              <input type="text" id="${d.id}-edit-meta" value="${d.meta}">
+            </div>
+            <div class="edit-field-row">
+              <label>Base Price (€, A3)</label>
+              <input type="number" id="${d.id}-edit-price" value="${d.basePrice}" min="1">
+            </div>
+            <div class="edit-field-row">
+              <label>Category</label>
+              <select id="${d.id}-edit-cat">
+                <option value="flora"${d.cat==='flora'?' selected':''}>Flora</option>
+                <option value="landscape"${d.cat==='landscape'?' selected':''}>Landscape</option>
+                <option value="seascape"${d.cat==='seascape'?' selected':''}>Seascape</option>
+              </select>
+            </div>
+            ${d.printed ? `
+            <div class="edit-field-row">
+              <label>Stock remaining per size</label>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:2px">
+                ${['A3','A2','A1'].map(s=>`
+                  <div style="display:flex;flex-direction:column;gap:3px">
+                    <label style="font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate)">${s}</label>
+                    <input type="number" min="0" max="10" value="${d.qty[s]}"
+                      id="${d.id}-qty-${s}"
+                      style="padding:.35rem .5rem;font-size:.82rem;border:1px solid rgba(44,74,53,0.2);background:var(--white);font-family:'Jost',sans-serif;outline:none;">
+                  </div>`).join('')}
+              </div>
+            </div>` : `
+            <div class="edit-field-row">
+              <label>Fulfillment</label>
+              <div style="padding:.5rem .65rem;background:rgba(44,74,53,0.06);border:1px solid rgba(44,74,53,0.15);font-size:.72rem;color:var(--forest)">
+                ✓ On-demand · auto-fulfilled via Printful
+              </div>
+            </div>`}
+            <div class="edit-actions">
+              <button class="edit-save" onclick="saveEdit('${d.id}')">Save Changes</button>
+              <button class="edit-cancel" onclick="toggleEdit('${d.id}',null,true)">Cancel</button>
+            </div>
+            <div class="edit-saved-flash" id="${d.id}-saved-flash">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Saved
+            </div>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  // ── SIZE SELECTION (rendered cards) ──────────────────────────────────────
+  function selectSizeG(pill, id) {
+    const d = store[id];
+    const allPills = pill.closest('.print-sizes').querySelectorAll('.size-pill');
+    allPills.forEach(p => p.classList.remove('active','selected-oos'));
+
+    const isOos  = pill.dataset.oos === 'true';
+    const size   = pill.dataset.size;
+    const price  = pill.dataset.price;
+    const priceEl   = document.getElementById(id+'-price');
+    const notifyEl  = document.getElementById(id+'-inline-notify');
+    const labelEl   = document.getElementById(id+'-notify-label');
+    const sentEl    = document.getElementById(id+'-notify-sent');
+    const atcBtn    = document.getElementById(id+'-atc');
+    const emailInput = document.getElementById(id+'-notify-email');
+
+    if (isOos) {
+      pill.classList.add('selected-oos');
+      priceEl.innerHTML = `<span style="text-decoration:line-through;color:var(--slate)">€${price}</span>`;
+      notifyEl.style.display = 'flex';
+      if (sentEl) sentEl.style.display = 'none';
+      if (emailInput) emailInput.value = '';
+      const notifyRow = notifyEl.querySelector('.inline-notify-row');
+      const notifyLbl = notifyEl.querySelector('.inline-notify-label');
+      if (notifyRow) notifyRow.style.display = '';
+      if (notifyLbl) notifyLbl.style.display = '';
+      labelEl.textContent = size + ' is sold out — notify me when back';
+      if (atcBtn) atcBtn.style.display = 'none';
+    } else {
+      pill.classList.add('active');
+      priceEl.innerHTML = `€${price}`;
+      notifyEl.style.display = 'none';
+      if (atcBtn) { atcBtn.style.display = ''; atcBtn.textContent = 'Add to Cart — ' + size; }
+    }
+  }
+
+  // ── INLINE EDIT ───────────────────────────────────────────────────────────
+  function toggleEdit(id, btn, forceClose) {
+    const panel = document.getElementById(id+'-edit');
+    const isOpen = panel.classList.contains('show');
+    if (forceClose || isOpen) {
+      panel.classList.remove('show');
+      document.querySelectorAll('.edit-toggle.active').forEach(b => b.classList.remove('active'));
+    } else {
+      // Sync edit fields to current store
+      const d = store[id];
+      document.getElementById(id+'-edit-title').value = d.title;
+      document.getElementById(id+'-edit-meta').value  = d.meta;
+      document.getElementById(id+'-edit-price').value = d.basePrice;
+      document.getElementById(id+'-edit-cat').value   = d.cat;
+      ['A3','A2','A1'].forEach(s => {
+        const b = document.getElementById(id+'-stock-'+s);
+        if (b) { b.className = 'stock-toggle ' + (d.stock[s]==='in'?'in-stock':'out-stock'); b.textContent = s + ' ' + (d.stock[s]==='in'?'✓':'✕'); }
+      });
+      document.getElementById(id+'-saved-flash').classList.remove('show');
+      panel.classList.add('show');
+      if (btn) btn.classList.add('active');
+    }
+  }
+
+  function toggleStock(id, size, btn) {
+    const d = store[id];
+    d.stock[size] = d.stock[size] === 'in' ? 'out' : 'in';
+    const isIn = d.stock[size] === 'in';
+    btn.className = 'stock-toggle ' + (isIn ? 'in-stock' : 'out-stock');
+    btn.textContent = size + ' ' + (isIn ? '✓' : '✕');
+  }
+
+  function saveEdit(id) {
+    const d = store[id];
+    d.title     = document.getElementById(id+'-edit-title').value.trim() || d.title;
+    d.meta      = document.getElementById(id+'-edit-meta').value.trim()  || d.meta;
+    d.basePrice = parseInt(document.getElementById(id+'-edit-price').value) || d.basePrice;
+    d.cat       = document.getElementById(id+'-edit-cat').value;
+    // Update qty for printed items
+    if (d.printed) {
+      ['A3','A2','A1'].forEach(s => {
+        const el = document.getElementById(id+'-qty-'+s);
+        if (el) {
+          d.qty[s]   = Math.max(0, parseInt(el.value)||0);
+          d.stock[s] = d.qty[s] > 0 ? 'in' : 'out';
+        }
+      });
+    }
+    const flash = document.getElementById(id+'-saved-flash');
+    flash.classList.add('show');
+    setTimeout(() => {
+      flash.classList.remove('show');
+      const activeCat = document.querySelector('.tab-btn.active')?.dataset.cat || 'all';
+      renderGrid(activeCat);
+    }, 900);
+  }
+
+  // ── CATEGORY FILTER ───────────────────────────────────────────────────────
+  let cartCount = 0;
+  let activeCat = 'all';
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat;
+      renderGrid(activeCat);
+    });
+  });
+
+  // ── NAV SCROLL ────────────────────────────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── REVEAL ────────────────────────────────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  // ── INLINE NOTIFY ─────────────────────────────────────────────────────────
+  function submitInlineNotify(id) {
+    const emailInput = document.getElementById(id+'-notify-email');
+    const sentEl     = document.getElementById(id+'-notify-sent');
+    const labelEl    = document.getElementById(id+'-notify-label');
+    const email = (emailInput?.value||'').trim();
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      if (emailInput) { emailInput.style.outline='2px solid #c0392b'; emailInput.focus(); setTimeout(()=>emailInput.style.outline='',1800); }
+      return;
+    }
+    const sizeText    = (labelEl?.textContent||'').split(' is sold')[0].trim();
+    const artworkName = store[id]?.title || id;
+    const btn = emailInput.nextElementSibling;
+    if (btn) { btn.textContent='…'; btn.disabled=true; }
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      artwork: artworkName, size: sizeText, customer_email: email,
+    }).then(()=>showNotifySuccess(id)).catch(()=>showNotifySuccess(id));
+  }
+  function showNotifySuccess(id) {
+    const notifyEl  = document.getElementById(id+'-inline-notify');
+    const sentEl    = document.getElementById(id+'-notify-sent');
+    const notifyRow = notifyEl?.querySelector('.inline-notify-row');
+    const notifyLbl = notifyEl?.querySelector('.inline-notify-label');
+    if (notifyRow) notifyRow.style.display='none';
+    if (notifyLbl) notifyLbl.style.display='none';
+    if (sentEl)    sentEl.style.display='flex';
+  }
+
+  // ── ADD TO CART ───────────────────────────────────────────────────────────
+  function addToCart(btn, name) {
+    cartCount++;
+    document.getElementById('cartCount').textContent = cartCount;
+    const toast = document.getElementById('cartToast');
+    toast.textContent = `"${name}" added to cart`;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  // ── INQUIRY MODAL ─────────────────────────────────────────────────────────
+  function openModal(name, size) {
+    document.getElementById('modalTitle').textContent = name==='General Inquiry' ? 'Send an Inquiry' : `Inquire: ${name}`;
+    document.getElementById('modalSub').textContent   = name==='General Inquiry' ? 'Janet will respond personally' : `${size} · Original oil on canvas`;
+    document.getElementById('modalPainting').value    = name==='General Inquiry' ? '' : `${name} (${size})`;
+    document.getElementById('modalBg').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal() { document.getElementById('modalBg').classList.remove('open'); document.body.style.overflow=''; }
+  function handleModalBgClick(e) { if(e.target===document.getElementById('modalBg'))closeModal(); }
+  function submitInquiry() {
+    closeModal();
+    const toast=document.getElementById('cartToast');
+    toast.textContent='Inquiry sent — Janet will be in touch';
+    toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),3000);
+  }
+
+  // ── NOTIFY MODAL ─────────────────────────────────────────────────────────
+  let currentNotifyArtwork='';
+  function openNotifyModal(artworkName, imgSrc) {
+    currentNotifyArtwork=artworkName;
+    document.getElementById('notifyArtworkName').textContent=artworkName;
+    document.getElementById('notifyArtworkImg').src=imgSrc;
+    document.getElementById('notifyEmailInput').value='';
+    document.getElementById('notifyFormInner').classList.remove('hiding');
+    document.getElementById('notifyFormInner').style.display='';
+    document.getElementById('notifySuccess').classList.remove('show');
+    document.getElementById('notifyModalBg').classList.add('open');
+    document.body.style.overflow='hidden';
+    setTimeout(()=>document.getElementById('notifyEmailInput').focus(),350);
+  }
+  function closeNotifyModal() { document.getElementById('notifyModalBg').classList.remove('open'); document.body.style.overflow=''; }
+  function handleNotifyBgClick(e) { if(e.target===document.getElementById('notifyModalBg'))closeNotifyModal(); }
+  function submitNotify() {
+    const input=document.getElementById('notifyEmailInput');
+    const email=input.value.trim();
+    if(!email||!email.includes('@')||!email.includes('.')){ input.style.outline='2px solid #c0392b'; input.focus(); setTimeout(()=>input.style.outline='',1800); return; }
+    document.getElementById('notifyFormInner').classList.add('hiding');
+    emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,{artwork:currentNotifyArtwork,size:'All sizes',customer_email:email}).catch(e=>console.warn(e));
+    setTimeout(()=>{
+      document.getElementById('notifyFormInner').style.display='none';
+      document.getElementById('notifySuccessName').textContent=currentNotifyArtwork;
+      document.getElementById('notifySuccess').classList.add('show');
+    },250);
+    setTimeout(()=>closeNotifyModal(),4200);
+  }
+
+  // ── KEYBOARD ─────────────────────────────────────────────────────────────
+  document.addEventListener('keydown', e => { if(e.key==='Escape'){closeModal();closeNotifyModal();} });
+
+  // ── COLLECTOR'S CIRCLE ────────────────────────────────────────────────────
+  function joinCircle() {
+    const input = document.getElementById('ccEmail');
+    const email = (input?.value || '').trim();
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      if (input) { input.style.outline = '2px solid #c0392b'; input.focus(); setTimeout(() => input.style.outline = '', 2000); }
+      return;
+    }
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      artwork: "Collector's Circle Signup", size: '', customer_email: email,
+    }).catch(() => {});
+    document.getElementById('ccForm').style.display = 'none';
+    document.getElementById('ccSuccess').classList.add('show');
+  }
+
+  // ── INIT ─────────────────────────────────────────────────────────────────
+  renderGrid('all');
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     CART DRAWER
+════════════════════════════════════════════════════════ -->
+<div id="cartOverlay" onclick="closeCart()"></div>
+<aside id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h2>Your Cart</h2>
+    <button class="cart-drawer-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-drawer-body" id="cartBody">
+    <div class="cart-empty-state" id="cartEmpty">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>Your cart is empty</p>
+      <button class="btn-continue-shopping" onclick="closeCart()">Browse Prints</button>
+    </div>
+    <ul class="cart-items" id="cartItems"></ul>
+  </div>
+  <div class="cart-drawer-footer" id="cartFooter" style="display:none">
+    <div class="cart-summary">
+      <div class="cart-summary-row">
+        <span>Subtotal (<span id="cartItemCount">0</span> items)</span>
+        <span id="cartSubtotal">€0</span>
+      </div>
+      <div class="cart-summary-row cart-summary-shipping">
+        <span>Shipping</span>
+        <span id="cartShipping">Calculated at checkout</span>
+      </div>
+      <div class="cart-summary-row cart-summary-total">
+        <span>Total</span>
+        <span id="cartTotal">€0</span>
+      </div>
+    </div>
+    <button class="btn-checkout" onclick="openCheckout()">
+      Proceed to Checkout
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+    <p class="cart-secure-note">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure checkout via Stripe · SSL encrypted
+    </p>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════════════════════════════
+     CHECKOUT MODAL
+════════════════════════════════════════════════════════ -->
+<div id="checkoutBg" onclick="handleCheckoutBgClick(event)">
+  <div id="checkoutModal">
+    <button class="checkout-close" onclick="closeCheckout()">✕</button>
+
+    <!-- Step indicator -->
+    <div class="checkout-steps" id="checkoutSteps">
+      <div class="checkout-step active" id="step-ind-1">
+        <span class="step-num">1</span><span class="step-lbl">Details</span>
+      </div>
+      <div class="checkout-step-line"></div>
+      <div class="checkout-step" id="step-ind-2">
+        <span class="step-num">2</span><span class="step-lbl">Shipping</span>
+      </div>
+      <div class="checkout-step-line"></div>
+      <div class="checkout-step" id="step-ind-3">
+        <span class="step-num">3</span><span class="step-lbl">Payment</span>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: Customer details ── -->
+    <div class="checkout-panel active" id="checkout-step-1">
+      <h3 class="checkout-panel-title">Your Details</h3>
+      <div class="checkout-form">
+        <div class="cf-row cf-row-2">
+          <div class="cf-group">
+            <label>First Name</label>
+            <input type="text" id="co-fname" placeholder="Jane" autocomplete="given-name">
+          </div>
+          <div class="cf-group">
+            <label>Last Name</label>
+            <input type="text" id="co-lname" placeholder="Smith" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="cf-group">
+          <label>Email Address</label>
+          <input type="email" id="co-email" placeholder="jane@example.com" autocomplete="email">
+        </div>
+        <div class="cf-group">
+          <label>Phone (optional)</label>
+          <input type="tel" id="co-phone" placeholder="+353 1 234 5678" autocomplete="tel">
+        </div>
+      </div>
+      <div class="checkout-order-summary">
+        <p class="checkout-order-label">Order Summary</p>
+        <ul id="checkout-order-list"></ul>
+        <div class="checkout-order-total">
+          <span>Total</span><span id="checkout-order-total-val">€0</span>
+        </div>
+      </div>
+      <button class="btn-checkout-next" onclick="goToStep(2)">
+        Continue to Shipping
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+
+    <!-- ── STEP 2: Shipping ── -->
+    <div class="checkout-panel" id="checkout-step-2">
+      <h3 class="checkout-panel-title">Shipping Address</h3>
+      <div class="checkout-form">
+        <div class="cf-group">
+          <label>Address Line 1</label>
+          <input type="text" id="co-addr1" placeholder="123 Main Street" autocomplete="address-line1">
+        </div>
+        <div class="cf-group">
+          <label>Address Line 2</label>
+          <input type="text" id="co-addr2" placeholder="Apartment, suite, etc." autocomplete="address-line2">
+        </div>
+        <div class="cf-row cf-row-2">
+          <div class="cf-group">
+            <label>City / Town</label>
+            <input type="text" id="co-city" placeholder="Dublin" autocomplete="address-level2">
+          </div>
+          <div class="cf-group">
+            <label>Postcode / Eircode</label>
+            <input type="text" id="co-postcode" placeholder="D01 X2Y3" autocomplete="postal-code">
+          </div>
+        </div>
+        <div class="cf-group">
+          <label>Country</label>
+          <select id="co-country" onchange="updateShipping()">
+            <option value="IE">Ireland</option>
+            <option value="GB">United Kingdom</option>
+            <option value="EU">Europe (EU)</option>
+            <option value="US">United States</option>
+            <option value="AU">Australia / NZ</option>
+            <option value="WW">Rest of World</option>
+          </select>
+        </div>
+        <div class="shipping-rate-box" id="shippingRateBox">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span id="shippingRateLabel">Free shipping within Ireland</span>
+        </div>
+      </div>
+      <div class="checkout-nav-row">
+        <button class="btn-checkout-back" onclick="goToStep(1)">← Back</button>
+        <button class="btn-checkout-next" onclick="goToStep(3)">
+          Continue to Payment
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Payment ── -->
+    <div class="checkout-panel" id="checkout-step-3">
+      <h3 class="checkout-panel-title">Payment</h3>
+      <div class="payment-amount-banner">
+        <span>Total due today</span>
+        <strong id="payment-total-banner">€0</strong>
+      </div>
+      <div class="stripe-card-wrap">
+        <p class="stripe-card-label">Card Details</p>
+        <div id="stripe-card-element"></div>
+        <div id="stripe-card-errors" class="stripe-errors"></div>
+      </div>
+      <div class="billing-same-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="billingSame" checked onchange="toggleBillingForm()">
+          Billing address same as shipping
+        </label>
+      </div>
+      <div id="billing-form" style="display:none">
+        <div class="cf-group"><label>Billing Address</label><input type="text" id="co-bill-addr" placeholder="123 Main Street"></div>
+        <div class="cf-row cf-row-2">
+          <div class="cf-group"><label>City</label><input type="text" id="co-bill-city" placeholder="Dublin"></div>
+          <div class="cf-group"><label>Postcode</label><input type="text" id="co-bill-post" placeholder="D01 X2Y3"></div>
+        </div>
+        <div class="cf-group"><label>Country</label>
+          <select id="co-bill-country">
+            <option>Ireland</option><option>United Kingdom</option><option>Europe (EU)</option>
+            <option>United States</option><option>Australia / NZ</option><option>Rest of World</option>
+          </select>
+        </div>
+      </div>
+      <div class="checkout-nav-row">
+        <button class="btn-checkout-back" onclick="goToStep(2)">← Back</button>
+        <button class="btn-pay" id="btn-pay" onclick="submitPayment()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Pay <span id="btn-pay-amount">€0</span> Securely
+        </button>
+      </div>
+      <div class="stripe-badges">
+        <svg width="38" height="16" viewBox="0 0 38 16" fill="none"><rect width="38" height="16" rx="3" fill="#635BFF"/><text x="19" y="11.5" text-anchor="middle" font-family="sans-serif" font-size="7" fill="white" font-weight="600">stripe</text></svg>
+        <span>Visa</span><span>Mastercard</span><span>Amex</span>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span style="color:#888">256-bit SSL</span>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Confirmation ── -->
+    <div class="checkout-panel" id="checkout-step-4">
+      <div class="order-confirmed">
+        <div class="confirmed-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Order Confirmed</h3>
+        <p id="confirmed-message">Thank you for your order. Janet will hand-pack your print with care and ship it within 3–5 working days. A confirmation email is on its way.</p>
+        <div class="confirmed-order-box" id="confirmed-order-box"></div>
+        <button class="btn-confirmed-close" onclick="closeCheckout(); clearCart();">Done</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* ── CART DRAWER ─────────────────────────────────────── */
+#cartOverlay {
+  position: fixed; inset: 0;
+  background: rgba(18,22,18,0);
+  z-index: 300;
+  pointer-events: none;
+  transition: background .35s;
+}
+#cartOverlay.open { background: rgba(18,22,18,0.45); pointer-events: all; }
+
+#cartDrawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(440px, 100vw);
+  background: var(--cream);
+  z-index: 301;
+  display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+  box-shadow: -8px 0 40px rgba(18,22,18,0.14);
+}
+#cartDrawer.open { transform: translateX(0); }
+
+.cart-drawer-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.6rem 1.8rem;
+  border-bottom: 1px solid rgba(44,74,53,0.12);
+  flex-shrink: 0;
+}
+.cart-drawer-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 400;
+}
+.cart-drawer-close {
+  width: 32px; height: 32px;
+  background: none; border: 1px solid rgba(44,74,53,0.2);
+  font-size: 1rem; cursor: pointer; color: var(--slate);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.cart-drawer-close:hover { background: var(--charcoal); color: var(--white); border-color: var(--charcoal); }
+
+.cart-drawer-body {
+  flex: 1; overflow-y: auto; padding: 1.2rem 1.8rem;
+}
+
+.cart-empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+  padding: 3rem 0; gap: 1rem; color: var(--slate);
+}
+.cart-empty-state p { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; }
+.btn-continue-shopping {
+  padding: .6rem 1.4rem;
+  font-family:'Jost',sans-serif; font-size:.62rem; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase;
+  background: none; border: 1px solid rgba(44,74,53,0.3);
+  color: var(--forest); cursor: pointer; transition: all .2s;
+}
+.btn-continue-shopping:hover { background: var(--forest); color: var(--white); }
+
+.cart-items { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+
+.cart-item {
+  display: grid; grid-template-columns: 64px 1fr auto;
+  gap: .9rem; padding: 1rem 0;
+  border-bottom: 1px solid rgba(44,74,53,0.08);
+  align-items: start;
+}
+.cart-item-img { width: 64px; height: 64px; object-fit: cover; background: var(--surface); }
+.cart-item-name {
+  font-family:'Cormorant Garamond',serif;
+  font-size: 1rem; font-style: italic; font-weight: 400;
+  margin-bottom: 3px; color: var(--charcoal);
+}
+.cart-item-meta { font-size: .7rem; color: var(--slate); letter-spacing: .04em; }
+.cart-item-remove {
+  font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--slate); cursor: pointer; background: none; border: none;
+  padding: 0; margin-top: .3rem; transition: color .2s;
+}
+.cart-item-remove:hover { color: #c0392b; }
+.cart-item-price {
+  font-size: .9rem; font-weight: 500; color: var(--charcoal);
+  white-space: nowrap;
+}
+
+.cart-drawer-footer {
+  padding: 1.4rem 1.8rem;
+  border-top: 1px solid rgba(44,74,53,0.12);
+  flex-shrink: 0; background: var(--cream);
+}
+.cart-summary { margin-bottom: 1.2rem; }
+.cart-summary-row {
+  display: flex; justify-content: space-between;
+  font-size: .8rem; color: var(--slate);
+  padding: .3rem 0;
+}
+.cart-summary-shipping { font-size: .72rem; color: var(--forest); }
+.cart-summary-total {
+  font-family:'Cormorant Garamond',serif;
+  font-size: 1.2rem; color: var(--charcoal);
+  border-top: 1px solid rgba(44,74,53,0.12);
+  padding-top: .6rem; margin-top: .4rem;
+  font-weight: 400;
+}
+.btn-checkout {
+  width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: .95rem;
+  background: var(--forest); color: var(--white);
+  font-family:'Jost',sans-serif; font-size:.68rem; font-weight:500;
+  letter-spacing:.18em; text-transform:uppercase;
+  border: none; cursor: pointer; transition: background .2s;
+  margin-bottom: .65rem;
+}
+.btn-checkout:hover { background: var(--forest-light); }
+.cart-secure-note {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  font-size: .62rem; color: var(--slate); text-align: center;
+}
+
+/* ── CHECKOUT MODAL ──────────────────────────────────── */
+#checkoutBg {
+  position: fixed; inset: 0;
+  background: rgba(18,22,18,0.6);
+  z-index: 400;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s;
+}
+#checkoutBg.open { opacity: 1; pointer-events: all; }
+
+#checkoutModal {
+  background: var(--cream);
+  width: 100%; max-width: 560px;
+  max-height: 92vh; overflow-y: auto;
+  position: relative;
+  transform: translateY(20px) scale(.98);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 40px 100px rgba(18,22,18,0.28);
+  padding: 2.4rem 2.4rem 2rem;
+}
+#checkoutBg.open #checkoutModal { transform: translateY(0) scale(1); }
+
+.checkout-close {
+  position: absolute; top: 1.1rem; right: 1.1rem;
+  background: none; border: 1px solid rgba(44,74,53,0.2);
+  font-size: .9rem; cursor: pointer; color: var(--slate);
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.checkout-close:hover { background: var(--charcoal); color: var(--white); border-color: var(--charcoal); }
+
+.checkout-steps {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 1.8rem;
+}
+.checkout-step {
+  display: flex; align-items: center; gap: 6px;
+  font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--slate); white-space: nowrap;
+}
+.checkout-step.active { color: var(--forest); }
+.checkout-step.done { color: var(--forest); }
+.step-num {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1px solid currentColor;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; font-weight: 600; flex-shrink: 0;
+}
+.checkout-step.active .step-num { background: var(--forest); color: var(--white); border-color: var(--forest); }
+.checkout-step.done .step-num { background: var(--forest); color: var(--white); border-color: var(--forest); }
+.checkout-step-line { flex: 1; height: 1px; background: rgba(44,74,53,0.2); margin: 0 .5rem; }
+
+.checkout-panel { display: none; }
+.checkout-panel.active { display: block; }
+
+.checkout-panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 400; margin-bottom: 1.4rem;
+  color: var(--charcoal);
+}
+
+.checkout-form { display: flex; flex-direction: column; gap: .85rem; margin-bottom: 1.4rem; }
+.cf-row { display: flex; gap: .7rem; }
+.cf-row-2 > * { flex: 1; }
+.cf-group { display: flex; flex-direction: column; gap: 4px; }
+.cf-group label {
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--slate); font-weight: 500;
+}
+.cf-group input, .cf-group select {
+  padding: .7rem .85rem;
+  font-family: 'Jost', sans-serif; font-size: .88rem; font-weight: 300;
+  color: var(--charcoal); background: var(--white);
+  border: 1px solid rgba(44,74,53,0.2); outline: none;
+  transition: border-color .2s;
+}
+.cf-group input:focus, .cf-group select:focus { border-color: var(--forest); }
+.cf-group input.error { border-color: #c0392b; }
+
+.checkout-order-summary {
+  background: rgba(44,74,53,0.05);
+  border: 1px solid rgba(44,74,53,0.12);
+  padding: 1rem 1.1rem; margin-bottom: 1.4rem;
+}
+.checkout-order-label {
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--slate); margin-bottom: .7rem; font-weight: 500;
+}
+#checkout-order-list { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+#checkout-order-list li {
+  display: flex; justify-content: space-between;
+  font-size: .8rem; color: var(--charcoal);
+}
+#checkout-order-list li span:last-child { font-weight: 500; }
+.checkout-order-total {
+  display: flex; justify-content: space-between;
+  border-top: 1px solid rgba(44,74,53,0.15);
+  padding-top: .6rem; margin-top: .6rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 400;
+}
+
+.shipping-rate-box {
+  display: flex; align-items: center; gap: 8px;
+  padding: .75rem 1rem;
+  background: rgba(44,74,53,0.07);
+  border: 1px solid rgba(44,74,53,0.2);
+  font-size: .78rem; color: var(--forest); font-weight: 400;
+}
+
+.checkout-nav-row { display: flex; justify-content: space-between; align-items: center; gap: .7rem; margin-top: 1.4rem; }
+.btn-checkout-back {
+  padding: .7rem 1.1rem;
+  background: none; color: var(--slate);
+  font-family:'Jost',sans-serif; font-size:.62rem; font-weight:400;
+  letter-spacing:.12em; text-transform:uppercase;
+  border: 1px solid rgba(44,74,53,0.2); cursor: pointer; transition: all .2s;
+}
+.btn-checkout-back:hover { color: var(--charcoal); border-color: var(--charcoal); }
+.btn-checkout-next {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  padding: .85rem 1.4rem;
+  background: var(--charcoal); color: var(--white);
+  font-family:'Jost',sans-serif; font-size:.65rem; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase;
+  border: none; cursor: pointer; transition: background .2s;
+}
+.btn-checkout-next:hover { background: var(--forest); }
+
+.payment-amount-banner {
+  display: flex; justify-content: space-between; align-items: baseline;
+  background: rgba(44,74,53,0.07); border: 1px solid rgba(44,74,53,0.18);
+  padding: .85rem 1.1rem; margin-bottom: 1.3rem;
+}
+.payment-amount-banner span { font-size: .72rem; color: var(--slate); letter-spacing: .08em; text-transform: uppercase; }
+.payment-amount-banner strong { font-family:'Cormorant Garamond',serif; font-size: 1.6rem; font-weight: 400; color: var(--charcoal); }
+
+.stripe-card-wrap {
+  border: 1px solid rgba(44,74,53,0.22);
+  padding: 1rem 1.1rem; margin-bottom: 1rem;
+  background: var(--white);
+}
+.stripe-card-label {
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--slate); margin-bottom: .65rem; font-weight: 500;
+}
+#stripe-card-element { min-height: 22px; }
+.stripe-errors { font-size: .75rem; color: #c0392b; margin-top: .5rem; min-height: 1rem; }
+
+/* Simulated card input for demo */
+.demo-card-input {
+  border: none; outline: none; width: 100%;
+  font-family: 'Jost', sans-serif; font-size: .88rem;
+  font-weight: 300; color: var(--charcoal); background: transparent;
+  letter-spacing: .06em;
+}
+
+.billing-same-row { margin-bottom: .9rem; }
+.checkbox-label {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .78rem; color: var(--slate); cursor: pointer; user-select: none;
+}
+.checkbox-label input[type="checkbox"] { accent-color: var(--forest); width: 14px; height: 14px; }
+
+.btn-pay {
+  width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 1rem;
+  background: var(--forest); color: var(--white);
+  font-family:'Jost',sans-serif; font-size:.7rem; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase;
+  border: none; cursor: pointer; transition: background .2s;
+}
+.btn-pay:hover { background: var(--forest-light); }
+.btn-pay:disabled { background: var(--slate); cursor: not-allowed; }
+.btn-pay.processing { background: var(--slate); }
+
+.stripe-badges {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin-top: .9rem; flex-wrap: wrap;
+  font-size: .62rem; color: var(--slate); letter-spacing: .06em;
+}
+
+/* ── ORDER CONFIRMED ─────────────────────────── */
+.order-confirmed { text-align: center; padding: 1.5rem 0; }
+.confirmed-icon {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: rgba(44,74,53,0.12);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.3rem; color: var(--forest);
+  animation: popIn .5s cubic-bezier(.4,0,.2,1);
+}
+@keyframes popIn { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.order-confirmed h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-size: 2rem; font-weight: 400; margin-bottom: .6rem;
+}
+.order-confirmed p {
+  font-size: .84rem; color: var(--slate);
+  line-height: 1.7; max-width: 380px; margin: 0 auto 1.5rem;
+}
+.confirmed-order-box {
+  background: rgba(44,74,53,0.06);
+  border: 1px solid rgba(44,74,53,0.15);
+  padding: 1rem 1.2rem; text-align: left;
+  max-width: 340px; margin: 0 auto 1.6rem;
+  font-size: .8rem; color: var(--charcoal);
+  display: flex; flex-direction: column; gap: .4rem;
+}
+.btn-confirmed-close {
+  padding: .85rem 2.4rem;
+  background: var(--forest); color: var(--white);
+  font-family:'Jost',sans-serif; font-size:.65rem; font-weight:500;
+  letter-spacing:.18em; text-transform:uppercase;
+  border: none; cursor: pointer; transition: background .2s;
+}
+.btn-confirmed-close:hover { background: var(--forest-light); }
+</style>
+
+<script>
+// ── CART STATE ────────────────────────────────────────────────────────────────
+const cartItems = [];
+const shippingRates = {
+  IE: { label: 'Free shipping within Ireland', cost: 0 },
+  GB: { label: 'Standard shipping to UK — €12', cost: 12 },
+  EU: { label: 'Tracked shipping to EU — €18', cost: 18 },
+  US: { label: 'Insured shipping to USA — €28', cost: 28 },
+  AU: { label: 'Insured shipping to AUS/NZ — €32', cost: 32 },
+  WW: { label: 'International tracked shipping — €35', cost: 35 },
+};
+let selectedShipping = shippingRates.IE;
+
+// Override addToCart to use real cart state
+function addToCart(btn, name) {
+  const card   = btn.closest('.print-card');
+  const id     = card?.dataset?.id || name.toLowerCase().replace(/\s+/g,'-');
+  const activePill = card?.querySelector('.size-pill.active');
+  const size   = activePill?.dataset?.size || 'A3';
+  const price  = parseInt(activePill?.dataset?.price) || (store[id]?.basePrice || 85);
+  const img    = card?.querySelector('img')?.src || '';
+  const isOD   = !!card?.dataset?.onDemand;
+  const slug   = id + '-' + size;
+
+  // For printed items, check and decrement qty
+  const d = store[id];
+  if (d && d.printed) {
+    if (d.qty[size] <= 0) {
+      const errEl = btn;
+      btn.textContent = 'Sold Out';
+      btn.style.background = 'var(--slate)';
+      setTimeout(() => { btn.textContent = 'Add to Cart'; btn.style.background = ''; }, 2000);
+      return;
+    }
+    decrementQty(id, size);
+    // Re-render grid to reflect new qty
+    const activeCat = document.querySelector('.tab-btn.active')?.dataset.cat || 'all';
+    setTimeout(() => renderGrid(activeCat), 100);
+  }
+
+  // Add or increment in cart
+  const existing = cartItems.find(i => i.slug === slug);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cartItems.push({ slug, id, name, size, price, img, qty: 1, onDemand: isOD });
+  }
+
+  updateCartUI();
+  openCart();
+
+  const orig = btn.textContent;
+  btn.textContent = '✓ Added';
+  btn.style.background = 'var(--forest)';
+  btn.style.color = 'var(--white)';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; }, 1600);
+}
+
+function removeFromCart(slug) {
+  const idx = cartItems.findIndex(i => i.slug === slug);
+  if (idx > -1) cartItems.splice(idx, 1);
+  updateCartUI();
+}
+
+function changeQty(slug, delta) {
+  const item = cartItems.find(i => i.slug === slug);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty < 1) { removeFromCart(slug); return; }
+  updateCartUI();
+}
+
+function cartSubtotalValue() {
+  return cartItems.reduce((s, i) => s + i.price * i.qty, 0);
+}
+
+function updateCartUI() {
+  const count    = cartItems.reduce((s, i) => s + i.qty, 0);
+  const subtotal = cartSubtotalValue();
+  const total    = subtotal + selectedShipping.cost;
+
+  // Nav badge
+  document.getElementById('cartCount').textContent = count;
+
+  // Empty / items visibility
+  const isEmpty = cartItems.length === 0;
+  document.getElementById('cartEmpty').style.display  = isEmpty ? 'flex' : 'none';
+  document.getElementById('cartItems').style.display  = isEmpty ? 'none' : 'flex';
+  document.getElementById('cartFooter').style.display = isEmpty ? 'none'  : 'block';
+
+  // Render items
+  const ul = document.getElementById('cartItems');
+  ul.innerHTML = cartItems.map(item => `
+    <li class="cart-item">
+      <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+      <div>
+        <p class="cart-item-name">${item.name}</p>
+        <p class="cart-item-meta">${item.size} Giclée print · Edition of 50</p>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+          <button onclick="changeQty('${item.slug}',-1)" style="width:22px;height:22px;border:1px solid rgba(44,74,53,0.25);background:none;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;color:var(--slate)">−</button>
+          <span style="font-size:.8rem;min-width:14px;text-align:center">${item.qty}</span>
+          <button onclick="changeQty('${item.slug}',1)"  style="width:22px;height:22px;border:1px solid rgba(44,74,53,0.25);background:none;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;color:var(--slate)">+</button>
+          <button class="cart-item-remove" onclick="removeFromCart('${item.slug}')">Remove</button>
+        </div>
+      </div>
+      <span class="cart-item-price">€${(item.price * item.qty).toLocaleString()}</span>
+    </li>
+  `).join('');
+
+  // Summary
+  document.getElementById('cartSubtotal').textContent  = `€${subtotal.toLocaleString()}`;
+  document.getElementById('cartShipping').textContent   = selectedShipping.cost === 0 ? 'Free' : `€${selectedShipping.cost}`;
+  document.getElementById('cartTotal').textContent      = `€${total.toLocaleString()}`;
+  document.getElementById('cartItemCount').textContent  = count;
+}
+
+function openCart() {
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartDrawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function clearCart() {
+  cartItems.length = 0;
+  updateCartUI();
+}
+
+// ── CHECKOUT ──────────────────────────────────────────────────────────────────
+let currentStep = 1;
+
+function openCheckout() {
+  if (cartItems.length === 0) return;
+  closeCart();
+  currentStep = 1;
+  renderCheckoutSummary();
+  setStep(1);
+  document.getElementById('checkoutBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCheckout() {
+  document.getElementById('checkoutBg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleCheckoutBgClick(e) {
+  if (e.target === document.getElementById('checkoutBg')) closeCheckout();
+}
+
+function setStep(n) {
+  currentStep = n;
+  document.querySelectorAll('.checkout-panel').forEach((p,i) => {
+    p.classList.toggle('active', i+1 === n);
+  });
+  document.querySelectorAll('.checkout-step').forEach((s,i) => {
+    s.classList.remove('active','done');
+    if (i+1 === n) s.classList.add('active');
+    if (i+1 < n)  s.classList.add('done');
+  });
+  // Update step indicator step-nums that are done to checkmark
+  document.querySelectorAll('.checkout-step.done .step-num').forEach(el => {
+    el.textContent = '✓';
+  });
+  document.querySelectorAll('.checkout-step:not(.done) .step-num').forEach((el, i) => {
+    el.textContent = String(i+1 + (n > 1 ? n-1 : 0));
+  });
+  document.querySelectorAll('.checkout-step .step-num').forEach((el,i) => {
+    el.textContent = document.querySelectorAll('.checkout-step')[i].classList.contains('done') ? '✓' : String(i+1);
+  });
+  document.getElementById('checkoutSteps').style.display = n === 4 ? 'none' : 'flex';
+  document.getElementById('checkoutModal').scrollTop = 0;
+}
+
+function goToStep(n) {
+  if (n > currentStep && !validateStep(currentStep)) return;
+  setStep(n);
+  if (n === 3) {
+    renderPaymentStep();
+  }
+}
+
+function validateStep(n) {
+  if (n === 1) {
+    const fname = document.getElementById('co-fname').value.trim();
+    const lname = document.getElementById('co-lname').value.trim();
+    const email = document.getElementById('co-email').value.trim();
+    let ok = true;
+    [['co-fname',fname],['co-lname',lname],['co-email',email]].forEach(([id,v]) => {
+      const el = document.getElementById(id);
+      if (!v) { el.classList.add('error'); ok = false; } else el.classList.remove('error');
+    });
+    if (email && (!email.includes('@') || !email.includes('.'))) {
+      document.getElementById('co-email').classList.add('error'); ok = false;
+    }
+    return ok;
+  }
+  if (n === 2) {
+    const addr = document.getElementById('co-addr1').value.trim();
+    const city = document.getElementById('co-city').value.trim();
+    let ok = true;
+    [['co-addr1',addr],['co-city',city]].forEach(([id,v]) => {
+      const el = document.getElementById(id);
+      if (!v) { el.classList.add('error'); ok = false; } else el.classList.remove('error');
+    });
+    return ok;
+  }
+  return true;
+}
+
+function renderCheckoutSummary() {
+  const ul = document.getElementById('checkout-order-list');
+  ul.innerHTML = cartItems.map(item =>
+    `<li><span>${item.name} · ${item.size}${item.qty > 1 ? ' ×'+item.qty : ''}</span><span>€${(item.price*item.qty).toLocaleString()}</span></li>`
+  ).join('');
+  const total = cartSubtotalValue() + selectedShipping.cost;
+  document.getElementById('checkout-order-total-val').textContent = `€${total.toLocaleString()}`;
+}
+
+function updateShipping() {
+  const country = document.getElementById('co-country').value;
+  selectedShipping = shippingRates[country] || shippingRates.WW;
+  document.getElementById('shippingRateLabel').textContent = selectedShipping.label;
+  updateCartUI();
+  renderCheckoutSummary();
+}
+
+function renderPaymentStep() {
+  const total = cartSubtotalValue() + selectedShipping.cost;
+  document.getElementById('payment-total-banner').textContent = `€${total.toLocaleString()}`;
+  document.getElementById('btn-pay-amount').textContent = `€${total.toLocaleString()}`;
+
+  // Render Stripe Elements if loaded, else show demo input
+  const wrapper = document.getElementById('stripe-card-element');
+  if (window.Stripe) {
+    if (!window._stripeCard) {
+      const stripe = Stripe('pk_test_51TPqyYB2c9rI160ozY65LsWbISt2W8S95ZVPiLmJIzpXjVW0PTfl1XAVWlK08KSVEWnUnlKDYYVHxMnBI4duW4th00Zd0K9nR4');
+      const elements = stripe.elements({
+        fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap' }]
+      });
+      window._stripeInstance = stripe;
+      window._stripeCard = elements.create('card', {
+        style: {
+          base: {
+            fontFamily: 'Jost, sans-serif', fontSize: '15px', fontWeight: '300',
+            color: '#1a1714', '::placeholder': { color: '#a09484' }
+          }
+        }
+      });
+      window._stripeCard.mount('#stripe-card-element');
+      window._stripeCard.on('change', e => {
+        document.getElementById('stripe-card-errors').textContent = e.error ? e.error.message : '';
+      });
+    }
+  } else {
+    // Demo mode — show simulated card field
+    if (!wrapper.querySelector('.demo-card-input')) {
+      wrapper.innerHTML = `
+        <input class="demo-card-input" id="demoCard" placeholder="4242 4242 4242 4242   MM/YY   CVC" maxlength="22"
+          oninput="formatDemoCard(this)">
+        <p style="font-size:.62rem;color:var(--slate);margin-top:.5rem">
+          Demo mode · Use card <strong>4242 4242 4242 4242</strong>, any expiry/CVC
+        </p>`;
+    }
+  }
+}
+
+function formatDemoCard(input) {
+  let v = input.value.replace(/\D/g,'').substring(0,16);
+  input.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+
+function toggleBillingForm() {
+  const same = document.getElementById('billingSame').checked;
+  document.getElementById('billing-form').style.display = same ? 'none' : 'block';
+}
+
+async function submitPayment() {
+  const btn   = document.getElementById('btn-pay');
+  const errEl = document.getElementById('stripe-card-errors');
+  errEl.textContent = '';
+
+  // ── Validate demo card ───────────────────────────────────────────────────
+  const demoCard = document.getElementById('demoCard');
+  if (demoCard) {
+    if (demoCard.value.replace(/\s/g,'').length < 16) {
+      errEl.textContent = 'Please enter a complete card number.'; return;
+    }
+  }
+
+  btn.disabled = true;
+  btn.classList.add('processing');
+  btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>&nbsp;Processing payment…`;
+
+  try {
+    // ── STEP 1: Stripe payment ─────────────────────────────────────────────
+    // In production replace this with:
+    //   1. POST /api/create-payment-intent  → returns { clientSecret }
+    //   2. stripe.confirmCardPayment(clientSecret, { payment_method: { card: _stripeCard } })
+    //   3. Use paymentIntent.id as proof of payment before sending to Gelato
+    let paymentIntentId = `pi_demo_${Date.now()}`;
+    await new Promise(r => setTimeout(r, 1800)); // simulate Stripe latency
+
+    // ── STEP 2: Build + send Gelato order ─────────────────────────────────
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>&nbsp;Sending to Gelato…`;
+
+    const fname    = document.getElementById('co-fname').value.trim();
+    const lname    = document.getElementById('co-lname').value.trim();
+    const email    = document.getElementById('co-email').value.trim();
+    const phone    = document.getElementById('co-phone').value.trim();
+    const addr1    = document.getElementById('co-addr1').value.trim();
+    const addr2    = document.getElementById('co-addr2').value.trim();
+    const city     = document.getElementById('co-city').value.trim();
+    const postcode = document.getElementById('co-postcode').value.trim();
+    const country  = document.getElementById('co-country').value;
+
+    // Gelato product UIDs for fine art poster 200gsm archival matte
+    // Full catalog: https://dashboard.gelato.com/docs/products/
+    const PRODUCT_UIDS = {
+      A3: 'poster_297x420-mm-a3_200-gsm_cl_4-0',
+      A2: 'poster_420x594-mm-a2_200-gsm_cl_4-0',
+      A1: 'poster_594x841-mm-a1_200-gsm_cl_4-0',
+    };
+
+    // Artwork file URLs — upload 300dpi TIFFs/JPEGs to a CDN before going live
+    // e.g. Cloudinary, AWS S3, or any public URL. Gelato fetches directly.
+    const ARTWORK_FILES = {
+      // ── Limited printed editions ───────────────────────────────────────────
+      'mayloom':          'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295382/Mayloom.png',
+      'canopy':           'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295382/Canopy.png',
+      'touching-green':   'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295382/Touching_Green.png',
+      'sweet-summer':     'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295384/Sweet_Summer.png',
+      'dancing':          'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295384/Dancing.png',
+      'moon-tree':        'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295382/Moon_Tree.png',
+      'red-leaf':         'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295384/Red_Leaf.png',
+      // ── On-demand paintings ────────────────────────────────────────────────
+      'last-summer':      'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295384/Last_Summer.png',
+      'petals-on-green':  'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295386/Petals_on_Green.png',
+      'holly-and-beech':  'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295385/Holly_and_Beach.png',
+      'leaf-and-water':   'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295386/Leaf_and_Water.png',
+      'blue-falls':       'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295385/Blue_Falls.png',
+      'blue-mantel':      'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295380/Blue_Mantle.png',
+    };
+
+    const countryMap = { IE:'IE', GB:'GB', EU:'DE', US:'US', AU:'AU', WW:'IE' };
+    const orderRef   = `JCH-${Date.now()}`;
+
+    // Gelato order payload (v4 API)
+    // Docs: https://dashboard.gelato.com/docs/orders/v4/create/
+    const gelatoPayload = {
+      orderReferenceId:  orderRef,
+      customerReferenceId: email,
+      currency:  'EUR',
+      orderType: 'draft',
+      shippingAddress: {
+        firstName:    fname,
+        lastName:     lname,
+        addressLine1: addr1,
+        addressLine2: addr2 || undefined,
+        city:         city,
+        postCode:     postcode,
+        country:      countryMap[country] || 'IE',
+        email:        email,
+        phone:        phone || undefined,
+      },
+      items: cartItems.map((item, i) => ({
+        itemReferenceId: `item-${i}-${item.id}-${item.size}`,
+        productUid:      PRODUCT_UIDS[item.size],
+        quantity:        item.qty,
+        files: [{ type: 'default', url: ARTWORK_FILES[item.id] || `https://res.cloudinary.com/dasjyomdb/image/upload/${item.id}.png` }],
+      })),
+      // Optional: pass Stripe payment ID as metadata for reconciliation
+      metadata: { paymentIntentId, source: 'janet-cruise-halpin.com' },
+    };
+
+    // POST to your server-side proxy — NEVER expose your Gelato API key client-side
+    // Server endpoint should: add X-API-KEY header, forward to https://order.gelatoapis.com/v4/orders
+    // Example Netlify function at /netlify/functions/gelato-order.js:
+    //
+    //   const fetch = require('node-fetch');
+    //   exports.handler = async (event) => {
+    //     const res = await fetch('https://order.gelatoapis.com/v4/orders', {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.GELATO_API_KEY },
+    //       body: event.body,
+    //     });
+    //     const data = await res.json();
+    //     return { statusCode: res.status, body: JSON.stringify(data) };
+    //   };
+
+    let gelatoOrderId = '';
+    let fulfillmentMsg = '';
+
+    try {
+      const res = await fetch('/.netlify/functions/gelato-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(gelatoPayload),
+      });
+      if (!res.ok) throw new Error(`Gelato ${res.status}`);
+      const data = await res.json();
+      gelatoOrderId = data.id;
+      fulfillmentMsg = `Your prints are now in production with Gelato. Printed on 200gsm archival matte paper and dispatched from the nearest local hub — typically 2–4 working days.`;
+    } catch (gelatoErr) {
+      console.error('Gelato failed — handle manually:', gelatoPayload, gelatoErr);
+      fulfillmentMsg = `Your payment was successful. Janet's team will be in touch to confirm your order.`;
+    }
+
+    // ── STEP 3: Show confirmation ──────────────────────────────────────────
+    const total = cartSubtotalValue() + selectedShipping.cost;
+    document.getElementById('confirmed-message').textContent =
+      `Thank you, ${fname}! A confirmation is on its way to ${email}. ${fulfillmentMsg}`;
+
+    document.getElementById('confirmed-order-box').innerHTML =
+      `<strong style="font-family:'Cormorant Garamond',serif;font-size:1rem;display:block;margin-bottom:.5rem">Order ${orderRef}</strong>` +
+      cartItems.map(i =>
+        `<span style="display:flex;justify-content:space-between;padding:.2rem 0;border-bottom:1px solid rgba(44,74,53,0.08)">
+          <span>${i.name} · ${i.size} Giclée${i.qty>1?' ×'+i.qty:''}</span>
+          <span style="font-weight:500">€${(i.price*i.qty).toLocaleString()}</span>
+        </span>`
+      ).join('') +
+      `<span style="display:flex;justify-content:space-between;padding-top:.5rem;font-weight:500">
+        <span>Total paid</span><span>€${total.toLocaleString()}</span>
+      </span>
+      <span style="display:block;margin-top:.75rem;font-size:.62rem;color:var(--slate);letter-spacing:.05em">
+        Gelato ref: ${gelatoOrderId}
+      </span>`;
+
+    setStep(4);
+
+  } catch (err) {
+    errEl.textContent = err.message || 'Payment failed. Please try again.';
+    btn.disabled = false;
+    btn.classList.remove('processing');
+    const total = cartSubtotalValue() + selectedShipping.cost;
+    btn.innerHTML = `Pay €${total.toLocaleString()} Securely`;
+  }
+}
+
+// ── LIGHTBOX ─────────────────────────────────────────────────────────────────
+function openLightbox(src, caption) {
+  const bg  = document.getElementById('lightboxBg');
+  const img = document.getElementById('lightboxImg');
+  const cap = document.getElementById('lightboxCaption');
+  img.src = src;
+  img.alt = caption || '';
+  cap.textContent = caption || '';
+  bg.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightboxBg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleLightboxBgClick(e) {
+  if (e.target === document.getElementById('lightboxBg')) closeLightbox();
+}
+
+// Wire up click-to-enlarge on original painting cards
+document.querySelectorAll('.original-card-img img').forEach(img => {
+  img.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const card = this.closest('.original-card');
+    const title = card.querySelector('.original-card-title')?.textContent || '';
+    const size  = card.querySelector('.original-card-size')?.textContent || '';
+    openLightbox(this.src, title + (size ? ' · ' + size : ''));
+  });
+});
+
+// Wire up click-to-enlarge on print grid cards (rendered dynamically)
+document.getElementById('printsGrid').addEventListener('click', function(e) {
+  const img = e.target.closest('.print-card-img img');
+  if (!img) return;
+  e.stopPropagation();
+  const card  = img.closest('.print-card');
+  const title = card.querySelector('.print-card-title')?.textContent || '';
+  const meta  = card.querySelector('.print-card-meta')?.textContent || '';
+  openLightbox(img.src, title + (meta ? ' · ' + meta : ''));
+});
+
+// Keyboard close for lightbox
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeLightbox(); closeCheckout(); closeCart(); closeModal?.(); closeNotifyModal?.(); }
+});
+
+// Spin animation for loading icons
+const _spinStyle = document.createElement('style');
+_spinStyle.textContent = `@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`;
+document.head.appendChild(_spinStyle);
+
+// Wire up nav cart button
+document.querySelector('.cart-nav')?.addEventListener('click', e => { e.preventDefault(); openCart(); });
+
+// Init
+updateCartUI();
+</script>
+</body>
+</html>
