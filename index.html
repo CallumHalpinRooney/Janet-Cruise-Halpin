@@ -2353,11 +2353,11 @@
     <p class="modal-subtitle" id="modalSub">Send Janet a message about this work</p>
     <div class="form-field">
       <label>Your Name</label>
-      <input type="text" placeholder="e.g. Claire Murphy">
+      <input type="text" id="modalName" placeholder="e.g. Claire Murphy">
     </div>
     <div class="form-field">
       <label>Email Address</label>
-      <input type="email" placeholder="claire@example.com">
+      <input type="email" id="modalEmail" placeholder="claire@example.com">
     </div>
     <div class="form-field">
       <label>Painting</label>
@@ -2365,9 +2365,9 @@
     </div>
     <div class="form-field">
       <label>Your Message</label>
-      <textarea placeholder="Tell Janet about your interest — scale, location, any specific questions…"></textarea>
+      <textarea id="modalMessage" placeholder="Tell Janet about your interest — scale, location, any specific questions…"></textarea>
     </div>
-    <button class="form-submit" onclick="submitInquiry()">Send Inquiry</button>
+    <button class="form-submit" id="modalSubmitBtn" onclick="submitInquiry()">Send Inquiry</button>
   </div>
 </div>
 
@@ -2862,11 +2862,80 @@
   }
   function closeModal() { document.getElementById('modalBg').classList.remove('open'); document.body.style.overflow=''; }
   function handleModalBgClick(e) { if(e.target===document.getElementById('modalBg'))closeModal(); }
-  function submitInquiry() {
-    closeModal();
-    const toast=document.getElementById('cartToast');
-    toast.textContent='Inquiry sent — Janet will be in touch';
-    toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),3000);
+  async function submitInquiry() {
+    const name    = document.getElementById('modalName').value.trim();
+    const email   = document.getElementById('modalEmail').value.trim();
+    const painting= document.getElementById('modalPainting').value.trim();
+    const message = document.getElementById('modalMessage').value.trim();
+    const btn     = document.getElementById('modalSubmitBtn');
+
+    if (!name)    { highlight('modalName');    return; }
+    if (!email || !email.includes('@')) { highlight('modalEmail'); return; }
+    if (!message) { highlight('modalMessage'); return; }
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    /* Map painting name to its Cloudinary thumbnail */
+    const paintingImg = findPaintingImg(painting);
+
+    try {
+      const res = await fetch('/.netlify/functions/submit-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, painting, message, painting_img: paintingImg }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+
+      closeModal();
+      /* Reset form */
+      ['modalName','modalEmail','modalMessage'].forEach(id => document.getElementById(id).value = '');
+      const toast = document.getElementById('cartToast');
+      toast.textContent = 'Inquiry sent — Janet will be in touch ✓';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    } catch(err) {
+      console.error(err);
+      btn.textContent = 'Send Inquiry';
+      btn.disabled = false;
+      const toast = document.getElementById('cartToast');
+      toast.textContent = 'Something went wrong — please try again';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+  }
+
+  function highlight(id) {
+    const el = document.getElementById(id);
+    el.style.outline = '2px solid #c0392b';
+    el.focus();
+    setTimeout(() => el.style.outline = '', 1800);
+  }
+
+  function findPaintingImg(paintingName) {
+    /* Strip size suffix like " (100×100cm)" */
+    const bare = paintingName.replace(/\s*\(.*\)$/, '').trim();
+    const map = {
+      'Red Leaf':       'Red_Leaf',
+      'Gliding Light':  'Dancing',
+      'Just Summer':    'Last_Summer',
+      'Leaf and Water': 'Leaf_and_Water',
+      'Small Wilderness': 'Sweet_Summer',
+      'Holly and Beech': 'Holly_and_Beach',
+      'Blue Mantle':    'Blue_Mantle',
+      'Canopy':         'Canopy',
+      'Mayloom':        'Mayloom',
+      'Moon Tree':      'Moon_Tree',
+      'Touching Green': 'Touching_Green',
+      'Dancing':        'Dancing',
+      'Last Summer':    'Last_Summer',
+      'Sweet Summer':   'Sweet_Summer',
+      'Blue Falls':     'Blue_Falls',
+      'Petals on Green':'Petals_on_Green',
+    };
+    const key = map[bare];
+    if (!key) return '';
+    return `https://res.cloudinary.com/dasjyomdb/image/upload/w_400,c_fill/${key}.png`;
   }
 
   // ── NOTIFY MODAL ─────────────────────────────────────────────────────────
