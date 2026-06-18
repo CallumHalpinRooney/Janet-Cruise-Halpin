@@ -2880,9 +2880,16 @@
     const paintingImg = findPaintingImg(painting);
 
     try {
-      const res = await fetch('/.netlify/functions/submit-inquiry', {
+      const SB_URL = 'https://lkwzyaygeqxfnmzekadj.supabase.co';
+      const SB_KEY = 'sb_publishable_m1fXPq2PNZ3JMjQDx05pqg_FT2UT0xH';
+      const res = await fetch(`${SB_URL}/rest/v1/inquiries`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SB_KEY,
+          'Authorization': `Bearer ${SB_KEY}`,
+          'Prefer': 'return=minimal',
+        },
         body: JSON.stringify({ name, email, painting, message, painting_img: paintingImg }),
       });
       if (!res.ok) throw new Error(await res.text());
