@@ -1,12 +1,14 @@
 /* Netlify Function — submit-inquiry.js
    Receives inquiry form POST, stores in Supabase, emails Janet via EmailJS.
-   Environment variables required (set in Netlify dashboard → Site config → Env vars):
-     SUPABASE_URL          — e.g. https://xxxx.supabase.co
-     SUPABASE_SERVICE_KEY  — service_role key (NOT anon key — server-side only)
+   Supabase credentials are hardcoded (anon key, safe with RLS).
+   EmailJS env vars (optional — add when ready):
      EMAILJS_SERVICE_ID
      EMAILJS_TEMPLATE_ID
-     EMAILJS_PRIVATE_KEY   — found in EmailJS dashboard → Account → API keys
+     EMAILJS_PRIVATE_KEY
 */
+
+const SUPABASE_URL = 'https://lkwzyaygeqxfnmzekadj.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_m1fXPq2PNZ3JMjQDx05pqg_FT2UT0xH';
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -29,24 +31,19 @@ exports.handler = async (event) => {
 
   /* ── 1. Store in Supabase ───────────────────────── */
   try {
-    const sbUrl = process.env.SUPABASE_URL;
-    const sbKey = process.env.SUPABASE_SERVICE_KEY;
-
-    if (sbUrl && sbKey) {
-      const res = await fetch(`${sbUrl}/rest/v1/inquiries`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': sbKey,
-          'Authorization': `Bearer ${sbKey}`,
-          'Prefer': 'return=representation',
-        },
-        body: JSON.stringify({ name, email, painting, message, painting_img }),
-      });
-      if (!res.ok) {
-        const err = await res.text();
-        errors.push(`Supabase: ${err}`);
-      }
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/inquiries`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Prefer': 'return=representation',
+      },
+      body: JSON.stringify({ name, email, painting, message, painting_img }),
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      errors.push(`Supabase: ${err}`);
     }
   } catch (e) {
     errors.push(`Supabase exception: ${e.message}`);
