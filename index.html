@@ -1968,9 +1968,10 @@
 <section class="hero">
   <div class="hero-image-panel">
     <img
-      src="https://res.cloudinary.com/dasjyomdb/image/upload/v1781689601/Janets_art_1_.jpg.jpg"
+      src="Janets_art_1_.jpg.jpg"
       alt="Janet Cruise Halpin — Original Painting"
       loading="eager"
+      onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://res.cloudinary.com/dasjyomdb/image/upload/w_2000,c_fill/Canopy.png';}"
     >
     <div class="hero-painting-label">
       <span>Original Painting</span>
@@ -2267,41 +2268,36 @@
       </div>
     </div>
     <p class="reveal" style="font-size:0.82rem;font-weight:300;color:var(--slate);max-width:260px;text-align:right;line-height:1.7;">
-      Museum-quality Giclée prints on 310gsm cotton rag paper. Signed &amp; numbered edition of 50.
+      Museum-quality giclée prints on heavyweight archival fine-art paper. Every print a signed, numbered edition of 50.
     </p>
   </div>
 
-  <!-- GELATO FULFILMENT BANNER -->
+  <!-- LIMITED EDITION ASSURANCE STRIP -->
   <div class="printful-banner reveal">
     <div class="pf-left">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 6.9H22l-6 4.5 2.3 7-6.3-4.5L5.7 20.4l2.3-7-6-4.5h7.6z"/></svg>
       <div>
-        <p class="pf-title">Printed &amp; shipped automatically via Gelato · 100+ labs across 32 countries</p>
-        <p class="pf-sub">Every order triggers automatic fulfilment — printed on 200gsm archival matte paper using giclée inkjet, packed and dispatched locally to your customer. Zero handling by Janet. Orders placed in Ireland and the EU are produced at the nearest Gelato hub for fastest delivery.</p>
+        <p class="pf-title">Strictly limited editions · never mass-produced</p>
+        <p class="pf-sub">Each artwork is released as an edition of just 50. Every print is produced to order on heavyweight archival fine-art paper, signed and numbered by Janet, and dispatched from the nearest local studio partner. Once an edition sells out, it is gone for good.</p>
       </div>
     </div>
     <div class="pf-costs">
       <div class="pf-cost-item">
-        <span class="pf-cost-label">A3 · 297×420mm</span>
-        <span class="pf-cost-val">~€8–12</span>
+        <span class="pf-cost-label">Edition</span>
+        <span class="pf-cost-val">50 only</span>
       </div>
       <div class="pf-cost-item">
-        <span class="pf-cost-label">A2 · 420×594mm</span>
-        <span class="pf-cost-val">~€14–18</span>
+        <span class="pf-cost-label">Paper</span>
+        <span class="pf-cost-val">Archival fine-art</span>
       </div>
       <div class="pf-cost-item">
-        <span class="pf-cost-label">A1 · 594×841mm</span>
-        <span class="pf-cost-val">~€22–28</span>
-      </div>
-      <div class="pf-cost-item">
-        <span class="pf-cost-label">Shipping IE/EU</span>
-        <span class="pf-cost-val">€4–8</span>
+        <span class="pf-cost-label">Finishing</span>
+        <span class="pf-cost-val">Signed &amp; numbered</span>
       </div>
       <div class="pf-cost-item pf-cost-margin">
-        <span class="pf-cost-label">Your margin (A3 · €95)</span>
-        <span class="pf-cost-val pf-green">~€75–83</span>
+        <span class="pf-cost-label">Made to order</span>
+        <span class="pf-cost-val pf-green">Ships worldwide</span>
       </div>
-      <button class="pf-setup-btn" onclick="window.open('https://www.gelato.com','_blank')">Set up Gelato →</button>
     </div>
   </div>
 
@@ -2579,11 +2575,32 @@
   // Size price map (add-on above base price)
   const sizeAddOn = { A3: 0, A2: 25, A1: 60 };
 
+  // ── LIMITED EDITIONS ──────────────────────────────────────────────────────
+  // Every artwork is a numbered edition of 50. EDITION_SIZE sets the cap; the
+  // map below is the number still available in each edition (edit these freely
+  // as prints sell — lower numbers create more urgency on the card).
+  const EDITION_SIZE = 50;
+  const EDITION_REMAINING = {
+    // Best-sellers — kept deliberately scarce
+    'mayloom':7, 'canopy':9, 'touching-green':6, 'sweet-summer':11, 'dancing':8,
+    'moon-tree':12, 'red-leaf':5, 'shades-of-evening':14, 'land-edge':16, 'aurora':13,
+    // The wider collection
+    'fragrant-blossoms':22, 'favourite-perfume':27, 'as-i-remember':31, 'happy-talk':19,
+    'maitree':24, 'tall-story':29, 'blossom-dearie':33, 'shadowed-nature':21, 'breeze':26,
+    'patterns':18, 'woods-in-mist':23, 'little-green':28, 'blue-mantel':15, 'just-summer':30,
+    'blue-falls':17, 'small-wilderness':25, 'leaf-and-water':20, 'true-green':12, 'last-summer':16,
+    'petals-on-green':19, 'holly-and-beech':22, 'cool-mountain':14, 'synergos-1':34, 'synergos-2':32,
+    'gliding-light':27, 'stone-gap':35, 'west-alone':38, 'dusk':30, 'mist-of-sea':21,
+  };
+
   // ── LIVE DATA STORE ───────────────────────────────────────────────────────
   // Derive stock from qty for printed items; on-demand items are always 'in'
   const store = {};
   paintings.forEach(p => {
     const d = JSON.parse(JSON.stringify(p));
+    // Limited-edition figures for every artwork
+    d.edition   = EDITION_SIZE;
+    d.remaining = EDITION_REMAINING[d.id] != null ? EDITION_REMAINING[d.id] : EDITION_SIZE;
     if (d.printed) {
       d.stock = {
         A3: d.qty.A3 > 0 ? 'in' : 'out',
@@ -2619,21 +2636,19 @@
       const firstIn  = isOD ? 'A3' : Object.keys(d.stock).find(k => d.stock[k] === 'in');
       const firstPrice = d.basePrice + sizeAddOn[firstIn || 'A3'];
 
-      // Badge
+      // Badge — every artwork is a limited edition of d.edition
       let badge = '';
-      if (d.printed && !allOut && !anyOut) {
-        const total = Object.values(d.qty).reduce((s,v)=>s+v,0);
-        badge = `<div class="print-run-badge">Limited · ${total} remaining</div>`;
-      } else if (d.printed && anyOut && !allOut) {
-        badge = `<div class="out-of-stock-badge" style="background:rgba(200,135,26,0.88)">Limited Sizes</div>`;
-      } else if (allOut) {
-        badge = `<div class="out-of-stock-badge">Sold Out</div>`;
-      } else if (isOD) {
-        badge = `<div class="on-demand-badge">Print to Order</div>`;
+      const soldOut = allOut || d.remaining <= 0;
+      if (soldOut) {
+        badge = `<div class="out-of-stock-badge">Edition Sold Out</div>`;
+      } else if (d.remaining <= 10) {
+        badge = `<div class="print-run-badge" style="background:rgba(200,135,26,0.92)">Only ${d.remaining} of ${d.edition} left</div>`;
+      } else {
+        badge = `<div class="print-run-badge">Edition of ${d.edition} · ${d.remaining} left</div>`;
       }
 
       // Price label
-      const priceLabel = allOut
+      const priceLabel = soldOut
         ? `<span style="text-decoration:line-through;color:var(--slate)">From €${d.basePrice}</span>`
         : `From €${firstPrice}`;
 
@@ -2663,9 +2678,8 @@
 
       card.innerHTML = `
         <div class="print-card-img">
-          <img src="${d.img}" alt="${d.title}" loading="lazy"${allOut ? ' style="filter:grayscale(28%) brightness(0.88)"' : ''}>
+          <img src="${d.img}" alt="${d.title}" loading="lazy"${soldOut ? ' style="filter:grayscale(28%) brightness(0.88)"' : ''}>
           ${badge}
-          ${!allOut && ['mayloom','canopy','touching-green','sweet-summer','dancing','moon-tree','red-leaf','last-summer','petals-on-green','holly-and-beech','leaf-and-water','blue-falls','blue-mantel'].includes(d.id) ? `<div class="available-now-badge">Available Now</div>` : ''}
         </div>
         <div class="print-card-info">
           <button class="edit-toggle" title="Edit" onclick="toggleEdit('${d.id}',this)">
@@ -2691,7 +2705,7 @@
               Done! We'll email you when it's back.
             </div>
           </div>
-          ${allOut
+          ${soldOut
             ? `<button class="notify-btn" onclick="openNotifyModal('${d.title}','${d.img}')">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                 Notify Me When Available
@@ -2739,7 +2753,7 @@
             <div class="edit-field-row">
               <label>Fulfillment</label>
               <div style="padding:.5rem .65rem;background:rgba(44,74,53,0.06);border:1px solid rgba(44,74,53,0.15);font-size:.72rem;color:var(--forest)">
-                ✓ On-demand · auto-fulfilled via Printful
+                ✓ Made to order · auto-fulfilled via Gelato
               </div>
             </div>`}
             <div class="edit-actions">
@@ -3927,12 +3941,15 @@ async function submitPayment() {
     const postcode = document.getElementById('co-postcode').value.trim();
     const country  = document.getElementById('co-country').value;
 
-    // Gelato product UIDs for fine art poster 200gsm archival matte
+    // Gelato product UIDs — PREMIUM archival fine-art paper.
+    // IMPORTANT: confirm these exact UIDs in your own Gelato catalog before going
+    // live (Dashboard → Products → your fine-art poster → "Product UID"). UIDs are
+    // catalog-specific and an order will fail if the UID does not match exactly.
     // Full catalog: https://dashboard.gelato.com/docs/products/
     const PRODUCT_UIDS = {
-      A3: 'poster_297x420-mm-a3_200-gsm_cl_4-0',
-      A2: 'poster_420x594-mm-a2_200-gsm_cl_4-0',
-      A1: 'poster_594x841-mm-a1_200-gsm_cl_4-0',
+      A3: 'poster_297x420-mm-a3_240-gsm-fine-art_cl_4-0',
+      A2: 'poster_420x594-mm-a2_240-gsm-fine-art_cl_4-0',
+      A1: 'poster_594x841-mm-a1_240-gsm-fine-art_cl_4-0',
     };
 
     // Artwork file URLs — upload 300dpi TIFFs/JPEGs to a CDN before going live
@@ -4013,7 +4030,7 @@ async function submitPayment() {
       if (!res.ok) throw new Error(`Gelato ${res.status}`);
       const data = await res.json();
       gelatoOrderId = data.id;
-      fulfillmentMsg = `Your prints are now in production with Gelato. Printed on 200gsm archival matte paper and dispatched from the nearest local hub — typically 2–4 working days.`;
+      fulfillmentMsg = `Your limited-edition prints are now in production. Printed on heavyweight archival fine-art paper and dispatched from the nearest local studio partner — typically 2–4 working days.`;
     } catch (gelatoErr) {
       console.error('Gelato failed — handle manually:', gelatoPayload, gelatoErr);
       fulfillmentMsg = `Your payment was successful. Janet's team will be in touch to confirm your order.`;
