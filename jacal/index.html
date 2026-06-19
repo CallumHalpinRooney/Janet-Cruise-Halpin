@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jacal Airlines — Private Jet Charter</title>
+  <meta name="description" content="Jacal Airlines — bespoke private jet charter. Fly on your schedule, in absolute comfort, anywhere in the world." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader__inner">
+      <span class="loader__mark">JACAL</span>
+      <div class="loader__bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <header class="nav" id="nav">
+    <a href="#hero" class="nav__brand">JACAL<span>AIRLINES</span></a>
+    <nav class="nav__links">
+      <a href="#fleet">Fleet</a>
+      <a href="#experience">Experience</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav__cta">Request a Flight</a>
+  </header>
+
+  <main id="smooth-content">
+
+    <!-- HERO with receding plane -->
+    <section class="hero" id="hero">
+      <div class="hero__bg"></div>
+      <div class="hero__plane" id="heroPlane">
+        <!-- Inline SVG jet so it scales crisply as it recedes -->
+        <svg viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg" aria-label="Private jet">
+          <defs>
+            <linearGradient id="fuse" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fdfdfd"/>
+              <stop offset="0.5" stop-color="#e8eaee"/>
+              <stop offset="1" stop-color="#b9bec7"/>
+            </linearGradient>
+            <linearGradient id="wing" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d7dbe2"/>
+              <stop offset="1" stop-color="#9aa0ac"/>
+            </linearGradient>
+          </defs>
+          <!-- far wing -->
+          <path d="M520 250 L760 210 L690 250 L540 270 Z" fill="url(#wing)" opacity="0.75"/>
+          <!-- tail -->
+          <path d="M120 210 L60 110 L150 150 L210 215 Z" fill="url(#wing)"/>
+          <path d="M120 215 L70 250 L150 245 Z" fill="url(#wing)" opacity="0.85"/>
+          <!-- fuselage -->
+          <path d="M150 200 Q520 170 980 205 Q1120 213 1150 222 Q1120 235 980 240 Q520 262 170 240 Q140 232 150 200 Z" fill="url(#fuse)"/>
+          <!-- nose accent -->
+          <path d="M980 205 Q1120 213 1150 222 Q1120 235 980 240 Z" fill="#0a2540"/>
+          <!-- windows -->
+          <g fill="#15324f">
+            <circle cx="430" cy="214" r="6"/><circle cx="475" cy="213" r="6"/>
+            <circle cx="520" cy="212" r="6"/><circle cx="565" cy="212" r="6"/>
+            <circle cx="610" cy="212" r="6"/><circle cx="655" cy="213" r="6"/>
+            <circle cx="700" cy="214" r="6"/><circle cx="745" cy="215" r="6"/>
+          </g>
+          <!-- near wing -->
+          <path d="M560 240 L890 300 L770 252 L600 232 Z" fill="url(#wing)"/>
+          <!-- engine -->
+          <ellipse cx="560" cy="252" rx="42" ry="20" fill="#7c828e"/>
+          <ellipse cx="560" cy="252" rx="28" ry="13" fill="#2a2f38"/>
+        </svg>
+      </div>
+      <div class="hero__content">
+        <p class="hero__eyebrow">Private Jet Charter</p>
+        <h1 class="hero__title">The Sky, On Your Terms</h1>
+        <p class="hero__sub">Bespoke private aviation. Fly when you want, where you want — in absolute comfort and discretion.</p>
+        <a href="#fleet" class="btn btn--light">Explore the Fleet</a>
+      </div>
+      <div class="hero__scroll">Scroll<span></span></div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro reveal" id="experience">
+      <p class="intro__kicker">Jacal Airlines</p>
+      <h2 class="intro__line">Where every detail is engineered around <em>you</em>.</h2>
+      <p class="intro__body">From the moment you arrive, time bends to your schedule. No queues, no compromise — only the quiet luxury of flight, reimagined for those who expect more.</p>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats reveal">
+      <div class="stat"><span class="stat__num" data-count="2400">0</span><span class="stat__label">Aircraft worldwide</span></div>
+      <div class="stat"><span class="stat__num" data-count="190">0</span><span class="stat__label">Countries served</span></div>
+      <div class="stat"><span class="stat__num" data-count="24">0</span><span class="stat__label">Hour concierge</span></div>
+      <div class="stat"><span class="stat__num" data-count="15">0</span><span class="stat__label">Minute boarding</span></div>
+    </section>
+
+    <!-- FLEET (pinned horizontal-ish cards) -->
+    <section class="fleet" id="fleet">
+      <div class="fleet__head reveal">
+        <p class="kicker">The Fleet</p>
+        <h2>Choose your altitude.</h2>
+      </div>
+      <div class="fleet__grid">
+        <article class="card reveal">
+          <div class="card__media card__media--1"></div>
+          <h3>Light Jet</h3>
+          <p>Nimble and efficient. Ideal for short hops and up to 7 guests.</p>
+          <span class="card__spec">Range 1,800 nm · 7 seats</span>
+        </article>
+        <article class="card reveal">
+          <div class="card__media card__media--2"></div>
+          <h3>Midsize Jet</h3>
+          <p>Stand-up cabins and transcontinental reach for the working traveller.</p>
+          <span class="card__spec">Range 3,200 nm · 9 seats</span>
+        </article>
+        <article class="card reveal">
+          <div class="card__media card__media--3"></div>
+          <h3>Heavy Jet</h3>
+          <p>Intercontinental luxury with private suites and full-service galley.</p>
+          <span class="card__spec">Range 6,000 nm · 16 seats</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- PARALLAX QUOTE -->
+    <section class="quote">
+      <div class="quote__bg"></div>
+      <blockquote class="reveal">"Luxury is not the destination. It is every moment in between."</blockquote>
+    </section>
+
+    <!-- DESTINATIONS -->
+    <section class="dest" id="destinations">
+      <div class="fleet__head reveal">
+        <p class="kicker">Destinations</p>
+        <h2>Anywhere worth landing.</h2>
+      </div>
+      <div class="dest__list">
+        <a class="dest__row reveal"><span class="dest__city">Monaco</span><span class="dest__meta">French Riviera</span><span class="dest__time">→</span></a>
+        <a class="dest__row reveal"><span class="dest__city">Aspen</span><span class="dest__meta">Colorado</span><span class="dest__time">→</span></a>
+        <a class="dest__row reveal"><span class="dest__city">Maldives</span><span class="dest__meta">Indian Ocean</span><span class="dest__time">→</span></a>
+        <a class="dest__row reveal"><span class="dest__city">Dubai</span><span class="dest__meta">United Arab Emirates</span><span class="dest__time">→</span></a>
+        <a class="dest__row reveal"><span class="dest__city">St. Moritz</span><span class="dest__meta">Swiss Alps</span><span class="dest__time">→</span></a>
+      </div>
+    </section>
+
+    <!-- CONTACT / CTA -->
+    <section class="cta" id="contact">
+      <div class="cta__inner reveal">
+        <p class="kicker">Request a Flight</p>
+        <h2>Your jet is waiting.</h2>
+        <p class="cta__sub">Tell us where and when. Our concierge will handle the rest — usually within the hour.</p>
+        <form class="cta__form" onsubmit="return false;">
+          <input type="text" placeholder="Full name" aria-label="Full name" />
+          <input type="email" placeholder="Email" aria-label="Email" />
+          <input type="text" placeholder="From → To" aria-label="Route" />
+          <button class="btn btn--dark" type="submit">Request Quote</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__brand">JACAL<span>AIRLINES</span></div>
+      <p>© <span id="year"></span> Jacal Airlines. Private aviation, perfected.</p>
+    </footer>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
