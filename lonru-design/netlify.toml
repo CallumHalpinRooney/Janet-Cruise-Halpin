@@ -1,0 +1,14 @@
+# Netlify config for the Lonrú Design site.
+#
+# When connecting this repo in the Netlify dashboard, set the site's
+# "Base directory" to `lonru-design` so Netlify runs the build from this
+# folder. With output:"export" in next.config.ts, the build produces a
+# static `out/` directory — no Next.js runtime/plugin required.
+
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  # Next.js 16 requires Node 20+.
+  NODE_VERSION = "20"
