@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place Sample Order — Janet Cruise Halpin</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--forest:#2c4a35;--forest-light:#3d6147;--cream:#faf7f2;--parchment:#f3ede3;--ink:#1a1a1a;--muted:#6b7280;--border:rgba(44,74,53,.18)}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--parchment);color:var(--ink);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2.5rem 1rem}
+  .wrap{background:#fff;border:1px solid var(--border);border-radius:6px;width:min(560px,100%);overflow:hidden}
+  .head{background:var(--forest);color:#fff;padding:1.6rem 1.8rem}
+  .head h1{font-family:Georgia,serif;font-weight:500;font-size:1.5rem;letter-spacing:.01em}
+  .head p{font-size:.82rem;opacity:.8;margin-top:.3rem}
+  .body{padding:1.6rem 1.8rem}
+  .warn{background:#fff7e6;border:1px solid #f0d28a;color:#7a5a12;font-size:.78rem;line-height:1.55;padding:.8rem 1rem;border-radius:4px;margin-bottom:1.4rem}
+  .warn b{color:#5c4410}
+  .sect-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:1.2rem 0 .6rem}
+  .items{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+  .item{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;font-size:.86rem;border-bottom:1px solid var(--border)}
+  .item:last-child{border-bottom:none}
+  .item .sz{color:var(--muted);font-size:.74rem;letter-spacing:.04em}
+  .field{margin-bottom:.85rem}
+  .field label{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+  .field input{width:100%;padding:.6rem .75rem;border:1px solid var(--border);border-radius:3px;font-size:.9rem;font-family:inherit;background:#fafafa;outline:none}
+  .field input:focus{border-color:var(--forest)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+  .toggle{display:flex;align-items:center;gap:.55rem;font-size:.8rem;color:var(--ink);margin:1rem 0 .4rem;cursor:pointer}
+  .toggle input{width:16px;height:16px;accent-color:var(--forest)}
+  .toggle-note{font-size:.72rem;color:var(--muted);line-height:1.5;margin-bottom:1.2rem}
+  .btn{width:100%;padding:.95rem;background:var(--forest);color:#fff;border:none;border-radius:3px;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+  .btn:hover{background:var(--forest-light)}
+  .btn:disabled{opacity:.55;cursor:default}
+  .result{margin-top:1.2rem;font-size:.82rem;line-height:1.6;padding:.9rem 1rem;border-radius:4px;display:none;white-space:pre-wrap;word-break:break-word}
+  .result.ok{display:block;background:#e9f6ec;border:1px solid #9fd3ab;color:#1d5b2e}
+  .result.err{display:block;background:#fdecec;border:1px solid #e7a3a3;color:#8a2020}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <h1>Place a Sample Order</h1>
+    <p>Three prints · comparison basket · ships to the studio</p>
+  </div>
+  <div class="body">
+
+    <div class="warn">
+      <b>Before this works:</b> in Netlify → Site settings → Environment variables, add
+      <b>GELATO_API_KEY</b> with your (regenerated) Gelato key, then redeploy. The key stays
+      on the server and is never shown here. This page just sends the order to your existing
+      <code>gelato-order.js</code> function.
+    </div>
+
+    <div class="sect-label">The basket</div>
+    <div class="items">
+      <div class="item"><span>Canopy</span><span class="sz">A2 · fine-art</span></div>
+      <div class="item"><span>Red Leaf</span><span class="sz">A3 · fine-art</span></div>
+      <div class="item"><span>Moon Tree</span><span class="sz">A3 · fine-art</span></div>
+    </div>
+
+    <div class="sect-label">Ship to</div>
+    <div class="row">
+      <div class="field"><label>First name</label><input id="fname" value="Janet"></div>
+      <div class="field"><label>Last name</label><input id="lname" value="Cruise Halpin"></div>
+    </div>
+    <div class="field"><label>Address line 1</label><input id="addr1" value="St John's Road"></div>
+    <div class="field"><label>Address line 2</label><input id="addr2" value="Laragh East"></div>
+    <div class="row">
+      <div class="field"><label>Town / City</label><input id="city" value="Laragh"></div>
+      <div class="field"><label>County / State</label><input id="state" value="Wicklow"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>Eircode / Postcode</label><input id="post" value="A98 P6Y9"></div>
+      <div class="field"><label>Country</label><input id="country" value="IE"></div>
+    </div>
+    <div class="field"><label>Email for confirmation</label><input id="email" value="callum.l.rooney@gmail.com"></div>
+
+    <label class="toggle"><input type="checkbox" id="live"> Place as a LIVE order (produce &amp; charge now)</label>
+    <p class="toggle-note">Leave unticked to create a <b>draft</b> — it appears in your Gelato dashboard for you to review and confirm before any money is charged. Recommended for the first run, so you can check the prints and product before paying.</p>
+
+    <button class="btn" id="go" onclick="placeOrder()">Send order to Gelato</button>
+    <div class="result" id="result"></div>
+  </div>
+</div>
+
+<script>
+  // ── Premium fine-art product UIDs ─────────────────────────────────────────
+  // MUST match your Gelato catalog exactly (Dashboard → Products → Product UID).
+  const PRODUCT_UIDS = {
+    A3: 'poster_297x420-mm-a3_240-gsm-fine-art_cl_4-0',
+    A2: 'poster_420x594-mm-a2_240-gsm-fine-art_cl_4-0',
+  };
+
+  // Artwork files Gelato will fetch and print
+  const ART = {
+    canopy:    'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295382/Canopy.png',
+    redleaf:   'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295384/Red_Leaf.png',
+    moontree:  'https://res.cloudinary.com/dasjyomdb/image/upload/v1781295382/Moon_Tree.png',
+  };
+
+  const BASKET = [
+    { ref: 'canopy-a2',   uid: PRODUCT_UIDS.A2, file: ART.canopy },
+    { ref: 'redleaf-a3',  uid: PRODUCT_UIDS.A3, file: ART.redleaf },
+    { ref: 'moontree-a3', uid: PRODUCT_UIDS.A3, file: ART.moontree },
+  ];
+
+  async function placeOrder() {
+    const btn = document.getElementById('go');
+    const res = document.getElementById('result');
+    res.className = 'result';
+    const val = id => document.getElementById(id).value.trim();
+    const email = val('email');
+    if (!email.includes('@')) { show('err', 'Please enter a valid confirmation email.'); return; }
+
+    const payload = {
+      orderReferenceId: 'JCH-SAMPLE-' + Date.now(),
+      customerReferenceId: email,
+      currency: 'EUR',
+      orderType: document.getElementById('live').checked ? 'order' : 'draft',
+      shippingAddress: {
+        firstName: val('fname'),
+        lastName:  val('lname'),
+        addressLine1: val('addr1'),
+        addressLine2: val('addr2') || undefined,
+        city: val('city'),
+        state: val('state') || undefined,
+        postCode: val('post'),
+        country: val('country') || 'IE',
+        email,
+      },
+      items: BASKET.map((b, i) => ({
+        itemReferenceId: 'item-' + i + '-' + b.ref,
+        productUid: b.uid,
+        quantity: 1,
+        files: [{ type: 'default', url: b.file }],
+      })),
+      metadata: { source: 'sample-order-page' },
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+      const r = await fetch('/.netlify/functions/gelato-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error((data && (data.message || data.error)) || ('Gelato returned ' + r.status));
+      const kind = payload.orderType === 'order' ? 'LIVE order placed' : 'Draft created';
+      show('ok', kind + ' ✓\nGelato order id: ' + (data.id || data.orderId || '(see dashboard)') +
+        '\n\n' + (payload.orderType === 'draft'
+          ? 'Open dashboard.gelato.com → Orders to review and confirm it.'
+          : 'Your prints are now in production.'));
+    } catch (e) {
+      show('err', 'Could not place the order:\n' + e.message +
+        '\n\nMost common cause: GELATO_API_KEY not set in Netlify, or a product UID that does not match your Gelato catalog.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send order to Gelato';
+    }
+  }
+
+  function show(kind, msg) {
+    const res = document.getElementById('result');
+    res.className = 'result ' + kind;
+    res.textContent = msg;
+  }
+</script>
+</body>
+</html>
