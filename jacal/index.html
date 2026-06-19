@@ -38,6 +38,15 @@
     <!-- HERO with receding plane -->
     <section class="hero" id="hero">
       <div class="hero__bg"></div>
+      <!-- atmospheric depth layers (parallax as the plane recedes) -->
+      <div class="hero__sky" data-depth="0.10"></div>
+      <div class="hero__clouds hero__clouds--far" data-depth="0.22">
+        <svg viewBox="0 0 1440 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 220 Q180 150 360 200 T720 195 T1080 200 T1440 190 V300 H0 Z" fill="rgba(120,170,210,.18)"/></svg>
+      </div>
+      <div class="hero__clouds hero__clouds--near" data-depth="0.5">
+        <svg viewBox="0 0 1440 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 250 Q220 190 480 240 T960 235 T1440 240 V300 H0 Z" fill="rgba(180,205,230,.16)"/></svg>
+      </div>
+      <div class="hero__haze"></div>
       <div class="hero__plane" id="heroPlane">
         <!-- Inline SVG jet so it scales crisply as it recedes -->
         <svg viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg" aria-label="Private jet">

@@ -61,6 +61,15 @@ em{font-style:italic;color:var(--gold)}
 }
 .hero__bg::after{content:"";position:absolute;inset:0;
   background:radial-gradient(60% 40% at 50% 60%,rgba(200,168,107,.16),transparent 70%)}
+/* atmospheric depth layers */
+.hero__sky{position:absolute;inset:0;z-index:1;
+  background:radial-gradient(80% 50% at 50% 30%,rgba(120,180,230,.22),transparent 70%)}
+.hero__clouds{position:absolute;left:0;width:120%;z-index:1;will-change:transform}
+.hero__clouds svg{width:100%;height:100%}
+.hero__clouds--far{bottom:-4%;height:46vh;opacity:.8}
+.hero__clouds--near{bottom:-10%;height:40vh}
+.hero__haze{position:absolute;left:0;bottom:0;width:100%;height:38vh;z-index:2;pointer-events:none;
+  background:linear-gradient(to top,#061726 8%,rgba(6,23,38,.4) 50%,transparent)}
 .hero__plane{position:absolute;top:46%;left:50%;width:62vw;max-width:1000px;
   transform:translate(-50%,-50%);will-change:transform,opacity;z-index:2;
   filter:drop-shadow(0 40px 60px rgba(0,0,0,.45))}
@@ -104,10 +113,20 @@ em{font-style:italic;color:var(--gold)}
 .card{background:#fff;border-radius:6px;overflow:hidden;
   box-shadow:0 30px 60px rgba(10,37,64,.08);transition:.5s var(--ease)}
 .card:hover{transform:translateY(-8px);box-shadow:0 40px 80px rgba(10,37,64,.16)}
-.card__media{height:240px;background-size:cover;background-position:center}
-.card__media--1{background:linear-gradient(135deg,#2b5d8a,#0a2540)}
-.card__media--2{background:linear-gradient(135deg,#4a7ba6,#163a5c)}
-.card__media--3{background:linear-gradient(135deg,#c8a86b,#1d3a55)}
+/* Photo slots: drop your own image into assets/ and set --img below.
+   Until then, a layered gradient + subtle cabin-window pattern stands in. */
+.card__media{height:240px;background-size:cover;background-position:center;position:relative;
+  background-image:var(--img,none)}
+.card__media::after{content:"";position:absolute;inset:0;
+  background-image:repeating-linear-gradient(90deg,transparent 0 34px,rgba(255,255,255,.06) 34px 36px);
+  mix-blend-mode:overlay;opacity:.6}
+.card__media--1{background-color:#143a5c;background:var(--img),linear-gradient(135deg,#2b5d8a,#0a2540)}
+.card__media--2{background-color:#163a5c;background:var(--img),linear-gradient(135deg,#4a7ba6,#163a5c)}
+.card__media--3{background-color:#1d3a55;background:var(--img),linear-gradient(135deg,#c8a86b,#1d3a55)}
+/* To use real photos, uncomment and point at your files:
+.card__media--1{--img:url('../assets/light.jpg')}
+.card__media--2{--img:url('../assets/mid.jpg')}
+.card__media--3{--img:url('../assets/heavy.jpg')} */
 .card h3{font-size:1.8rem;color:var(--ink);padding:1.6rem 1.6rem .4rem}
 .card p{padding:0 1.6rem;color:var(--grey);font-weight:300;line-height:1.7;font-size:.92rem}
 .card__spec{display:block;padding:1.2rem 1.6rem 1.6rem;font-size:.72rem;letter-spacing:.14em;

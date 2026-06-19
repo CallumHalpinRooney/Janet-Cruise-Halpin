@@ -23,18 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
     onUpdate:s => nav.classList.toggle('nav--scrolled', s.scroll() > 80) });
 
   /* ---------- HERO: plane recedes into the distance as you scroll ---------- */
-  const plane = document.getElementById('heroPlane');
-  gsap.to(plane, {
-    scale:0.16,          // shrinks away
-    y:'-34vh',           // climbs slightly
-    opacity:0,           // fades into the haze
-    ease:'none',
-    scrollTrigger:{ trigger:'#hero', start:'top top', end:'bottom top', scrub:1 }
+  const heroTl = gsap.timeline({
+    scrollTrigger:{ trigger:'#hero', start:'top top', end:'bottom top', scrub:1.1 }
   });
-  // hero copy drifts up and fades a touch faster than the plane
-  gsap.to('.hero__content', {
-    y:-120, opacity:0, ease:'none',
-    scrollTrigger:{ trigger:'#hero', start:'top top', end:'60% top', scrub:1 }
+  // plane flies away: shrinks, climbs toward the horizon, fades into haze
+  heroTl.to('#heroPlane', { scale:0.12, y:'-30vh', opacity:0, ease:'power1.in' }, 0);
+  // copy lifts away faster than the plane
+  heroTl.to('.hero__content', { y:-140, opacity:0, ease:'none', duration:0.6 }, 0);
+  // sky brightens slightly as we "climb"
+  heroTl.to('.hero__bg', { filter:'brightness(1.15)', ease:'none' }, 0);
+
+  // parallax cloud/haze layers — nearer layers move more, selling the depth
+  gsap.utils.toArray('[data-depth]').forEach(layer => {
+    const d = parseFloat(layer.dataset.depth);
+    gsap.to(layer, { yPercent: d * 60, ease:'none',
+      scrollTrigger:{ trigger:'#hero', start:'top top', end:'bottom top', scrub:1 } });
   });
 
   /* ---------- Reveal on scroll ---------- */
