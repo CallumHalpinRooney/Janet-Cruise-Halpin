@@ -241,6 +241,18 @@ body{font-family:var(--sans);background:var(--parchment);color:var(--ink);min-he
 .new-toast-text strong{display:block;font-size:.9rem;margin-bottom:.15rem}
 .new-toast-text span{font-size:.75rem;opacity:.7}
 
+/* ── Email export modal ── */
+.email-modal-bg{position:fixed;inset:0;background:rgba(26,26,26,.55);z-index:600;display:none;align-items:center;justify-content:center;padding:1.25rem}
+.email-modal-bg.open{display:flex}
+.email-modal{background:#fff;border-radius:4px;width:min(560px,96vw);max-height:88vh;overflow-y:auto;padding:2.25rem;position:relative}
+.email-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid var(--border);width:30px;height:30px;cursor:pointer;color:var(--muted);border-radius:2px}
+.email-close:hover{background:var(--parchment)}
+.email-modal-title{font-family:var(--serif);font-size:1.7rem;color:var(--forest);margin-bottom:.3rem}
+.email-modal-sub{font-size:.82rem;color:var(--muted);margin-bottom:1.2rem}
+.email-textarea{width:100%;height:180px;border:1px solid var(--border);border-radius:3px;padding:.8rem;font-family:var(--sans);font-size:.82rem;color:var(--ink);resize:vertical;background:#fafafa;outline:none}
+.email-actions{display:flex;gap:.6rem;margin-top:1rem}
+.email-note{font-size:.72rem;color:var(--muted);margin-top:1rem;line-height:1.5;background:var(--parchment);padding:.6rem .8rem;border-radius:2px}
+
 @media(max-width:640px){
   .art-strip{height:120px}
   .strip-title{font-size:1.5rem}
@@ -315,6 +327,7 @@ body{font-family:var(--sans);background:var(--parchment);color:var(--ink);min-he
       <span class="stat-l">Most Inquired</span>
     </div>
     <div class="stats-bar-right">
+      <button class="refresh-btn" onclick="openEmails()">✉ Export Emails</button>
       <button class="refresh-btn" onclick="loadInquiries()">↺ Refresh</button>
       <button class="logout-btn" onclick="logout()">Sign Out</button>
     </div>
@@ -360,6 +373,21 @@ body{font-family:var(--sans);background:var(--parchment);color:var(--ink);min-he
       <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_200,h_100,c_fill/Dancing.png" alt="">
     </div>
 
+  </div>
+</div>
+
+<!-- Email export modal -->
+<div class="email-modal-bg" id="emailModalBg" onclick="if(event.target===this)closeEmails()">
+  <div class="email-modal">
+    <button class="email-close" onclick="closeEmails()" aria-label="Close">✕</button>
+    <h2 class="email-modal-title">Customer Emails</h2>
+    <p class="email-modal-sub" id="emailModalSub">—</p>
+    <textarea class="email-textarea" id="emailList" readonly></textarea>
+    <div class="email-actions">
+      <button class="card-reply-btn" id="copyEmailsBtn" onclick="copyEmails()">Copy all emails</button>
+      <button class="card-mark-btn" onclick="downloadEmailsCSV()">Download CSV</button>
+    </div>
+    <p class="email-note">Only email people who have agreed to hear from you, and keep a record of their consent (GDPR). These are everyone who has contacted Janet through the site.</p>
   </div>
 </div>
 
@@ -571,6 +599,57 @@ function showNewToast(inq) {
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 5000);
 }
+
+/* ── Email harvesting ────────────────────────────── */
+function uniqueCustomers() {
+  const map = new Map();
+  allInquiries.forEach(i => {
+    const email = (i.email || '').trim().toLowerCase();
+    if (!email || !email.includes('@')) return;
+    const date = new Date(i.created_at);
+    const existing = map.get(email);
+    if (existing) {
+      existing.count++;
+      if (date > existing.last) existing.last = date;
+    } else {
+      map.set(email, { email, name: i.name || '', count: 1, last: date });
+    }
+  });
+  return [...map.values()].sort((a, b) => b.last - a.last);
+}
+
+function openEmails() {
+  const customers = uniqueCustomers();
+  document.getElementById('emailList').value = customers.map(c => c.email).join(', ');
+  document.getElementById('emailModalSub').textContent =
+    `${customers.length} unique customer email${customers.length === 1 ? '' : 's'} collected from site inquiries`;
+  document.getElementById('emailModalBg').classList.add('open');
+}
+function closeEmails() { document.getElementById('emailModalBg').classList.remove('open'); }
+
+function copyEmails() {
+  const ta = document.getElementById('emailList');
+  const btn = document.getElementById('copyEmailsBtn');
+  ta.select();
+  const done = () => { const t = btn.textContent; btn.textContent = '✓ Copied'; setTimeout(() => btn.textContent = t, 1500); };
+  if (navigator.clipboard) navigator.clipboard.writeText(ta.value).then(done).catch(() => { document.execCommand('copy'); done(); });
+  else { document.execCommand('copy'); done(); }
+}
+
+function downloadEmailsCSV() {
+  const customers = uniqueCustomers();
+  const rows = [['Email', 'Name', 'Inquiries', 'Last contact']];
+  customers.forEach(c => rows.push([c.email, c.name, c.count, c.last.toISOString().slice(0, 10)]));
+  const csv = rows.map(r => r.map(f => `"${String(f).replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `janet-customers-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeEmails(); });
 
 /* Auto-init if already authenticated */
 if (sessionStorage.getItem('jch_auth') === '1') init();
