@@ -152,14 +152,18 @@
     display: none;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
-    width: 30px;
-    height: 30px;
+    width: 44px;
+    height: 44px;
+    margin: -7px;
     padding: 0;
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 110;
+    position: relative;
+    z-index: 111;
+    -webkit-tap-highlight-color: transparent;
   }
   .nav-toggle span {
     display: block;
@@ -167,6 +171,7 @@
     height: 2px;
     background: var(--white);
     border-radius: 2px;
+    pointer-events: none;
     transition: transform 0.35s, opacity 0.25s, background 0.5s;
   }
   nav.scrolled .nav-toggle span { background: var(--charcoal); }
@@ -2254,7 +2259,7 @@
     <a href="#prints" class="cart-nav">
       Cart <span class="cart-count" id="cartCount">0</span>
     </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <button class="nav-toggle" id="navToggle" type="button" onclick="toggleNav(event)" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -2985,7 +2990,6 @@
         <div class="print-card-img">
           <img src="${d.img}" alt="${d.title}" loading="lazy"${isSold ? ' style="filter:grayscale(28%) brightness(0.88)"' : ''}>
           ${badge}
-          ${!isSold && ['mayloom','canopy','touching-green','sweet-summer','dancing','moon-tree','red-leaf','last-summer','petals-on-green','holly-and-beech','leaf-and-water','blue-falls','blue-mantel'].includes(d.id) ? `<div class="available-now-badge">Available Now</div>` : ''}
         </div>
         <div class="print-card-info">
           <button class="edit-toggle" title="Edit" onclick="toggleEdit('${d.id}',this)">
@@ -3208,23 +3212,30 @@
   });
 
   // ── MOBILE NAV TOGGLE ─────────────────────────────────────────────────────
+  // Uses global functions + inline onclick so the menu works even if any other
+  // script on the page errors. setOpen toggles the body class the CSS keys off.
+  function setNavOpen(open) {
+    document.body.classList.toggle('nav-open', open);
+    const t = document.getElementById('navToggle');
+    if (t) {
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+      t.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+  }
+  function toggleNav(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    setNavOpen(!document.body.classList.contains('nav-open'));
+  }
+  function closeNav() { setNavOpen(false); }
+  window.toggleNav = toggleNav;
+  window.closeNav = closeNav;
   (function () {
-    const toggle = document.getElementById('navToggle');
     const backdrop = document.getElementById('navBackdrop');
     const links = document.getElementById('navLinks');
-    if (!toggle) return;
-
-    const setOpen = (open) => {
-      document.body.classList.toggle('nav-open', open);
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    };
-
-    toggle.addEventListener('click', () => setOpen(!document.body.classList.contains('nav-open')));
-    backdrop.addEventListener('click', () => setOpen(false));
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
-    window.addEventListener('resize', () => { if (window.innerWidth > 900) setOpen(false); });
+    if (backdrop) backdrop.addEventListener('click', closeNav);
+    if (links) links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 900) closeNav(); });
   })();
 
   // ── EDIT-MODE LOCK (admin) ────────────────────────────────────────────────
