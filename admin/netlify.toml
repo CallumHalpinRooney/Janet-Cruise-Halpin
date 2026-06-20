@@ -1,0 +1,7 @@
+# Janet's private inquiries dashboard — deployed as its own Netlify site,
+# separate from the public website. Set this Netlify site's "base directory"
+# to `admin`. It needs no build step or functions; it talks to Supabase
+# directly (the same database the public site's inquiry form writes to), so
+# inquiries from the live site appear here automatically.
+[build]
+  publish = "."
