@@ -23,7 +23,7 @@ const PRICES = {
   'west-alone': 65, 'dusk': 75, 'mist-of-sea': 80,
 };
 const SIZE_ADDON = { '21x30': -20, '30x40': 0, '50x70': 45 };
-const SHIPPING   = { IE: 0, GB: 12, EU: 18, US: 28, AU: 32, WW: 35 };
+const SHIPPING   = { IE: 5, GB: 8, EU: 7, US: 12, AU: 15, WW: 15 };
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
