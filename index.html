@@ -2735,8 +2735,9 @@
   const SIZES = ['21x30', '30x40', '50x70'];
   // Short label shown on the size buttons
   const SIZE_LABEL = { '21x30': '21×30cm', '30x40': '30×40cm', '50x70': '50×70cm' };
-  // Price add-on relative to the 30×40 base price (30×40 = base)
-  const sizeAddOn = { '21x30': -20, '30x40': 0, '50x70': 45 };
+  // Retail price per size = Gelato production cost + 120% markup (same for every print)
+  const SIZE_PRICE = { '21x30': 34, '30x40': 45, '50x70': 59 };
+  const fromPrice  = SIZE_PRICE['21x30']; // cheapest size, for the "From €" label
   // Full dimensions shown under the size buttons
   const SIZE_DIMS = {
     '21x30': '21 × 29.7 cm (A4 · 8 × 12 in)',
@@ -2745,6 +2746,7 @@
   };
   window.SIZE_DIMS = SIZE_DIMS;
   window.SIZE_LABEL = SIZE_LABEL;
+  window.SIZE_PRICE = SIZE_PRICE;
 
   // ── SOLD / DISCONTINUED FLAGS (persisted in the browser) ───────────────────
   // A painting is shown as "Sold" (buy disabled, contact-us button shown) when
@@ -2805,7 +2807,7 @@
       const isSold   = d.sold === true || allOut;
       // Default to 30×40 (the standard size) when available, else the first in-stock size
       const firstIn  = (d.stock['30x40'] === 'in' || isOD) ? '30x40' : Object.keys(d.stock).find(k => d.stock[k] === 'in');
-      const firstPrice = d.basePrice + sizeAddOn[firstIn || '30x40'];
+      const firstPrice = SIZE_PRICE[firstIn || '30x40'];
 
       // Badge
       let badge = '';
@@ -2822,8 +2824,8 @@
 
       // Price label
       const priceLabel = isSold
-        ? `<span style="text-decoration:line-through;color:var(--slate)">From €${d.basePrice}</span>`
-        : `From €${firstPrice}`;
+        ? `<span style="text-decoration:line-through;color:var(--slate)">From €${fromPrice}</span>`
+        : `From €${fromPrice}`;
 
       // Size pills
       const sizePills = SIZES.map(s => {
@@ -2831,7 +2833,7 @@
         const isFirst = s === (firstIn || '30x40');
         const qtyTip  = d.printed && d.qty[s] > 0 ? ` data-qty="${d.qty[s]}"` : '';
         return `<button class="size-pill${isFirst && !allOut ? ' active' : ''}${oos ? ' oos' : ''}"
-          data-size="${s}" data-price="${d.basePrice + sizeAddOn[s]}" data-oos="${oos}"${qtyTip}
+          data-size="${s}" data-price="${SIZE_PRICE[s]}" data-oos="${oos}"${qtyTip}
           onclick="selectSizeG(this,'${d.id}')">${SIZE_LABEL[s]}${d.printed && d.qty[s] <= 3 && d.qty[s] > 0 ? `<span class="pill-qty-warn">${d.qty[s]} left</span>` : ''}</button>`;
       }).join('');
 
@@ -3907,7 +3909,7 @@ function addToCart(btn, name) {
   const id     = card?.dataset?.id || name.toLowerCase().replace(/\s+/g,'-');
   const activePill = card?.querySelector('.size-pill.active');
   const size   = activePill?.dataset?.size || 'A3';
-  const price  = parseInt(activePill?.dataset?.price) || (store[id]?.basePrice || 85);
+  const price  = parseInt(activePill?.dataset?.price) || (window.SIZE_PRICE ? window.SIZE_PRICE['30x40'] : 45);
   const img    = card?.querySelector('img')?.src || '';
   const isOD   = !!card?.dataset?.onDemand;
   const slug   = id + '-' + size;
