@@ -4,3 +4,12 @@
 
 [build.environment]
   NODE_VERSION = "18"
+
+# Janet's dashboard lives in /admin and is deployed as a SEPARATE Netlify site
+# (its own private URL). The folder still ships with this repo, so keep it
+# unreachable from the public site: send any /admin request back to the home page.
+[[redirects]]
+  from = "/admin/*"
+  to = "/"
+  status = 302
+  force = true
