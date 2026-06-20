@@ -86,7 +86,11 @@
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 100;
+    /* Must stay above .nav-backdrop (104). The slide-in menu panel is a child of
+       nav, so it's confined to this stacking context — if nav sat below the
+       backdrop, the open menu would be covered by it and taps would close it
+       instead of hitting the links, making the menu feel unresponsive. */
+    z-index: 110;
     display: flex;
     align-items: center;
     justify-content: space-between;
