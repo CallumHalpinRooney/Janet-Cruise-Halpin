@@ -1599,6 +1599,10 @@
     font-size: 0.72rem; line-height: 1.55; color: var(--slate);
     margin: 0.5rem 0 0.9rem; font-weight: 300;
   }
+  .size-dims {
+    font-size: 0.68rem; color: var(--slate); letter-spacing: 0.04em;
+    margin: 0.5rem 0 0.2rem; font-weight: 400;
+  }
 
   /* ── SIZE-LEVEL OOS ── */
   .size-pill.oos {
@@ -2161,7 +2165,7 @@
       <a href="#prints" class="btn-primary">Shop Prints</a>
       <a href="#originals" class="btn-outline">View Originals</a>
     </div>
-    <p class="hero-edition-note">Giclée editions · Signed &amp; numbered · Ships worldwide</p>
+    <p class="hero-edition-note">Giclée fine-art editions · Ships worldwide</p>
   </div>
   <a href="#about" class="hero-scroll" aria-label="Scroll to explore">
     <span>Explore</span>
@@ -2180,7 +2184,7 @@
     <div class="ticker-item">Works Held in International Collections<span class="ticker-dot"></span></div>
     <div class="ticker-item">Flora · Land · Sea · Abstract<span class="ticker-dot"></span></div>
     <div class="ticker-item">Original Oil on Canvas<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Giclée Editions · Signed &amp; Numbered<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Giclée Fine-Art Editions<span class="ticker-dot"></span></div>
     <div class="ticker-item">Glendalough, Ancient Oak Woodland<span class="ticker-dot"></span></div>
     <!-- Duplicate for seamless loop -->
     <div class="ticker-item">Tyrone Guthrie Centre Residency 2018<span class="ticker-dot"></span></div>
@@ -2189,7 +2193,7 @@
     <div class="ticker-item">Works Held in International Collections<span class="ticker-dot"></span></div>
     <div class="ticker-item">Flora · Land · Sea · Abstract<span class="ticker-dot"></span></div>
     <div class="ticker-item">Original Oil on Canvas<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Giclée Editions · Signed &amp; Numbered<span class="ticker-dot"></span></div>
+    <div class="ticker-item">Giclée Fine-Art Editions<span class="ticker-dot"></span></div>
     <div class="ticker-item">Glendalough, Ancient Oak Woodland<span class="ticker-dot"></span></div>
   </div>
 </div>
@@ -2438,42 +2442,8 @@
       </div>
     </div>
     <p class="reveal" style="font-size:0.82rem;font-weight:300;color:var(--slate);max-width:260px;text-align:right;line-height:1.7;">
-      Museum-quality Giclée prints on 310gsm cotton rag paper. Signed &amp; numbered edition of 50.
+      Giclée fine-art prints on 200gsm archival matte paper. Limited edition, produced to order.
     </p>
-  </div>
-
-  <!-- GELATO FULFILMENT BANNER -->
-  <div class="printful-banner reveal">
-    <div class="pf-left">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-      <div>
-        <p class="pf-title">Printed &amp; shipped automatically via Gelato · 100+ labs across 32 countries</p>
-        <p class="pf-sub">Every order triggers automatic fulfilment — printed on 200gsm archival matte paper using giclée inkjet, packed and dispatched locally to your customer. Zero handling by Janet. Orders placed in Ireland and the EU are produced at the nearest Gelato hub for fastest delivery.</p>
-      </div>
-    </div>
-    <div class="pf-costs">
-      <div class="pf-cost-item">
-        <span class="pf-cost-label">A3 · 297×420mm</span>
-        <span class="pf-cost-val">~€8–12</span>
-      </div>
-      <div class="pf-cost-item">
-        <span class="pf-cost-label">A2 · 420×594mm</span>
-        <span class="pf-cost-val">~€14–18</span>
-      </div>
-      <div class="pf-cost-item">
-        <span class="pf-cost-label">A1 · 594×841mm</span>
-        <span class="pf-cost-val">~€22–28</span>
-      </div>
-      <div class="pf-cost-item">
-        <span class="pf-cost-label">Shipping IE/EU</span>
-        <span class="pf-cost-val">€4–8</span>
-      </div>
-      <div class="pf-cost-item pf-cost-margin">
-        <span class="pf-cost-label">Your margin (A3 · €95)</span>
-        <span class="pf-cost-val pf-green">~€75–83</span>
-      </div>
-      <button class="pf-setup-btn" onclick="window.open('https://www.gelato.com','_blank')">Set up Gelato →</button>
-    </div>
   </div>
 
   <div class="prints-grid" id="printsGrid"></div>
@@ -2755,6 +2725,13 @@
 
   // Size price map (add-on above base price)
   const sizeAddOn = { A3: 0, A2: 25, A1: 60 };
+  // Physical print dimensions per paper size (ISO A-series — matches Gelato products)
+  const SIZE_DIMS = {
+    A3: '297 × 420 mm (29.7 × 42 cm)',
+    A2: '420 × 594 mm (42 × 59.4 cm)',
+    A1: '594 × 841 mm (59.4 × 84.1 cm)',
+  };
+  window.SIZE_DIMS = SIZE_DIMS;
 
   // ── SOLD / DISCONTINUED FLAGS (persisted in the browser) ───────────────────
   // A painting is shown as "Sold" (buy disabled, contact-us button shown) when
@@ -2869,7 +2846,8 @@
           <p class="print-card-title">${d.title}</p>
           <p class="print-card-meta">Giclée Print · ${d.meta}</p>
           <p class="print-card-price" id="${d.id}-price">${priceLabel}</p>
-          ${isSold ? `<p class="sold-note">This edition is sold. Register your interest and Janet will be in touch — she may have related works available.</p>` : `<div class="print-sizes" id="${d.id}-pills">${sizePills}</div>`}
+          ${isSold ? `<p class="sold-note">This edition is sold. Register your interest and Janet will be in touch — she may have related works available.</p>` : `<div class="print-sizes" id="${d.id}-pills">${sizePills}</div>
+          <p class="size-dims" id="${d.id}-dims">${SIZE_DIMS[firstIn || 'A3']}</p>`}
           ${isSold ? '' : odNote}
           <div class="inline-notify" id="${d.id}-inline-notify" style="display:none">
             <span class="inline-notify-label">
@@ -2975,6 +2953,9 @@
     const sentEl    = document.getElementById(id+'-notify-sent');
     const atcBtn    = document.getElementById(id+'-atc');
     const emailInput = document.getElementById(id+'-notify-email');
+    const dimsEl    = document.getElementById(id+'-dims');
+
+    if (dimsEl) dimsEl.textContent = SIZE_DIMS[size];
 
     if (isOos) {
       pill.classList.add('selected-oos');
@@ -3989,7 +3970,7 @@ function updateCartUI() {
       <img class="cart-item-img" src="${item.img}" alt="${item.name}">
       <div>
         <p class="cart-item-name">${item.name}</p>
-        <p class="cart-item-meta">${item.size} Giclée print · Edition of 50</p>
+        <p class="cart-item-meta">${item.size} Giclée print · ${(window.SIZE_DIMS && window.SIZE_DIMS[item.size]) || ''}</p>
         <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
           <button onclick="changeQty('${item.slug}',-1)" style="width:22px;height:22px;border:1px solid rgba(44,74,53,0.25);background:none;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;color:var(--slate)">−</button>
           <span style="font-size:.8rem;min-width:14px;text-align:center">${item.qty}</span>
