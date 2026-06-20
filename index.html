@@ -848,10 +848,11 @@
     cursor: pointer;
     display: none;
   }
-  .print-card.visible { display: block; }
+  .print-card.visible { display: flex; flex-direction: column; }
   .print-card-img {
     aspect-ratio: 1;
     overflow: hidden;
+    flex-shrink: 0;
   }
   .print-card-img img {
     width: 100%;
@@ -864,7 +865,13 @@
   .print-card-info {
     padding: 1.25rem 1.25rem 1.5rem;
     background: var(--white);
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
   }
+  /* Push the action button to the bottom so every card's button lines up */
+  .print-card-info .add-to-cart,
+  .print-card-info .notify-btn { margin-top: auto; }
   .print-card-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.05rem;
@@ -2724,9 +2731,15 @@
   ];
 
   // Size price map (add-on above base price)
-  const sizeAddOn = { A3: 0, A2: 25, A1: 60 };
+  // Available print sizes, smallest → largest. Capped at A1 — larger than this
+  // the source images would lose sharpness. A0 deliberately excluded.
+  const SIZES = ['A5', 'A4', 'A3', 'A2', 'A1'];
+  // Price add-on relative to the A3 base price (A3 = base)
+  const sizeAddOn = { A5: -25, A4: -15, A3: 0, A2: 25, A1: 60 };
   // Physical print dimensions per paper size (ISO A-series — matches Gelato products)
   const SIZE_DIMS = {
+    A5: '148 × 210 mm (14.8 × 21 cm)',
+    A4: '210 × 297 mm (21 × 29.7 cm)',
     A3: '297 × 420 mm (29.7 × 42 cm)',
     A2: '420 × 594 mm (42 × 59.4 cm)',
     A1: '594 × 841 mm (59.4 × 84.1 cm)',
@@ -2754,13 +2767,15 @@
   paintings.forEach(p => {
     const d = JSON.parse(JSON.stringify(p));
     if (d.printed) {
-      d.stock = {
-        A3: d.qty.A3 > 0 ? 'in' : 'out',
-        A2: d.qty.A2 > 0 ? 'in' : 'out',
-        A1: d.qty.A1 > 0 ? 'in' : 'out',
-      };
+      d.qty = d.qty || {};
+      d.stock = {};
+      SIZES.forEach(s => {
+        if (d.qty[s] == null) d.qty[s] = 10;        // default run for newly-added sizes
+        d.stock[s] = d.qty[s] > 0 ? 'in' : 'out';
+      });
     } else {
-      d.stock = { A3: 'in', A2: 'in', A1: 'in' }; // on-demand: always orderable
+      d.stock = {};
+      SIZES.forEach(s => { d.stock[s] = 'in'; });    // on-demand: always orderable
     }
     d.sold = p.sold === true || savedSold[d.id] === true;
     store[d.id] = d;
@@ -2788,7 +2803,8 @@
       const anyOut   = !isOD && Object.values(d.stock).some(v => v === 'out');
       // "Sold" = manually marked sold/discontinued, OR a printed edition fully gone.
       const isSold   = d.sold === true || allOut;
-      const firstIn  = isOD ? 'A3' : Object.keys(d.stock).find(k => d.stock[k] === 'in');
+      // Default to A3 (the standard size) when available, else the first in-stock size
+      const firstIn  = (d.stock['A3'] === 'in' || isOD) ? 'A3' : Object.keys(d.stock).find(k => d.stock[k] === 'in');
       const firstPrice = d.basePrice + sizeAddOn[firstIn || 'A3'];
 
       // Badge
@@ -2810,7 +2826,7 @@
         : `From €${firstPrice}`;
 
       // Size pills
-      const sizePills = ['A3','A2','A1'].map(s => {
+      const sizePills = SIZES.map(s => {
         const oos    = !isOD && d.stock[s] === 'out';
         const isFirst = s === (firstIn || 'A3');
         const qtyTip  = d.printed && d.qty[s] > 0 ? ` data-qty="${d.qty[s]}"` : '';
@@ -2899,7 +2915,7 @@
             <div class="edit-field-row">
               <label>Stock remaining per size</label>
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:2px">
-                ${['A3','A2','A1'].map(s=>`
+                ${SIZES.map(s=>`
                   <div style="display:flex;flex-direction:column;gap:3px">
                     <label style="font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate)">${s}</label>
                     <input type="number" min="0" max="10" value="${d.qty[s]}"
@@ -2990,7 +3006,7 @@
       document.getElementById(id+'-edit-meta').value  = d.meta;
       document.getElementById(id+'-edit-price').value = d.basePrice;
       document.getElementById(id+'-edit-cat').value   = d.cat;
-      ['A3','A2','A1'].forEach(s => {
+      SIZES.forEach(s => {
         const b = document.getElementById(id+'-stock-'+s);
         if (b) { b.className = 'stock-toggle ' + (d.stock[s]==='in'?'in-stock':'out-stock'); b.textContent = s + ' ' + (d.stock[s]==='in'?'✓':'✕'); }
       });
@@ -3016,7 +3032,7 @@
     d.cat       = document.getElementById(id+'-edit-cat').value;
     // Update qty for printed items
     if (d.printed) {
-      ['A3','A2','A1'].forEach(s => {
+      SIZES.forEach(s => {
         const el = document.getElementById(id+'-qty-'+s);
         if (el) {
           d.qty[s]   = Math.max(0, parseInt(el.value)||0);
@@ -4234,6 +4250,8 @@ async function submitPayment() {
     // Gelato product UIDs for fine art poster 200gsm archival matte
     // Full catalog: https://dashboard.gelato.com/docs/products/
     const PRODUCT_UIDS = {
+      A5: 'poster_148x210-mm-a5_200-gsm_cl_4-0',
+      A4: 'poster_210x297-mm-a4_200-gsm_cl_4-0',
       A3: 'poster_297x420-mm-a3_200-gsm_cl_4-0',
       A2: 'poster_420x594-mm-a2_200-gsm_cl_4-0',
       A1: 'poster_594x841-mm-a1_200-gsm_cl_4-0',
