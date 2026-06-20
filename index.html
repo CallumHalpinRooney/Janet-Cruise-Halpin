@@ -4189,12 +4189,54 @@ async function submitPayment() {
 
   try {
     // ── STEP 1: Stripe payment ─────────────────────────────────────────────
-    // In production replace this with:
-    //   1. POST /api/create-payment-intent  → returns { clientSecret }
-    //   2. stripe.confirmCardPayment(clientSecret, { payment_method: { card: _stripeCard } })
-    //   3. Use paymentIntent.id as proof of payment before sending to Gelato
-    let paymentIntentId = `pi_demo_${Date.now()}`;
-    await new Promise(r => setTimeout(r, 1800)); // simulate Stripe latency
+    // Asks the Netlify function for a PaymentIntent (server calculates the real
+    // total), then charges the card with Stripe. If no payment backend is
+    // reachable (e.g. the page is opened as a local file / demo), it falls back
+    // to a simulated success so the demo still completes.
+    let paymentIntentId;
+    const payItems     = cartItems.map(i => ({ id: i.id, size: i.size, qty: i.qty }));
+    const shippingCode = document.getElementById('co-country')?.value || 'IE';
+    const buyerEmail   = document.getElementById('co-email')?.value.trim() || '';
+    const buyerName    = `${document.getElementById('co-fname')?.value.trim() || ''} ${document.getElementById('co-lname')?.value.trim() || ''}`.trim();
+    const resetPayBtn  = () => {
+      btn.disabled = false; btn.classList.remove('processing');
+      const t = cartSubtotalValue() + selectedShipping.cost;
+      btn.innerHTML = `Pay €${t.toLocaleString()} Securely`;
+    };
+
+    let piResp = null;
+    try {
+      piResp = await fetch('/.netlify/functions/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: payItems, shippingCode, email: buyerEmail }),
+      });
+    } catch (netErr) {
+      piResp = null; // network unreachable → demo fallback below
+    }
+
+    if (!piResp || piResp.status === 404) {
+      // No live payment backend (local file / function not deployed) → simulate
+      paymentIntentId = `pi_demo_${Date.now()}`;
+      await new Promise(r => setTimeout(r, 1200));
+    } else if (!piResp.ok) {
+      // Backend is live but returned an error — do NOT fake a success
+      const e = await piResp.json().catch(() => ({}));
+      errEl.textContent = e.error || 'Payment could not be started. Please try again.';
+      resetPayBtn();
+      return;
+    } else {
+      const { clientSecret } = await piResp.json();
+      const result = await window._stripeInstance.confirmCardPayment(clientSecret, {
+        payment_method: { card: window._stripeCard, billing_details: { name: buyerName, email: buyerEmail } },
+      });
+      if (result.error) {
+        errEl.textContent = result.error.message;
+        resetPayBtn();
+        return;
+      }
+      paymentIntentId = result.paymentIntent.id;
+    }
 
     // ── STEP 2: Build + send Gelato order ─────────────────────────────────
     btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>&nbsp;Sending to Gelato…`;
