@@ -2449,7 +2449,7 @@
       </div>
     </div>
     <p class="reveal" style="font-size:0.82rem;font-weight:300;color:var(--slate);max-width:260px;text-align:right;line-height:1.7;">
-      Giclée fine-art prints on 200gsm archival matte paper. Limited edition, produced to order.
+      Giclée fine-art prints on 250gsm acid-free archival matte paper — uncoated, natural white and FSC-certified. Produced to order.
     </p>
   </div>
 
@@ -4247,7 +4247,7 @@ async function submitPayment() {
     const postcode = document.getElementById('co-postcode').value.trim();
     const country  = document.getElementById('co-country').value;
 
-    // Gelato product UIDs for fine art poster 200gsm archival matte
+    // Gelato product UIDs — Museum-Quality Matte Paper Poster (250gsm uncoated archival)
     // Full catalog: https://dashboard.gelato.com/docs/products/
     const PRODUCT_UIDS = {
       A5: 'poster_148x210-mm-a5_200-gsm_cl_4-0',
@@ -4335,7 +4335,7 @@ async function submitPayment() {
       if (!res.ok) throw new Error(`Gelato ${res.status}`);
       const data = await res.json();
       gelatoOrderId = data.id;
-      fulfillmentMsg = `Your prints are now in production with Gelato. Printed on 200gsm archival matte paper and dispatched from the nearest local hub — typically 2–4 working days.`;
+      fulfillmentMsg = `Your prints are now in production. Printed on 250gsm acid-free archival matte paper and dispatched from the nearest local hub — typically 2–4 working days.`;
     } catch (gelatoErr) {
       console.error('Gelato failed — handle manually:', gelatoPayload, gelatoErr);
       fulfillmentMsg = `Your payment was successful. Janet's team will be in touch to confirm your order.`;
