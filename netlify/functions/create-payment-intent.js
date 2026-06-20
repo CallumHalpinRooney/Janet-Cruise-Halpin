@@ -22,7 +22,7 @@ const PRICES = {
   'synergos-1': 75, 'synergos-2': 75, 'gliding-light': 80, 'stone-gap': 75,
   'west-alone': 65, 'dusk': 75, 'mist-of-sea': 80,
 };
-const SIZE_ADDON = { A5: -25, A4: -15, A3: 0, A2: 25, A1: 60 };
+const SIZE_ADDON = { '21x30': -20, '30x40': 0, '50x70': 45 };
 const SHIPPING   = { IE: 0, GB: 12, EU: 18, US: 28, AU: 32, WW: 35 };
 
 exports.handler = async (event) => {
