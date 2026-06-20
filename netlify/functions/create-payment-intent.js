@@ -9,20 +9,9 @@
 //
 // No npm packages required — this calls Stripe's API directly.
 
-// ── Trusted price list (must match the catalogue in index.html) ──────────────
-const PRICES = {
-  'mayloom': 95, 'canopy': 95, 'touching-green': 95, 'sweet-summer': 85,
-  'dancing': 85, 'moon-tree': 75, 'red-leaf': 85, 'shades-of-evening': 80,
-  'land-edge': 80, 'aurora': 80, 'fragrant-blossoms': 80, 'favourite-perfume': 85,
-  'as-i-remember': 85, 'happy-talk': 85, 'maitree': 85, 'tall-story': 85,
-  'blossom-dearie': 85, 'shadowed-nature': 85, 'breeze': 75, 'patterns': 80,
-  'woods-in-mist': 85, 'little-green': 75, 'blue-mantel': 80, 'just-summer': 85,
-  'blue-falls': 80, 'small-wilderness': 85, 'leaf-and-water': 85, 'true-green': 95,
-  'last-summer': 80, 'petals-on-green': 80, 'holly-and-beech': 80, 'cool-mountain': 90,
-  'synergos-1': 75, 'synergos-2': 75, 'gliding-light': 80, 'stone-gap': 75,
-  'west-alone': 65, 'dusk': 75, 'mist-of-sea': 80,
-};
-const SIZE_ADDON = { '21x30': -20, '30x40': 0, '50x70': 45 };
+// ── Trusted price list (must match SIZE_PRICE in index.html) ─────────────────
+// Flat retail price per size = production cost + 120% markup. Same for every print.
+const SIZE_PRICE = { '21x30': 34, '30x40': 45, '50x70': 59 };
 const SHIPPING   = { IE: 5, GB: 8, EU: 7, US: 12, AU: 15, WW: 15 };
 
 exports.handler = async (event) => {
@@ -36,16 +25,15 @@ exports.handler = async (event) => {
   try {
     const { items = [], shippingCode = 'IE', email = '' } = JSON.parse(event.body || '{}');
 
-    // Recompute the total from trusted prices
+    // Recompute the total from trusted per-size prices
     let total = 0;
     for (const it of items) {
-      const base = PRICES[it.id];
-      const addon = SIZE_ADDON[it.size];
+      const unit = SIZE_PRICE[it.size];
       const qty = parseInt(it.qty, 10);
-      if (base == null || addon == null || !(qty > 0)) {
+      if (unit == null || !(qty > 0)) {
         return { statusCode: 400, body: JSON.stringify({ error: `Invalid cart item: ${it.id} ${it.size}` }) };
       }
-      total += (base + addon) * qty;
+      total += unit * qty;
     }
     total += SHIPPING[shippingCode] != null ? SHIPPING[shippingCode] : SHIPPING.WW;
 
