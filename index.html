@@ -1337,6 +1337,81 @@
     transition: color 0.3s;
   }
   .footer-links a:hover { color: var(--cream); }
+  .footer-policies {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .footer-policies a {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    text-decoration: none;
+    transition: color 0.3s;
+    cursor: pointer;
+  }
+  .footer-policies a:hover { color: var(--cream); }
+
+  /* ── LEGAL / POLICIES MODAL ── */
+  .legal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(18,22,18,0.6);
+    z-index: 550;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .legal-bg.open { opacity: 1; pointer-events: all; }
+  .legal-modal {
+    background: var(--cream);
+    width: 100%;
+    max-width: 640px;
+    max-height: 88vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 3rem 2.75rem;
+    box-shadow: 0 40px 100px rgba(18,22,18,0.3);
+    transform: translateY(16px);
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+  }
+  .legal-bg.open .legal-modal { transform: translateY(0); }
+  .legal-close {
+    position: absolute; top: 1.1rem; right: 1.1rem;
+    background: none; border: 1px solid rgba(44,74,53,0.2);
+    width: 30px; height: 30px; cursor: pointer; color: var(--slate);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .legal-close:hover { background: var(--charcoal); color: var(--white); border-color: var(--charcoal); }
+  .legal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem; font-weight: 500; color: var(--charcoal);
+    margin-bottom: 1.25rem; padding-right: 2rem;
+  }
+  .legal-body { font-size: 0.86rem; line-height: 1.75; color: var(--slate-dark); font-weight: 300; }
+  .legal-body h3 {
+    font-family: 'Jost', sans-serif; font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--forest);
+    margin: 1.5rem 0 0.5rem;
+  }
+  .legal-body p { margin-bottom: 0.85rem; }
+  .legal-body ul { margin: 0 0 0.85rem 1.1rem; }
+  .legal-body li { margin-bottom: 0.35rem; }
+  .legal-body a { color: var(--forest); }
+  .legal-note {
+    background: rgba(200,135,26,0.1);
+    border: 1px solid rgba(200,135,26,0.3);
+    padding: 0.75rem 1rem; font-size: 0.74rem; color: var(--slate-dark);
+    margin-bottom: 1.5rem;
+  }
+  .legal-updated { font-size: 0.7rem; color: var(--slate); margin-top: 1.75rem; font-style: italic; }
 
   /* ── DIVIDER ── */
   .rule { height: 1px; background: rgba(44,74,53,0.12); margin: 0 3.5rem; }
@@ -2540,8 +2615,23 @@
     <li><a href="#originals">Originals</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <ul class="footer-policies">
+    <li><a href="#" onclick="openLegal('terms');return false;">Terms</a></li>
+    <li><a href="#" onclick="openLegal('privacy');return false;">Privacy</a></li>
+    <li><a href="#" onclick="openLegal('refunds');return false;">Refunds &amp; Returns</a></li>
+    <li><a href="#" onclick="openLegal('shipping');return false;">Shipping</a></li>
+  </ul>
   <p class="footer-copy">© 2025 Janet Cruise Halpin. All rights reserved.</p>
 </footer>
+
+<!-- LEGAL / POLICIES MODAL -->
+<div class="legal-bg" id="legalBg" onclick="if(event.target===this)closeLegal()">
+  <div class="legal-modal">
+    <button class="legal-close" onclick="closeLegal()" aria-label="Close">✕</button>
+    <h2 class="legal-title" id="legalTitle"></h2>
+    <div class="legal-body" id="legalBody"></div>
+  </div>
+</div>
 
 <!-- EDIT-MODE BANNER (only visible after unlocking) -->
 <div class="admin-bar" id="adminBar">
@@ -4428,6 +4518,112 @@ document.querySelector('.cart-nav')?.addEventListener('click', e => { e.preventD
 
 // Init
 updateCartUI();
+</script>
+
+<!-- LEGAL / POLICIES CONTENT -->
+<script>
+  const LEGAL_UPDATED = '20 June 2026';
+  const legalContent = {
+    terms: {
+      title: 'Terms &amp; Conditions',
+      html: `
+        <p>These terms govern your use of this website and any purchase made through it. By placing an order you agree to them. The site is operated by <strong>Janet Cruise Halpin</strong>, Laragh, Co. Wicklow, Ireland ("we", "us").</p>
+        <h3>Products</h3>
+        <p>We sell open and limited-edition giclée fine-art prints, produced to order on your behalf by our print partner, and original paintings (available by inquiry). Colours may vary slightly between screens and the printed piece.</p>
+        <h3>Orders &amp; Payment</h3>
+        <p>All prices are shown in euro (€). Payment is processed securely by Stripe; we never see or store your full card details. An order is confirmed once payment is completed and you receive a confirmation on screen and by email.</p>
+        <h3>Pricing &amp; Availability</h3>
+        <p>We may update prices and the range of works at any time. Limited editions are sold while stocks last. If we cannot fulfil an order we will contact you and arrange a full refund.</p>
+        <h3>Intellectual Property</h3>
+        <p>All artwork, images and content on this site are the copyright of Janet Cruise Halpin and may not be reproduced, copied or used without written permission. Purchase of a print does not transfer any reproduction rights.</p>
+        <h3>Liability</h3>
+        <p>Nothing in these terms limits your statutory rights as a consumer. To the extent permitted by law, our liability for any order is limited to the value of that order.</p>
+        <h3>Governing Law</h3>
+        <p>These terms are governed by the laws of Ireland, and any disputes are subject to the Irish courts.</p>
+        <h3>Contact</h3>
+        <p>Questions about these terms? Reach us through the contact form on this website.</p>
+        <p class="legal-updated">Last updated: ${LEGAL_UPDATED}</p>`
+    },
+    privacy: {
+      title: 'Privacy Policy',
+      html: `
+        <p>We respect your privacy and handle your personal data in line with the EU General Data Protection Regulation (GDPR). The data controller is <strong>Janet Cruise Halpin</strong>, Laragh, Co. Wicklow, Ireland.</p>
+        <h3>What We Collect</h3>
+        <ul>
+          <li>Your name, email address and shipping address</li>
+          <li>Order details (the works and sizes you buy)</li>
+          <li>Messages you send us via the inquiry form</li>
+        </ul>
+        <p>Card payments are handled entirely by <strong>Stripe</strong> — we do not receive or store your card number.</p>
+        <h3>Why We Use It</h3>
+        <p>To process and deliver your order, respond to inquiries, and meet our legal and accounting obligations.</p>
+        <h3>Who We Share It With</h3>
+        <ul>
+          <li><strong>Stripe</strong> — to take payment</li>
+          <li>Our <strong>print &amp; fulfilment partner</strong> — to produce and ship your order</li>
+          <li>Service providers that store inquiry and order data on our behalf</li>
+        </ul>
+        <p>We never sell your data.</p>
+        <h3>How Long We Keep It</h3>
+        <p>Only as long as needed to fulfil your order and meet legal/tax requirements, after which it is deleted.</p>
+        <h3>Your Rights</h3>
+        <p>Under GDPR you may request access to, correction of, or deletion of your data, and may object to its processing. To exercise these rights, contact us through the form on this site.</p>
+        <p class="legal-updated">Last updated: ${LEGAL_UPDATED}</p>`
+    },
+    refunds: {
+      title: 'Refunds &amp; Returns',
+      html: `
+        <div class="legal-note">As an EU consumer you generally have a <strong>14-day right of withdrawal</strong> on standard purchases. Because prints are produced to order, please read how this applies below.</div>
+        <h3>Damaged or Faulty Items</h3>
+        <p>If your print arrives damaged or faulty, contact us within <strong>14 days</strong> of delivery with photos of the item and packaging. We will arrange a free replacement or a full refund.</p>
+        <h3>Change of Mind</h3>
+        <p>Standard (non-personalised) prints may be returned within <strong>14 days</strong> of delivery in their original, undamaged condition. Return postage is the customer's responsibility unless the item was faulty. Once we receive and inspect the item, we will refund the price paid.</p>
+        <h3>Made-to-Order / Personalised Items</h3>
+        <p>Items personalised or custom-made to your specification may be exempt from the standard cooling-off period, except where faulty.</p>
+        <h3>Original Paintings</h3>
+        <p>Original works are sold by individual arrangement; return terms will be confirmed with you at the time of purchase.</p>
+        <h3>How to Request a Refund or Return</h3>
+        <p>Contact us through the form on this website with your order reference and we will guide you through the next steps. Refunds are issued to your original payment method.</p>
+        <p class="legal-updated">Last updated: ${LEGAL_UPDATED}</p>`
+    },
+    shipping: {
+      title: 'Shipping',
+      html: `
+        <p>Prints are produced to order by our print partner at the production hub nearest to you, then shipped directly — this keeps delivery fast and your print in the best condition.</p>
+        <h3>Production &amp; Dispatch</h3>
+        <p>Most prints are produced and dispatched within <strong>2–4 working days</strong>, after which delivery times depend on your location.</p>
+        <h3>Shipping Rates</h3>
+        <ul>
+          <li>Ireland — €5</li>
+          <li>United Kingdom — €8</li>
+          <li>European Union — €7</li>
+          <li>United States — €12</li>
+          <li>Australia / New Zealand — €15</li>
+          <li>Rest of world — €15</li>
+        </ul>
+        <p>Shipping is charged once per order. Estimated delivery: Ireland/UK/EU ~3–7 working days; rest of world ~7–14 working days after dispatch.</p>
+        <h3>Customs &amp; Duties</h3>
+        <p>Orders shipped outside the EU may be subject to import duties or taxes set by the destination country. These are the responsibility of the customer.</p>
+        <h3>Questions</h3>
+        <p>Get in touch through the contact form on this website and we'll be happy to help.</p>
+        <p class="legal-updated">Last updated: ${LEGAL_UPDATED}</p>`
+    }
+  };
+
+  function openLegal(which) {
+    const c = legalContent[which];
+    if (!c) return;
+    document.getElementById('legalTitle').innerHTML = c.title;
+    document.getElementById('legalBody').innerHTML = c.html;
+    document.getElementById('legalBody').scrollTop = 0;
+    document.getElementById('legalBg').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLegal() {
+    document.getElementById('legalBg').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLegal(); });
 </script>
 </body>
 </html>
