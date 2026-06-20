@@ -1711,18 +1711,29 @@
     color: var(--slate);
     font-weight: 500;
   }
-  .sold-toggle-label {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center;
-    gap: 0.5rem;
-    letter-spacing: 0.06em !important;
-    text-transform: none !important;
-    font-size: 0.78rem !important;
-    color: var(--charcoal) !important;
+  .mark-sold-btn {
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--ochre);
+    color: var(--white);
+    border: 1px solid var(--ochre);
     cursor: pointer;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
   }
-  .sold-toggle-label input { width: auto; accent-color: var(--ochre); cursor: pointer; }
+  .mark-sold-btn:hover { background: var(--ochre-light); border-color: var(--ochre-light); }
+  .mark-sold-btn.is-sold {
+    background: transparent;
+    color: var(--forest);
+    border-color: var(--forest);
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+  .mark-sold-btn.is-sold:hover { background: rgba(44,74,53,0.06); }
   .edit-field-row input,
   .edit-field-row select {
     padding: 0.45rem 0.65rem;
@@ -2814,7 +2825,7 @@
           <p class="print-card-title">${d.title}</p>
           <p class="print-card-meta">Giclée Print · ${d.meta}</p>
           <p class="print-card-price" id="${d.id}-price">${priceLabel}</p>
-          ${isSold ? `<p class="sold-note">This edition is sold out. Contact us if you're interested — Janet may have related works available.</p>` : `<div class="print-sizes" id="${d.id}-pills">${sizePills}</div>`}
+          ${isSold ? `<p class="sold-note">This edition is sold. Register your interest and Janet will be in touch — she may have related works available.</p>` : `<div class="print-sizes" id="${d.id}-pills">${sizePills}</div>`}
           ${isSold ? '' : odNote}
           <div class="inline-notify" id="${d.id}-inline-notify" style="display:none">
             <span class="inline-notify-label">
@@ -2834,7 +2845,7 @@
           ${isSold
             ? `<button class="notify-btn" onclick="openModal('${d.title.replace(/'/g,"\\'")}','${d.meta}')">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                Contact Us if Interested
+                Register Interest
                </button>`
             : `<button class="add-to-cart" id="${d.id}-atc"
                 onclick="addToCart(this,'${d.title}')">
@@ -2883,12 +2894,12 @@
               </div>
             </div>`}
             <div class="edit-field-row">
-              <label class="sold-toggle-label">
-                <input type="checkbox" id="${d.id}-edit-sold"${d.sold ? ' checked' : ''}>
-                <span>Mark as Sold / no longer selling</span>
-              </label>
-              <p style="font-size:.62rem;color:var(--slate);margin-top:.3rem;line-height:1.5">
-                Hides the buy options and shows a “Contact Us if Interested” button instead.
+              <label>Availability</label>
+              <button type="button" class="mark-sold-btn${d.sold ? ' is-sold' : ''}" id="${d.id}-sold-btn" onclick="toggleSold('${d.id}')">
+                ${d.sold ? '✓ Marked as Sold — tap to put back on sale' : 'Mark as Sold'}
+              </button>
+              <p style="font-size:.62rem;color:var(--slate);margin-top:.4rem;line-height:1.5">
+                When sold, the buy options are hidden and a “Register Interest” button is shown so people can contact Janet about this work.
               </p>
             </div>
             <div class="edit-actions">
@@ -2979,10 +2990,6 @@
     d.meta      = document.getElementById(id+'-edit-meta').value.trim()  || d.meta;
     d.basePrice = parseInt(document.getElementById(id+'-edit-price').value) || d.basePrice;
     d.cat       = document.getElementById(id+'-edit-cat').value;
-    // Sold / discontinued flag
-    const soldEl = document.getElementById(id+'-edit-sold');
-    if (soldEl) d.sold = soldEl.checked;
-    saveSoldFlags();
     // Update qty for printed items
     if (d.printed) {
       ['A3','A2','A1'].forEach(s => {
@@ -3000,6 +3007,15 @@
       const activeCat = document.querySelector('.tab-btn.active')?.dataset.cat || 'all';
       renderGrid(activeCat);
     }, 900);
+  }
+
+  // Toggle a print between "for sale" and "Sold" (persists in the browser)
+  function toggleSold(id) {
+    const d = store[id];
+    d.sold = !d.sold;
+    saveSoldFlags();
+    const activeCat = document.querySelector('.tab-btn.active')?.dataset.cat || 'all';
+    renderGrid(activeCat);
   }
 
   // ── CATEGORY FILTER ───────────────────────────────────────────────────────
