@@ -1689,6 +1689,44 @@
   .edit-toggle:hover { color: var(--forest); }
   .edit-toggle.active { opacity: 1; color: var(--forest); }
 
+  /* ── EDIT CONTROLS ARE HIDDEN UNTIL ADMIN MODE IS UNLOCKED ── */
+  .edit-toggle { display: none; }
+  body.admin .edit-toggle { display: inline-block; }
+  body:not(.admin) .inline-edit-panel { display: none !important; }
+
+  /* Small banner shown only while editing is unlocked */
+  .admin-bar {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 600;
+    background: var(--forest);
+    color: var(--white);
+    padding: 0.6rem 1.25rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 -2px 18px rgba(0,0,0,0.25);
+  }
+  body.admin .admin-bar { display: flex; }
+  .admin-bar button {
+    background: var(--white);
+    color: var(--forest);
+    border: none;
+    padding: 0.4rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
   .inline-edit-panel {
     display: none;
     flex-direction: column;
@@ -2518,7 +2556,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-logo">Janet Cruise Halpin</span>
+  <span class="footer-logo" id="footerLogo">Janet Cruise Halpin</span>
   <ul class="footer-links">
     <li><a href="#about">About</a></li>
     <li><a href="#prints">Prints</a></li>
@@ -2527,6 +2565,12 @@
   </ul>
   <p class="footer-copy">© 2025 Janet Cruise Halpin. All rights reserved.</p>
 </footer>
+
+<!-- EDIT-MODE BANNER (only visible after unlocking) -->
+<div class="admin-bar" id="adminBar">
+  <span>✎ Editing unlocked — changes are saved on this device only</span>
+  <button onclick="lockAdmin()">Exit editing</button>
+</div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox-bg" id="lightboxBg" onclick="handleLightboxBgClick(event)">
@@ -3053,6 +3097,55 @@
     links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
     window.addEventListener('resize', () => { if (window.innerWidth > 900) setOpen(false); });
+  })();
+
+  // ── EDIT-MODE LOCK (admin) ────────────────────────────────────────────────
+  // Editing is hidden from all visitors. Unlock it with the password below by
+  // either adding #edit to the page URL, or tapping the footer name 5 times.
+  const EDIT_PASSWORD = 'Jur17414';
+  const ADMIN_KEY = 'jch_admin';
+
+  function applyAdmin() {
+    if (localStorage.getItem(ADMIN_KEY) === 'true') document.body.classList.add('admin');
+  }
+  function promptAdmin() {
+    const p = prompt('Enter the edit password to unlock editing:');
+    if (p === null) return;                 // cancelled
+    if (p === EDIT_PASSWORD) {
+      try { localStorage.setItem(ADMIN_KEY, 'true'); } catch (e) {}
+      document.body.classList.add('admin');
+    } else {
+      alert('Incorrect password.');
+    }
+  }
+  function lockAdmin() {
+    try { localStorage.removeItem(ADMIN_KEY); } catch (e) {}
+    document.body.classList.remove('admin');
+    // close any open edit panels
+    document.querySelectorAll('.inline-edit-panel.show').forEach(p => p.classList.remove('show'));
+  }
+  window.lockAdmin = lockAdmin;            // used by the Exit button
+
+  applyAdmin();
+
+  // Trigger 1: visiting the page with #edit in the URL
+  if (location.hash.toLowerCase() === '#edit') {
+    history.replaceState(null, '', location.pathname + location.search);
+    if (!document.body.classList.contains('admin')) promptAdmin();
+  }
+
+  // Trigger 2: tap/click the footer name 5 times quickly (phone-friendly)
+  (function () {
+    const logo = document.getElementById('footerLogo');
+    if (!logo) return;
+    let taps = 0, timer = null;
+    logo.style.cursor = 'default';
+    logo.addEventListener('click', () => {
+      taps++;
+      clearTimeout(timer);
+      timer = setTimeout(() => { taps = 0; }, 1200);
+      if (taps >= 5) { taps = 0; if (!document.body.classList.contains('admin')) promptAdmin(); }
+    });
   })();
 
   // ── REVEAL ────────────────────────────────────────────────────────────────
