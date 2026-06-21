@@ -964,6 +964,28 @@
     border-color: var(--forest);
     color: var(--white);
   }
+  /* Size dropdown — used on mobile where the pills are too cramped to read */
+  .size-select {
+    display: none;            /* desktop uses the pills; shown via media query */
+    width: 100%;
+    padding: 0.6rem 2.1rem 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    color: var(--charcoal);
+    background-color: transparent;
+    border: 1px solid rgba(28,28,26,0.25);
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='12'%20height='12'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%232c4a35'%20stroke-width='2'%3E%3Cpolyline%20points='6%209%2012%2015%2018%209'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 0.72rem;
+    cursor: pointer;
+  }
+  .size-select:focus { outline: none; border-color: var(--forest); }
   .add-to-cart {
     width: 100%;
     padding: 0.75rem;
@@ -2045,6 +2067,9 @@
   @media (max-width: 700px) {
     .printful-banner { grid-template-columns: 1fr; }
     .pf-costs { border-left: none; padding-left: 0; border-top: 1px solid rgba(44,74,53,0.15); padding-top: 1rem; }
+    /* On phones the size pills are too narrow to read — use the dropdown instead */
+    .print-sizes { display: none; }
+    .size-select { display: block; }
   }
 
   /* ── SCROLL ANIMATE ── */
@@ -2220,6 +2245,46 @@
     .prints-section, .originals-section { padding: 5rem 1.5rem; }
     .modal { padding: 2.5rem 1.75rem; }
     footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  }
+
+  /* Large / landscape phones (up to ~932px wide) sit above the 900px cutoff,
+     so the desktop links would show with no hamburger. Extend the mobile menu
+     up to 1024px so the toggle is visible on every phone. */
+  @media (min-width: 901px) and (max-width: 1024px) {
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      height: 100svh;
+      width: min(70vw, 320px);
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.25rem;
+      padding: 2rem 2.5rem;
+      background: rgba(20,30,22,0.98);
+      backdrop-filter: blur(14px);
+      box-shadow: -8px 0 40px rgba(0,0,0,0.35);
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+      z-index: 105;
+    }
+    body.nav-open .nav-links { transform: translateX(0); }
+    .nav-links a,
+    nav.scrolled .nav-links a { color: rgba(255,255,255,0.88); font-size: 1rem; letter-spacing: 0.22em; }
+    .nav-links a:hover,
+    nav.scrolled .nav-links a:hover { color: #fff; }
+    .nav-backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,8,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s, visibility 0.4s;
+      z-index: 104;
+    }
+    body.nav-open .nav-backdrop { opacity: 1; visibility: visible; }
   }
 
   /* ── SMALL PHONES ── */
@@ -2976,6 +3041,15 @@
           onclick="selectSizeG(this,'${d.id}')">${SIZE_LABEL[s]}${d.printed && d.qty[s] <= 3 && d.qty[s] > 0 ? `<span class="pill-qty-warn">${d.qty[s]} left</span>` : ''}</button>`;
       }).join('');
 
+      // Same sizes as a dropdown — shown on mobile in place of the pills
+      const sizeSelect = `<select class="size-select" id="${d.id}-select" aria-label="Choose a print size" onchange="selectSizeSel(this,'${d.id}')">
+        ${SIZES.map(s => {
+          const oos = !isOD && d.stock[s] === 'out';
+          const isFirst = s === (firstIn || '30x40');
+          return `<option value="${s}"${isFirst && !allOut ? ' selected' : ''}>${SIZE_LABEL[s]} — €${SIZE_PRICE[s]}${oos ? ' · sold out' : ''}</option>`;
+        }).join('')}
+      </select>`;
+
       // On-demand lead time note
       const odNote = isOD
         ? `<p class="od-note">
@@ -3002,6 +3076,7 @@
           <p class="print-card-title">${d.title}</p>
           <p class="print-card-price" id="${d.id}-price">${priceLabel}</p>
           ${isSold ? `<p class="sold-note">This edition is sold. Register your interest and Janet will be in touch — she may have related works available.</p>` : `<div class="print-sizes" id="${d.id}-pills">${sizePills}</div>
+          ${sizeSelect}
           <p class="size-dims" id="${d.id}-dims">${SIZE_DIMS[firstIn || '30x40']}</p>`}
           ${isSold ? '' : odNote}
           <div class="inline-notify" id="${d.id}-inline-notify" style="display:none">
@@ -3094,6 +3169,13 @@
   }
 
   // ── SIZE SELECTION (rendered cards) ──────────────────────────────────────
+  // Mobile dropdown → reuse the pill logic by triggering the matching pill.
+  function selectSizeSel(sel, id) {
+    const pills = document.getElementById(id+'-pills');
+    const pill = pills && pills.querySelector(`.size-pill[data-size="${sel.value}"]`);
+    if (pill) selectSizeG(pill, id);
+  }
+
   function selectSizeG(pill, id) {
     const d = store[id];
     const allPills = pill.closest('.print-sizes').querySelectorAll('.size-pill');
@@ -3101,6 +3183,9 @@
 
     const isOos  = pill.dataset.oos === 'true';
     const size   = pill.dataset.size;
+    // Keep the mobile dropdown in sync when a pill is chosen (and vice-versa)
+    const selEl = document.getElementById(id+'-select');
+    if (selEl && selEl.value !== size) selEl.value = size;
     const price  = pill.dataset.price;
     const priceEl   = document.getElementById(id+'-price');
     const notifyEl  = document.getElementById(id+'-inline-notify');
