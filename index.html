@@ -115,6 +115,12 @@
     text-decoration: none;
     text-transform: uppercase;
     transition: color 0.5s;
+    /* Let the logo shrink/ellipsis on narrow phones rather than pushing the
+       cart + hamburger off the right edge. */
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   nav.scrolled .nav-logo { color: var(--charcoal); }
   .nav-links {
@@ -147,7 +153,7 @@
   nav.scrolled .nav-links a:hover { color: var(--forest); }
   .nav-links a:hover::after { width: 100%; }
 
-  .nav-right { display: flex; align-items: center; gap: 1.75rem; }
+  .nav-right { display: flex; align-items: center; gap: 1.75rem; flex-shrink: 0; }
 
   .nav-backdrop { display: none; }
 
@@ -160,7 +166,11 @@
     gap: 5px;
     width: 44px;
     height: 44px;
-    margin: -7px;
+    /* Vertical-only negative margin keeps the bar visually compact without
+       pushing the 44px tap target past the right edge (which clipped it on
+       some phones). */
+    margin: -7px 0;
+    flex-shrink: 0;
     padding: 0;
     background: none;
     border: none;
@@ -2183,8 +2193,10 @@
 
   /* ── MOBILE ── */
   @media (max-width: 900px) {
-    nav { padding: 1.25rem 1.5rem; }
-    nav.scrolled { padding: 1rem 1.5rem; }
+    /* Honour the safe-area inset so the hamburger isn't tucked under a notch
+       or rounded corner when a phone is held in landscape. */
+    nav { padding: 1.25rem max(1.5rem, env(safe-area-inset-right)) 1.25rem max(1.5rem, env(safe-area-inset-left)); }
+    nav.scrolled { padding: 1rem max(1.5rem, env(safe-area-inset-right)) 1rem max(1.5rem, env(safe-area-inset-left)); }
     .nav-logo { font-size: 1.05rem; letter-spacing: 0.04em; }
     .nav-right { gap: 1rem; }
     .cart-nav { font-size: 0.62rem; letter-spacing: 0.12em; }
