@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0C0A09;
+  --foreground: #FAFAF9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-jost);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scrollLine {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(300%); }
+}
