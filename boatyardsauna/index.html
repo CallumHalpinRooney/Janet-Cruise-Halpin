@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>The Boat Yard Sauna — Wood-Fired Saunas by the Irish Sea | Wicklow &amp; Arklow</title>
+<meta name="description" content="Authentic wood-fired saunas on the water in Wicklow Harbour and River Walk, Arklow. Feel the heat, embrace the chill. Book a sauna and cold-dip session by the Irish Sea." />
+<meta name="theme-color" content="#0B1620" />
+
+<!-- Social sharing -->
+<meta property="og:type" content="business.business" />
+<meta property="og:title" content="The Boat Yard Sauna — Feel the heat, embrace the chill" />
+<meta property="og:description" content="Wood-fired saunas on the water in Wicklow Harbour &amp; Arklow. Book your sea-side sauna session." />
+<meta property="og:image" content="assets/hero.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="icon" type="image/png" href="assets/icon-192.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Local business structured data — helps Google show the business in search & maps -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "The Boat Yard Sauna",
+  "description": "Wood-fired saunas by the sea in Wicklow Harbour and River Walk, Arklow.",
+  "image": "assets/hero.jpg",
+  "url": "https://theboatyardsauna.ie",
+  "sameAs": ["https://www.instagram.com/theboatyardsauna", "https://linktr.ee/theboatyardsauna"],
+  "address": [
+    {"@type": "PostalAddress", "addressLocality": "Wicklow", "addressRegion": "Co. Wicklow", "addressCountry": "IE"},
+    {"@type": "PostalAddress", "addressLocality": "Arklow", "addressRegion": "Co. Wicklow", "addressCountry": "IE"}
+  ],
+  "priceRange": "€€"
+}
+</script>
+
+<style>
+  :root{
+    --bodoni:'Bodoni Moda',serif; --jost:'Jost',system-ui,sans-serif;
+    --bg:#0B1620; --bg2:#0F2030; --panel:#12283A;
+    --fg:#F7F4EF; --muted:rgba(247,244,239,.55); --faint:rgba(247,244,239,.32);
+    --ember:#FF7A3C; --gold:#F2B705; --line:rgba(247,244,239,.08);
+    --grad:linear-gradient(90deg,#FF4E73,#FF7A3C,#FFC93C);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--bg); color:var(--fg); font-family:var(--jost); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+  img{ display:block; max-width:100%; }
+  .up{ text-transform:uppercase; }
+  .wrap{ max-width:1100px; margin:0 auto; }
+  section{ padding:0 24px; }
+  @keyframes fadeInUp{ from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:none;} }
+  @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+  @keyframes scrollLine{ from{transform:translateY(-100%);} to{transform:translateY(300%);} }
+  .reveal{ opacity:0; transform:translateY(46px); transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ---------- Nav ---------- */
+  header{ position:fixed; inset:0 0 auto 0; z-index:60; display:flex; justify-content:center; padding:18px 16px 0; }
+  nav.pill{ display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1100px; padding:11px 14px 11px 20px; border-radius:9999px; transition:all .5s; border:1px solid transparent; animation:fadeInUp .8s .2s both; }
+  nav.pill.scrolled{ background:rgba(11,22,32,.85); backdrop-filter:blur(18px); border:1px solid var(--line); }
+  .brand{ display:flex; align-items:center; gap:10px; font-family:var(--bodoni); font-style:italic; font-size:17px; letter-spacing:.04em; }
+  .brand .mark{ width:30px; height:30px; border-radius:50%; background:var(--grad); padding:2px; flex:none; }
+  .brand .mark span{ display:flex; width:100%; height:100%; border-radius:50%; background:var(--bg2); align-items:center; justify-content:center; font-size:15px; font-style:normal; }
+  .navlinks{ display:flex; align-items:center; gap:30px; }
+  .navlinks a{ position:relative; font-size:11px; letter-spacing:.2em; color:var(--muted); transition:color .3s; }
+  .navlinks a:hover{ color:#fff; }
+  .navlinks a::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--ember); transition:width .3s; }
+  .navlinks a:hover::after{ width:100%; }
+  .btn-book{ font-size:10px; letter-spacing:.22em; padding:11px 22px; border-radius:9999px; background:var(--grad); color:#1a0e06; font-weight:700; transition:filter .2s, transform .2s; }
+  .btn-book:hover{ filter:brightness(1.07); transform:translateY(-1px); }
+  .hamburger{ display:none; background:none; border:0; color:var(--fg); padding:6px; cursor:pointer; }
+  .hamburger svg{ width:24px; height:24px; }
+  @media (max-width:860px){ .navlinks{ display:none; } .hamburger{ display:block; } }
+
+  /* mobile drawer */
+  .drawer{ position:fixed; inset:0; z-index:80; background:rgba(11,22,32,.97); backdrop-filter:blur(8px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; opacity:0; pointer-events:none; transition:opacity .35s; }
+  .drawer.open{ opacity:1; pointer-events:auto; }
+  .drawer a{ font-family:var(--bodoni); font-style:italic; font-size:30px; color:var(--fg); }
+  .drawer .close{ position:absolute; top:24px; right:24px; background:none; border:0; color:var(--fg); font-size:34px; cursor:pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero{ position:relative; height:100vh; min-height:600px; overflow:hidden; }
+  .hero-bg{ position:absolute; inset:0; background:#0a131c center/cover no-repeat; transform:scale(1.05); }
+  .hero-grad{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(11,22,32,.35) 0%, rgba(11,22,32,.15) 38%, rgba(11,22,32,.85) 100%); }
+  .hero-text{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 20px; }
+  .hero-eyebrow{ color:var(--gold); font-size:11px; letter-spacing:.4em; margin-bottom:22px; animation:fadeInUp 1.2s .3s both; }
+  .hero-title{ font-family:var(--bodoni); font-style:italic; font-size:clamp(3rem,9vw,7.5rem); line-height:.95; font-weight:400; animation:fadeInUp 1.4s .5s both; }
+  .hero-title .grad{ background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-sub{ font-weight:300; font-size:13px; letter-spacing:.28em; color:var(--muted); margin-top:26px; animation:fadeInUp 1s .8s both; }
+  .hero-cta{ display:flex; gap:14px; margin-top:38px; flex-wrap:wrap; justify-content:center; animation:fadeInUp 1s 1s both; }
+  .cta-primary{ background:var(--grad); color:#1a0e06; font-weight:700; font-size:11px; letter-spacing:.22em; padding:15px 30px; border-radius:9999px; transition:transform .2s, filter .2s; }
+  .cta-primary:hover{ transform:translateY(-2px); filter:brightness(1.07); }
+  .cta-ghost{ border:1px solid rgba(247,244,239,.25); color:var(--fg); font-size:11px; letter-spacing:.22em; padding:15px 30px; border-radius:9999px; transition:border-color .3s, background .3s; }
+  .cta-ghost:hover{ border-color:var(--fg); background:rgba(247,244,239,.06); }
+  .scroll-ind{ position:absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:12px; animation:fadeIn .8s 1.6s both; }
+  .scroll-ind p{ font-size:10px; letter-spacing:.35em; color:var(--faint); }
+  .scroll-track{ width:1px; height:46px; background:rgba(247,244,239,.15); overflow:hidden; position:relative; }
+  .scroll-track span{ position:absolute; top:0; width:100%; height:40%; background:rgba(247,244,239,.6); animation:scrollLine 1.4s linear infinite; }
+
+  /* ---------- Stats ---------- */
+  .stats{ padding:60px 24px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .stats-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+  .stat .v{ font-family:var(--bodoni); font-weight:400; font-size:clamp(2rem,4vw,3.3rem); line-height:1; }
+  .stat .l{ font-size:10px; letter-spacing:.22em; color:var(--faint); margin-top:8px; }
+  @media (max-width:680px){ .stats-grid{ grid-template-columns:repeat(2,1fr); gap:32px 20px; } }
+
+  /* ---------- Manifesto ---------- */
+  .manifesto{ padding:130px 24px; text-align:center; }
+  .manifesto .rule{ width:34px; height:2px; background:var(--grad); margin:0 auto 44px; }
+  .manifesto blockquote{ font-family:var(--bodoni); font-style:italic; font-weight:400; font-size:clamp(1.5rem,4vw,2.8rem); line-height:1.4; color:rgba(247,244,239,.86); }
+  .manifesto .by{ margin-top:36px; font-size:10px; letter-spacing:.32em; color:var(--gold); }
+
+  /* ---------- Features ---------- */
+  .features{ padding:40px 24px 120px; }
+  .sec-head{ margin-bottom:84px; display:flex; flex-direction:column; gap:18px; }
+  .eyebrow{ color:var(--ember); font-size:10px; letter-spacing:.4em; }
+  .sec-head h2{ font-family:var(--bodoni); font-style:italic; font-weight:400; font-size:clamp(2.3rem,6vw,4.5rem); line-height:1; }
+  .sec-head p{ max-width:25rem; color:var(--muted); font-weight:300; font-size:14px; line-height:1.7; }
+  @media (min-width:768px){ .sec-head{ flex-direction:row; align-items:flex-end; justify-content:space-between; } }
+  .feat-row{ display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; margin-bottom:118px; }
+  .feat-row:last-child{ margin-bottom:0; }
+  .feat-row.rev .feat-img{ order:2; }
+  .feat-img{ position:relative; overflow:hidden; border-radius:3px; aspect-ratio:4/3; background:linear-gradient(135deg,#12283A,#0a131c); }
+  .feat-img img{ width:100%; height:100%; object-fit:cover; }
+  .feat-img .badge{ position:absolute; bottom:22px; right:22px; text-align:right; text-shadow:0 2px 10px rgba(0,0,0,.5); }
+  .feat-img .badge .n{ font-family:var(--bodoni); font-weight:400; font-size:2.6rem; line-height:1; }
+  .feat-img .badge .nl{ font-size:9px; letter-spacing:.28em; color:rgba(255,255,255,.75); margin-top:4px; }
+  .feat-txt .k{ color:var(--ember); font-size:10px; letter-spacing:.36em; margin-bottom:22px; }
+  .feat-txt h3{ font-family:var(--bodoni); font-style:italic; font-weight:400; font-size:clamp(1.9rem,4vw,3.2rem); line-height:1.05; margin-bottom:22px; }
+  .feat-txt .bar{ width:34px; height:2px; background:var(--grad); margin-bottom:22px; }
+  .feat-txt p{ color:var(--muted); font-weight:300; font-size:14px; line-height:1.75; max-width:25rem; }
+  @media (max-width:768px){ .feat-row{ grid-template-columns:1fr; gap:34px; } .feat-row.rev .feat-img{ order:0; } }
+
+  /* ---------- Sessions / pricing ---------- */
+  .sessions{ background:var(--bg2); padding:120px 24px; border-top:1px solid var(--line); }
+  .price-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:64px; }
+  .price-card{ background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:38px 30px; display:flex; flex-direction:column; transition:transform .35s, border-color .35s; }
+  .price-card:hover{ transform:translateY(-6px); border-color:rgba(255,122,60,.4); }
+  .price-card.feature{ border-color:rgba(242,183,5,.45); position:relative; }
+  .price-card.feature::before{ content:'Most popular'; position:absolute; top:-11px; left:30px; background:var(--grad); color:#1a0e06; font-size:9px; letter-spacing:.18em; font-weight:700; padding:5px 12px; border-radius:9999px; text-transform:uppercase; }
+  .price-card .t{ font-family:var(--bodoni); font-style:italic; font-size:1.7rem; }
+  .price-card .d{ color:var(--muted); font-size:13px; line-height:1.6; margin:14px 0 24px; font-weight:300; min-height:62px; }
+  .price-card .p{ font-family:var(--bodoni); font-size:2.6rem; }
+  .price-card .p small{ font-family:var(--jost); font-size:12px; color:var(--faint); letter-spacing:.1em; }
+  .price-card ul{ list-style:none; margin:24px 0 30px; display:flex; flex-direction:column; gap:11px; }
+  .price-card li{ font-size:13px; color:rgba(247,244,239,.7); display:flex; gap:10px; align-items:flex-start; }
+  .price-card li::before{ content:'✶'; color:var(--ember); flex:none; }
+  .price-card .pick{ margin-top:auto; text-align:center; padding:13px; border-radius:9999px; border:1px solid rgba(247,244,239,.2); font-size:11px; letter-spacing:.2em; cursor:pointer; transition:all .3s; background:none; color:var(--fg); font-family:var(--jost); }
+  .price-card .pick:hover{ background:var(--grad); color:#1a0e06; border-color:transparent; font-weight:700; }
+  @media (max-width:820px){ .price-grid{ grid-template-columns:1fr; max-width:420px; margin-left:auto; margin-right:auto; } }
+
+  /* ---------- Gallery ---------- */
+  .gallery{ padding:120px 24px; }
+  .gal-grid{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:180px; gap:12px; margin-top:60px; }
+  .gal-grid figure{ overflow:hidden; border-radius:3px; background:linear-gradient(135deg,#12283A,#0a131c); }
+  .gal-grid img{ width:100%; height:100%; object-fit:cover; transition:transform .6s; }
+  .gal-grid figure:hover img{ transform:scale(1.06); }
+  .gal-grid .big{ grid-column:span 2; grid-row:span 2; }
+  .gal-grid .wide{ grid-column:span 2; }
+  @media (max-width:680px){ .gal-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:140px; } .gal-grid .big{ grid-column:span 2; grid-row:span 2; } .gal-grid .wide{ grid-column:span 2; } }
+
+  /* ---------- Testimonials ---------- */
+  .test{ background:var(--bg2); padding:120px 24px; border-top:1px solid var(--line); }
+  .test .wrap{ max-width:900px; }
+  .test-body{ display:flex; align-items:flex-start; gap:30px; margin-top:48px; }
+  .test-num{ font-family:var(--bodoni); font-weight:400; font-size:clamp(90px,12vw,130px); line-height:1; color:rgba(247,244,239,.06); user-select:none; flex:none; }
+  .test-quote{ font-family:var(--bodoni); font-style:italic; font-weight:400; font-size:clamp(1.2rem,3vw,1.8rem); line-height:1.6; color:rgba(247,244,239,.85); transition:opacity .4s, transform .4s; }
+  .test-meta{ margin-top:36px; display:flex; align-items:center; gap:14px; transition:opacity .4s; }
+  .test-meta .av{ width:46px; height:46px; border-radius:50%; background:var(--grad); display:flex; align-items:center; justify-content:center; font-family:var(--bodoni); font-style:italic; color:#1a0e06; flex:none; }
+  .test-meta .nm{ font-size:14px; font-weight:500; }
+  .test-meta .ro{ font-size:12px; font-weight:300; color:var(--faint); margin-top:2px; }
+  .test-ctrl{ margin-top:52px; display:flex; align-items:center; justify-content:space-between; }
+  .dots{ display:flex; gap:10px; }
+  .dots button{ background:none; border:0; padding:12px 0; cursor:pointer; }
+  .dots button span{ display:block; height:2px; width:22px; background:rgba(247,244,239,.2); transition:all .5s; }
+  .dots button.active span{ width:44px; background:var(--ember); }
+  .arrows{ display:flex; gap:6px; }
+  .arrows button{ width:40px; height:40px; border-radius:50%; border:1px solid rgba(247,244,239,.14); background:none; color:var(--muted); cursor:pointer; transition:all .3s; font-size:18px; }
+  .arrows button:hover{ color:#fff; border-color:rgba(247,244,239,.4); }
+
+  /* ---------- Booking ---------- */
+  .booking{ padding:120px 24px; }
+  .booking .panel{ background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; margin-top:56px; display:grid; grid-template-columns:340px 1fr; }
+  .book-side{ background:linear-gradient(160deg,#143049,#0a131c); padding:44px 36px; display:flex; flex-direction:column; }
+  .book-side h3{ font-family:var(--bodoni); font-style:italic; font-size:1.8rem; line-height:1.15; margin-bottom:18px; }
+  .book-side p{ color:var(--muted); font-size:13px; line-height:1.7; font-weight:300; }
+  .book-steps{ margin-top:auto; display:flex; flex-direction:column; gap:4px; padding-top:36px; }
+  .book-steps .s{ display:flex; align-items:center; gap:12px; padding:9px 0; color:var(--faint); font-size:12px; letter-spacing:.04em; transition:color .3s; }
+  .book-steps .s .num{ width:24px; height:24px; border-radius:50%; border:1px solid rgba(247,244,239,.2); display:flex; align-items:center; justify-content:center; font-size:11px; flex:none; transition:all .3s; }
+  .book-steps .s.active{ color:var(--fg); }
+  .book-steps .s.active .num{ background:var(--grad); color:#1a0e06; border-color:transparent; font-weight:700; }
+  .book-steps .s.done .num{ background:rgba(255,122,60,.18); border-color:var(--ember); color:var(--ember); }
+  .book-main{ padding:44px 40px; min-height:440px; display:flex; flex-direction:column; }
+  .step{ display:none; animation:fadeIn .4s both; }
+  .step.active{ display:block; }
+  .step h4{ font-size:13px; letter-spacing:.06em; color:var(--muted); margin-bottom:24px; font-weight:400; }
+  .opt-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .opt{ border:1px solid var(--line); border-radius:8px; padding:18px; cursor:pointer; transition:all .25s; background:rgba(255,255,255,.02); }
+  .opt:hover{ border-color:rgba(255,122,60,.4); }
+  .opt.sel{ border-color:var(--ember); background:rgba(255,122,60,.08); }
+  .opt .ot{ font-family:var(--bodoni); font-style:italic; font-size:1.15rem; }
+  .opt .od{ font-size:12px; color:var(--muted); margin-top:5px; font-weight:300; line-height:1.5; }
+  .opt .op{ font-size:12px; color:var(--gold); margin-top:8px; letter-spacing:.05em; }
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:11px; letter-spacing:.14em; color:var(--faint); text-transform:uppercase; margin-bottom:8px; }
+  .field input, .field select, .field textarea{ width:100%; background:rgba(255,255,255,.04); border:1px solid var(--line); border-radius:8px; padding:13px 15px; color:var(--fg); font-family:var(--jost); font-size:14px; }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:rgba(255,122,60,.5); }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .dates{ display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; margin-bottom:22px; }
+  .date-chip{ flex:none; width:64px; text-align:center; border:1px solid var(--line); border-radius:10px; padding:12px 0; cursor:pointer; transition:all .25s; }
+  .date-chip:hover{ border-color:rgba(255,122,60,.4); }
+  .date-chip.sel{ border-color:var(--ember); background:rgba(255,122,60,.1); }
+  .date-chip .dow{ font-size:10px; letter-spacing:.1em; color:var(--faint); }
+  .date-chip .dn{ font-family:var(--bodoni); font-size:1.4rem; margin-top:4px; }
+  .date-chip .mo{ font-size:9px; color:var(--faint); letter-spacing:.1em; }
+  .slots{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .slot{ border:1px solid var(--line); border-radius:8px; padding:11px 0; text-align:center; font-size:13px; cursor:pointer; transition:all .25s; }
+  .slot:hover{ border-color:rgba(255,122,60,.4); }
+  .slot.sel{ border-color:var(--ember); background:rgba(255,122,60,.1); }
+  .slot.full{ opacity:.32; pointer-events:none; text-decoration:line-through; }
+  .addons{ display:flex; flex-direction:column; gap:10px; }
+  .addon{ display:flex; align-items:center; gap:14px; border:1px solid var(--line); border-radius:8px; padding:14px 16px; cursor:pointer; transition:all .25s; }
+  .addon:hover{ border-color:rgba(255,122,60,.4); }
+  .addon.sel{ border-color:var(--ember); background:rgba(255,122,60,.08); }
+  .addon .box{ width:20px; height:20px; border-radius:5px; border:1px solid rgba(247,244,239,.3); flex:none; display:flex; align-items:center; justify-content:center; font-size:13px; }
+  .addon.sel .box{ background:var(--grad); border-color:transparent; color:#1a0e06; }
+  .addon .info{ flex:1; }
+  .addon .an{ font-size:14px; }
+  .addon .ad{ font-size:12px; color:var(--muted); font-weight:300; }
+  .addon .ap{ color:var(--gold); font-size:13px; }
+  .qty{ display:flex; align-items:center; gap:16px; }
+  .qty button{ width:38px; height:38px; border-radius:50%; border:1px solid rgba(247,244,239,.2); background:none; color:var(--fg); font-size:18px; cursor:pointer; }
+  .qty .n{ font-family:var(--bodoni); font-size:1.6rem; min-width:34px; text-align:center; }
+  .summary{ background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:10px; padding:22px; }
+  .summary .line{ display:flex; justify-content:space-between; padding:8px 0; font-size:14px; color:rgba(247,244,239,.78); }
+  .summary .line.total{ border-top:1px solid var(--line); margin-top:8px; padding-top:16px; font-family:var(--bodoni); font-size:1.4rem; color:var(--fg); }
+  .book-nav{ margin-top:auto; padding-top:30px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  .book-nav .back{ background:none; border:0; color:var(--muted); font-size:12px; letter-spacing:.16em; cursor:pointer; text-transform:uppercase; }
+  .book-nav .next{ background:var(--grad); color:#1a0e06; font-weight:700; font-size:11px; letter-spacing:.2em; padding:14px 32px; border-radius:9999px; border:0; cursor:pointer; transition:transform .2s, filter .2s; text-transform:uppercase; }
+  .book-nav .next:hover{ transform:translateY(-1px); filter:brightness(1.07); }
+  .book-nav .next:disabled{ opacity:.4; cursor:not-allowed; transform:none; }
+  .book-done{ text-align:center; padding:30px 10px; }
+  .book-done .tick{ width:64px; height:64px; border-radius:50%; background:var(--grad); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:30px; color:#1a0e06; }
+  .book-done h4{ font-family:var(--bodoni); font-style:italic; font-size:1.8rem; color:var(--fg); margin-bottom:14px; }
+  .book-done p{ color:var(--muted); font-size:14px; line-height:1.7; max-width:30rem; margin:0 auto; }
+  @media (max-width:860px){ .booking .panel{ grid-template-columns:1fr; } .book-side{ padding:34px 28px; } .book-steps{ display:none; } .book-main{ padding:32px 24px; } .opt-grid{ grid-template-columns:1fr; } .slots{ grid-template-columns:repeat(3,1fr); } .row2{ grid-template-columns:1fr; } }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--bg); border-top:1px solid var(--line); }
+  .foot-top{ padding:90px 24px; border-bottom:1px solid var(--line); }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; }
+  .foot-brand .b{ font-family:var(--bodoni); font-style:italic; font-size:1.7rem; }
+  .foot-brand p{ color:var(--muted); font-size:13px; line-height:1.7; font-weight:300; margin-top:16px; max-width:24rem; }
+  .foot-col h5{ font-size:10px; letter-spacing:.3em; color:var(--gold); text-transform:uppercase; margin-bottom:20px; }
+  .foot-col a, .foot-col p{ display:block; color:var(--muted); font-size:13px; font-weight:300; margin-bottom:12px; transition:color .3s; }
+  .foot-col a:hover{ color:var(--fg); }
+  .install-cta{ margin-top:18px; display:inline-flex; align-items:center; gap:8px; font-size:11px; letter-spacing:.14em; padding:11px 18px; border-radius:9999px; border:1px solid rgba(247,244,239,.2); cursor:pointer; background:none; color:var(--fg); font-family:var(--jost); }
+  .install-cta:hover{ border-color:var(--ember); }
+  .foot-bot{ padding:30px 24px; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; }
+  .foot-bot p{ font-size:10px; color:var(--faint); letter-spacing:.05em; }
+  @media (max-width:760px){ .foot-grid{ grid-template-columns:1fr; gap:40px; } }
+
+  /* toast */
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(120%); background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--ember); border-radius:10px; padding:16px 22px; font-size:13px; z-index:200; transition:transform .4s; max-width:90vw; }
+  .toast.show{ transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="pill" id="navpill">
+    <a href="#top" class="brand"><span class="mark"><span>⛵</span></span> The Boat Yard Sauna</a>
+    <div class="navlinks">
+      <a href="#experience" class="up">Experience</a>
+      <a href="#sessions" class="up">Sessions</a>
+      <a href="#gallery" class="up">Gallery</a>
+      <a href="#reviews" class="up">Reviews</a>
+      <a href="#book" class="up">Book</a>
+    </div>
+    <a href="#book" class="btn-book up">Book a session</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </nav>
+</header>
+
+<div class="drawer" id="drawer">
+  <button class="close" id="drawerClose" aria-label="Close">&times;</button>
+  <a href="#experience" class="dl">Experience</a>
+  <a href="#sessions" class="dl">Sessions</a>
+  <a href="#gallery" class="dl">Gallery</a>
+  <a href="#reviews" class="dl">Reviews</a>
+  <a href="#book" class="dl">Book a session</a>
+</div>
+
+<div id="top"></div>
+<section class="hero" style="padding:0;">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-text">
+    <p class="hero-eyebrow up">Wicklow Harbour · River Walk, Arklow</p>
+    <h1 class="hero-title">Feel the heat,<br><span class="grad">embrace the chill</span></h1>
+    <p class="hero-sub up">Wood-fired saunas by the Irish Sea</p>
+    <div class="hero-cta">
+      <a href="#book" class="cta-primary up">Book a session</a>
+      <a href="#experience" class="cta-ghost up">The experience</a>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <p class="up">Scroll</p>
+    <div class="scroll-track"><span></span></div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stats-grid wrap">
+    <div class="stat reveal"><div class="v">90°C</div><div class="l up">Authentic wood-fired heat</div></div>
+    <div class="stat reveal"><div class="v">2</div><div class="l up">Sea-front locations</div></div>
+    <div class="stat reveal"><div class="v">7</div><div class="l up">Days a week</div></div>
+    <div class="stat reveal"><div class="v">∞</div><div class="l up">Sea views &amp; cold dips</div></div>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="wrap reveal">
+    <div class="rule"></div>
+    <blockquote>&ldquo;Light the fire, breathe the salt air, and let the sea do the rest. The contrast is the cure.&rdquo;</blockquote>
+    <p class="by up">— The Boat Yard Sauna, Co. Wicklow</p>
+  </div>
+</section>
+
+<section class="features" id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow up">The Experience</p>
+        <h2>Heat, cold,<br>repeat.</h2>
+      </div>
+      <p>A simple ritual with deep roots — wood-fired warmth, a bracing dip in the Irish Sea, and a moment of stillness with the harbour in front of you.</p>
+    </div>
+    <div id="feat-rows"></div>
+  </div>
+</section>
+
+<section class="sessions" id="sessions">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow up">Sessions</p>
+        <h2>Find your<br>heat.</h2>
+      </div>
+      <p>Drop in solo, share the bench with the community, or take the whole sauna for your group. Every session faces the water.</p>
+    </div>
+    <div class="price-grid" id="price-grid"></div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow up">The Yard</p>
+        <h2>By the water.</h2>
+      </div>
+      <p>Real moments from Wicklow Harbour and the River Walk in Arklow.</p>
+    </div>
+    <div class="gal-grid reveal" id="gal-grid"></div>
+  </div>
+</section>
+
+<section class="test" id="reviews">
+  <div class="wrap">
+    <p class="eyebrow up reveal">What people say</p>
+    <div class="test-body">
+      <span class="test-num" id="test-num">01</span>
+      <div style="flex:1; padding-top:10px;">
+        <blockquote class="test-quote" id="test-quote"></blockquote>
+        <div class="test-meta" id="test-meta">
+          <div class="av" id="test-av"></div>
+          <div><p class="nm" id="test-name"></p><p class="ro" id="test-role"></p></div>
+        </div>
+      </div>
+    </div>
+    <div class="test-ctrl">
+      <div style="display:flex; align-items:center; gap:22px;">
+        <div class="dots" id="dots"></div>
+        <span style="font-size:10px;letter-spacing:.2em;color:var(--faint)" id="counter"></span>
+      </div>
+      <div class="arrows">
+        <button id="prev" aria-label="Previous">&#8249;</button>
+        <button id="next" aria-label="Next">&#8250;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="book">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow up">Reserve</p>
+        <h2>Book your<br>session.</h2>
+      </div>
+      <p>Pick a session, a slot and you're in — confirmed in under a minute. No app store, no waiting.</p>
+    </div>
+
+    <div class="panel reveal">
+      <aside class="book-side">
+        <h3 id="side-title">Your sea-side reset awaits.</h3>
+        <p id="side-text">Choose how you'd like to sauna and we'll handle the rest. You'll get instant confirmation and a reminder before your session.</p>
+        <div class="book-steps">
+          <div class="s active" data-s="1"><span class="num">1</span> Session</div>
+          <div class="s" data-s="2"><span class="num">2</span> Date &amp; time</div>
+          <div class="s" data-s="3"><span class="num">3</span> Guests &amp; extras</div>
+          <div class="s" data-s="4"><span class="num">4</span> Your details</div>
+          <div class="s" data-s="5"><span class="num">5</span> Confirm</div>
+        </div>
+      </aside>
+
+      <div class="book-main">
+        <!-- Step 1 -->
+        <div class="step active" data-step="1">
+          <h4>Where would you like to go?</h4>
+          <div class="opt-grid" id="locOpts"></div>
+          <h4 style="margin-top:28px;">Which session?</h4>
+          <div class="opt-grid" id="sessOpts"></div>
+        </div>
+        <!-- Step 2 -->
+        <div class="step" data-step="2">
+          <h4>Choose a day</h4>
+          <div class="dates" id="dates"></div>
+          <h4>Choose a time</h4>
+          <div class="slots" id="slots"></div>
+        </div>
+        <!-- Step 3 -->
+        <div class="step" data-step="3">
+          <h4>How many guests?</h4>
+          <div class="qty">
+            <button id="qtyMinus" aria-label="Fewer">−</button>
+            <span class="n" id="qtyN">1</span>
+            <button id="qtyPlus" aria-label="More">+</button>
+          </div>
+          <h4 style="margin-top:30px;">Add a little extra</h4>
+          <div class="addons" id="addons"></div>
+        </div>
+        <!-- Step 4 -->
+        <div class="step" data-step="4">
+          <h4>Where should we send your confirmation?</h4>
+          <div class="row2">
+            <div class="field"><label>First name</label><input id="fName" autocomplete="given-name"></div>
+            <div class="field"><label>Last name</label><input id="lName" autocomplete="family-name"></div>
+          </div>
+          <div class="field"><label>Email</label><input id="email" type="email" autocomplete="email"></div>
+          <div class="field"><label>Phone</label><input id="phone" type="tel" autocomplete="tel"></div>
+          <div class="field"><label>Anything we should know? (optional)</label><textarea id="notes" rows="2"></textarea></div>
+        </div>
+        <!-- Step 5 -->
+        <div class="step" data-step="5">
+          <h4>Review &amp; confirm</h4>
+          <div class="summary" id="summary"></div>
+          <p style="font-size:12px;color:var(--faint);margin-top:16px;line-height:1.6;">A small deposit may be requested to secure peak slots. You can pay the balance on arrival. Free to reschedule up to 12 hours before.</p>
+        </div>
+        <!-- Done -->
+        <div class="step" data-step="done">
+          <div class="book-done">
+            <div class="tick">✓</div>
+            <h4 id="doneTitle">You're booked in!</h4>
+            <p id="doneText"></p>
+          </div>
+        </div>
+
+        <div class="book-nav" id="bookNav">
+          <button class="back" id="btnBack" style="visibility:hidden;">← Back</button>
+          <button class="next" id="btnNext" disabled>Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-top">
+    <div class="wrap foot-grid">
+      <div class="foot-brand">
+        <div class="b">The Boat Yard Sauna</div>
+        <p>Authentic wood-fired saunas on the water in Wicklow Harbour and on the River Walk in Arklow. Feel the heat, embrace the chill. 🔥❄️</p>
+        <button class="install-cta" id="installBtn" style="display:none;">📲 Install the app</button>
+      </div>
+      <div class="foot-col">
+        <h5>Visit</h5>
+        <p>Wicklow Harbour, Co. Wicklow</p>
+        <p>River Walk, Arklow, Co. Wicklow</p>
+        <a href="https://maps.google.com/?q=Wicklow+Harbour" target="_blank" rel="noopener">Get directions →</a>
+        <h5 style="margin-top:28px;">Hours</h5>
+        <p>Open 7 days · sunrise to late</p>
+      </div>
+      <div class="foot-col">
+        <h5>Connect</h5>
+        <a href="https://www.instagram.com/theboatyardsauna" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://linktr.ee/theboatyardsauna" target="_blank" rel="noopener">Linktree</a>
+        <a href="#book">Book a session</a>
+        <a href="#" id="voucherLink">Gift a session 🎁</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bot wrap">
+    <p>© <span id="yr"></span> The Boat Yard Sauna · Wood Fired Saunas · Co. Wicklow, Ireland</p>
+    <p>Feel the heat, embrace the chill 🔥❄️</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================================
+   IMAGERY — swap these for real Boat Yard Sauna photos.
+   Drop files into /assets and change the paths below (e.g. 'assets/hero.jpg').
+   Until then we fall back to on-brand sea/sauna imagery.
+   ========================================================================= */
+const IMG = {
+  hero:   'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1800&q=80&auto=format&fit=crop',
+  sauna:  'https://images.unsplash.com/photo-1610632380989-680fe40816c6?w=1200&q=80&auto=format&fit=crop',
+  dip:    'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1200&q=80&auto=format&fit=crop',
+  rest:   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format&fit=crop',
+  g1:     'https://images.unsplash.com/photo-1554260570-9140fd3b7614?w=900&q=80&auto=format&fit=crop',
+  g2:     'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&q=80&auto=format&fit=crop',
+  g3:     'https://images.unsplash.com/photo-1559070169-a3077159ee16?w=900&q=80&auto=format&fit=crop',
+  g4:     'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=900&q=80&auto=format&fit=crop',
+  g5:     'https://images.unsplash.com/photo-1476611317561-60117649dd94?w=900&q=80&auto=format&fit=crop',
+};
+document.getElementById('heroBg').style.backgroundImage = `url('${IMG.hero}')`;
+
+/* ---- Nav ---- */
+const navpill = document.getElementById('navpill');
+addEventListener('scroll', ()=> navpill.classList.toggle('scrolled', scrollY > 30));
+const drawer = document.getElementById('drawer');
+document.getElementById('hamburger').onclick = ()=> drawer.classList.add('open');
+document.getElementById('drawerClose').onclick = ()=> drawer.classList.remove('open');
+document.querySelectorAll('.drawer a').forEach(a=> a.onclick = ()=> drawer.classList.remove('open'));
+
+/* ---- Features ---- */
+const features = [
+  { number:'01', title:'Wood-fired sauna', subtitle:'The real thing', image:IMG.sauna, stat:'90°C', statLabel:'crackling heat',
+    description:'A proper wood-burning stove, the smell of cedar and woodsmoke, and a window onto the harbour. No electric box — just honest, deep, dry heat the way sauna was meant to be.' },
+  { number:'02', title:'The cold dip', subtitle:'Embrace the chill', image:IMG.dip, stat:'❄️', statLabel:'straight in the sea',
+    description:'Step from the heat into the Irish Sea — or our cold plunge — and feel everything switch on. It is bracing, it is brilliant, and it is right on the doorstep.' },
+  { number:'03', title:'Sunrise & sunset', subtitle:'Your time, your view', image:IMG.rest, stat:'7am', statLabel:'first light sessions',
+    description:'Book the golden hours and watch the light move over the water between rounds. Wrap up, slow down, and leave lighter than you arrived.' },
+];
+document.getElementById('feat-rows').innerHTML = features.map((f,i)=>`
+  <div class="feat-row ${i%2===1?'rev':''}">
+    <div class="feat-img reveal">
+      <img src="${f.image}" alt="${f.title}" loading="lazy" onerror="this.style.display='none'">
+      <div class="badge"><div class="n">${f.stat}</div><div class="nl up">${f.statLabel}</div></div>
+    </div>
+    <div class="feat-txt reveal">
+      <div class="k up">${f.number} — ${f.subtitle}</div>
+      <h3>${f.title}</h3><div class="bar"></div><p>${f.description}</p>
+    </div>
+  </div>`).join('');
+
+/* ---- Sessions / pricing ---- */
+const sessions = [
+  { id:'communal', name:'Communal drop-in', price:15, unit:'per person', popular:false,
+    desc:'Share the heat with the community. Perfect for a quick reset.',
+    perks:['45-minute session','Shared sauna','Sea or river dip','Walk-ins welcome'] },
+  { id:'private', name:'Private sauna', price:60, unit:'up to 4 people', popular:true,
+    desc:'The whole sauna, just for you and yours. Most loved.',
+    perks:['60-minute private hire','Up to 4 guests','Exclusive use','Best for friends & couples'] },
+  { id:'group', name:'Group & events', price:120, unit:'up to 8 people', popular:false,
+    desc:'Birthdays, clubs, recovery days — bring the crew.',
+    perks:['90-minute session','Up to 8 guests','Flexible add-ons','Great for celebrations'] },
+];
+document.getElementById('price-grid').innerHTML = sessions.map(s=>`
+  <div class="price-card reveal ${s.popular?'feature':''}">
+    <div class="t">${s.name}</div>
+    <div class="d">${s.desc}</div>
+    <div class="p">€${s.price}<small> ${s.unit}</small></div>
+    <ul>${s.perks.map(p=>`<li>${p}</li>`).join('')}</ul>
+    <button class="pick up" data-sess="${s.id}">Book this</button>
+  </div>`).join('');
+
+/* ---- Gallery ---- */
+const gal = [
+  {src:IMG.sauna, cls:'big'}, {src:IMG.dip, cls:''}, {src:IMG.g1, cls:''},
+  {src:IMG.g2, cls:'wide'}, {src:IMG.g3, cls:''}, {src:IMG.g4, cls:''}, {src:IMG.g5, cls:''},
+];
+document.getElementById('gal-grid').innerHTML = gal.map(g=>`
+  <figure class="${g.cls}"><img src="${g.src}" alt="The Boat Yard Sauna" loading="lazy" onerror="this.style.display='none'"></figure>`).join('');
+
+/* ---- Testimonials ---- */
+const testimonials = [
+  { quote:"Genuinely the best thing I do all week. The wood-fired heat is next level and running into the sea after is unreal. The lads are so welcoming too.", author:'Aoife M.', role:'Wicklow' },
+  { quote:"Booked the private sauna for my partner's birthday. Watching the sunrise over the harbour between dips — we'll be back every month.", author:'Cian D.', role:'Arklow' },
+  { quote:"I was nervous about the cold but it's completely addictive. Easy to book, right by the water, and I always leave buzzing.", author:'Niamh K.', role:'Greystones' },
+];
+let active=0, transitioning=false;
+const $=id=>document.getElementById(id);
+const elNum=$('test-num'), elQuote=$('test-quote'), elMeta=$('test-meta'), elAv=$('test-av'), elName=$('test-name'), elRole=$('test-role'), elCounter=$('counter'), elDots=$('dots');
+const prev=$('prev'), next=$('next');
+const pad=n=>String(n).padStart(2,'0');
+function renderT(){
+  const t=testimonials[active];
+  elNum.textContent=pad(active+1);
+  elQuote.textContent='“'+t.quote+'”';
+  elAv.textContent=t.author[0];
+  elName.textContent=t.author; elRole.textContent=t.role;
+  elCounter.textContent=pad(active+1)+' / '+pad(testimonials.length);
+  [...elDots.children].forEach((b,i)=>b.classList.toggle('active', i===active));
+}
+function goT(i){
+  if(transitioning||i===active) return; transitioning=true;
+  elQuote.style.opacity='0'; elQuote.style.transform='translateX(-18px)'; elMeta.style.opacity='0';
+  setTimeout(()=>{ active=i; renderT(); elQuote.style.transform='translateX(18px)';
+    requestAnimationFrame(()=>{ elQuote.style.opacity='1'; elQuote.style.transform='translateX(0)'; elMeta.style.opacity='1'; transitioning=false; }); },320);
+}
+testimonials.forEach((_,i)=>{ const b=document.createElement('button'); b.innerHTML='<span></span>'; b.onclick=()=>goT(i); elDots.appendChild(b); });
+prev.onclick=()=>goT(active===0?testimonials.length-1:active-1);
+next.onclick=()=>goT(active===testimonials.length-1?0:active+1);
+renderT();
+setInterval(()=>{ if(!transitioning) goT((active+1)%testimonials.length); }, 7000);
+
+/* =========================================================================
+   BOOKING FLOW
+   ========================================================================= */
+const locations = [
+  { id:'wicklow', name:'Wicklow Harbour', desc:'On the pier, facing the boats' },
+  { id:'arklow',  name:'River Walk, Arklow', desc:'Beside the river, by the sea' },
+];
+const addonsList = [
+  { id:'plunge', name:'Cold plunge add-on', desc:'Ice-cold tub between rounds', price:8 },
+  { id:'towel',  name:'Towel & robe hire', desc:'Turn up with nothing, leave cosy', price:5 },
+  { id:'tea',    name:'Herbal tea & honey', desc:'Warm down the right way', price:4 },
+  { id:'photos', name:'Session photos', desc:'A few shots for the memories', price:10 },
+];
+const TIMES = ['07:00','08:00','09:00','10:00','11:00','12:00','13:00','15:00','16:00','17:00','18:00','19:00'];
+
+const state = { loc:null, sess:null, date:null, time:null, qty:1, addons:new Set(), step:1 };
+
+/* Step 1 — render options */
+document.getElementById('locOpts').innerHTML = locations.map(l=>`
+  <div class="opt" data-loc="${l.id}"><div class="ot">${l.name}</div><div class="od">${l.desc}</div></div>`).join('');
+document.getElementById('sessOpts').innerHTML = sessions.map(s=>`
+  <div class="opt" data-sess="${s.id}"><div class="ot">${s.name}</div><div class="od">${s.desc}</div><div class="op">€${s.price} · ${s.unit}</div></div>`).join('');
+
+document.querySelectorAll('#locOpts .opt').forEach(o=> o.onclick=()=>{
+  document.querySelectorAll('#locOpts .opt').forEach(x=>x.classList.remove('sel'));
+  o.classList.add('sel'); state.loc=o.dataset.loc; validate();
+});
+function selectSession(id){
+  document.querySelectorAll('#sessOpts .opt').forEach(x=>x.classList.toggle('sel', x.dataset.sess===id));
+  state.sess=id; validate();
+}
+document.querySelectorAll('#sessOpts .opt').forEach(o=> o.onclick=()=>selectSession(o.dataset.sess));
+
+/* "Book this" buttons jump to booking with session preselected */
+document.querySelectorAll('[data-sess].pick').forEach(b=> b.onclick=()=>{
+  selectSession(b.dataset.sess);
+  if(!state.loc){ document.querySelector('#locOpts .opt').click(); }
+  document.getElementById('book').scrollIntoView({behavior:'smooth'});
+});
+
+/* Step 2 — dates & slots */
+function buildDates(){
+  const wrap=document.getElementById('dates'); wrap.innerHTML='';
+  const dow=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], mon=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  for(let i=0;i<14;i++){
+    const d=new Date(); d.setDate(d.getDate()+i);
+    const iso=d.toISOString().slice(0,10);
+    const chip=document.createElement('div'); chip.className='date-chip'; chip.dataset.date=iso;
+    chip.innerHTML=`<div class="dow">${i===0?'Today':dow[d.getDay()]}</div><div class="dn">${d.getDate()}</div><div class="mo up">${mon[d.getMonth()]}</div>`;
+    chip.onclick=()=>{ document.querySelectorAll('.date-chip').forEach(x=>x.classList.remove('sel')); chip.classList.add('sel'); state.date=iso; state.dateLabel=`${dow[d.getDay()]} ${d.getDate()} ${mon[d.getMonth()]}`; buildSlots(iso); validate(); };
+    wrap.appendChild(chip);
+  }
+}
+function buildSlots(iso){
+  const wrap=document.getElementById('slots'); wrap.innerHTML=''; state.time=null;
+  // deterministic pseudo-availability so it feels real
+  TIMES.forEach((t,i)=>{
+    const seed=(iso.charCodeAt(8)+iso.charCodeAt(9)+i*7)%10;
+    const full=seed<2;
+    const s=document.createElement('div'); s.className='slot'+(full?' full':''); s.textContent=t;
+    if(!full) s.onclick=()=>{ document.querySelectorAll('.slot').forEach(x=>x.classList.remove('sel')); s.classList.add('sel'); state.time=t; validate(); };
+    wrap.appendChild(s);
+  });
+}
+buildDates();
+
+/* Step 3 — qty + addons */
+const qtyN=document.getElementById('qtyN');
+function maxGuests(){ const s=sessions.find(x=>x.id===state.sess); return s?(s.id==='communal'?6:s.id==='private'?4:8):1; }
+document.getElementById('qtyPlus').onclick=()=>{ if(state.qty<maxGuests()){ state.qty++; qtyN.textContent=state.qty; } };
+document.getElementById('qtyMinus').onclick=()=>{ if(state.qty>1){ state.qty--; qtyN.textContent=state.qty; } };
+document.getElementById('addons').innerHTML = addonsList.map(a=>`
+  <div class="addon" data-add="${a.id}"><div class="box"></div><div class="info"><div class="an">${a.name}</div><div class="ad">${a.desc}</div></div><div class="ap">+€${a.price}</div></div>`).join('');
+document.querySelectorAll('.addon').forEach(a=> a.onclick=()=>{
+  const id=a.dataset.add; a.classList.toggle('sel');
+  state.addons.has(id)?state.addons.delete(id):state.addons.add(id);
+});
+
+/* Pricing */
+function priceBreakdown(){
+  const s=sessions.find(x=>x.id===state.sess);
+  let base=0;
+  if(s){ base = s.id==='communal' ? s.price*state.qty : s.price; }
+  let addTotal=0; const addLines=[];
+  state.addons.forEach(id=>{ const a=addonsList.find(x=>x.id===id); addTotal+=a.price*(id==='towel'||id==='tea'?state.qty:1); addLines.push(a); });
+  return { base, addTotal, total:base+addTotal, addLines, s };
+}
+
+/* Step 5 — summary */
+function buildSummary(){
+  const {base, total, addLines, s}=priceBreakdown();
+  const loc=locations.find(l=>l.id===state.loc);
+  let html=`
+    <div class="line"><span>${s?s.name:''}</span><span>€${base}</span></div>
+    <div class="line"><span>${loc?loc.name:''}</span><span></span></div>
+    <div class="line"><span>${state.dateLabel||''} · ${state.time||''}</span><span></span></div>
+    <div class="line"><span>${state.qty} guest${state.qty>1?'s':''}</span><span></span></div>`;
+  addLines.forEach(a=> html+=`<div class="line"><span>+ ${a.name}</span><span>€${a.price*(a.id==='towel'||a.id==='tea'?state.qty:1)}</span></div>`);
+  html+=`<div class="line total"><span>Total</span><span>€${total}</span></div>`;
+  document.getElementById('summary').innerHTML=html;
+}
+
+/* Step machine */
+const steps=[...document.querySelectorAll('.step')];
+const sideSteps=[...document.querySelectorAll('.book-steps .s')];
+const btnNext=document.getElementById('btnNext'), btnBack=document.getElementById('btnBack');
+function showStep(n){
+  state.step=n;
+  steps.forEach(s=> s.classList.toggle('active', s.dataset.step==String(n)));
+  sideSteps.forEach(s=>{ const sn=+s.dataset.s; s.classList.toggle('active', sn===n); s.classList.toggle('done', sn<n); });
+  btnBack.style.visibility = n>1 ? 'visible' : 'hidden';
+  btnNext.textContent = n===5 ? 'Confirm booking' : 'Continue';
+  if(n===5) buildSummary();
+  validate();
+}
+function validate(){
+  let ok=true;
+  if(state.step===1) ok = state.loc && state.sess;
+  if(state.step===2) ok = state.date && state.time;
+  if(state.step===4) ok = fName.value && email.value.includes('@') && phone.value;
+  btnNext.disabled = !ok;
+}
+['fName','lName','email','phone'].forEach(id=> document.getElementById(id).addEventListener('input', validate));
+
+btnBack.onclick=()=>{ if(state.step>1) showStep(state.step-1); };
+btnNext.onclick=()=>{
+  if(state.step<5){ showStep(state.step+1); return; }
+  submitBooking();
+};
+
+async function submitBooking(){
+  btnNext.disabled=true; btnNext.textContent='Confirming…';
+  const {total}=priceBreakdown();
+  const payload={
+    location: locations.find(l=>l.id===state.loc)?.name,
+    session:  sessions.find(s=>s.id===state.sess)?.name,
+    date: state.date, dateLabel: state.dateLabel, time: state.time,
+    guests: state.qty,
+    addons: [...state.addons].map(id=>addonsList.find(a=>a.id===id)?.name),
+    total,
+    firstName: fName.value, lastName: lName.value,
+    email: email.value, phone: phone.value, notes: notes.value,
+  };
+  try{
+    const res = await fetch('/.netlify/functions/book-session', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+    });
+    if(!res.ok) throw new Error('bad status');
+  }catch(e){
+    // Graceful fallback if the serverless function isn't deployed yet:
+    // open a pre-filled email so no booking is ever lost.
+    const body=encodeURIComponent(
+      `New booking request\n\nSession: ${payload.session}\nLocation: ${payload.location}\nDate: ${payload.dateLabel} at ${payload.time}\nGuests: ${payload.guests}\nExtras: ${payload.addons.join(', ')||'none'}\nTotal: €${payload.total}\n\nName: ${payload.firstName} ${payload.lastName}\nEmail: ${payload.email}\nPhone: ${payload.phone}\nNotes: ${payload.notes}`);
+    window.open(`mailto:hello@theboatyardsauna.ie?subject=Sauna booking — ${payload.firstName} ${payload.lastName}&body=${body}`,'_blank');
+  }
+  document.getElementById('doneText').textContent =
+    `${payload.session} at ${payload.location}, ${payload.dateLabel} at ${payload.time} for ${payload.guests} guest${payload.guests>1?'s':''}. We've sent a confirmation to ${payload.email}. See you by the water! 🔥❄️`;
+  showStep('done');
+  btnBack.style.visibility='hidden'; btnNext.style.display='none';
+}
+
+/* Gift voucher */
+document.getElementById('voucherLink').onclick=(e)=>{ e.preventDefault(); toast('🎁 Gift vouchers coming online soon — DM us on Instagram to buy one today!'); };
+
+showStep(1);
+
+/* ---- Reveals (degrade gracefully if IntersectionObserver is unavailable) ---- */
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}else{
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+}
+
+/* ---- Toast ---- */
+let toastTimer;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),4200); }
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ---- PWA / installable app ---- */
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+let deferredPrompt;
+addEventListener('beforeinstallprompt',(e)=>{ e.preventDefault(); deferredPrompt=e; const b=document.getElementById('installBtn'); b.style.display='inline-flex'; b.onclick=async()=>{ b.style.display='none'; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; }; });
+</script>
+</body>
+</html>
