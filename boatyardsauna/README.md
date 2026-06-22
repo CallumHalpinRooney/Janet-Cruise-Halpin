@@ -52,27 +52,23 @@ in `index.html`.
    `netlify/functions`).
 3. Point your domain (e.g. `theboatyardsauna.ie`) at the site.
 
-### Make bookings land somewhere (optional but recommended)
-Set these in **Netlify → Site settings → Environment variables**:
+### Turn on the full booking system → see `SETUP.md`
+The booking form works out of the box (it falls back to a pre-filled email so
+nothing is ever lost). To switch on **instant emails, the bookings dashboard,
+real availability, and card deposits**, fill in the `CONFIG` object at the top of
+the `<script>` in `index.html`. Step-by-step instructions (with the Supabase SQL
+and the Stripe / EmailJS keys) are in **`SETUP.md`**.
 
-| Variable | What it does |
-|---|---|
-| `SUPABASE_URL`, `SUPABASE_KEY` | Store every booking in a `bookings` table |
-| `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, `EMAILJS_PRIVATE_KEY` | Email you instantly when a booking comes in |
-
-With nothing set, the form still works — it falls back to opening a pre-filled
-email to `hello@theboatyardsauna.ie`, so no booking is ever lost. Update that
-address in `index.html` (`submitBooking()`) to your real inbox.
-
-Suggested `bookings` table columns: `location, session, booking_date,
-booking_time, guests, addons, total, first_name, last_name, email, phone, notes,
-created_at`.
+The private **bookings dashboard** lives in `admin/` — deploy it as its own
+Netlify site (Base directory = `boatyardsauna/admin`) for a private URL.
 
 ## Customise
 - **Prices / sessions** → `sessions` array in `index.html`.
 - **Add-ons** → `addonsList` array.
 - **Locations** → `locations` array.
 - **Reviews** → `testimonials` array.
-- **Times** → `TIMES` array.
+- **Opening hours / capacity / deposit** → `CONFIG` object in `index.html`.
+- **Owner email** → `CONFIG.ownerEmail`.
 
-See `STRATEGY.md` for the full plan on beating the current Linktree + app setup.
+See `STRATEGY.md` for the full plan on beating the current Linktree + app setup,
+and `SETUP.md` to activate the booking back end.

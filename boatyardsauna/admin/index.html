@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bookings · The Boat Yard Sauna</title>
+<meta name="robots" content="noindex,nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#0E1B2A; --panel:#172B43; --fg:#F3EEE4; --muted:rgba(243,238,228,.55); --line:rgba(243,238,228,.1); --ember:#E8703A; --sea:#5FA8B8; --gold:#CBA75E; }
+  *{ margin:0; box-sizing:border-box; }
+  body{ background:var(--bg); color:var(--fg); font-family:'Jost',system-ui,sans-serif; }
+  header{ padding:24px 28px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+  h1{ font-family:'Bodoni Moda',serif; font-style:italic; font-weight:400; font-size:1.6rem; }
+  .stats{ display:flex; gap:26px; }
+  .stat .v{ font-family:'Bodoni Moda',serif; font-size:1.7rem; }
+  .stat .l{ font-size:10px; letter-spacing:.18em; color:var(--muted); text-transform:uppercase; }
+  .bar{ padding:18px 28px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; border-bottom:1px solid var(--line); }
+  input,select{ background:rgba(255,255,255,.05); border:1px solid var(--line); color:var(--fg); border-radius:8px; padding:9px 12px; font-family:inherit; font-size:14px; }
+  .wrap{ padding:22px 28px; }
+  table{ width:100%; border-collapse:collapse; font-size:14px; }
+  th{ text-align:left; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); padding:10px 12px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); }
+  td{ padding:13px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tr:hover td{ background:rgba(255,255,255,.02); }
+  .who{ font-weight:500; } .sub{ color:var(--muted); font-size:12px; }
+  .pill{ font-size:10px; letter-spacing:.1em; padding:4px 9px; border-radius:99px; text-transform:uppercase; border:1px solid var(--line); }
+  .pill.new{ color:var(--gold); border-color:rgba(203,167,94,.5); }
+  .pill.confirmed{ color:var(--sea); border-color:rgba(95,168,184,.5); }
+  .pill.cancelled{ color:#c66; border-color:rgba(204,102,102,.5); text-decoration:line-through; }
+  button.act{ background:none; border:1px solid var(--line); color:var(--fg); border-radius:7px; padding:6px 10px; font-size:12px; cursor:pointer; font-family:inherit; }
+  button.act:hover{ border-color:var(--ember); }
+  .empty{ padding:60px; text-align:center; color:var(--muted); }
+  .note{ background:rgba(232,112,58,.1); border:1px solid rgba(232,112,58,.4); border-radius:10px; padding:18px 20px; margin:22px 28px; font-size:14px; line-height:1.6; }
+  code{ background:rgba(255,255,255,.08); padding:2px 6px; border-radius:4px; font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Bookings — The Boat Yard Sauna</h1>
+  <div class="stats">
+    <div class="stat"><div class="v" id="sToday">0</div><div class="l">Today</div></div>
+    <div class="stat"><div class="v" id="sUpcoming">0</div><div class="l">Upcoming</div></div>
+    <div class="stat"><div class="v" id="sRevenue">€0</div><div class="l">Booked value</div></div>
+  </div>
+</header>
+
+<div class="bar">
+  <input type="date" id="fDate" title="Filter by date">
+  <select id="fLoc"><option value="">All locations</option><option value="wicklow">Wicklow Harbour</option><option value="arklow">River Walk, Arklow</option></select>
+  <select id="fStatus"><option value="">All statuses</option><option value="new">New</option><option value="confirmed">Confirmed</option><option value="cancelled">Cancelled</option></select>
+  <button class="act" id="refresh">↻ Refresh</button>
+  <button class="act" id="clear">Clear filters</button>
+</div>
+
+<div id="content"><div class="empty">Loading…</div></div>
+
+<script>
+/* Paste the SAME Supabase keys you put in index.html's CONFIG. */
+const SUPABASE = { url:'', anonKey:'' };
+
+const $=id=>document.getElementById(id);
+async function sb(path, opts={}){
+  const r=await fetch(`${SUPABASE.url}/rest/v1/${path}`,{...opts,
+    headers:{'Content-Type':'application/json',apikey:SUPABASE.anonKey,Authorization:`Bearer ${SUPABASE.anonKey}`,...(opts.headers||{})}});
+  if(!r.ok) throw new Error('supabase '+r.status);
+  return r.status===204?null:r.json();
+}
+const LOC={wicklow:'Wicklow Harbour',arklow:'River Walk, Arklow'};
+const today=()=>new Date().toISOString().slice(0,10);
+
+async function load(){
+  if(!SUPABASE.url || !SUPABASE.anonKey){
+    $('content').innerHTML=`<div class="note">Add your Supabase keys to <code>admin/index.html</code> (the <code>SUPABASE</code> object at the top of the script) — the same keys you put in the website's <code>CONFIG.supabase</code>. Then bookings will appear here automatically.</div>`;
+    return;
+  }
+  $('content').innerHTML='<div class="empty">Loading…</div>';
+  let q='bookings?select=*&order=booking_date.asc,booking_time.asc';
+  if($('fDate').value) q+=`&booking_date=eq.${$('fDate').value}`;
+  if($('fLoc').value)  q+=`&location_id=eq.${$('fLoc').value}`;
+  if($('fStatus').value) q+=`&status=eq.${$('fStatus').value}`;
+  let rows;
+  try{ rows=await sb(q); }
+  catch(e){ $('content').innerHTML=`<div class="note">Couldn't load bookings (${e.message}). Check the keys and that a <code>bookings</code> table exists (see SETUP.md).</div>`; return; }
+
+  const t=today();
+  $('sToday').textContent    = rows.filter(r=>r.booking_date===t && r.status!=='cancelled').length;
+  $('sUpcoming').textContent = rows.filter(r=>r.booking_date>=t && r.status!=='cancelled').length;
+  $('sRevenue').textContent  = '€'+rows.filter(r=>r.status!=='cancelled').reduce((s,r)=>s+(+r.total||0),0);
+
+  if(!rows.length){ $('content').innerHTML='<div class="empty">No bookings match.</div>'; return; }
+  $('content').innerHTML=`<div class="wrap"><table><thead><tr>
+    <th>When</th><th>Session</th><th>Guest</th><th>Extras</th><th>Total</th><th>Status</th><th></th></tr></thead>
+    <tbody>${rows.map(rowHtml).join('')}</tbody></table></div>`;
+  bindActions();
+}
+
+function rowHtml(r){
+  return `<tr data-id="${r.id}">
+    <td><div class="who">${r.booking_date}</div><div class="sub">${r.booking_time} · ${LOC[r.location_id]||r.location||''}</div></td>
+    <td>${r.session||r.session_id||''}<div class="sub">${r.guests} guest(s)</div></td>
+    <td><div class="who">${(r.first_name||'')+' '+(r.last_name||'')}</div><div class="sub">${r.email||''}<br>${r.phone||''}</div>${r.notes?`<div class="sub">“${r.notes}”</div>`:''}</td>
+    <td class="sub">${r.addons||'—'}</td>
+    <td>€${r.total||0}${r.deposit_paid?`<div class="sub">€${r.deposit_paid} dep.</div>`:''}</td>
+    <td><span class="pill ${r.status||'new'}">${r.status||'new'}</span></td>
+    <td>
+      ${r.status!=='confirmed'?`<button class="act" data-set="confirmed">Confirm</button> `:''}
+      ${r.status!=='cancelled'?`<button class="act" data-set="cancelled">Cancel</button>`:''}
+    </td></tr>`;
+}
+function bindActions(){
+  document.querySelectorAll('button[data-set]').forEach(b=> b.onclick=async()=>{
+    const id=b.closest('tr').dataset.id, status=b.dataset.set;
+    b.textContent='…';
+    try{ await sb(`bookings?id=eq.${id}`,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({status})}); load(); }
+    catch(e){ alert('Update failed: '+e.message); }
+  });
+}
+['refresh'].forEach(id=>$(id).onclick=load);
+$('clear').onclick=()=>{ $('fDate').value=''; $('fLoc').value=''; $('fStatus').value=''; load(); };
+['fDate','fLoc','fStatus'].forEach(id=>$(id).onchange=load);
+load();
+</script>
+</body>
+</html>

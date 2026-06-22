@@ -250,6 +250,11 @@
   .summary{ background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:10px; padding:22px; }
   .summary .line{ display:flex; justify-content:space-between; padding:8px 0; font-size:14px; color:rgba(243,238,228,.78); }
   .summary .line.total{ border-top:1px solid var(--line); margin-top:8px; padding-top:16px; font-family:var(--bodoni); font-size:1.4rem; color:var(--fg); }
+  .deposit-box{ margin-top:18px; border:1px solid rgba(232,112,58,.4); background:var(--grad-soft); border-radius:10px; padding:18px; }
+  .deposit-box .dep-head{ font-size:13px; letter-spacing:.04em; margin-bottom:14px; }
+  .deposit-box .dep-head #depositAmt{ color:var(--gold); font-weight:600; }
+  .card-el{ background:rgba(255,255,255,.04); border:1px solid var(--line); border-radius:8px; padding:14px 15px; }
+  .dep-note{ font-size:11px; color:var(--faint); margin-top:10px; line-height:1.5; }
   .book-nav{ margin-top:auto; padding-top:30px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
   .book-nav .back{ background:none; border:0; color:var(--muted); font-size:12px; letter-spacing:.16em; cursor:pointer; text-transform:uppercase; }
   .book-nav .next{ background:var(--grad); color:#0E1B2A; font-weight:700; font-size:11px; letter-spacing:.2em; padding:14px 32px; border-radius:9999px; border:0; cursor:pointer; transition:transform .2s, filter .2s; text-transform:uppercase; }
@@ -507,7 +512,12 @@
         <div class="step" data-step="5">
           <h4>Review &amp; confirm</h4>
           <div class="summary" id="summary"></div>
-          <p style="font-size:12px;color:var(--faint);margin-top:16px;line-height:1.6;">A small deposit may be requested to secure peak slots. You can pay the balance on arrival. Free to reschedule up to 12 hours before.</p>
+          <div class="deposit-box" id="depositBox" style="display:none;">
+            <div class="dep-head"><span>Secure your slot with a <span id="depositAmt">€10</span> deposit</span></div>
+            <div id="cardEl" class="card-el"></div>
+            <p class="dep-note">Balance paid on arrival. Free to reschedule up to 12 hours before — your deposit moves with you.</p>
+          </div>
+          <p style="font-size:12px;color:var(--faint);margin-top:16px;line-height:1.6;">You'll get instant confirmation by email. Free to reschedule up to 12 hours before your session.</p>
         </div>
         <!-- Done -->
         <div class="step" data-step="done">
@@ -720,8 +730,54 @@ renderT();
 setInterval(()=>{ if(!transitioning) goT((active+1)%testimonials.length); }, 7000);
 
 /* =========================================================================
-   BOOKING FLOW
+   BOOKING FLOW  +  BACKEND
+   -------------------------------------------------------------------------
+   Paste your keys into CONFIG to switch each feature ON. With everything
+   blank the site still works (bookings open a pre-filled email — nothing is
+   ever lost). See SETUP.md for step-by-step instructions for each service.
    ========================================================================= */
+const CONFIG = {
+  ownerEmail: 'hello@theboatyardsauna.ie',     // where bookings/fallback emails go
+  // 1) EmailJS — instant booking emails (you + the customer). Public key is safe in the browser.
+  emailjs:  { publicKey:'', serviceId:'', templateOwner:'', templateCustomer:'' },
+  // 2) Supabase — stores bookings (powers the dashboard + real availability).
+  supabase: { url:'', anonKey:'' },
+  // 3) Stripe — card deposit to cut no-shows (needs the Netlify function + secret key in Netlify env).
+  stripe:   { publishableKey:'' },
+  deposit:  { enabled:false, amount:10, currency:'eur', label:'Refundable deposit' },
+  // 4) Real availability — opening hours + capacity. Slots are generated from this,
+  //    then marked "full" using real bookings once Supabase is connected.
+  schedule: {
+    slotMinutes: 60,
+    capacityPerSlot: 6,                          // total guest spaces per slot
+    exclusiveSessions: ['private','group'],      // these book out the whole slot
+    hours: {  // 0=Sun … 6=Sat ; null = closed that day
+      wicklow: { 0:['09:00','19:00'], 1:['08:00','20:00'], 2:['08:00','20:00'], 3:['08:00','20:00'], 4:['08:00','20:00'], 5:['08:00','21:00'], 6:['08:00','21:00'] },
+      arklow:  { 0:['09:00','19:00'], 1:['08:00','20:00'], 2:['08:00','20:00'], 3:['08:00','20:00'], 4:['08:00','20:00'], 5:['08:00','21:00'], 6:['08:00','21:00'] },
+    },
+  },
+};
+
+/* ---- Lazy SDK loaders (only fetched when that feature is configured) ---- */
+const _loaded = {};
+function loadScript(src){
+  if(_loaded[src]) return _loaded[src];
+  _loaded[src] = new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
+  return _loaded[src];
+}
+const hasEmail    = ()=> CONFIG.emailjs.publicKey && CONFIG.emailjs.serviceId;
+const hasSupabase = ()=> CONFIG.supabase.url && CONFIG.supabase.anonKey;
+const hasStripe   = ()=> CONFIG.deposit.enabled && CONFIG.stripe.publishableKey;
+
+async function sb(path, opts={}){
+  const r = await fetch(`${CONFIG.supabase.url}/rest/v1/${path}`, {
+    ...opts,
+    headers: { 'Content-Type':'application/json', apikey:CONFIG.supabase.anonKey, Authorization:`Bearer ${CONFIG.supabase.anonKey}`, ...(opts.headers||{}) },
+  });
+  if(!r.ok) throw new Error('supabase '+r.status);
+  return r.status===204 ? null : r.json();
+}
+
 const locations = [
   { id:'wicklow', name:'Wicklow Harbour', desc:'On the pier, facing the boats' },
   { id:'arklow',  name:'River Walk, Arklow', desc:'Beside the river, by the sea' },
@@ -772,15 +828,49 @@ function buildDates(){
     wrap.appendChild(chip);
   }
 }
-function buildSlots(iso){
-  const wrap=document.getElementById('slots'); wrap.innerHTML=''; state.time=null;
-  // deterministic pseudo-availability so it feels real
-  TIMES.forEach((t,i)=>{
-    const seed=(iso.charCodeAt(8)+iso.charCodeAt(9)+i*7)%10;
-    const full=seed<2;
-    const s=document.createElement('div'); s.className='slot'+(full?' full':''); s.textContent=t;
-    if(!full) s.onclick=()=>{ document.querySelectorAll('.slot').forEach(x=>x.classList.remove('sel')); s.classList.add('sel'); state.time=t; validate(); };
-    wrap.appendChild(s);
+/* Generate slots from real opening hours (CONFIG.schedule) */
+function slotsForDay(locId, iso){
+  const day=new Date(iso+'T00:00:00').getDay();
+  const h=CONFIG.schedule.hours[locId] && CONFIG.schedule.hours[locId][day];
+  if(!h) return [];
+  const step=CONFIG.schedule.slotMinutes;
+  const [oh,om]=h[0].split(':').map(Number); const [ch,cm]=h[1].split(':').map(Number);
+  let cur=oh*60+om; const end=ch*60+cm;
+  const now=new Date(); const isToday=iso===new Date().toISOString().slice(0,10);
+  const nowMin=now.getHours()*60+now.getMinutes();
+  const out=[];
+  while(cur+step<=end){
+    if(!(isToday && cur<=nowMin+30)){ // hide already-passed times today
+      out.push(`${String(Math.floor(cur/60)).padStart(2,'0')}:${String(cur%60).padStart(2,'0')}`);
+    }
+    cur+=step;
+  }
+  return out;
+}
+/* Real availability from existing bookings (when Supabase is connected) */
+async function availability(locId, iso){
+  if(!hasSupabase()) return { used:{}, excl:new Set() };
+  try{
+    const rows=await sb(`bookings?select=booking_time,guests,session_id&location_id=eq.${locId}&booking_date=eq.${iso}&status=neq.cancelled`);
+    const used={}, excl=new Set();
+    rows.forEach(r=>{ used[r.booking_time]=(used[r.booking_time]||0)+(r.guests||1);
+      if(CONFIG.schedule.exclusiveSessions.includes(r.session_id)) excl.add(r.booking_time); });
+    return { used, excl };
+  }catch(e){ return { used:{}, excl:new Set() }; }
+}
+async function buildSlots(iso){
+  const wrap=document.getElementById('slots'); state.time=null;
+  const times=slotsForDay(state.loc, iso);
+  if(!times.length){ wrap.innerHTML='<p style="grid-column:1/-1;color:var(--faint);font-size:13px;padding:6px 0">Closed this day — please pick another date.</p>'; validate(); return; }
+  wrap.innerHTML=times.map(t=>`<div class="slot" data-t="${t}">${t}</div>`).join('');
+  const { used, excl }=await availability(state.loc, iso);
+  const cap=CONFIG.schedule.capacityPerSlot;
+  const isExcl=CONFIG.schedule.exclusiveSessions.includes(state.sess);
+  wrap.querySelectorAll('.slot').forEach(s=>{
+    const t=s.dataset.t, u=used[t]||0;
+    const full = excl.has(t) || u>=cap || (isExcl && u>0);
+    if(full){ s.classList.add('full'); return; }
+    s.onclick=()=>{ wrap.querySelectorAll('.slot').forEach(x=>x.classList.remove('sel')); s.classList.add('sel'); state.time=t; validate(); };
   });
 }
 buildDates();
@@ -831,7 +921,7 @@ function showStep(n){
   sideSteps.forEach(s=>{ const sn=+s.dataset.s; s.classList.toggle('active', sn===n); s.classList.toggle('done', sn<n); });
   btnBack.style.visibility = n>1 ? 'visible' : 'hidden';
   btnNext.textContent = n===5 ? 'Confirm booking' : 'Continue';
-  if(n===5) buildSummary();
+  if(n===5){ buildSummary(); mountDeposit(); }
   validate();
 }
 function validate(){
@@ -849,35 +939,81 @@ btnNext.onclick=()=>{
   submitBooking();
 };
 
+/* ---- Stripe deposit (only when CONFIG.deposit.enabled + key set) ---- */
+let _stripe, _card;
+async function mountDeposit(){
+  const box=document.getElementById('depositBox');
+  if(!hasStripe()){ if(box) box.style.display='none'; return; }
+  box.style.display='block';
+  document.getElementById('depositAmt').textContent=`€${CONFIG.deposit.amount}`;
+  if(_card) return;
+  try{
+    await loadScript('https://js.stripe.com/v3/');
+    _stripe=Stripe(CONFIG.stripe.publishableKey);
+    _card=_stripe.elements().create('card',{style:{base:{color:'#F3EEE4',fontFamily:'Jost,sans-serif','::placeholder':{color:'rgba(243,238,228,.35)'}}}});
+    _card.mount('#cardEl');
+  }catch(e){ box.style.display='none'; }
+}
+async function takeDeposit(p){
+  try{
+    const r=await fetch('/.netlify/functions/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({amount:CONFIG.deposit.amount*100, currency:CONFIG.deposit.currency, description:`Deposit — ${p.session}, ${p.dateLabel} ${p.time}`, email:p.email})});
+    const {clientSecret}=await r.json();
+    const {error,paymentIntent}=await _stripe.confirmCardPayment(clientSecret,{payment_method:{card:_card,billing_details:{name:`${p.firstName} ${p.lastName}`,email:p.email}}});
+    if(error){ toast('Card: '+error.message); return false; }
+    p.depositPaid=CONFIG.deposit.amount; p.paymentId=paymentIntent.id; return true;
+  }catch(e){ toast('Payment could not be processed — please try again.'); return false; }
+}
+
+/* ---- EmailJS (REST, public key only) ---- */
+async function emailjsSend(templateId, params){
+  const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({service_id:CONFIG.emailjs.serviceId, template_id:templateId, user_id:CONFIG.emailjs.publicKey, template_params:params})});
+  if(!r.ok) throw new Error('emailjs '+r.status);
+}
+async function sendEmails(p){
+  const summary=`${p.session} — ${p.location}\n${p.dateLabel} at ${p.time}\n${p.guests} guest(s)\nExtras: ${p.addons.join(', ')||'none'}\nTotal: €${p.total}${p.depositPaid?` (deposit €${p.depositPaid} paid)`:''}`;
+  const base={from_name:`${p.firstName} ${p.lastName}`, from_email:p.email, phone:p.phone, booking_summary:summary, notes:p.notes||'', reply_to:p.email};
+  if(CONFIG.emailjs.templateOwner)    await emailjsSend(CONFIG.emailjs.templateOwner,    {...base, to_email:CONFIG.ownerEmail});
+  if(CONFIG.emailjs.templateCustomer) await emailjsSend(CONFIG.emailjs.templateCustomer, {...base, to_email:p.email});
+}
+
+function dbRow(p){
+  return { location_id:state.loc, location:p.location, session_id:state.sess, session:p.session,
+    booking_date:p.date, booking_time:p.time, guests:p.guests, addons:p.addons.join(', '),
+    total:p.total, deposit_paid:p.depositPaid||0, payment_id:p.paymentId||null,
+    first_name:p.firstName, last_name:p.lastName, email:p.email, phone:p.phone, notes:p.notes, status:'new' };
+}
+function mailtoFallback(p){
+  const body=encodeURIComponent(`New booking request\n\nSession: ${p.session}\nLocation: ${p.location}\nDate: ${p.dateLabel} at ${p.time}\nGuests: ${p.guests}\nExtras: ${p.addons.join(', ')||'none'}\nTotal: €${p.total}\n\nName: ${p.firstName} ${p.lastName}\nEmail: ${p.email}\nPhone: ${p.phone}\nNotes: ${p.notes}`);
+  window.open(`mailto:${CONFIG.ownerEmail}?subject=Sauna booking — ${p.firstName} ${p.lastName}&body=${body}`,'_blank');
+}
+
 async function submitBooking(){
   btnNext.disabled=true; btnNext.textContent='Confirming…';
   const {total}=priceBreakdown();
   const payload={
+    location_id:state.loc, session_id:state.sess,
     location: locations.find(l=>l.id===state.loc)?.name,
     session:  sessions.find(s=>s.id===state.sess)?.name,
-    date: state.date, dateLabel: state.dateLabel, time: state.time,
-    guests: state.qty,
-    addons: [...state.addons].map(id=>addonsList.find(a=>a.id===id)?.name),
-    total,
-    firstName: fName.value, lastName: lName.value,
-    email: email.value, phone: phone.value, notes: notes.value,
+    date: state.date, dateLabel: state.dateLabel, time: state.time, guests: state.qty,
+    addons: [...state.addons].map(id=>addonsList.find(a=>a.id===id)?.name), total,
+    firstName: fName.value, lastName: lName.value, email: email.value, phone: phone.value, notes: notes.value,
   };
-  try{
-    const res = await fetch('/.netlify/functions/book-session', {
-      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
-    });
-    if(!res.ok) throw new Error('bad status');
-  }catch(e){
-    // Graceful fallback if the serverless function isn't deployed yet:
-    // open a pre-filled email so no booking is ever lost.
-    const body=encodeURIComponent(
-      `New booking request\n\nSession: ${payload.session}\nLocation: ${payload.location}\nDate: ${payload.dateLabel} at ${payload.time}\nGuests: ${payload.guests}\nExtras: ${payload.addons.join(', ')||'none'}\nTotal: €${payload.total}\n\nName: ${payload.firstName} ${payload.lastName}\nEmail: ${payload.email}\nPhone: ${payload.phone}\nNotes: ${payload.notes}`);
-    window.open(`mailto:hello@theboatyardsauna.ie?subject=Sauna booking — ${payload.firstName} ${payload.lastName}&body=${body}`,'_blank');
-  }
+
+  // 1) Deposit (if enabled) — must succeed before we book
+  if(hasStripe()){ const ok=await takeDeposit(payload); if(!ok){ btnNext.disabled=false; btnNext.textContent='Confirm booking'; return; } }
+
+  // 2) Store + email (best effort, with fallbacks so nothing is ever lost)
+  let stored=false, emailed=false;
+  if(hasSupabase()){ try{ await sb('bookings',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(dbRow(payload))}); stored=true; }catch(e){} }
+  if(hasEmail()){ try{ await sendEmails(payload); emailed=true; }catch(e){} }
+  if(!stored && !emailed){ try{ const r=await fetch('/.netlify/functions/book-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); if(r.ok) emailed=true; }catch(e){} }
+  if(!stored && !emailed){ mailtoFallback(payload); }
+
   document.getElementById('doneText').textContent =
-    `${payload.session} at ${payload.location}, ${payload.dateLabel} at ${payload.time} for ${payload.guests} guest${payload.guests>1?'s':''}. We've sent a confirmation to ${payload.email}. See you by the water! 🔥❄️`;
-  showStep('done');
-  btnBack.style.visibility='hidden'; btnNext.style.display='none';
+    `${payload.session} at ${payload.location}, ${payload.dateLabel} at ${payload.time} for ${payload.guests} guest${payload.guests>1?'s':''}.${payload.depositPaid?` Deposit of €${payload.depositPaid} received.`:''} We'll confirm shortly at ${payload.email}. See you by the water! 🔥❄️`;
+  showStep('done'); btnBack.style.visibility='hidden'; btnNext.style.display='none';
 }
 
 /* Gift voucher */

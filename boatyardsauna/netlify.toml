@@ -19,3 +19,11 @@
   for = "/sw.js"
   [headers.values]
     Cache-Control = "no-cache"
+
+# Keep the private bookings dashboard out of the public site. Deploy /admin as
+# its OWN Netlify site (base directory = boatyardsauna/admin) for a private URL.
+[[redirects]]
+  from = "/admin/*"
+  to = "/"
+  status = 302
+  force = true

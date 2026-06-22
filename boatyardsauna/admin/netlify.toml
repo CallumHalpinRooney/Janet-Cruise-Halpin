@@ -1,0 +1,7 @@
+# The private bookings dashboard — deploy as its OWN Netlify site (separate
+# private URL). When creating the Netlify site, set the Base directory to
+# `boatyardsauna/admin`. No build step or functions; it reads Supabase directly
+# (the same database the booking form writes to), so new bookings appear here
+# automatically.
+[build]
+  publish = "."
