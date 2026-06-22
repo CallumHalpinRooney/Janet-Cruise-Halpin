@@ -206,7 +206,7 @@
   .book-steps .s.active{ color:var(--fg); }
   .book-steps .s.active .num{ background:var(--grad); color:#0E1B2A; border-color:transparent; font-weight:700; }
   .book-steps .s.done .num{ background:rgba(255,122,60,.18); border-color:var(--ember); color:var(--ember); }
-  .book-main{ padding:44px 40px; min-height:440px; display:flex; flex-direction:column; }
+  .book-main{ padding:44px 40px; min-height:440px; display:flex; flex-direction:column; min-width:0; }
   .step{ display:none; animation:fadeIn .4s both; }
   .step.active{ display:block; }
   .step h4{ font-size:13px; letter-spacing:.06em; color:var(--muted); margin-bottom:24px; font-weight:400; }
@@ -229,7 +229,7 @@
   .date-chip .dow{ font-size:10px; letter-spacing:.1em; color:var(--faint); }
   .date-chip .dn{ font-family:var(--bodoni); font-size:1.4rem; margin-top:4px; }
   .date-chip .mo{ font-size:9px; color:var(--faint); letter-spacing:.1em; }
-  .slots{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .slots{ display:grid; grid-template-columns:repeat(auto-fit,minmax(84px,1fr)); gap:8px; }
   .slot{ border:1px solid var(--line); border-radius:8px; padding:11px 0; text-align:center; font-size:13px; cursor:pointer; transition:all .25s; }
   .slot:hover{ border-color:rgba(255,122,60,.4); }
   .slot.sel{ border-color:var(--ember); background:rgba(255,122,60,.1); }
