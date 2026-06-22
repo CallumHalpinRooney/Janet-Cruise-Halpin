@@ -24,20 +24,21 @@ cd boatyardsauna && python3 -m http.server 8080
 ```
 
 ## Swap in real photos (most important step)
-1. Drop your photos into `assets/` (e.g. `hero.jpg`, `sauna.jpg`, `dip.jpg`, …).
-2. Open `index.html`, find the `const IMG = { … }` block near the top of the
-   `<script>` and point each entry at your file:
-   ```js
-   const IMG = {
-     hero:  'assets/hero.jpg',
-     sauna: 'assets/sauna.jpg',
-     dip:   'assets/dip.jpg',
-     rest:  'assets/sunrise.jpg',
-     g1: 'assets/g1.jpg', g2: 'assets/g2.jpg', g3: 'assets/g3.jpg',
-     g4: 'assets/g4.jpg', g5: 'assets/g5.jpg',
-   };
-   ```
-   Until you do, the site falls back to on-brand sea/sauna stock imagery.
+The site already points at these filenames. **Just drop the matching files into
+`assets/` and they appear automatically** — no code change needed. Until a file
+exists, the site falls back to on-brand stock imagery, so it never looks broken.
+
+| File in `assets/` | Used for | Best photo |
+|---|---|---|
+| `hero.jpg` | Full-screen hero background | The "THE BOAT YARD SAUNA" sign framing the harbour |
+| `sauna-interior.jpg` | "Wood-fired sauna" feature + gallery | Inside the sauna — stove + window onto the sea |
+| `sauna-exterior.jpg` | Gallery (large tile) | The timber-clad sauna cabin |
+| `beach.jpg` | "The cold dip" feature + gallery | The beach / seafront |
+| `harbour-evening.jpg` | "Evenings in the harbour" feature + gallery | Evening in the harbour (orange boat) |
+
+Use landscape JPGs around 1600px wide (hero ~2000px). To add more photos or
+change the mapping, edit the `PHOTO = { … }` block at the top of the `<script>`
+in `index.html`.
 
 ## Deploy (Netlify)
 1. New site from this repo → set **Base directory** to `boatyardsauna`.
