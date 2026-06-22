@@ -91,11 +91,12 @@
   .drawer a{ font-family:var(--bodoni); font-style:italic; font-size:30px; color:var(--fg); }
   .drawer .close{ position:absolute; top:24px; right:24px; background:none; border:0; color:var(--fg); font-size:34px; cursor:pointer; }
 
-  /* ---------- Hero ---------- */
-  .hero{ position:relative; height:100vh; min-height:600px; overflow:hidden; }
-  .hero-bg{ position:absolute; inset:0; background:#0B1622 center/cover no-repeat; transform:scale(1.05); }
+  /* ---------- Hero (scroll-scrubbed video) ---------- */
+  .hero{ position:relative; height:300vh; }
+  .hero-sticky{ position:sticky; top:0; height:100vh; width:100%; overflow:hidden; background:#0B1622; }
+  #hero-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
   .hero-grad{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(14,27,42,.35) 0%, rgba(14,27,42,.15) 38%, rgba(14,27,42,.85) 100%); }
-  .hero-text{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 20px; }
+  .hero-text{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 20px; will-change:opacity,transform; }
   .hero-logo{ width:88px; height:88px; margin-bottom:26px; filter:drop-shadow(0 8px 24px rgba(0,0,0,.45)); animation:fadeInUp 1.1s .15s both; }
   .hero-eyebrow{ color:var(--gold); font-size:11px; letter-spacing:.4em; margin-bottom:22px; animation:fadeInUp 1.2s .3s both; }
   .hero-title{ font-family:var(--bodoni); font-style:italic; font-size:clamp(3rem,9vw,7.5rem); line-height:.95; font-weight:400; animation:fadeInUp 1.4s .5s both; }
@@ -337,22 +338,26 @@
 </div>
 
 <div id="top"></div>
-<section class="hero" style="padding:0;">
-  <div class="hero-bg" id="heroBg"></div>
-  <div class="hero-grad"></div>
-  <div class="hero-text">
-    <svg class="hero-logo"><use href="#logo-roundel"/></svg>
-    <p class="hero-eyebrow up">Wicklow Harbour · River Walk, Arklow</p>
-    <h1 class="hero-title">Feel the heat,<br><span class="grad">embrace the chill</span></h1>
-    <p class="hero-sub up">Wood-fired saunas by the Irish Sea</p>
-    <div class="hero-cta">
-      <a href="#book" class="cta-primary up">Book a session</a>
-      <a href="#experience" class="cta-ghost up">The experience</a>
+<section class="hero" id="hero">
+  <div class="hero-sticky">
+    <video id="hero-video" muted playsinline preload="auto" poster="assets/hero.jpg">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-grad"></div>
+    <div class="hero-text" id="hero-overlay">
+      <svg class="hero-logo"><use href="#logo-roundel"/></svg>
+      <p class="hero-eyebrow up">Wicklow Harbour · River Walk, Arklow</p>
+      <h1 class="hero-title">Feel the heat,<br><span class="grad">embrace the chill</span></h1>
+      <p class="hero-sub up">Wood-fired saunas by the Irish Sea</p>
+      <div class="hero-cta">
+        <a href="#book" class="cta-primary up">Book a session</a>
+        <a href="#experience" class="cta-ghost up">The experience</a>
+      </div>
     </div>
-  </div>
-  <div class="scroll-ind">
-    <p class="up">Scroll</p>
-    <div class="scroll-track"><span></span></div>
+    <div class="scroll-ind" id="scrollInd">
+      <p class="up">Scroll to explore</p>
+      <div class="scroll-track"><span></span></div>
+    </div>
   </div>
 </section>
 
@@ -583,10 +588,45 @@ function imgTag(key, alt, extra=''){
   return `<img src="${local}" alt="${alt}" loading="lazy" ${extra}
     onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='${fb}';}else{this.style.display='none';}">`;
 }
+/* ---- Hero: scrub the video with scroll (like the sample's frame sequence) ---- */
 (function(){
-  const el = document.getElementById('heroBg'); const [local, fb] = PHOTO.hero;
-  const t = new Image(); t.onload = ()=> el.style.backgroundImage = `url('${local}')`;
-  t.onerror = ()=> el.style.backgroundImage = `url('${fb}')`; t.src = local;
+  const hero = document.getElementById('hero');
+  const video = document.getElementById('hero-video');
+  const overlay = document.getElementById('hero-overlay');
+  const scrollInd = document.getElementById('scrollInd');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Prime the video so frames are decodable for seeking (esp. iOS).
+  video.play().then(()=> video.pause()).catch(()=>{});
+
+  if(reduce){
+    // Respect reduced-motion: gently loop instead of scrubbing.
+    video.loop = true; video.play().catch(()=>{});
+    return;
+  }
+
+  let dur = 0, target = 0, cur = 0, raf = false;
+  video.addEventListener('loadedmetadata', ()=>{ dur = video.duration || 0; });
+
+  function scrub(){
+    cur += (target - cur) * 0.16;
+    if(Math.abs(target - cur) < 0.004) cur = target;
+    if(video.readyState >= 2){ try { video.currentTime = cur; } catch(e){} }
+    if(Math.abs(target - cur) > 0.004){ requestAnimationFrame(scrub); } else { raf = false; }
+  }
+  function onScroll(){
+    const rect = hero.getBoundingClientRect();
+    const scrollable = hero.offsetHeight - window.innerHeight;
+    const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+    target = progress * (dur || video.duration || 0);
+    const fade = Math.min(1, progress / 0.55);
+    overlay.style.opacity = String(1 - fade);
+    overlay.style.transform = `translateY(${-fade * 44}px)`;
+    if(scrollInd) scrollInd.style.opacity = String(Math.max(0, 1 - progress * 5));
+    if(!raf){ raf = true; requestAnimationFrame(scrub); }
+  }
+  addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
 })();
 
 /* ---- Nav ---- */

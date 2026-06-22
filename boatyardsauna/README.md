@@ -28,9 +28,15 @@ The site already points at these filenames. **Just drop the matching files into
 `assets/` and they appear automatically** — no code change needed. Until a file
 exists, the site falls back to on-brand stock imagery, so it never looks broken.
 
+The hero is a **scroll-scrubbed video** (`assets/hero.mp4`) — as you scroll, the
+clip plays through, like the sample's frame sequence. `assets/hero.jpg` is its
+poster/fallback frame (also used for social sharing). To change the hero clip,
+drop a new `assets/hero.mp4` (keep it short, muted, ~720p/1080p, `+faststart`).
+
 | File in `assets/` | Used for | Best photo |
 |---|---|---|
-| `hero.jpg` | Full-screen hero background | The "THE BOAT YARD SAUNA" sign framing the harbour |
+| `hero.mp4` | Full-screen scroll-scrubbed hero video | The harbour clip |
+| `hero.jpg` | Hero poster + social image + gallery | A strong still frame |
 | `sauna-interior.jpg` | "Wood-fired sauna" feature + gallery | Inside the sauna — stove + window onto the sea |
 | `sauna-exterior.jpg` | Gallery (large tile) | The timber-clad sauna cabin |
 | `beach.jpg` | "The cold dip" feature + gallery | The beach / seafront |
