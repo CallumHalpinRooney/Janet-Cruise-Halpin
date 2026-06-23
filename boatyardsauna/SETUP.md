@@ -85,6 +85,35 @@ upcoming counts and booked value, and lets you Confirm or Cancel each one.
 
 ---
 
+## Edit photos from the live site (no GitHub needed)
+You can replace the site's photos yourself, right in the browser:
+
+1. Open the site and add **`?edit`** to the address (or tap **"Manage photos"**
+   in the footer). An Edit bar appears.
+2. **Tap any photo → pick an image** from your phone/computer. It previews
+   instantly (and is remembered on your device).
+3. Make it live for everyone, two ways:
+   - **⬇ Download photos** — saves them correctly-named (e.g. `beach.jpg`); then
+     upload into `boatyardsauna/assets/` on GitHub (**Add file → Upload files**).
+     Works with zero setup.
+   - **Publish to website** — commits them straight to the site (auto-redeploys
+     in ~30s). This needs the one-time setup below.
+
+### To enable the "Publish" button
+In **Netlify → Site settings → Environment variables** add:
+
+| Variable | Value |
+|---|---|
+| `GITHUB_TOKEN` | a GitHub token with **Contents: read & write** on the repo (fine-grained PAT, limited to this repo) |
+| `GITHUB_REPO` | `CallumHalpinRooney/Janet-Cruise-Halpin` |
+| `GITHUB_BRANCH` | `claude/jolly-hamilton-9g7btd` |
+| `EDIT_PASSCODE` | any passcode you choose (the editor asks for it) |
+
+Create the token at **github.com → Settings → Developer settings → Fine-grained
+tokens**. Until this is set, the Publish button falls back to the Download route.
+
+---
+
 ### How it all fits together
 ```
 Customer books  ─▶  (optional) Stripe deposit  ─▶  saved to Supabase  ─▶  emails you + customer
