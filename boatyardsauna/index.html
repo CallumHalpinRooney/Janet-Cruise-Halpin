@@ -61,6 +61,14 @@
   *{ margin:0; padding:0; box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   body{ background:var(--bg); color:var(--fg); font-family:var(--jost); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  /* Ambient warm/cool glow — sits behind all content, fades as you scroll */
+  .ambient{ position:fixed; inset:0; z-index:-1; pointer-events:none; transition:background 1.2s ease; background:radial-gradient(120% 85% at 50% 28%, transparent, transparent); }
+  body[data-glow="warm"] .ambient{ background:radial-gradient(120% 95% at 50% 30%, rgba(232,112,58,.22), rgba(224,162,75,.07) 42%, transparent 68%); }
+  body[data-glow="cool"] .ambient{ background:radial-gradient(120% 95% at 50% 30%, rgba(95,168,184,.26), rgba(95,168,184,.07) 42%, transparent 68%); }
+  /* reinforce each feature with its own accent */
+  .feat-row[data-glow="cool"] .feat-txt .k{ color:var(--sea); }
+  .feat-row[data-glow="cool"] .feat-txt .bar{ background:var(--sea); }
+  .feat-row[data-glow="warm"] .feat-txt .bar{ background:var(--ember); }
   a{ color:inherit; text-decoration:none; }
   img{ display:block; max-width:100%; }
   .up{ text-transform:uppercase; }
@@ -321,7 +329,10 @@
   .toast.show{ transform:translateX(-50%) translateY(0); }
 </style>
 </head>
-<body>
+<body data-glow="neutral">
+
+<!-- Ambient glow: warms (sauna) / cools (ice bath) as you scroll the experience -->
+<div class="ambient" id="ambient"></div>
 
 <!-- ===== Brand logo (reusable SVG) ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -702,15 +713,15 @@ document.querySelectorAll('.drawer a').forEach(a=> a.onclick = ()=> drawer.class
 
 /* ---- Features ---- */
 const features = [
-  { number:'01', title:'Wood-fired sauna', subtitle:'The real thing', image:'interior', stat:'90°C', statLabel:'crackling heat',
+  { number:'01', title:'Wood-fired sauna', subtitle:'The real thing', image:'interior', stat:'90°C', statLabel:'crackling heat', glow:'warm',
     description:'A proper wood-burning stove, the smell of cedar and woodsmoke, and a window straight onto the sea. No electric box — just honest, deep, dry heat the way sauna was meant to be.' },
-  { number:'02', title:'The cold dip', subtitle:'Embrace the chill', image:'beach', stat:'❄️', statLabel:'straight in the sea',
+  { number:'02', title:'The cold dip', subtitle:'Embrace the chill', image:'beach', stat:'❄️', statLabel:'straight in the sea', glow:'cool',
     description:'Step from the heat into the Irish Sea — or our cold plunge — and feel everything switch on. It is bracing, it is brilliant, and it is right on the doorstep.' },
-  { number:'03', title:'Evenings in the harbour', subtitle:'Your time, your view', image:'harbour', stat:'7 days', statLabel:'sunrise to late',
+  { number:'03', title:'Evenings in the harbour', subtitle:'Your time, your view', image:'harbour', stat:'7 days', statLabel:'sunrise to late', glow:'warm',
     description:'Catch the golden hour and watch the light move over the water between rounds. Wrap up, slow down, and leave lighter than you arrived.' },
 ];
 document.getElementById('feat-rows').innerHTML = features.map((f,i)=>`
-  <div class="feat-row ${i%2===1?'rev':''}">
+  <div class="feat-row ${i%2===1?'rev':''}" data-glow="${f.glow}">
     <div class="feat-img reveal">
       ${imgTag(f.image, f.title)}
       <div class="badge"><div class="n">${f.stat}</div><div class="nl up">${f.statLabel}</div></div>
@@ -1081,6 +1092,21 @@ if('IntersectionObserver' in window){
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 }else{
   document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+}
+
+/* ---- Ambient warm/cool glow driven by the feature in view ---- */
+if('IntersectionObserver' in window){
+  const active=[];
+  const glowIO=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      const i=active.indexOf(e.target);
+      if(e.isIntersecting){ if(i<0) active.push(e.target); }
+      else if(i>-1){ active.splice(i,1); }
+    });
+    const top=active[active.length-1];
+    document.body.dataset.glow = top ? top.dataset.glow : 'neutral';
+  }, { rootMargin:'-42% 0px -42% 0px', threshold:0 });
+  document.querySelectorAll('[data-glow]').forEach(el=>{ if(el!==document.body) glowIO.observe(el); });
 }
 
 /* ---- Toast ---- */
