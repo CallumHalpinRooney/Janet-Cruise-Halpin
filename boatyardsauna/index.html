@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>The Boat Yard Sauna — Wood-Fired Saunas by the Irish Sea | Wicklow &amp; Arklow</title>
-<meta name="description" content="Authentic wood-fired saunas on the water in Wicklow Harbour and River Walk, Arklow. Feel the heat, embrace the chill. Book a sauna and cold-dip session by the Irish Sea." />
+<meta name="description" content="A premium riverside sauna experience in Arklow & Wicklow — traditional wood-fired sauna, cold plunge tanks and high-end changing facilities. Rated 5.0 on Google. Feel the heat, embrace the chill. Book online." />
 <meta name="theme-color" content="#0E1B2A" />
 
 <!-- Social sharing -->
@@ -26,17 +26,24 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HealthAndBeautyBusiness",
+  "@type": "DaySpa",
   "name": "The Boat Yard Sauna",
-  "description": "Wood-fired saunas by the sea in Wicklow Harbour and River Walk, Arklow.",
+  "description": "A premium riverside sauna experience featuring a traditional wood-fired sauna, cold plunges and high-end changing facilities. A calm, refined space to unwind, recharge and reconnect, on the River Walk in Arklow and at Wicklow Harbour.",
   "image": "assets/hero.jpg",
   "url": "https://theboatyardsauna.ie",
+  "telephone": "+353 87 217 1936",
   "sameAs": ["https://www.instagram.com/theboatyardsauna", "https://linktr.ee/theboatyardsauna"],
   "address": [
-    {"@type": "PostalAddress", "addressLocality": "Wicklow", "addressRegion": "Co. Wicklow", "addressCountry": "IE"},
-    {"@type": "PostalAddress", "addressLocality": "Arklow", "addressRegion": "Co. Wicklow", "addressCountry": "IE"}
+    {"@type": "PostalAddress", "streetAddress": "River Walk", "addressLocality": "Arklow", "addressRegion": "Co. Wicklow", "addressCountry": "IE"},
+    {"@type": "PostalAddress", "addressLocality": "Wicklow", "addressRegion": "Co. Wicklow", "addressCountry": "IE"}
   ],
-  "priceRange": "€€"
+  "priceRange": "€€",
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "5", "bestRating": "5"},
+  "review": [
+    {"@type": "Review", "author": {"@type": "Person", "name": "Gerry Doran"}, "reviewRating": {"@type": "Rating", "ratingValue": "5"}, "reviewBody": "A great facility, very relaxing, clean and lovely landscaping. Plunge tanks are well maintained as are the showers, great sauna also. Friendly staff."},
+    {"@type": "Review", "author": {"@type": "Person", "name": "Oliver"}, "reviewRating": {"@type": "Rating", "ratingValue": "5"}, "reviewBody": "Really great sauna. Has great cold plunge tanks and a nice atmosphere about the place."},
+    {"@type": "Review", "author": {"@type": "Person", "name": "Sambo"}, "reviewRating": {"@type": "Rating", "ratingValue": "5"}, "reviewBody": "Great facility, great staff."}
+  ]
 }
 </script>
 
@@ -178,6 +185,12 @@
   /* ---------- Testimonials ---------- */
   .test{ background:var(--bg2); padding:120px 24px; border-top:1px solid var(--line); }
   .test .wrap{ max-width:900px; }
+  .rev-head{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  .g-badge{ display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9999px; padding:8px 16px; transition:border-color .3s; }
+  .g-badge:hover{ border-color:rgba(242,183,5,.5); }
+  .g-stars{ color:var(--gold); letter-spacing:2px; font-size:13px; }
+  .g-score{ font-family:var(--bodoni); font-size:1.1rem; }
+  .g-meta{ font-size:11px; letter-spacing:.06em; color:var(--muted); }
   .test-body{ display:flex; align-items:flex-start; gap:30px; margin-top:48px; }
   .test-num{ font-family:var(--bodoni); font-weight:400; font-size:clamp(90px,12vw,130px); line-height:1; color:rgba(243,238,228,.06); user-select:none; flex:none; }
   .test-quote{ font-family:var(--bodoni); font-style:italic; font-weight:400; font-size:clamp(1.2rem,3vw,1.8rem); line-height:1.6; color:rgba(243,238,228,.85); transition:opacity .4s, transform .4s; }
@@ -424,7 +437,14 @@
 
 <section class="test" id="reviews">
   <div class="wrap">
-    <p class="eyebrow up reveal">What people say</p>
+    <div class="rev-head reveal">
+      <p class="eyebrow up">What people say</p>
+      <a class="g-badge" href="https://www.google.com/search?q=The+Boat+Yard+Sauna+Arklow" target="_blank" rel="noopener">
+        <span class="g-stars">★★★★★</span>
+        <span class="g-score">5.0</span>
+        <span class="g-meta">on Google · 5 reviews</span>
+      </a>
+    </div>
     <div class="test-body">
       <span class="test-num" id="test-num">01</span>
       <div style="flex:1; padding-top:10px;">
@@ -559,6 +579,7 @@
       </div>
       <div class="foot-col">
         <h5>Connect</h5>
+        <a href="tel:+353872171936">📞 087 217 1936</a>
         <a href="https://www.instagram.com/theboatyardsauna" target="_blank" rel="noopener">Instagram</a>
         <a href="https://linktr.ee/theboatyardsauna" target="_blank" rel="noopener">Linktree</a>
         <a href="#book">Book a session</a>
@@ -699,9 +720,9 @@ document.getElementById('gal-grid').innerHTML = gal.map(g=>`
 
 /* ---- Testimonials ---- */
 const testimonials = [
-  { quote:"Genuinely the best thing I do all week. The wood-fired heat is next level and running into the sea after is unreal. The lads are so welcoming too.", author:'Aoife M.', role:'Wicklow' },
-  { quote:"Booked the private sauna for my partner's birthday. Watching the sunrise over the harbour between dips — we'll be back every month.", author:'Cian D.', role:'Arklow' },
-  { quote:"I was nervous about the cold but it's completely addictive. Easy to book, right by the water, and I always leave buzzing.", author:'Niamh K.', role:'Greystones' },
+  { quote:"Really great sauna. Has great cold plunge tanks and a nice atmosphere about the place.", author:'Oliver', role:'★★★★★ · Google review' },
+  { quote:"A great facility, very relaxing, clean and lovely landscaping. Plunge tanks are well maintained as are the showers, great sauna also. Friendly staff and they make you feel welcome.", author:'Gerry Doran', role:'★★★★★ · Google review' },
+  { quote:"Great facility, great staff.", author:'Sambo', role:'★★★★★ · Google review' },
 ];
 let active=0, transitioning=false;
 const $=id=>document.getElementById(id);
