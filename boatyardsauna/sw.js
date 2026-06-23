@@ -1,7 +1,7 @@
 /* The Boat Yard Sauna — service worker.
    Makes the site installable (PWA) and lets it open instantly / work offline,
    so it behaves like the native app in their Linktree — without an app store. */
-const CACHE = 'boatyard-v7';
+const CACHE = 'boatyard-v8';
 const ASSETS = ['./', './index.html', './manifest.webmanifest'];
 
 self.addEventListener('install', (e) => {

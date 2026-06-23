@@ -188,7 +188,7 @@
   .addons-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:60px; }
   .addon-card{ border:1px solid var(--line); border-radius:12px; padding:30px 24px; background:rgba(255,255,255,.02); transition:transform .35s, border-color .35s, background .35s; }
   .addon-card:hover{ transform:translateY(-6px); border-color:rgba(232,112,58,.4); background:rgba(232,112,58,.05); }
-  .ac-icon{ font-size:30px; margin-bottom:18px; }
+  .ac-num{ font-family:var(--bodoni); font-size:1.5rem; color:var(--ember); margin-bottom:16px; }
   .ac-name{ font-family:var(--bodoni); font-style:italic; font-size:1.3rem; margin-bottom:8px; }
   .ac-desc{ color:var(--muted); font-size:13px; font-weight:300; line-height:1.6; min-height:42px; }
   .ac-price{ margin-top:16px; color:var(--gold); font-size:14px; letter-spacing:.04em; }
@@ -448,95 +448,6 @@
   </div>
 </section>
 
-<section class="manifesto">
-  <div class="wrap reveal">
-    <div class="rule"></div>
-    <blockquote>&ldquo;Light the fire, breathe the salt air, and let the sea do the rest. The contrast is the cure.&rdquo;</blockquote>
-    <p class="by up">— The Boat Yard Sauna, Co. Wicklow</p>
-  </div>
-</section>
-
-<section class="ritual" id="ritual">
-  <div class="wrap ritual-head reveal">
-    <p class="eyebrow up">The Ritual</p>
-    <h2>Heat. Cold.<br>Repeat.</h2>
-    <p>Two simple forces, one powerful reset. Move between the fire and the freeze, and feel everything switch on.</p>
-  </div>
-  <div id="hotcold"></div>
-</section>
-
-<section class="sessions" id="sessions">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <p class="eyebrow up">Sessions</p>
-        <h2>Find your<br>heat.</h2>
-      </div>
-      <p>Drop in solo, share the bench with the community, or take the whole sauna for your group. Every session faces the water.</p>
-    </div>
-    <div class="price-grid" id="price-grid"></div>
-  </div>
-</section>
-
-<section class="addons-sec" id="extras">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <p class="eyebrow up">Make it yours</p>
-        <h2>The little<br>extras.</h2>
-      </div>
-      <p>Small touches that turn a sauna into a proper ritual — add any of these when you book your session.</p>
-    </div>
-    <div class="addons-grid reveal" id="addons-grid"></div>
-  </div>
-</section>
-
-<section class="gallery" id="gallery">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <p class="eyebrow up">The Yard</p>
-        <h2>By the water.</h2>
-      </div>
-      <p>Real moments from Wicklow Harbour and the River Walk in Arklow.</p>
-    </div>
-    <div class="gal-grid reveal" id="gal-grid"></div>
-  </div>
-</section>
-
-<section class="test" id="reviews">
-  <div class="wrap">
-    <div class="rev-head reveal">
-      <p class="eyebrow up">What people say</p>
-      <a class="g-badge" href="https://www.google.com/search?q=The+Boat+Yard+Sauna+Arklow" target="_blank" rel="noopener">
-        <span class="g-stars">★★★★★</span>
-        <span class="g-score">5.0</span>
-        <span class="g-meta">on Google · 5 reviews</span>
-      </a>
-    </div>
-    <div class="test-body">
-      <span class="test-num" id="test-num">01</span>
-      <div style="flex:1; padding-top:10px;">
-        <blockquote class="test-quote" id="test-quote"></blockquote>
-        <div class="test-meta" id="test-meta">
-          <div class="av" id="test-av"></div>
-          <div><p class="nm" id="test-name"></p><p class="ro" id="test-role"></p></div>
-        </div>
-      </div>
-    </div>
-    <div class="test-ctrl">
-      <div style="display:flex; align-items:center; gap:22px;">
-        <div class="dots" id="dots"></div>
-        <span style="font-size:10px;letter-spacing:.2em;color:var(--faint)" id="counter"></span>
-      </div>
-      <div class="arrows">
-        <button id="prev" aria-label="Previous">&#8249;</button>
-        <button id="next" aria-label="Next">&#8250;</button>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="booking" id="book">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -626,6 +537,95 @@
   </div>
 </section>
 
+<section class="manifesto">
+  <div class="wrap reveal">
+    <div class="rule"></div>
+    <blockquote>&ldquo;Light the fire, breathe the salt air, and let the sea do the rest. The contrast is the cure.&rdquo;</blockquote>
+    <p class="by up">— The Boat Yard Sauna, Co. Wicklow</p>
+  </div>
+</section>
+
+<section class="ritual" id="ritual">
+  <div class="wrap ritual-head reveal">
+    <p class="eyebrow up">The Ritual</p>
+    <h2>Heat. Cold.<br>Repeat.</h2>
+    <p>Two simple forces, one powerful reset. Move between the fire and the freeze, and feel everything switch on.</p>
+  </div>
+  <div id="hotcold"></div>
+</section>
+
+<section class="sessions" id="sessions">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow up">Sessions</p>
+        <h2>Find your<br>heat.</h2>
+      </div>
+      <p>Drop in solo, share the bench with the community, or take the whole sauna for your group. Every session faces the water.</p>
+    </div>
+    <div class="price-grid" id="price-grid"></div>
+  </div>
+</section>
+
+<section class="addons-sec" id="extras">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow up">Make it yours</p>
+        <h2>The little<br>extras.</h2>
+      </div>
+      <p>Small touches that turn a sauna into a proper ritual — add any of these when you book your session.</p>
+    </div>
+    <div class="addons-grid reveal" id="addons-grid"></div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow up">The Yard</p>
+        <h2>By the water.</h2>
+      </div>
+      <p>Real moments from Wicklow Harbour and the River Walk in Arklow.</p>
+    </div>
+    <div class="gal-grid reveal" id="gal-grid"></div>
+  </div>
+</section>
+
+<section class="test" id="reviews">
+  <div class="wrap">
+    <div class="rev-head reveal">
+      <p class="eyebrow up">What people say</p>
+      <a class="g-badge" href="https://www.google.com/search?q=The+Boat+Yard+Sauna+Arklow" target="_blank" rel="noopener">
+        <span class="g-stars">★★★★★</span>
+        <span class="g-score">5.0</span>
+        <span class="g-meta">on Google · 5 reviews</span>
+      </a>
+    </div>
+    <div class="test-body">
+      <span class="test-num" id="test-num">01</span>
+      <div style="flex:1; padding-top:10px;">
+        <blockquote class="test-quote" id="test-quote"></blockquote>
+        <div class="test-meta" id="test-meta">
+          <div class="av" id="test-av"></div>
+          <div><p class="nm" id="test-name"></p><p class="ro" id="test-role"></p></div>
+        </div>
+      </div>
+    </div>
+    <div class="test-ctrl">
+      <div style="display:flex; align-items:center; gap:22px;">
+        <div class="dots" id="dots"></div>
+        <span style="font-size:10px;letter-spacing:.2em;color:var(--faint)" id="counter"></span>
+      </div>
+      <div class="arrows">
+        <button id="prev" aria-label="Previous">&#8249;</button>
+        <button id="next" aria-label="Next">&#8250;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="foot-top">
     <div class="wrap foot-grid">
@@ -635,7 +635,7 @@
           <div class="wordmark"><span class="w1">The Boat Yard</span><span class="w2">Sauna</span></div>
         </div>
         <p>Authentic wood-fired saunas on the water in Wicklow Harbour and on the River Walk in Arklow.</p>
-        <p class="foot-tag">Feel the heat, embrace the chill. <span class="hc">🔥&nbsp;❄️</span></p>
+        <p class="foot-tag">Feel the heat, embrace the chill.</p>
         <button class="install-cta" id="installBtn" style="display:none;">Install the app</button>
       </div>
       <div class="foot-col">
@@ -648,24 +648,24 @@
       </div>
       <div class="foot-col">
         <h5>Connect</h5>
-        <a href="tel:+353872171936">📞 087 217 1936</a>
+        <a href="tel:+353872171936">087 217 1936</a>
         <a href="https://www.instagram.com/theboatyardsauna" target="_blank" rel="noopener">Instagram</a>
         <a href="https://linktr.ee/theboatyardsauna" target="_blank" rel="noopener">Linktree</a>
         <a href="#book">Book a session</a>
-        <a href="#" id="voucherLink">Gift a session 🎁</a>
+        <a href="#" id="voucherLink">Gift a session</a>
       </div>
     </div>
   </div>
   <div class="foot-bot wrap">
     <p>© <span id="yr"></span> The Boat Yard Sauna · Wood Fired Saunas · Co. Wicklow, Ireland · <a href="?edit" style="color:var(--faint)">Manage photos</a></p>
-    <p>Feel the heat, embrace the chill 🔥❄️</p>
+    <p>Feel the heat, embrace the chill</p>
   </div>
 </footer>
 
 <!-- Photo editor controls (shown only in edit mode: visit the site with ?edit) -->
 <div class="edit-bar" id="editBar">
   <div class="eb-title"><b>Edit mode</b> Tap any photo to replace it</div>
-  <button class="eb-download" id="ebDownload" title="Download your photos to upload to GitHub">⬇ Download photos</button>
+  <button class="eb-download" id="ebDownload" title="Download your photos to upload to GitHub">Download photos</button>
   <button class="eb-publish" id="ebPublish" disabled>Publish to website</button>
   <button class="eb-done" id="ebDone">Done</button>
 </div>
@@ -737,16 +737,16 @@ document.querySelectorAll('.drawer a').forEach(a=> a.onclick = ()=> drawer.class
 
 /* ---- The Ritual: Hot ↔ Cold ---- */
 const hotcold = [
-  { glow:'warm', kicker:'The Heat', icon:'🔥', title:'Wood-fired sauna', image:'interior', stat:'90°C',
+  { glow:'warm', kicker:'The Heat', title:'Wood-fired sauna', image:'interior', stat:'90°C',
     desc:'A real wood-burning stove, the smell of cedar and woodsmoke, and a window straight onto the sea. No electric box — just honest, deep, dry heat that loosens every muscle and clears the head.' },
-  { glow:'cool', kicker:'The Cold', icon:'❄️', title:'Ice baths & cold plunge', image:'beach', stat:'~5°C',
+  { glow:'cool', kicker:'The Cold', title:'Ice baths & cold plunge', image:'beach', stat:'~5°C',
     desc:'Step from the fire into ice-cold plunge tanks — or straight into the Irish Sea. The shock floods you with energy, sharpens the mind and leaves you buzzing. Bracing, brilliant, addictive.' },
 ];
 document.getElementById('hotcold').innerHTML = hotcold.map((b,i)=>`
   <div class="hc-block ${b.glow} ${i%2?'rev':''}" data-glow="${b.glow}">
     <div class="hc-media reveal">${imgTag(b.image, b.title)}<div class="hc-stat">${b.stat}</div></div>
     <div class="hc-copy reveal">
-      <div class="hc-kicker"><span class="hc-icon">${b.icon}</span>${b.kicker}</div>
+      <div class="hc-kicker">${b.kicker}</div>
       <h3>${b.title}</h3>
       <p>${b.desc}</p>
     </div>
@@ -868,16 +868,16 @@ const locations = [
   { id:'arklow',  name:'River Walk, Arklow', desc:'Beside the river, by the sea' },
 ];
 const addonsList = [
-  { id:'plunge', name:'Cold plunge add-on', desc:'Ice-cold tub between rounds', price:8,  icon:'🧊' },
-  { id:'towel',  name:'Towel & robe hire', desc:'Turn up with nothing, leave cosy', price:5,  icon:'🧖' },
-  { id:'tea',    name:'Herbal tea & honey', desc:'Warm down the right way', price:4,  icon:'🍵' },
-  { id:'photos', name:'Session photos', desc:'A few shots for the memories', price:10, icon:'📸' },
+  { id:'plunge', name:'Cold plunge add-on', desc:'Ice-cold tub between rounds', price:8 },
+  { id:'towel',  name:'Towel & robe hire', desc:'Turn up with nothing, leave cosy', price:5 },
+  { id:'tea',    name:'Herbal tea & honey', desc:'Warm down the right way', price:4 },
+  { id:'photos', name:'Session photos', desc:'A few shots for the memories', price:10 },
 ];
 /* ---- Add-ons section ---- */
 const addonsGrid=document.getElementById('addons-grid');
-if(addonsGrid){ addonsGrid.innerHTML = addonsList.map(a=>`
+if(addonsGrid){ addonsGrid.innerHTML = addonsList.map((a,i)=>`
   <div class="addon-card">
-    <div class="ac-icon">${a.icon}</div>
+    <div class="ac-num">0${i+1}</div>
     <div class="ac-name">${a.name}</div>
     <div class="ac-desc">${a.desc}</div>
     <div class="ac-price">+€${a.price}</div>
@@ -1106,12 +1106,12 @@ async function submitBooking(){
   if(!stored && !emailed){ mailtoFallback(payload); }
 
   document.getElementById('doneText').textContent =
-    `${payload.session} at ${payload.location}, ${payload.dateLabel} at ${payload.time} for ${payload.guests} guest${payload.guests>1?'s':''}.${payload.depositPaid?` Deposit of €${payload.depositPaid} received.`:''} We'll confirm shortly at ${payload.email}. See you by the water! 🔥❄️`;
+    `${payload.session} at ${payload.location}, ${payload.dateLabel} at ${payload.time} for ${payload.guests} guest${payload.guests>1?'s':''}.${payload.depositPaid?` Deposit of €${payload.depositPaid} received.`:''} We'll confirm shortly at ${payload.email}. See you by the water.`;
   showStep('done'); btnBack.style.visibility='hidden'; btnNext.style.display='none';
 }
 
 /* Gift voucher */
-document.getElementById('voucherLink').onclick=(e)=>{ e.preventDefault(); toast('🎁 Gift vouchers coming online soon — DM us on Instagram to buy one today!'); };
+document.getElementById('voucherLink').onclick=(e)=>{ e.preventDefault(); toast('Gift vouchers coming online soon — message us on Instagram to buy one today.'); };
 
 showStep(1);
 
@@ -1225,7 +1225,7 @@ applyStoredOverrides();
       }catch(e){ noEndpoint=true; break; }
     }
     publishBtn.textContent='Publish to website'; publishBtn.disabled=false;
-    if(noEndpoint){ toast('Publishing isn’t connected yet — use ⬇ Download, then upload to GitHub (SETUP.md §photo editor).'); return; }
+    if(noEndpoint){ toast('Publishing isn’t connected yet — use Download, then upload to GitHub (SETUP.md §photo editor).'); return; }
     if(fail && !ok){ toast('Publish failed — check the passcode/token (SETUP.md).'); return; }
     toast(`Published ${ok} photo${ok>1?'s':''}! Live in ~30s once the site rebuilds. ✓`);
   };
