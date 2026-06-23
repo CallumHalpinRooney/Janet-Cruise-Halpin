@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HCUTZ — Premium Barbering in Ashford | Book Online</title>
+<meta name="description" content="HCUTZ — premium barbering in Ashford. Fresher the better. Skin fades, beard sculpting, hot towel finishes and after-hours appointments. Book your cut online in seconds." />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" type="image/svg+xml" href="logo.svg" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="HCUTZ — Premium Barbering in Ashford" />
+<meta property="og:description" content="Fresher the better. Book your cut online with Harry." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-2:#111111;
+    --bg-3:#161616;
+    --line:rgba(255,255,255,.08);
+    --gold:#c8a96a;
+    --gold-soft:#e0c896;
+    --ink:#f6f4ef;
+    --muted:#9a958c;
+    --maxw:1180px;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  h1,h2,h3,.display{
+    font-family:'Bebas Neue',sans-serif;
+    font-weight:400;
+    letter-spacing:.02em;
+    line-height:.95;
+  }
+
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.32em;
+    font-size:.72rem;
+    font-weight:600;
+    color:var(--gold);
+  }
+
+  /* ===== Buttons ===== */
+  .btn{
+    display:inline-flex;align-items:center;gap:.6em;
+    font-family:'Inter',sans-serif;
+    font-weight:600;font-size:.82rem;
+    text-transform:uppercase;letter-spacing:.14em;
+    padding:16px 30px;border-radius:2px;
+    transition:transform .4s var(--ease),background .4s var(--ease),color .4s var(--ease),box-shadow .4s var(--ease);
+    cursor:pointer;border:1px solid transparent;
+  }
+  .btn-gold{
+    background:linear-gradient(135deg,var(--gold-soft),var(--gold));
+    color:#1a1408;
+    box-shadow:0 10px 30px -10px rgba(200,169,106,.6);
+  }
+  .btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 40px -12px rgba(200,169,106,.8)}
+  .btn-ghost{border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* ===== Logo mark ===== */
+  .logo{display:flex;align-items:center;gap:13px}
+  .logo .mark{width:40px;height:40px;flex:none}
+  .logo .word{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:1.55rem;letter-spacing:.18em;line-height:1;
+  }
+  .logo .word b{color:var(--gold);font-weight:400}
+
+  /* ===== Nav ===== */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:18px 0;
+    transition:background .4s var(--ease),padding .4s var(--ease),border-color .4s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.nav.scrolled{
+    background:rgba(10,10,10,.82);
+    backdrop-filter:blur(14px);
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a.link{
+    font-size:.8rem;text-transform:uppercase;letter-spacing:.14em;
+    color:var(--muted);font-weight:500;transition:color .3s;
+  }
+  .nav-links a.link:hover{color:var(--ink)}
+  .nav-cta{padding:11px 22px}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+  .burger span{width:26px;height:2px;background:var(--ink);transition:.3s}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;
+    padding:140px 0 80px;
+    background:
+      radial-gradient(110% 70% at 80% 0%,rgba(200,169,106,.10),transparent 60%),
+      radial-gradient(90% 60% at 0% 100%,rgba(200,169,106,.06),transparent 55%),
+      var(--bg);
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(70% 70% at 70% 30%,#000,transparent);
+    -webkit-mask-image:radial-gradient(70% 70% at 70% 30%,#000,transparent);
+    opacity:.5;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;position:relative;z-index:2;width:100%}
+  .hero h1{
+    font-size:clamp(3.4rem,9vw,7.4rem);
+    margin:18px 0 0;
+  }
+  .hero h1 .gold{color:var(--gold)}
+  .hero .lede{
+    color:var(--muted);font-size:1.12rem;max-width:36ch;margin:22px 0 34px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-stats{display:flex;gap:38px;margin-top:48px;flex-wrap:wrap}
+  .hero-stats .stat .n{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--ink);line-height:1}
+  .hero-stats .stat .l{font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-top:4px}
+
+  /* hero medallion */
+  .medallion{
+    position:relative;aspect-ratio:1;display:grid;place-items:center;
+    border:1px solid var(--line);border-radius:50%;
+    background:
+      radial-gradient(circle at 50% 35%,rgba(200,169,106,.14),transparent 60%),
+      conic-gradient(from 180deg,rgba(200,169,106,.18),transparent 30%,transparent 70%,rgba(200,169,106,.18));
+    box-shadow:inset 0 0 80px rgba(0,0,0,.6);
+  }
+  .medallion::before{
+    content:"";position:absolute;inset:18px;border:1px solid var(--line);border-radius:50%;
+  }
+  .medallion .ring-text{position:absolute;inset:0;animation:spin 36s linear infinite}
+  .medallion .mark-big{width:46%;height:auto}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ===== Section frame ===== */
+  section{padding:110px 0;position:relative}
+  .sec-head{max-width:640px;margin-bottom:54px}
+  .sec-head h2{font-size:clamp(2.6rem,6vw,4.4rem);margin:14px 0 0}
+  .sec-head p{color:var(--muted);margin-top:16px;font-size:1.05rem}
+  .center{text-align:center;margin-left:auto;margin-right:auto}
+
+  /* ===== Marquee ===== */
+  .marquee{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--bg-2);padding:18px 0;overflow:hidden;white-space:nowrap;
+  }
+  .marquee .track{display:inline-flex;gap:48px;animation:slide 26s linear infinite}
+  .marquee span{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.14em;color:var(--muted)}
+  .marquee span i{color:var(--gold);font-style:normal;margin:0 14px}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ===== Services ===== */
+  .services{background:var(--bg-2)}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .svc{
+    background:var(--bg-3);border:1px solid var(--line);border-radius:6px;
+    padding:32px 30px;position:relative;overflow:hidden;
+    transition:transform .5s var(--ease),border-color .5s var(--ease);
+  }
+  .svc::before{
+    content:"";position:absolute;left:0;top:0;height:100%;width:3px;
+    background:linear-gradient(var(--gold-soft),var(--gold));
+    transform:scaleY(0);transform-origin:top;transition:transform .5s var(--ease);
+  }
+  .svc:hover{transform:translateY(-6px);border-color:rgba(200,169,106,.4)}
+  .svc:hover::before{transform:scaleY(1)}
+  .svc .svc-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+  .svc h3{font-size:1.7rem}
+  .svc .price{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--gold);white-space:nowrap}
+  .svc p{color:var(--muted);font-size:.95rem;margin-top:12px}
+  .svc .dur{margin-top:18px;font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+  .note{margin-top:26px;color:var(--muted);font-size:.85rem}
+
+  /* ===== About / split ===== */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .about-visual{
+    aspect-ratio:4/5;border-radius:8px;border:1px solid var(--line);
+    background:
+      radial-gradient(circle at 30% 20%,rgba(200,169,106,.16),transparent 55%),
+      linear-gradient(160deg,#1c1c1c,#0c0c0c);
+    display:grid;place-items:center;position:relative;overflow:hidden;
+  }
+  .about-visual .mark-ghost{width:55%;opacity:.9}
+  .about-visual .badge{
+    position:absolute;bottom:20px;left:20px;right:20px;
+    border:1px solid var(--line);border-radius:4px;
+    background:rgba(10,10,10,.6);backdrop-filter:blur(6px);
+    padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .about-visual .badge .t{font-family:'Bebas Neue',sans-serif;letter-spacing:.12em;font-size:1.1rem}
+  .about-visual .badge .s{font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.16em}
+  .about ul{list-style:none;margin-top:26px;display:grid;gap:14px}
+  .about li{display:flex;gap:12px;align-items:flex-start;color:var(--muted)}
+  .about li svg{flex:none;margin-top:3px}
+  .about li b{color:var(--ink);font-weight:600}
+
+  /* ===== Steps ===== */
+  .steps{background:var(--bg-2)}
+  .step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step{padding:30px;border:1px solid var(--line);border-radius:6px;background:var(--bg-3)}
+  .step .num{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--gold);line-height:1}
+  .step h3{font-size:1.4rem;margin:12px 0 8px}
+  .step p{color:var(--muted);font-size:.95rem}
+
+  /* ===== Gallery ===== */
+  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .gal-grid .tile{
+    aspect-ratio:1;border:1px solid var(--line);border-radius:6px;overflow:hidden;position:relative;
+    background:linear-gradient(160deg,#1a1a1a,#0c0c0c);display:grid;place-items:center;
+    transition:transform .5s var(--ease);
+  }
+  .gal-grid .tile:nth-child(odd){background:linear-gradient(160deg,#161616,#080808)}
+  .gal-grid .tile:hover{transform:scale(.97)}
+  .gal-grid .tile .mk{width:38%;opacity:.5;transition:opacity .4s}
+  .gal-grid .tile:hover .mk{opacity:.9}
+  .gal-grid .tile span{position:absolute;bottom:10px;left:12px;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  /* ===== Reviews ===== */
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .rev{background:var(--bg-3);border:1px solid var(--line);border-radius:6px;padding:30px}
+  .rev .stars{color:var(--gold);letter-spacing:3px;font-size:1rem}
+  .rev p{margin:16px 0 20px;font-size:1.02rem}
+  .rev .who{font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+
+  /* ===== Booking / location ===== */
+  .book{background:var(--bg-2)}
+  .book-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+  .hours{border:1px solid var(--line);border-radius:8px;background:var(--bg-3);overflow:hidden}
+  .hours .row{display:flex;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--line);font-size:.95rem}
+  .hours .row:last-child{border-bottom:0}
+  .hours .row .d{color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-size:.8rem}
+  .hours .row.closed .t{color:#5e5a52}
+  .hours .row .t{color:var(--ink);font-weight:600}
+
+  /* ===== CTA band ===== */
+  .cta-band{
+    text-align:center;
+    background:
+      radial-gradient(80% 120% at 50% 0%,rgba(200,169,106,.12),transparent 60%),
+      var(--bg);
+  }
+  .cta-band h2{font-size:clamp(2.8rem,7vw,5.5rem)}
+  .cta-band p{color:var(--muted);margin:16px auto 32px;max-width:48ch}
+
+  /* ===== Footer ===== */
+  footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 36px}
+  .foot-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  .foot-links{display:flex;gap:28px;flex-wrap:wrap}
+  .foot-links a{color:var(--muted);font-size:.85rem;transition:color .3s}
+  .foot-links a:hover{color:var(--gold)}
+  .foot-bottom{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:#6b675f;font-size:.78rem}
+
+  /* ===== Reveal animation ===== */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ===== Mobile menu ===== */
+  .mobile-menu{
+    position:fixed;inset:0;z-index:99;background:rgba(8,8,8,.97);backdrop-filter:blur(8px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+    opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
+  }
+  .mobile-menu.open{opacity:1;pointer-events:auto}
+  .mobile-menu a{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.06em;color:var(--ink)}
+  .mobile-menu a:hover{color:var(--gold)}
+
+  /* ===== Responsive ===== */
+  @media(max-width:980px){
+    .hero-grid,.split,.book-grid{grid-template-columns:1fr}
+    .medallion{max-width:360px;margin:10px auto 0}
+    .svc-grid,.step-grid,.rev-grid{grid-template-columns:1fr 1fr}
+    .gal-grid{grid-template-columns:repeat(3,1fr)}
+    .about-visual{max-width:420px;margin:0 auto}
+  }
+  @media(max-width:640px){
+    section{padding:80px 0}
+    .nav-links{display:none}
+    .burger{display:flex}
+    .svc-grid,.step-grid,.rev-grid,.gal-grid{grid-template-columns:1fr 1fr}
+    .rev-grid,.step-grid{grid-template-columns:1fr}
+    .hero-stats{gap:24px}
+    .hero .lede{font-size:1rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo" aria-label="HCUTZ home">
+      <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+        <!-- H mark: black posts + gold accent stroke -->
+        <rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/>
+        <rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/>
+        <rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/>
+        <path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/>
+      </svg>
+      <span class="word">H<b>CUTZ</b></span>
+    </a>
+    <nav class="nav-links">
+      <a class="link" href="#services">Services</a>
+      <a class="link" href="#about">About</a>
+      <a class="link" href="#book">Hours</a>
+      <a class="link" href="#reviews">Reviews</a>
+      <a class="btn btn-gold nav-cta" href="https://hcutz09.simplybook.it/v2" target="_blank" rel="noopener">Book Now</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#book">Hours</a>
+  <a href="#reviews">Reviews</a>
+  <a class="btn btn-gold" href="https://hcutz09.simplybook.it/v2" target="_blank" rel="noopener">Book Now</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <span class="eyebrow">Ashford&nbsp;·&nbsp;Premium Barbering</span>
+      <h1>FRESH<br><span class="gold">CUTS.</span> SHARP<br>FINISH.</h1>
+      <p class="lede">Precision fades, beard sculpting and hot-towel finishes — booked in seconds. After-hours slots available. Fresher the better.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="https://hcutz09.simplybook.it/v2" target="_blank" rel="noopener">Book Your Cut →</a>
+        <a class="btn btn-ghost" href="#services">View Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="n">412+</div><div class="l">Regulars</div></div>
+        <div class="stat"><div class="n">5.0</div><div class="l">Rated</div></div>
+        <div class="stat"><div class="n">7&nbsp;Days</div><div class="l">Incl. After Hours</div></div>
+      </div>
+    </div>
+    <div class="reveal in" style="transition-delay:.15s">
+      <div class="medallion">
+        <svg class="ring-text" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text fill="#c8a96a" font-family="'Bebas Neue',sans-serif" font-size="13" letter-spacing="6">
+            <textPath href="#circle">HCUTZ · FRESHER THE BETTER · ASHFORD · HCUTZ · FRESHER THE BETTER ·</textPath>
+          </text>
+        </svg>
+        <svg class="mark-big" viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/>
+          <rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/>
+          <rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/>
+          <path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>SKIN FADES <i>✦</i> BEARD SCULPT <i>✦</i> HOT TOWEL <i>✦</i> KIDS CUTS <i>✦</i> AFTER HOURS <i>✦</i> FRESHER THE BETTER <i>✦</i></span>
+    <span>SKIN FADES <i>✦</i> BEARD SCULPT <i>✦</i> HOT TOWEL <i>✦</i> KIDS CUTS <i>✦</i> AFTER HOURS <i>✦</i> FRESHER THE BETTER <i>✦</i></span>
+  </div>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The Menu</span>
+      <h2>Services &amp; Pricing</h2>
+      <p>Every cut finished to the same standard. Choose your service when you book online.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="svc-top"><h3>Skin Fade</h3><span class="price">£18</span></div>
+        <p>Clean, blended fade tapered exactly how you like it — low, mid or high.</p>
+        <div class="dur">⏱ 40 min</div>
+      </div>
+      <div class="svc reveal" style="transition-delay:.05s">
+        <div class="svc-top"><h3>Cut &amp; Beard</h3><span class="price">£25</span></div>
+        <p>Full haircut paired with a sharp beard line-up and shape for the complete look.</p>
+        <div class="dur">⏱ 50 min</div>
+      </div>
+      <div class="svc reveal" style="transition-delay:.1s">
+        <div class="svc-top"><h3>Hot Towel Shave</h3><span class="price">£20</span></div>
+        <p>Traditional hot-towel treatment and a precision blade finish. Pure barbershop.</p>
+        <div class="dur">⏱ 35 min</div>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-top"><h3>Classic Cut</h3><span class="price">£15</span></div>
+        <p>Scissor or clipper cut, styled and finished. Timeless and tidy.</p>
+        <div class="dur">⏱ 30 min</div>
+      </div>
+      <div class="svc reveal" style="transition-delay:.05s">
+        <div class="svc-top"><h3>Kids Cut</h3><span class="price">£12</span></div>
+        <p>Relaxed cut for the little ones, 12 and under. Patient and friendly.</p>
+        <div class="dur">⏱ 30 min</div>
+      </div>
+      <div class="svc reveal" style="transition-delay:.1s">
+        <div class="svc-top"><h3>After Hours</h3><span class="price">£30</span></div>
+        <p>Can't make the day slots? Book a premium evening appointment around your schedule.</p>
+        <div class="dur">⏱ By arrangement</div>
+      </div>
+    </div>
+    <p class="note">★ Prices are a guide and easy to update. Final pricing and add-ons are confirmed at the time of booking.</p>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="wrap split">
+    <div class="about-visual reveal">
+      <svg class="mark-ghost" viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/>
+        <rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/>
+        <rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/>
+        <path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/>
+      </svg>
+      <div class="badge">
+        <span class="t">HCUTZ</span>
+        <span class="s">Fresher the better</span>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <span class="eyebrow">The Barber</span>
+      <h2 style="font-size:clamp(2.4rem,5vw,3.6rem);margin-top:14px">Meet Harry</h2>
+      <p style="color:var(--muted);margin-top:18px;font-size:1.05rem">
+        Ashford's go-to for a sharp, modern cut with proper attention to detail. No rushing,
+        no guesswork — just a clean chair, good chat and a finish you'll want to show off.
+        Whether it's a tight skin fade, a beard sculpt or a full hot-towel reset, you leave fresher than you came in.
+      </p>
+      <ul>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#c8a96a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Precision specialist</b> — fades, line-ups and beard work done right.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#c8a96a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Flexible hours</b> — including dedicated after-hours appointments.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#c8a96a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Easy online booking</b> — pick your slot and service in under a minute.</span></li>
+      </ul>
+      <div style="margin-top:32px">
+        <a class="btn btn-gold" href="https://hcutz09.simplybook.it/v2" target="_blank" rel="noopener">Book With Harry →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW TO BOOK ============ -->
+<section class="steps">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Simple</span>
+      <h2>Booking In Three Steps</h2>
+    </div>
+    <div class="step-grid">
+      <div class="step reveal"><div class="num">01</div><h3>Pick a Service</h3><p>Choose the cut, beard or shave that suits you from the booking page.</p></div>
+      <div class="step reveal" style="transition-delay:.06s"><div class="num">02</div><h3>Choose a Time</h3><p>Grab a slot that fits your day — daytime or after hours, your call.</p></div>
+      <div class="step reveal" style="transition-delay:.12s"><div class="num">03</div><h3>Turn Up Fresh</h3><p>Get confirmed instantly, show up, and leave looking your sharpest.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The Work</span>
+      <h2>Looks From The Chair</h2>
+      <p>A taste of the finish. Add your own photos here any time — drop them in and they'll slot straight into the grid.</p>
+    </div>
+    <div class="gal-grid">
+      <div class="tile reveal"><svg class="mk" viewBox="0 0 100 100"><rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/><path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/></svg><span>Skin Fade</span></div>
+      <div class="tile reveal"><svg class="mk" viewBox="0 0 100 100"><rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/><path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/></svg><span>Beard Sculpt</span></div>
+      <div class="tile reveal"><svg class="mk" viewBox="0 0 100 100"><rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/><path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/></svg><span>Line Up</span></div>
+      <div class="tile reveal"><svg class="mk" viewBox="0 0 100 100"><rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/><path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/></svg><span>Hot Towel</span></div>
+      <div class="tile reveal"><svg class="mk" viewBox="0 0 100 100"><rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/><path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/></svg><span>Classic</span></div>
+      <div class="tile reveal"><svg class="mk" viewBox="0 0 100 100"><rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/><path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/></svg><span>Textured Crop</span></div>
+      <div class="tile reveal"><svg class="mk" viewBox="0 0 100 100"><rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/><path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/></svg><span>Kids Cut</span></div>
+      <div class="tile reveal"><svg class="mk" viewBox="0 0 100 100"><rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/><rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/><path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/></svg><span>After Hours</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section id="reviews" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Word On The Street</span>
+      <h2>What Clients Say</h2>
+    </div>
+    <div class="rev-grid">
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Best fade I've had in Ashford, no question. Sharp every single time and a proper sound bloke too."</p>
+        <div class="who">— Local Regular</div>
+      </div>
+      <div class="rev reveal" style="transition-delay:.06s">
+        <div class="stars">★★★★★</div>
+        <p>"Booked online in seconds and the after-hours slot was a lifesaver before a night out. Top class."</p>
+        <div class="who">— First-Time Client</div>
+      </div>
+      <div class="rev reveal" style="transition-delay:.12s">
+        <div class="stars">★★★★★</div>
+        <p>"Takes his time, listens to what you want and the finish is unreal. Won't go anywhere else now."</p>
+        <div class="who">— Weekly Booking</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOK / HOURS ============ -->
+<section class="book" id="book">
+  <div class="wrap book-grid">
+    <div class="reveal">
+      <span class="eyebrow">Opening Hours</span>
+      <h2 style="font-size:clamp(2.4rem,5vw,3.6rem);margin:14px 0 22px">Find A Slot<br>That Works</h2>
+      <p style="color:var(--muted);max-width:46ch">Based in Ashford. After-hours appointments available on request — just pick the after-hours service when you book.</p>
+      <div style="margin-top:30px">
+        <a class="btn btn-gold" href="https://hcutz09.simplybook.it/v2" target="_blank" rel="noopener">Check Availability →</a>
+      </div>
+    </div>
+    <div class="hours reveal" style="transition-delay:.1s">
+      <div class="row"><span class="d">Monday</span><span class="t">9:00 — 18:00</span></div>
+      <div class="row"><span class="d">Tuesday</span><span class="t">9:00 — 18:00</span></div>
+      <div class="row"><span class="d">Wednesday</span><span class="t">9:00 — 18:00</span></div>
+      <div class="row"><span class="d">Thursday</span><span class="t">9:00 — 20:00</span></div>
+      <div class="row"><span class="d">Friday</span><span class="t">9:00 — 20:00</span></div>
+      <div class="row"><span class="d">Saturday</span><span class="t">8:00 — 17:00</span></div>
+      <div class="row"><span class="d">Sunday</span><span class="t">After hours only</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Ready When You Are</span>
+      <h2>LOOK FRESH.<br>FEEL <span style="color:var(--gold)">SHARP.</span></h2>
+      <p>Your next cut is two taps away. Lock in your slot with Harry now.</p>
+      <a class="btn btn-gold" href="https://hcutz09.simplybook.it/v2" target="_blank" rel="noopener" style="font-size:.95rem;padding:20px 44px">Book Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo">
+          <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+            <rect x="14" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/>
+            <rect x="71" y="12" width="15" height="76" rx="2" fill="#f6f4ef"/>
+            <rect x="14" y="42" width="72" height="15" rx="2" fill="#f6f4ef"/>
+            <path d="M71 12 L86 12 L40 88 L25 88 Z" fill="#c8a96a"/>
+          </svg>
+          <span class="word">H<b>CUTZ</b></span>
+        </a>
+        <p style="color:var(--muted);margin-top:14px;max-width:34ch;font-size:.92rem">Premium barbering in Ashford. Fresher the better.</p>
+      </div>
+      <div class="foot-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#book">Hours</a>
+        <a href="#reviews">Reviews</a>
+        <a href="https://instagram.com/h.cutz_09" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://hcutz09.simplybook.it/v2" target="_blank" rel="noopener">Book Online</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> HCUTZ · Ashford</span>
+      <span>Fresher the better.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav background on scroll
+  var nav=document.getElementById('nav');
+  function onScroll(){nav.classList.toggle('scrolled',window.scrollY>30)}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Mobile menu
+  var burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+  burger.addEventListener('click',function(){mm.classList.toggle('open')});
+  mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open')})});
+
+  // Reveal on scroll
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+  // Year
+  document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
