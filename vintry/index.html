@@ -66,8 +66,12 @@ img{max-width:100%;display:block}
 .wordmark .name{font-family:'Cormorant Garamond';font-style:normal;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
 .wordmark .name b{font-family:'Pinyon Script',cursive;font-style:normal;font-weight:400;font-size:1.78em;line-height:0;
   display:inline-block;vertical-align:-.2em;margin:0 -.04em 0 -.02em}
-/* when her real logo file is present it auto-replaces the text wordmark */
-.wordmark img{height:.92em;width:auto;max-width:78vw;display:block}
+/* her real logo file auto-replaces the text wordmark */
+.wordmark img{height:1.05em;width:auto;max-width:80vw;display:block}
+.nav .wordmark img{height:1.5em}
+.hero .wordmark img{height:.82em}
+/* footer sits on dark green — render the logo in cream so it stays legible */
+.foot-brand .wordmark img{filter:brightness(0) invert(1);opacity:.9;height:1.2em}
 
 /* ───────── scroll progress ───────── */
 #progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:200;background:linear-gradient(90deg,var(--clay),var(--clay-2))}
