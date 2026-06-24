@@ -13,7 +13,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Pinyon+Script&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<!-- To use The Vintry's REAL logo artwork instead of the styled text below,
+     drop the file into /vintry (e.g. logo.svg) and see the note in the README. -->
+
 
 <!-- Stripe.js — only used at checkout. Set your publishable key below. -->
 <script src="https://js.stripe.com/v3/"></script>
@@ -60,9 +63,11 @@ img{max-width:100%;display:block}
 /* ── reusable wordmark ── */
 .wordmark{font-family:'Cormorant Garamond';color:var(--clay);white-space:nowrap;line-height:1;display:inline-flex;align-items:baseline;gap:.34em}
 .wordmark .the{font-size:.42em;letter-spacing:.2em;text-transform:uppercase;font-weight:500;transform:translateY(-.04em)}
-.wordmark .name{font-style:italic;font-weight:500;letter-spacing:.005em;text-transform:none;padding-left:.04em}
-.wordmark .name b{font-family:'Pinyon Script',cursive;font-style:normal;font-weight:400;font-size:1.62em;line-height:0;
-  display:inline-block;vertical-align:-.2em;margin:0 -.02em 0 -.06em}
+.wordmark .name{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;letter-spacing:.01em;text-transform:none}
+.wordmark .name b{font-style:italic;font-weight:500;font-size:1.34em;line-height:0;display:inline-block;
+  vertical-align:-.05em;margin-right:-.01em}
+/* when her real logo file is present it auto-replaces the text wordmark */
+.wordmark img{height:.92em;width:auto;max-width:78vw;display:block}
 
 /* ───────── scroll progress ───────── */
 #progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:200;background:linear-gradient(90deg,var(--clay),var(--clay-2))}
@@ -775,6 +780,23 @@ const statIO=new IntersectionObserver((es)=>{es.forEach(e=>{
 
 document.getElementById('navToggle').onclick=()=>{document.getElementById('navLinks').classList.toggle('open');};
 document.querySelectorAll('#navLinks a').forEach(a=>a.onclick=()=>document.getElementById('navLinks').classList.remove('open'));
+
+/* Use the real Vintry logo automatically if a file is present in /vintry.
+   Tries logo.svg first, then logo.png. Until then, the styled text shows. */
+(function probeLogo(){
+  const candidates=['logo.svg','logo.png'];
+  (function tryNext(i){
+    if(i>=candidates.length)return;
+    const test=new Image();
+    test.onload=()=>{
+      document.querySelectorAll('.wordmark').forEach(w=>{
+        w.innerHTML='<img src="'+candidates[i]+'" alt="The Vintry, Rathgar">';
+      });
+    };
+    test.onerror=()=>tryNext(i+1);
+    test.src=candidates[i];
+  })(0);
+})();
 
 document.getElementById('yr').textContent=new Date().getFullYear();
 loadCart();renderGrid();updateCart();observeReveals();
