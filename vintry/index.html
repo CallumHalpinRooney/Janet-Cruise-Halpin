@@ -323,7 +323,7 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
 
 <!-- ───────── NAV ───────── -->
 <nav class="nav" id="nav">
-  <a class="wordmark" href="#top"><span class="the">The</span><span class="name"><b>V</b>intry</span></a>
+  <a class="wordmark" href="#top"><img src="logo.png" alt="The Vintry, Rathgar" /></a>
   <div class="nav-links" id="navLinks">
     <a href="#story">The House</a>
     <a href="#cellar">The Cellar</a>
@@ -340,7 +340,7 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
   <div class="hero-glow" data-parallax="0.12"></div>
   <div class="wrap">
     <p class="eyebrow">102 Rathgar Road · Dublin 6</p>
-    <h1 class="wordmark"><span class="the">The</span><span class="name"><b>V</b>intry</span></h1>
+    <h1 class="wordmark"><img src="logo.png" alt="The Vintry, Rathgar" /></h1>
     <p class="hero-tag">Fine wine, kept beautifully.</p>
     <p class="hero-sub">A family-run wine merchant in the heart of Rathgar — rare vintages, grower Champagne and a quietly serious cellar, chosen by people who actually drink the stuff.</p>
     <div class="hero-cta">
@@ -453,7 +453,7 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <a class="wordmark" href="#top"><span class="the">The</span><span class="name"><b>V</b>intry</span></a>
+        <a class="wordmark" href="#top"><img src="logo.png" alt="The Vintry, Rathgar" /></a>
         <p style="margin-top:18px;max-width:34ch;font-size:.9rem">Dublin's neighbourhood wine merchant since the day the door first opened. Clicks and mortar — shop online, or come say hello.</p>
       </div>
       <div class="foot-col">
@@ -784,23 +784,6 @@ const statIO=new IntersectionObserver((es)=>{es.forEach(e=>{
 
 document.getElementById('navToggle').onclick=()=>{document.getElementById('navLinks').classList.toggle('open');};
 document.querySelectorAll('#navLinks a').forEach(a=>a.onclick=()=>document.getElementById('navLinks').classList.remove('open'));
-
-/* Use the real Vintry logo automatically if a file is present in /vintry.
-   Tries logo.svg first, then logo.png. Until then, the styled text shows. */
-(function probeLogo(){
-  const candidates=['logo.svg','logo.png'];
-  (function tryNext(i){
-    if(i>=candidates.length)return;
-    const test=new Image();
-    test.onload=()=>{
-      document.querySelectorAll('.wordmark').forEach(w=>{
-        w.innerHTML='<img src="'+candidates[i]+'" alt="The Vintry, Rathgar">';
-      });
-    };
-    test.onerror=()=>tryNext(i+1);
-    test.src=candidates[i];
-  })(0);
-})();
 
 document.getElementById('yr').textContent=new Date().getFullYear();
 loadCart();renderGrid();updateCart();observeReveals();
