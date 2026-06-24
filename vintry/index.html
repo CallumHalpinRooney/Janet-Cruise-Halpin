@@ -28,12 +28,12 @@
 
 <style>
 :root{
-  /* ── The Vintry brand palette (from the existing site) ── */
-  --sage:#bccdc4;        /* signature soft sage green (eased back, less blue) */
-  --sage-2:#aabfb6;      /* mid sage */
-  --sage-3:#88a299;      /* deeper sage */
-  --pine:#3f564f;        /* deepest green — used instead of black */
-  --pine-2:#33463f;
+  /* ── The Vintry brand palette (from her shopfront) ── */
+  --sage:#93c7cc;        /* signature duck-egg blue (the shopfront paint) */
+  --sage-2:#7cb8be;      /* mid */
+  --sage-3:#579ba2;      /* deeper teal-blue */
+  --pine:#2c4d51;        /* deep teal (instead of black) */
+  --pine-2:#223e41;
   --clay:#a23c25;        /* signature terracotta (the wordmark red) */
   --clay-2:#b9543a;      /* lighter terracotta */
   --clay-deep:#7c2c19;
@@ -105,20 +105,20 @@ body.scrolled .nav{top:0}
 .nav-toggle span:nth-child(1){top:2px}.nav-toggle span:nth-child(2){top:10px}.nav-toggle span:nth-child(3){top:18px}
 
 /* ───────── hero ───────── */
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;
-  background:
-    radial-gradient(120% 90% at 78% 14%, rgba(255,255,255,.42) 0%, rgba(255,255,255,0) 50%),
-    radial-gradient(130% 120% at 12% 112%, rgba(162,60,37,.13) 0%, rgba(162,60,37,0) 52%),
-    linear-gradient(162deg,#d3ddd5 0%,#c4d2cb 46%,#b2c5bc 100%)}
-.hero-grain{position:absolute;inset:0;opacity:.4;mix-blend-mode:multiply;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E")}
-.hero-glow{position:absolute;width:62vw;height:62vw;right:-14vw;top:-16vw;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.4),transparent 62%);filter:blur(6px);will-change:transform}
-.hero .wrap{position:relative;z-index:3;padding-top:60px}
-.hero .eyebrow{color:var(--clay-deep);margin-bottom:6px}
-.hero .wordmark{font-size:clamp(3.6rem,12vw,9.5rem);margin:.06em 0 .14em}
-.hero-tag{font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.3rem,3vw,2rem);color:var(--pine);margin:0 auto 14px;max-width:24ch}
-.hero-sub{max-width:46ch;margin:0 auto 36px;font-size:1.02rem;font-weight:300;color:#41534d}
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;justify-content:center;text-align:center;overflow:hidden;
+  background:linear-gradient(162deg,#d3ddd5,#b2c5bc)}
+.hero-photo{position:absolute;inset:0;z-index:0;background:#bcd2d4 center/cover no-repeat;
+  background-image:url("storefront.jpg");will-change:transform}
+.hero-photo::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,40,42,.36) 0%,rgba(20,40,42,.12) 32%,rgba(20,40,42,.28) 62%,rgba(20,40,42,.74) 100%)}
+.hero-grain{display:none}
+.hero-glow{display:none}
+.hero .wrap{position:relative;z-index:3;padding:0 0 9vh}
+.hero .eyebrow{color:#fff;margin-bottom:14px;opacity:.92}
+.hero .wordmark{font-size:clamp(3rem,9vw,7rem);margin:0 auto .16em}
+.hero .wordmark img{filter:brightness(0) invert(1);height:.8em;margin-inline:auto}
+.hero-tag{font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.4rem,3vw,2.2rem);color:#fff;margin:0 auto 16px;max-width:26ch;text-shadow:0 1px 20px rgba(0,0,0,.3)}
+.hero-sub{max-width:46ch;margin:0 auto 36px;font-size:1.02rem;font-weight:300;color:rgba(255,255,255,.9);text-shadow:0 1px 16px rgba(0,0,0,.35)}
 .hero-cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
 .btn{display:inline-flex;align-items:center;gap:12px;padding:15px 30px;border-radius:42px;font-size:.78rem;
   letter-spacing:.18em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:.4s var(--ease);font-weight:500;font-family:'Jost'}
@@ -126,6 +126,10 @@ body.scrolled .nav{top:0}
 .btn-clay:hover{background:var(--clay-2);transform:translateY(-2px)}
 .btn-ghost{border-color:var(--pine);color:var(--pine)}
 .btn-ghost:hover{background:rgba(63,86,79,.07)}
+.hero-ghost{border-color:rgba(255,255,255,.7);color:#fff}
+.hero-ghost:hover{background:rgba(255,255,255,.14);border-color:#fff}
+.hero-hint{color:#fff;opacity:.85}
+.hero-hint i{background:linear-gradient(#fff,transparent)}
 .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;color:var(--pine);
   font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:.7}
 .scroll-hint i{width:1px;height:46px;background:linear-gradient(var(--pine),transparent);animation:drip 2.4s var(--ease) infinite}
@@ -147,6 +151,37 @@ section{position:relative}
   color:var(--pine);line-height:1.22;border-left:2px solid var(--clay);padding-left:30px}
 .figure-quote span{display:block;font-family:'Jost';font-style:normal;font-size:.78rem;letter-spacing:.22em;
   text-transform:uppercase;color:var(--clay);margin-top:22px}
+
+/* about photo */
+.story-photo{margin:0}
+.story-photo img{width:100%;border-radius:8px;box-shadow:var(--shadow);aspect-ratio:4/3;object-fit:cover;background:var(--sage)}
+.story-photo figcaption{font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.25rem,2.3vw,1.7rem);
+  color:var(--pine);line-height:1.28;border-left:2px solid var(--clay);padding-left:22px;margin-top:26px}
+
+/* our team */
+.team{background:var(--ivory)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.member{text-align:center}
+.member .photo{aspect-ratio:1/1;border-radius:8px;overflow:hidden;position:relative;box-shadow:var(--shadow);
+  background:linear-gradient(150deg,var(--sage-3),var(--pine))}
+.member .photo img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
+.member .photo .mono{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond';font-size:3.2rem;color:rgba(255,255,255,.9)}
+.member h4{font-family:'Cormorant Garamond';font-size:1.55rem;color:var(--pine);margin:18px 0 3px}
+.member .role{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--clay)}
+
+/* reviews */
+.reviews{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:var(--ivory)}
+.reviews .sec-head h2{color:var(--sage)}
+.reviews .sec-head p{color:rgba(255,255,255,.8)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev-card{background:rgba(255,255,255,.05);border:1px solid rgba(147,199,204,.2);border-radius:8px;padding:28px;display:flex;flex-direction:column}
+.rev-stars{color:#e7c06a;letter-spacing:3px;font-size:.95rem;margin-bottom:14px}
+.rev-text{font-family:'Cormorant Garamond';font-style:italic;font-size:1.2rem;line-height:1.42;margin:0 0 20px;color:#fff}
+.rev-meta{margin-top:auto;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.rev-meta b{display:block;font-family:'Jost';font-weight:500;letter-spacing:.04em;color:#fff;text-transform:none;font-size:.98rem;margin-bottom:3px}
+.rev-foot{text-align:center;margin-top:42px;font-size:.85rem;color:rgba(255,255,255,.7)}
+.rev-foot b{color:#e7c06a}
 
 /* marquee */
 .marquee{background:var(--pine);color:var(--sage);overflow:hidden;padding:20px 0;border-block:1px solid rgba(167,193,188,.18)}
@@ -296,6 +331,8 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
   .lede,.visit-grid{grid-template-columns:1fr}
   .collections{grid-template-columns:1fr 1fr}
   .grid{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .rev-grid{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:1fr 1fr;gap:40px 20px}
   .foot-top{grid-template-columns:1fr 1fr}
 }
@@ -326,8 +363,9 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
   <a class="wordmark" href="#top"><img src="logo.png" alt="The Vintry, Rathgar" /></a>
   <div class="nav-links" id="navLinks">
     <a href="#story">The House</a>
-    <a href="#cellar">The Cellar</a>
+    <a href="#team">Our Team</a>
     <a href="#shop">Shop</a>
+    <a href="#reviews">Reviews</a>
     <a href="#visit">Visit</a>
     <button class="cart-btn" onclick="openCart()">Basket <span class="cart-count" id="navCount">0</span></button>
   </div>
@@ -336,19 +374,18 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
 
 <!-- ───────── HERO ───────── -->
 <header class="hero" id="top">
-  <div class="hero-grain"></div>
-  <div class="hero-glow" data-parallax="0.12"></div>
+  <div class="hero-photo" data-parallax="0.10"></div>
   <div class="wrap">
     <p class="eyebrow">102 Rathgar Road · Dublin 6</p>
     <h1 class="wordmark"><img src="logo.png" alt="The Vintry, Rathgar" /></h1>
-    <p class="hero-tag">Fine wine, kept beautifully.</p>
+    <p class="hero-tag">Fine wine, kept beautifully — on Rathgar Road.</p>
     <p class="hero-sub">A family-run wine merchant in the heart of Rathgar — rare vintages, grower Champagne and a quietly serious cellar, chosen by people who actually drink the stuff.</p>
     <div class="hero-cta">
       <a href="#shop" class="btn btn-clay">Explore the Cellar</a>
-      <a href="#story" class="btn btn-ghost">Our Story</a>
+      <a href="#story" class="btn btn-ghost hero-ghost">Our Story</a>
     </div>
   </div>
-  <div class="scroll-hint"><span>Scroll</span><i></i></div>
+  <div class="scroll-hint hero-hint"><span>Scroll</span><i></i></div>
 </header>
 
 <!-- ───────── STORY ───────── -->
@@ -363,10 +400,10 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
       <p>Step in for a Tuesday-night red or a cellar-defining magnum — you'll get the same considered word from the same people who chose it.</p>
     </div>
     <div class="reveal" data-delay="2">
-      <blockquote class="figure-quote">
-        “We don't stock labels. We stock wines we'd be glad to open ourselves.”
-        <span>— The Vintry, Rathgar</span>
-      </blockquote>
+      <figure class="story-photo">
+        <img src="team.jpg" alt="The team at The Vintry, Rathgar" loading="lazy" onerror="this.style.display='none'" />
+        <figcaption>“We don't stock labels. We stock wines we'd be glad to open ourselves.”</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -386,6 +423,23 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
     <div class="stat reveal" data-delay="1"><div class="num" data-count="14">0</div><div class="lbl">Countries poured</div></div>
     <div class="stat reveal" data-delay="2"><div class="num" data-count="40">0</div><div class="lbl">Years on Rathgar Rd</div></div>
     <div class="stat reveal" data-delay="3"><div class="num" data-count="100">0</div><div class="lbl">% chosen by hand</div></div>
+  </div>
+</section>
+
+<!-- ───────── OUR TEAM ───────── -->
+<section class="team pad" id="team">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Our Team</p>
+      <h2>The people who choose it.</h2>
+      <p>The reason regulars keep coming back — knowledgeable, generous with advice, and genuinely glad to see you.</p>
+    </div>
+    <div class="team-grid">
+      <div class="member reveal"><div class="photo"><span class="mono">E</span><img src="evelyn.jpg" alt="Evelyn Jones" loading="lazy" onerror="this.style.display='none'"></div><h4>Evelyn Jones</h4><div class="role">The Vintry</div></div>
+      <div class="member reveal" data-delay="1"><div class="photo"><span class="mono">D</span><img src="david.jpg" alt="David Lonergan" loading="lazy" onerror="this.style.display='none'"></div><h4>David Lonergan</h4><div class="role">The Vintry</div></div>
+      <div class="member reveal" data-delay="2"><div class="photo"><span class="mono">L</span><img src="leslie.jpg" alt="Leslie Williams" loading="lazy" onerror="this.style.display='none'"></div><h4>Leslie Williams</h4><div class="role">The Vintry</div></div>
+      <div class="member reveal" data-delay="3"><div class="photo"><span class="mono">R</span><img src="ray.jpg" alt="Ray McCann" loading="lazy" onerror="this.style.display='none'"></div><h4>Ray McCann</h4><div class="role">The Vintry</div></div>
+    </div>
   </div>
 </section>
 
@@ -429,6 +483,26 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
   </div>
 </section>
 
+<!-- ───────── REVIEWS ───────── -->
+<section class="reviews pad" id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Kind Words</p>
+      <h2>Rathgar's favourite offie.</h2>
+      <p>A handful of the many five-star reviews from our customers on Google.</p>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">“Great bunch of guys in the Vintry — best selection of wine in the city. Love popping in.”</p><div class="rev-meta"><b>Martin Stafford</b>Google review</div></div>
+      <div class="rev-card reveal" data-delay="1"><div class="rev-stars">★★★★★</div><p class="rev-text">“The staff are wonderful and the range of wines, beers and spirits is second to none. A wonderful place to browse.”</p><div class="rev-meta"><b>Google reviewer</b>Google review</div></div>
+      <div class="rev-card reveal" data-delay="2"><div class="rev-stars">★★★★★</div><p class="rev-text">“The loveliest shop with such a great range of wine. The owner was very friendly and offered great recommendations. We'll be returning very soon!”</p><div class="rev-meta"><b>Lydia Doyle</b>Google review</div></div>
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">“One of the best independent wine shops in Ireland. A great selection of wines you don't tend to see elsewhere — all hand-picked.”</p><div class="rev-meta"><b>Mike G</b>Google review</div></div>
+      <div class="rev-card reveal" data-delay="1"><div class="rev-stars">★★★★★</div><p class="rev-text">“The most wonderful shop in Dublin for wine. Evelyn and Dave really know what they are talking about — always fabulous advice.”</p><div class="rev-meta"><b>Adeline Farrelly</b>Google review</div></div>
+      <div class="rev-card reveal" data-delay="2"><div class="rev-stars">★★★★★</div><p class="rev-text">“Best place on the southside to find quality wine. The gentlemen are extremely knowledgeable and always happy to help. A class act!”</p><div class="rev-meta"><b>Rachel Forster</b>Google review</div></div>
+    </div>
+    <p class="rev-foot reveal">Rated <b>5.0 ★</b> by our customers on Google</p>
+  </div>
+</section>
+
 <!-- ───────── VISIT ───────── -->
 <section class="visit pad" id="visit">
   <div class="wrap visit-grid">
@@ -438,7 +512,8 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
       <p>You'll find us on the corner of Rathgar Road — the one with the good bottles in the window. Park, browse, ask anything.</p>
       <div class="info-row"><div class="k">Address</div><div class="v">The Vintry<br>102 Rathgar Road, Rathgar<br>Dublin 6, D06 YW96</div></div>
       <div class="info-row"><div class="k">Telephone</div><div class="v"><a href="tel:+35314905477">+353 1 490 5477</a></div></div>
-      <div class="info-row"><div class="k">Opening</div><div class="v">Mon – Sat · 10:30 – 22:00<br>Sunday · 12:30 – 22:00</div></div>
+      <div class="info-row"><div class="k">Email</div><div class="v"><a href="mailto:vintry@vintry.ie">vintry@vintry.ie</a></div></div>
+      <div class="info-row"><div class="k">Opening</div><div class="v">Mon &amp; Tue · 1:00 – 9:00pm<br>Wed – Sat · 11:00am – 9:00pm<br>Sunday · 12:30 – 8:00pm</div></div>
       <div class="info-row"><div class="k">Find us</div><div class="v"><a href="https://www.instagram.com/thevintryrathgar/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/thevintry102/" target="_blank" rel="noopener">Facebook</a></div></div>
     </div>
     <div class="map-card reveal" data-delay="1">
@@ -463,6 +538,7 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
       <div class="foot-col">
         <h5>Contact</h5>
         <a href="tel:+35314905477">+353 1 490 5477</a>
+        <a href="mailto:vintry@vintry.ie">vintry@vintry.ie</a>
         <a href="https://maps.google.com/?q=102+Rathgar+Road+Dublin" target="_blank" rel="noopener">102 Rathgar Road, D06 YW96</a>
         <a href="https://www.instagram.com/thevintryrathgar/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/thevintry102/" target="_blank" rel="noopener">Facebook</a>
