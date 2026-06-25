@@ -152,6 +152,23 @@ section{position:relative}
 .figure-quote span{display:block;font-family:'Jost';font-style:normal;font-size:.78rem;letter-spacing:.22em;
   text-transform:uppercase;color:var(--clay);margin-top:22px}
 
+/* discover intro */
+.discover-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);max-width:900px;margin:0 auto;color:#4a5a57}
+.feature-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:820px;margin:clamp(40px,5vw,56px) auto 0}
+.feat{text-align:center;padding:26px 20px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
+.feat b{display:block;font-family:'Cormorant Garamond';font-size:1.9rem;color:var(--clay);line-height:1.1}
+.feat span{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#6c7a74;margin-top:8px}
+
+/* awards */
+.awards{background:var(--cream)}
+.awards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.award{background:var(--paper);border:1px solid rgba(63,86,79,.12);border-radius:8px;padding:32px 26px;text-align:center;
+  transition:transform .5s var(--ease),box-shadow .5s,border-color .5s}
+.award:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(162,60,37,.32)}
+.award .medal{font-size:1.5rem;color:var(--clay);margin-bottom:8px;line-height:1}
+.award h4{font-family:'Cormorant Garamond';font-size:1.5rem;color:var(--pine);margin:4px 0 9px;line-height:1.15}
+.award p{font-size:.82rem;color:#6c7a74;margin:0;letter-spacing:.04em;text-transform:uppercase;font-size:.7rem;letter-spacing:.12em}
+
 /* about photo */
 .story-photo{margin:0}
 .story-photo img{width:100%;border-radius:8px;box-shadow:var(--shadow);aspect-ratio:4/3;object-fit:cover;background:var(--sage)}
@@ -333,6 +350,9 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
   .grid{grid-template-columns:1fr 1fr}
   .team-grid{grid-template-columns:1fr 1fr;gap:30px}
   .rev-grid{grid-template-columns:1fr}
+  .awards-grid{grid-template-columns:1fr 1fr}
+  .discover-cols{grid-template-columns:1fr;gap:14px;max-width:600px}
+  .feature-row{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:1fr 1fr;gap:40px 20px}
   .foot-top{grid-template-columns:1fr 1fr}
 }
@@ -362,8 +382,8 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
 <nav class="nav" id="nav">
   <a class="wordmark" href="#top"><img src="logo.png" alt="The Vintry, Rathgar" /></a>
   <div class="nav-links" id="navLinks">
-    <a href="#story">The House</a>
-    <a href="#team">Our Team</a>
+    <a href="#discover">About</a>
+    <a href="#awards">Awards</a>
     <a href="#shop">Shop</a>
     <a href="#reviews">Reviews</a>
     <a href="#visit">Visit</a>
@@ -388,16 +408,34 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
   <div class="scroll-hint hero-hint"><span>Scroll</span><i></i></div>
 </header>
 
+<!-- ───────── DISCOVER ───────── -->
+<section class="pad wrap" id="discover">
+  <div class="sec-head reveal">
+    <p class="eyebrow">Discover</p>
+    <h2>A world for wine lovers, everywhere.</h2>
+    <p>The Vintry was established in 1991. Ever since, we've poured ourselves into our award-winning shop in Rathgar, Dublin 6 — and, these days, online too.</p>
+  </div>
+  <div class="discover-cols reveal">
+    <p>We carry a full range of fine wines, right back to older vintages, alongside an extensive selection of spirits, liqueurs, cocktails and craft beers — many you simply won't find on a supermarket shelf.</p>
+    <p>We also offer a complete party service and a range of gift boxes, including bespoke, customised gift cases built to suit every requirement and every budget.</p>
+  </div>
+  <div class="feature-row reveal" data-delay="1">
+    <div class="feat"><b>Est. 1991</b><span>Independent, in Rathgar</span></div>
+    <div class="feat"><b>Party Service</b><span>Supply, glassware &amp; advice</span></div>
+    <div class="feat"><b>Gift Cases</b><span>Bespoke, made to suit</span></div>
+  </div>
+</section>
+
 <!-- ───────── STORY ───────── -->
 <section class="pad wrap" id="story">
   <div class="lede">
     <div class="reveal">
-      <p class="eyebrow">The House</p>
+      <p class="eyebrow">About Us</p>
       <h2>A merchant's eye,<br>a neighbour's welcome.</h2>
       <div class="rule"></div>
-      <p>The Vintry has poured itself into the corner of Rathgar Road for a generation — long enough to know our regulars' tastes better than they do, and to have laid down the bottles worth waiting for.</p>
-      <p>We buy the way we drink: led by curiosity, never by fashion. Classed-growth Bordeaux and grower Champagne sit happily beside a €17 Marlborough that overdelivers every single time. If it's on our shelf, it earned its place.</p>
-      <p>Step in for a Tuesday-night red or a cellar-defining magnum — you'll get the same considered word from the same people who chose it.</p>
+      <p>Wine should be a pleasure, never a test. Our team trains continually in matching wine with food, and through our own education arm we taste through the range together every week — so the advice you get is lived-in, not learned by rote.</p>
+      <p>Between us we hold qualifications from the Wine &amp; Spirit Education Trust, the wine industry's recognised training body: <strong>four Certificates, four Higher Certificates, two Distinctions and two Diplomas</strong>.</p>
+      <p>But knowledge only counts if it's useful. We couple it with a warm, down-to-earth approach that starts with you — your taste, your occasion, your budget — and finds the bottle that fits.</p>
     </div>
     <div class="reveal" data-delay="2">
       <figure class="story-photo">
@@ -423,6 +461,25 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
     <div class="stat reveal" data-delay="1"><div class="num" data-count="14">0</div><div class="lbl">Countries poured</div></div>
     <div class="stat reveal" data-delay="2"><div class="num" data-count="40">0</div><div class="lbl">Years on Rathgar Rd</div></div>
     <div class="stat reveal" data-delay="3"><div class="num" data-count="100">0</div><div class="lbl">% chosen by hand</div></div>
+  </div>
+</section>
+
+<!-- ───────── AWARDS ───────── -->
+<section class="awards pad" id="awards">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Recognition</p>
+      <h2>Award-winning, year after year.</h2>
+      <p>We compete every year in the National Off-Licence Association (NOffLA) Awards, and have been proud to win many — including National Off-Licence of the Year, on two occasions.</p>
+    </div>
+    <div class="awards-grid">
+      <div class="award reveal"><div class="medal">✦</div><h4>National Off-Licence of the Year</h4><p>Winner · twice</p></div>
+      <div class="award reveal" data-delay="1"><div class="medal">✦</div><h4>Customer Service Award</h4><p>National winner · 2018 &amp; 2019</p></div>
+      <div class="award reveal" data-delay="2"><div class="medal">✦</div><h4>Excellence Awards</h4><p>2020 &amp; 2021</p></div>
+      <div class="award reveal"><div class="medal">✦</div><h4>Spirits Specialist of the Year</h4><p>National · 2022</p></div>
+      <div class="award reveal" data-delay="1"><div class="medal">✦</div><h4>Bridgestone &amp; McKenna Guides</h4><p>Listed every year · 1998–2023</p></div>
+      <div class="award reveal" data-delay="2"><div class="medal">✦</div><h4>Foundation Mark</h4><p>Business excellence · Excellence Ireland</p></div>
+    </div>
   </div>
 </section>
 
