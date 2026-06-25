@@ -185,8 +185,8 @@ section{position:relative}
 
 /* our team */
 .team{background:var(--ivory)}
-.team-group{margin:0 auto clamp(40px,5vw,60px);max-width:760px;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
-.team-group img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
+.team-group{margin:0 auto clamp(40px,5vw,60px);max-width:480px;border-radius:10px;overflow:hidden;box-shadow:var(--shadow);border:6px solid var(--paper)}
+.team-group img{width:100%;display:block;height:auto}
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .member{text-align:center}
 .member .photo{aspect-ratio:4/5;border-radius:8px;overflow:hidden;position:relative;box-shadow:var(--shadow);
@@ -236,6 +236,9 @@ section{position:relative}
 .col-card.c1::before{background:linear-gradient(150deg,#7a9d96,#3f564f)}
 .col-card.c2::before{background:linear-gradient(150deg,#b9543a,#7c2c19)}
 .col-card.c3::before{background:linear-gradient(150deg,#5e7d76,#33463f)}
+.col-card .door-bottle{position:absolute;right:7%;bottom:-2%;height:82%;width:auto;z-index:0;opacity:.22;pointer-events:none;transition:transform .9s var(--ease)}
+.col-card:hover .door-bottle{transform:translateY(-6px) rotate(-2deg)}
+.col-card .ix,.col-card h3,.col-card p,.col-card .go{position:relative;z-index:1}
 .col-card .ix{font-family:'EB Garamond';font-size:.95rem;color:var(--sage);letter-spacing:.1em}
 .col-card h3{font-size:2.1rem;margin:6px 0;color:var(--ivory)}
 .col-card p{font-size:.9rem;color:rgba(249,244,235,.82);margin:0 0 8px}
@@ -529,16 +532,19 @@ footer{background:#efe0e2;color:#5a4046;padding:70px 0 40px;border-top:1px solid
   </div>
   <div class="collections">
     <a class="col-card c1 reveal" onclick="filterTo('champagne')">
+      <svg class="door-bottle" viewBox="0 0 60 184" fill="none" aria-hidden="true"><path d="M26 7h8v9l3 6c2 4 3 8 3 14v118a10 10 0 0 1-10 10h-8a10 10 0 0 1-10-10V36c0-6 1-10 3-14l3-6z" stroke="#fff" stroke-width="1.6"/><rect x="18" y="96" width="24" height="46" rx="2" stroke="#fff" stroke-width="1.1"/></svg>
       <span class="ix">No. 01</span><h3>Champagne &amp; Fizz</h3>
       <p>Grand marques and grower gems, from Sant'Anna to Dom Pérignon.</p>
       <span class="go">Browse</span>
     </a>
     <a class="col-card c2 reveal" data-delay="1" onclick="filterTo('red')">
+      <svg class="door-bottle" viewBox="0 0 60 184" fill="none" aria-hidden="true"><path d="M22 7h16v22c8 6 10 13 10 24v111a10 10 0 0 1-10 10H22a10 10 0 0 1-10-10V53c0-11 2-18 10-24z" stroke="#fff" stroke-width="1.6"/><rect x="16" y="98" width="28" height="48" rx="2" stroke="#fff" stroke-width="1.1"/></svg>
       <span class="ix">No. 02</span><h3>Fine Reds</h3>
       <p>Bordeaux, Châteauneuf, Barolo &amp; Burgundy worth opening slowly.</p>
       <span class="go">Browse</span>
     </a>
     <a class="col-card c3 reveal" data-delay="2" onclick="filterTo('port')">
+      <svg class="door-bottle" viewBox="0 0 60 184" fill="none" aria-hidden="true"><path d="M23 7h14v20c9 6 11 14 11 26v113a10 10 0 0 1-10 10H22a10 10 0 0 1-10-10V53c0-12 2-20 11-26z" stroke="#fff" stroke-width="1.6"/><rect x="17" y="100" width="26" height="46" rx="2" stroke="#fff" stroke-width="1.1"/></svg>
       <span class="ix">No. 03</span><h3>Port &amp; Fortified</h3>
       <p>Vintage declarations and aged tawnies for the end of the evening.</p>
       <span class="go">Browse</span>
