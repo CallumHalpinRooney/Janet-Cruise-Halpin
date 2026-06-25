@@ -231,7 +231,7 @@ section{position:relative}
 .col-card{position:relative;border-radius:6px;overflow:hidden;min-height:380px;display:flex;flex-direction:column;
   justify-content:flex-end;padding:30px;color:var(--ivory);cursor:pointer;isolation:isolate}
 .col-card::before{content:"";position:absolute;inset:0;z-index:-3;transition:transform .9s var(--ease)}
-.col-card .door-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .9s var(--ease)}
+.col-card .door-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:-2;transition:transform .9s var(--ease)}
 .col-card:hover .door-bg{transform:scale(1.06)}
 .col-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,32,34,.28) 0%,rgba(18,32,34,.18) 38%,rgba(18,32,34,.82) 100%)}
 .col-card:hover::before{transform:scale(1.07)}
@@ -537,20 +537,20 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
   </div>
   <div class="collections">
     <a class="col-card c1 reveal" onclick="filterTo('champagne')">
-      <img class="door-bg" src="champagne.jpg" alt="" loading="lazy" onerror="this.remove()">
+      <span class="door-bg" style="background-image:url('champagne.jpg')"></span>
       <span class="ix">No. 01</span><h3>Champagne &amp; Fizz</h3>
       <p>Grand marques and grower gems, from Sant'Anna to Dom Pérignon.</p>
       <span class="go">Browse</span>
     </a>
     <a class="col-card c2 reveal" data-delay="1" onclick="filterTo('red')">
-      <img class="door-bg" src="red.jpg" alt="" loading="lazy" onerror="this.remove()">
+      <span class="door-bg" style="background-image:url('red.jpg')"></span>
       <svg class="door-bottle" viewBox="0 0 60 184" fill="none" aria-hidden="true"><path d="M22 7h16v22c8 6 10 13 10 24v111a10 10 0 0 1-10 10H22a10 10 0 0 1-10-10V53c0-11 2-18 10-24z" stroke="#fff" stroke-width="1.6"/><rect x="16" y="98" width="28" height="48" rx="2" stroke="#fff" stroke-width="1.1"/></svg>
       <span class="ix">No. 02</span><h3>Fine Reds</h3>
       <p>Bordeaux, Châteauneuf, Barolo &amp; Burgundy worth opening slowly.</p>
       <span class="go">Browse</span>
     </a>
     <a class="col-card c3 reveal" data-delay="2" onclick="filterTo('port')">
-      <img class="door-bg" src="port.jpg" alt="" loading="lazy" onerror="this.remove()">
+      <span class="door-bg" style="background-image:url('port.jpg')"></span>
       <span class="ix">No. 03</span><h3>Port &amp; Fortified</h3>
       <p>Vintage declarations and aged tawnies for the end of the evening.</p>
       <span class="go">Browse</span>
