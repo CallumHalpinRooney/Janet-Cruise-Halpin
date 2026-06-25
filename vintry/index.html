@@ -29,8 +29,8 @@
 <style>
 :root{
   /* ── The Vintry — dark luxury: charcoal, black, deep red ── */
-  --wine:#6e121f;        /* deep bordeaux — primary brand */
-  --wine-2:#9a1f2c;      /* brighter red accent */
+  --wine:#4d0c14;        /* deep, rich bordeaux — red bands */
+  --wine-2:#7a1320;      /* mid red */
   --clay:#b03142;        /* accent red (reads on dark) */
   --clay-2:#c9505f;      /* hover red */
   --clay-deep:#4a0c14;   /* darkest red */
@@ -218,10 +218,10 @@ section{position:relative}
 .fs-text h2{font-size:clamp(2.2rem,4vw,3.6rem);color:var(--ink);margin-bottom:.4em}
 .fs-text p{color:var(--sage);margin:0 0 16px;max-width:46ch}
 
-/* deep wine-red statement band over a vineyard */
-.statement{position:relative;background:var(--wine);color:#f4e7e0;text-align:center;padding:clamp(90px,13vw,160px) 0;overflow:hidden}
-.statement .st-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;opacity:.26;mix-blend-mode:luminosity}
-.statement::after{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(120% 100% at 50% 50%,rgba(110,18,31,.35),rgba(74,12,20,.85))}
+/* deep, rich red statement band */
+.statement{position:relative;background:radial-gradient(120% 120% at 50% 0%,#5e0f18 0%,#3c0810 60%,#280509 100%);
+  color:#f3ddd6;text-align:center;padding:clamp(90px,13vw,160px) 0;overflow:hidden}
+.statement .st-bg{display:none}
 .statement .wrap{position:relative;z-index:1;max-width:920px}
 .statement .eyebrow{color:#e7c9b8;margin-bottom:24px}
 .statement h2{font-family:'Cormorant Garamond';font-weight:400;font-style:italic;font-size:clamp(2rem,4.4vw,3.6rem);
@@ -247,8 +247,12 @@ section{position:relative}
 
 /* our team */
 .team{background:var(--ivory)}
-.team-group{margin:0 auto clamp(40px,5vw,60px);max-width:480px;border-radius:10px;overflow:hidden;box-shadow:var(--shadow);border:6px solid var(--paper)}
+.team-group{margin:0 auto clamp(30px,4vw,44px);max-width:680px;border-radius:6px;overflow:hidden;box-shadow:var(--shadow)}
 .team-group img{width:100%;display:block;height:auto}
+.team-names{list-style:none;margin:0 auto;padding:0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:14px 30px;max-width:680px}
+.team-names li{font-family:'Cormorant Garamond';font-size:clamp(1.3rem,2.4vw,1.8rem);color:var(--sage);position:relative;padding:0 2px}
+.team-names li:not(:last-child)::after{content:"·";position:absolute;right:-17px;color:var(--clay)}
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .member{text-align:center}
 .member .photo{aspect-ratio:4/5;border-radius:8px;overflow:hidden;position:relative;box-shadow:var(--shadow);
@@ -513,7 +517,7 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
   <a class="wordmark" href="#top"><img src="logo.png" alt="The Vintry, Rathgar" /></a>
   <div class="nav-links" id="navLinks">
     <a href="#discover">About</a>
-    <a href="#grapes">Grapes</a>
+    <a href="#cellar">Cellar</a>
     <a href="#shop">Shop</a>
     <a href="#reviews">Reviews</a>
     <a href="#visit">Visit</a>
@@ -538,36 +542,6 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
 </header>
 <div class="hero-spacer" aria-hidden="true"></div>
 <div class="page">
-
-<!-- ───────── COLLECTIONS (three doors — below the video) ───────── -->
-<section class="pad wrap" id="cellar">
-  <div class="sec-head reveal">
-    <p class="eyebrow">The Cellar</p>
-    <h2>Three doors in.</h2>
-    <p>Whether you're after a gift that lands, a bottle for tonight, or something to lay down — start here.</p>
-  </div>
-  <div class="collections">
-    <a class="col-card c1 reveal" onclick="filterTo('champagne')">
-      <span class="door-bg" style="background-image:url('champagne.jpg?v=1')"></span>
-      <span class="ix">No. 01</span><h3>Champagne &amp; Fizz</h3>
-      <p>Grand marques and grower gems, from Sant'Anna to Dom Pérignon.</p>
-      <span class="go">Browse</span>
-    </a>
-    <a class="col-card c2 reveal" data-delay="1" onclick="filterTo('red')">
-      <span class="door-bg" style="background-image:url('red.jpg?v=1')"></span>
-      <svg class="door-bottle" viewBox="0 0 60 184" fill="none" aria-hidden="true"><path d="M22 7h16v22c8 6 10 13 10 24v111a10 10 0 0 1-10 10H22a10 10 0 0 1-10-10V53c0-11 2-18 10-24z" stroke="#fff" stroke-width="1.6"/><rect x="16" y="98" width="28" height="48" rx="2" stroke="#fff" stroke-width="1.1"/></svg>
-      <span class="ix">No. 02</span><h3>Fine Reds</h3>
-      <p>Bordeaux, Châteauneuf, Barolo &amp; Burgundy worth opening slowly.</p>
-      <span class="go">Browse</span>
-    </a>
-    <a class="col-card c3 reveal" data-delay="2" onclick="filterTo('port')">
-      <span class="door-bg" style="background-image:url('port.jpg?v=1')"></span>
-      <span class="ix">No. 03</span><h3>Port &amp; Fortified</h3>
-      <p>Vintage declarations and aged tawnies for the end of the evening.</p>
-      <span class="go">Browse</span>
-    </a>
-  </div>
-</section>
 
 <!-- ───────── DISCOVER (split image + text) ───────── -->
 <section class="feature-split" id="discover">
@@ -667,12 +641,12 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
       <p>The reason regulars keep coming back — knowledgeable, generous with advice, and genuinely glad to see you.</p>
     </div>
     <figure class="team-group reveal"><img src="team-group.jpg" alt="The Vintry team, Rathgar" loading="lazy" onerror="this.closest('figure').style.display='none'"></figure>
-    <div class="team-grid">
-      <div class="member reveal"><div class="photo"><span class="mono">E</span><img src="evelyn.webp" alt="Evelyn Jones" loading="lazy" onerror="this.style.display='none'"></div><h4>Evelyn Jones</h4><div class="role">The Vintry</div></div>
-      <div class="member reveal" data-delay="1"><div class="photo"><span class="mono">D</span><img src="david.webp" alt="David Lonergan" loading="lazy" onerror="this.style.display='none'"></div><h4>David Lonergan</h4><div class="role">The Vintry</div></div>
-      <div class="member reveal" data-delay="2"><div class="photo"><span class="mono">L</span><img src="leslie.webp" alt="Leslie Williams" loading="lazy" onerror="this.style.display='none'"></div><h4>Leslie Williams</h4><div class="role">The Vintry</div></div>
-      <div class="member reveal" data-delay="3"><div class="photo"><span class="mono">R</span><img src="ray.webp" alt="Ray McCann" loading="lazy" onerror="this.style.display='none'"></div><h4>Ray McCann</h4><div class="role">The Vintry</div></div>
-    </div>
+    <ul class="team-names reveal" data-delay="1">
+      <li>Evelyn Jones</li>
+      <li>David Lonergan</li>
+      <li>Leslie Williams</li>
+      <li>Ray McCann</li>
+    </ul>
   </div>
 </section>
 
@@ -686,24 +660,33 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
   </div>
 </section>
 
-<!-- ───────── GRAPES ───────── -->
-<section class="grapes pad" id="grapes">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">By the Grape</p>
-      <h2>Explore by variety.</h2>
-      <p>Discover the cellar through the grapes that define it — from noble Cabernet to a crisp Sauvignon Blanc.</p>
-    </div>
-    <div class="grape-grid">
-      <a class="grape-card reveal" style="--gi:url('grape-cabernet-sauvignon.jpg')" onclick="filterToGrape('Cabernet Sauvignon')"><span class="gmedia"></span><span class="ginfo"><h4>Cabernet Sauvignon</h4><span class="gcount">73 wines</span></span></a>
-      <a class="grape-card reveal" data-delay="1" style="--gi:url('grape-merlot.jpg')" onclick="filterToGrape('Merlot')"><span class="gmedia"></span><span class="ginfo"><h4>Merlot</h4><span class="gcount">66 wines</span></span></a>
-      <a class="grape-card reveal" data-delay="2" style="--gi:url('grape-pinot-noir.jpg')" onclick="filterToGrape('Pinot Noir')"><span class="gmedia"></span><span class="ginfo"><h4>Pinot Noir</h4><span class="gcount">44 wines</span></span></a>
-      <a class="grape-card reveal" data-delay="3" style="--gi:url('grape-chardonnay.jpg')" onclick="filterToGrape('Chardonnay')"><span class="gmedia"></span><span class="ginfo"><h4>Chardonnay</h4><span class="gcount">56 wines</span></span></a>
-      <a class="grape-card reveal" style="--gi:url('grape-syrah.jpg')" onclick="filterToGrape('Syrah')"><span class="gmedia"></span><span class="ginfo"><h4>Syrah</h4><span class="gcount">40 wines</span></span></a>
-      <a class="grape-card reveal" data-delay="1" style="--gi:url('grape-sauvignon-blanc.jpg')" onclick="filterToGrape('Sauvignon Blanc')"><span class="gmedia"></span><span class="ginfo"><h4>Sauvignon Blanc</h4><span class="gcount">32 wines</span></span></a>
-      <a class="grape-card reveal" data-delay="2" style="--gi:url('grape-tempranillo.jpg')" onclick="filterToGrape('Tempranillo')"><span class="gmedia"></span><span class="ginfo"><h4>Tempranillo</h4><span class="gcount">31 wines</span></span></a>
-      <a class="grape-card reveal" data-delay="3" style="--gi:url('grape-sangiovese.jpg')" onclick="filterToGrape('Sangiovese')"><span class="gmedia"></span><span class="ginfo"><h4>Sangiovese</h4><span class="gcount">18 wines</span></span></a>
-    </div>
+<!-- ───────── COLLECTIONS (three doors) ───────── -->
+<section class="pad wrap" id="cellar">
+  <div class="sec-head reveal">
+    <p class="eyebrow">The Cellar</p>
+    <h2>Three doors in.</h2>
+    <p>Whether you're after a gift that lands, a bottle for tonight, or something to lay down — start here.</p>
+  </div>
+  <div class="collections">
+    <a class="col-card c1 reveal" onclick="filterTo('champagne')">
+      <span class="door-bg" style="background-image:url('champagne.jpg?v=1')"></span>
+      <span class="ix">No. 01</span><h3>Champagne &amp; Fizz</h3>
+      <p>Grand marques and grower gems, from Sant'Anna to Dom Pérignon.</p>
+      <span class="go">Browse</span>
+    </a>
+    <a class="col-card c2 reveal" data-delay="1" onclick="filterTo('red')">
+      <span class="door-bg" style="background-image:url('red.jpg?v=1')"></span>
+      <svg class="door-bottle" viewBox="0 0 60 184" fill="none" aria-hidden="true"><path d="M22 7h16v22c8 6 10 13 10 24v111a10 10 0 0 1-10 10H22a10 10 0 0 1-10-10V53c0-11 2-18 10-24z" stroke="#fff" stroke-width="1.6"/><rect x="16" y="98" width="28" height="48" rx="2" stroke="#fff" stroke-width="1.1"/></svg>
+      <span class="ix">No. 02</span><h3>Fine Reds</h3>
+      <p>Bordeaux, Châteauneuf, Barolo &amp; Burgundy worth opening slowly.</p>
+      <span class="go">Browse</span>
+    </a>
+    <a class="col-card c3 reveal" data-delay="2" onclick="filterTo('port')">
+      <span class="door-bg" style="background-image:url('port.jpg?v=1')"></span>
+      <span class="ix">No. 03</span><h3>Port &amp; Fortified</h3>
+      <p>Vintage declarations and aged tawnies for the end of the evening.</p>
+      <span class="go">Browse</span>
+    </a>
   </div>
 </section>
 
@@ -810,7 +793,7 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="yr"></span> The Vintry, Rathgar. All rights reserved. <span style="opacity:.55">· build DARK‑2</span></span>
+      <span>© <span id="yr"></span> The Vintry, Rathgar. All rights reserved. <span style="opacity:.55">· build DARK‑3</span></span>
       <span>Enjoy wine sensibly · Over 18s only · drinkaware.ie</span>
     </div>
   </div>
