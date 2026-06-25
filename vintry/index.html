@@ -230,8 +230,10 @@ section{position:relative}
 .collections{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .col-card{position:relative;border-radius:6px;overflow:hidden;min-height:380px;display:flex;flex-direction:column;
   justify-content:flex-end;padding:30px;color:var(--ivory);cursor:pointer;isolation:isolate}
-.col-card::before{content:"";position:absolute;inset:0;z-index:-2;transition:transform .9s var(--ease)}
-.col-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 26%,rgba(33,46,40,.8))}
+.col-card::before{content:"";position:absolute;inset:0;z-index:-3;transition:transform .9s var(--ease)}
+.col-card .door-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .9s var(--ease)}
+.col-card:hover .door-bg{transform:scale(1.06)}
+.col-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,32,34,.28) 0%,rgba(18,32,34,.18) 38%,rgba(18,32,34,.82) 100%)}
 .col-card:hover::before{transform:scale(1.07)}
 .col-card.c1::before{background:linear-gradient(150deg,#7a9d96,#3f564f)}
 .col-card.c2::before{background:linear-gradient(150deg,#b9543a,#7c2c19)}
@@ -247,29 +249,32 @@ section{position:relative}
 
 /* shop */
 .shop{background:var(--ivory)}
-.filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:46px}
-.filter{border:1px solid var(--line);background:none;color:var(--ink);padding:10px 20px;border-radius:40px;
-  font-family:'EB Garamond';font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:.35s}
-.filter:hover{border-color:var(--clay)}
-.filter.active{background:var(--clay);color:var(--ivory);border-color:var(--clay)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.card{background:var(--paper);border:1px solid rgba(63,86,79,.1);border-radius:5px;overflow:hidden;display:flex;flex-direction:column;
+.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:54px}
+.filter{border:1px solid var(--line);background:none;color:var(--ink);padding:11px 22px;border-radius:0;
+  font-family:'EB Garamond';font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:.35s}
+.filter:hover{border-color:var(--wine);color:var(--wine)}
+.filter.active{background:var(--wine);color:#fff;border-color:var(--wine)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.card{background:var(--paper);border:1px solid rgba(44,77,81,.12);border-radius:3px;overflow:hidden;display:flex;flex-direction:column;
   transition:transform .55s var(--ease),box-shadow .55s,border-color .55s}
-.card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(162,60,37,.36)}
-.bottle{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#eef3f0,#e3ece8)}
-.bottle::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 32%,rgba(255,255,255,.5),transparent)}
-.b-svg{height:150px;filter:drop-shadow(0 12px 16px rgba(40,56,50,.26));position:relative;z-index:1}
-.flag{position:absolute;top:12px;left:12px;z-index:2;background:var(--clay);color:var(--ivory);font-size:.6rem;
-  letter-spacing:.16em;text-transform:uppercase;padding:4px 9px;border-radius:30px;font-weight:500}
-.card-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;border-top:1px solid rgba(63,86,79,.08)}
-.card .region{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clay)}
-.card h4{font-family:'EB Garamond';font-size:1.46rem;color:var(--wine);margin:7px 0 3px;line-height:1.12}
-.card .producer{font-size:.88rem;color:#6a565a;margin-bottom:12px}
-.card .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.price{font-family:'EB Garamond';font-size:1.5rem;color:var(--ink)}
-.add{border:1px solid var(--clay);background:none;color:var(--clay);border-radius:40px;padding:9px 16px;
-  font-family:'EB Garamond';font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
-.add:hover{background:var(--clay);color:var(--ivory)}
+.card:hover{transform:translateY(-7px);box-shadow:0 30px 60px -34px rgba(30,40,55,.5);border-color:rgba(110,19,34,.3)}
+.bottle{height:240px;display:flex;align-items:flex-end;justify-content:center;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#fbf8f3 0%,#f1ece2 100%)}
+.bottle::before{content:"";position:absolute;left:0;right:0;bottom:0;height:30px;background:linear-gradient(#d8cfc0,#cfc5b4);box-shadow:0 -1px 0 rgba(0,0,0,.05)}
+.bottle::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 28%,rgba(255,255,255,.55),transparent 70%)}
+.b-svg{height:188px;filter:drop-shadow(0 18px 14px rgba(40,40,50,.22));position:relative;z-index:1;margin-bottom:8px}
+.flag{position:absolute;top:14px;left:14px;z-index:2;background:var(--wine);color:#fff;font-size:.58rem;
+  letter-spacing:.18em;text-transform:uppercase;padding:5px 11px;border-radius:30px;font-weight:500}
+.card-body{padding:22px 20px 22px;display:flex;flex-direction:column;flex:1}
+.card .region{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay)}
+.card h4{font-family:'EB Garamond';font-size:1.4rem;color:var(--wine);margin:9px 0 4px;line-height:1.16}
+.card .producer{font-size:.92rem;color:#5a4a4c;margin-bottom:16px;font-style:italic}
+.card .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding-top:15px;border-top:1px solid rgba(44,77,81,.12)}
+.price{font-family:'EB Garamond';font-size:1.6rem;color:var(--ink);font-weight:500}
+.add{border:1px solid var(--wine);background:none;color:var(--wine);border-radius:30px;padding:10px 18px;
+  font-family:'EB Garamond';font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+.add:hover{background:var(--wine);color:#fff}
 .add.added{background:var(--sage-3);border-color:var(--sage-3);color:var(--ivory)}
 .shop-note{text-align:center;margin-top:44px;font-size:.85rem;color:#6a565a}
 .shop-note b{color:var(--clay);font-weight:500}
@@ -532,19 +537,20 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
   </div>
   <div class="collections">
     <a class="col-card c1 reveal" onclick="filterTo('champagne')">
-      <svg class="door-bottle" viewBox="0 0 60 184" fill="none" aria-hidden="true"><path d="M26 7h8v9l3 6c2 4 3 8 3 14v118a10 10 0 0 1-10 10h-8a10 10 0 0 1-10-10V36c0-6 1-10 3-14l3-6z" stroke="#fff" stroke-width="1.6"/><rect x="18" y="96" width="24" height="46" rx="2" stroke="#fff" stroke-width="1.1"/></svg>
+      <img class="door-bg" src="champagne.jpg" alt="" loading="lazy" onerror="this.remove()">
       <span class="ix">No. 01</span><h3>Champagne &amp; Fizz</h3>
       <p>Grand marques and grower gems, from Sant'Anna to Dom Pérignon.</p>
       <span class="go">Browse</span>
     </a>
     <a class="col-card c2 reveal" data-delay="1" onclick="filterTo('red')">
+      <img class="door-bg" src="red.jpg" alt="" loading="lazy" onerror="this.remove()">
       <svg class="door-bottle" viewBox="0 0 60 184" fill="none" aria-hidden="true"><path d="M22 7h16v22c8 6 10 13 10 24v111a10 10 0 0 1-10 10H22a10 10 0 0 1-10-10V53c0-11 2-18 10-24z" stroke="#fff" stroke-width="1.6"/><rect x="16" y="98" width="28" height="48" rx="2" stroke="#fff" stroke-width="1.1"/></svg>
       <span class="ix">No. 02</span><h3>Fine Reds</h3>
       <p>Bordeaux, Châteauneuf, Barolo &amp; Burgundy worth opening slowly.</p>
       <span class="go">Browse</span>
     </a>
     <a class="col-card c3 reveal" data-delay="2" onclick="filterTo('port')">
-      <svg class="door-bottle" viewBox="0 0 60 184" fill="none" aria-hidden="true"><path d="M23 7h14v20c9 6 11 14 11 26v113a10 10 0 0 1-10 10H22a10 10 0 0 1-10-10V53c0-12 2-20 11-26z" stroke="#fff" stroke-width="1.6"/><rect x="17" y="100" width="26" height="46" rx="2" stroke="#fff" stroke-width="1.1"/></svg>
+      <img class="door-bg" src="port.jpg" alt="" loading="lazy" onerror="this.remove()">
       <span class="ix">No. 03</span><h3>Port &amp; Fortified</h3>
       <p>Vintage declarations and aged tawnies for the end of the evening.</p>
       <span class="go">Browse</span>
@@ -742,19 +748,25 @@ const FREE_OVER = 150;
 
 /* bottle SVG — coloured by category, with a sage-cream label that reads on brand */
 function bottle(hue){
-  const c = {gold:['#d8c489','#b89a52'],red:['#7c2c2c','#4a1414'],white:['#cdbf8e','#9a8a52'],
-             port:['#5a1018','#330a10'],spirit:['#9a6a2a','#5a3f17'],beer:['#9a7a1f','#5a4313']}[hue]||['#7c2c2c','#4a1414'];
-  return `<svg class="b-svg" viewBox="0 0 60 170" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="g${hue}" x1="0" x2="1"><stop offset="0" stop-color="${c[0]}"/><stop offset=".5" stop-color="${c[1]}"/><stop offset="1" stop-color="${c[0]}"/></linearGradient></defs>
-    <rect x="25" y="2" width="10" height="20" rx="2" fill="${c[1]}"/>
-    <path d="M24 22 h12 v20 c10 8 11 16 11 30 v78 a8 8 0 0 1-8 8 h-18 a8 8 0 0 1-8-8 v-78 c0-14 1-22 11-30 z" fill="url(#g${hue})"/>
-    <rect x="16" y="92" width="28" height="46" rx="2" fill="#f4eee3" opacity=".96"/>
-    <rect x="16" y="92" width="28" height="46" rx="2" fill="none" stroke="#a23c25" stroke-width=".6" opacity=".65"/>
-    <line x1="20" y1="104" x2="40" y2="104" stroke="#a23c25" stroke-width="1"/>
-    <line x1="22" y1="112" x2="38" y2="112" stroke="#7a9d96" stroke-width=".7"/>
-    <line x1="22" y1="118" x2="38" y2="118" stroke="#7a9d96" stroke-width=".7"/>
-    <circle cx="30" cy="128" r="3" fill="none" stroke="#a23c25" stroke-width=".7"/>
-    <ellipse cx="26" cy="60" rx="3" ry="9" fill="#fff" opacity=".16"/>
+  // [glass light, glass dark, foil] — refined, realistic glass tones
+  const c = {gold:['#5c7040','#293a22','#c9a24a'],red:['#6b2026','#360d12','#7a1226'],
+             white:['#b7c08c','#7d8a54','#c8b56a'],port:['#4a1119','#240810','#7a1226'],
+             spirit:['#8a5a26','#46300f','#caa24a'],beer:['#7c5c1c','#3c2c0e','#caa24a']}[hue]||['#6b2026','#360d12','#7a1226'];
+  return `<svg class="b-svg" viewBox="0 0 60 176" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g${hue}" x1="0" x2="1"><stop offset="0" stop-color="${c[1]}"/><stop offset=".42" stop-color="${c[0]}"/><stop offset="1" stop-color="${c[1]}"/></linearGradient>
+    </defs>
+    <path d="M24 24 h12 v18 c10 8 11 16 11 30 v78 a9 9 0 0 1-9 9 h-16 a9 9 0 0 1-9-9 v-78 c0-14 1-22 11-30 z" fill="url(#g${hue})"/>
+    <rect x="24.5" y="6" width="11" height="20" rx="1.5" fill="${c[1]}"/>
+    <path d="M24.5 6 h11 v9 q-5.5 2 -11 0 z" fill="${c[2]}"/>
+    <rect x="23.5" y="24" width="13" height="4" fill="${c[2]}" opacity=".9"/>
+    <rect x="15.5" y="96" width="29" height="50" rx="1.5" fill="#f6f1e6"/>
+    <rect x="15.5" y="96" width="29" height="50" rx="1.5" fill="none" stroke="${c[2]}" stroke-width=".7"/>
+    <text x="30" y="112" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#6e1322" font-style="italic">V</text>
+    <line x1="20" y1="120" x2="40" y2="120" stroke="#6e1322" stroke-width=".9"/>
+    <line x1="22" y1="128" x2="38" y2="128" stroke="#b8a98e" stroke-width=".7"/>
+    <line x1="24" y1="134" x2="36" y2="134" stroke="#b8a98e" stroke-width=".7"/>
+    <rect x="20" y="32" width="4" height="56" rx="2" fill="#fff" opacity=".14"/>
   </svg>`;
 }
 
