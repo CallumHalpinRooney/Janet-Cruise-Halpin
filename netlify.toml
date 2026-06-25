@@ -13,3 +13,9 @@
   to = "/"
   status = 302
   force = true
+
+# Always serve the freshest Vintry HTML (no stale-cache of the page itself).
+[[headers]]
+  for = "/vintry/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
