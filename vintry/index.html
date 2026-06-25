@@ -51,7 +51,7 @@ html{scroll-behavior:smooth}
 body{
   margin:0;background:var(--cream);color:var(--ink);
   font-family:'Jost',system-ui,sans-serif;font-weight:300;
-  font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-size:18px;line-height:1.78;-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.05;margin:0;letter-spacing:.01em}
 a{color:inherit;text-decoration:none}
@@ -91,7 +91,10 @@ body.scrolled .nav{top:0}
 .nav.hide{transform:translateY(-130%)}
 .nav .wordmark{font-size:1.7rem}
 .nav-links{display:flex;gap:34px;align-items:center}
-.nav-links a{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pine);opacity:.82;transition:opacity .3s;position:relative;font-weight:400}
+.nav-links a{font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pine);opacity:.86;transition:opacity .3s;position:relative;font-weight:400}
+.nav-phone{display:inline-flex;align-items:center;gap:8px;font-family:'Cormorant Garamond';font-size:1.3rem;color:var(--clay);font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.nav-phone::before{content:"☎";font-size:1rem}
+.nav-phone:hover{color:var(--clay-2)}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--clay);transition:width .4s var(--ease)}
 .nav-links a:hover{opacity:1}.nav-links a:hover::after{width:100%}
 .cart-btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--clay);color:var(--clay);
@@ -120,8 +123,8 @@ body.scrolled .nav{top:0}
 .hero-tag{font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.4rem,3vw,2.2rem);color:#fff;margin:0 auto 16px;max-width:26ch;text-shadow:0 1px 20px rgba(0,0,0,.3)}
 .hero-sub{max-width:46ch;margin:0 auto 36px;font-size:1.02rem;font-weight:300;color:rgba(255,255,255,.9);text-shadow:0 1px 16px rgba(0,0,0,.35)}
 .hero-cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-.btn{display:inline-flex;align-items:center;gap:12px;padding:15px 30px;border-radius:42px;font-size:.78rem;
-  letter-spacing:.18em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:.4s var(--ease);font-weight:500;font-family:'Jost'}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:17px 36px;border-radius:42px;font-size:.84rem;
+  letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:.4s var(--ease);font-weight:500;font-family:'Jost'}
 .btn-clay{background:var(--clay);color:var(--ivory)}
 .btn-clay:hover{background:var(--clay-2);transform:translateY(-2px)}
 .btn-ghost{border-color:var(--pine);color:var(--pine)}
@@ -177,9 +180,11 @@ section{position:relative}
 
 /* our team */
 .team{background:var(--ivory)}
+.team-group{margin:0 auto clamp(40px,5vw,60px);max-width:760px;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.team-group img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .member{text-align:center}
-.member .photo{aspect-ratio:1/1;border-radius:8px;overflow:hidden;position:relative;box-shadow:var(--shadow);
+.member .photo{aspect-ratio:4/5;border-radius:8px;overflow:hidden;position:relative;box-shadow:var(--shadow);
   background:linear-gradient(150deg,var(--sage-3),var(--pine))}
 .member .photo img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
 .member .photo .mono{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;
@@ -202,7 +207,7 @@ section{position:relative}
 
 /* marquee */
 .marquee{background:var(--pine);color:var(--sage);overflow:hidden;padding:20px 0;border-block:1px solid rgba(167,193,188,.18)}
-.marquee-track{display:flex;gap:60px;white-space:nowrap;width:max-content;animation:scrollx 38s linear infinite}
+.marquee-track{display:flex;gap:60px;white-space:nowrap;width:max-content;animation:scrollx 64s linear infinite}
 .marquee span{font-family:'Cormorant Garamond';font-style:italic;font-size:1.5rem;display:inline-flex;gap:60px;align-items:center}
 .marquee span::after{content:"✦";color:var(--clay-2);font-style:normal;font-size:.8rem}
 @keyframes scrollx{to{transform:translateX(-50%)}}
@@ -250,8 +255,8 @@ section{position:relative}
   letter-spacing:.16em;text-transform:uppercase;padding:4px 9px;border-radius:30px;font-weight:500}
 .card-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;border-top:1px solid rgba(63,86,79,.08)}
 .card .region{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clay)}
-.card h4{font-family:'Cormorant Garamond';font-size:1.32rem;color:var(--pine);margin:6px 0 2px;line-height:1.1}
-.card .producer{font-size:.8rem;color:#6c7a74;margin-bottom:12px}
+.card h4{font-family:'Cormorant Garamond';font-size:1.46rem;color:var(--pine);margin:7px 0 3px;line-height:1.12}
+.card .producer{font-size:.88rem;color:#6c7a74;margin-bottom:12px}
 .card .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .price{font-family:'Cormorant Garamond';font-size:1.5rem;color:var(--ink)}
 .add{border:1px solid var(--clay);background:none;color:var(--clay);border-radius:40px;padding:9px 16px;
@@ -387,6 +392,7 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
     <a href="#shop">Shop</a>
     <a href="#reviews">Reviews</a>
     <a href="#visit">Visit</a>
+    <a class="nav-phone" href="tel:+35314905477">01 490 5477</a>
     <button class="cart-btn" onclick="openCart()">Basket <span class="cart-count" id="navCount">0</span></button>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -439,7 +445,7 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
     </div>
     <div class="reveal" data-delay="2">
       <figure class="story-photo">
-        <img src="team.jpg" alt="The team at The Vintry, Rathgar" loading="lazy" onerror="this.style.display='none'" />
+        <img src="interior.webp" alt="Inside The Vintry, Rathgar — the wine shelves" loading="lazy" onerror="this.style.display='none'" />
         <figcaption>“We don't stock labels. We stock wines we'd be glad to open ourselves.”</figcaption>
       </figure>
     </div>
@@ -491,11 +497,12 @@ footer{background:var(--pine-2);color:rgba(249,244,235,.74);padding:70px 0 40px}
       <h2>The people who choose it.</h2>
       <p>The reason regulars keep coming back — knowledgeable, generous with advice, and genuinely glad to see you.</p>
     </div>
+    <figure class="team-group reveal"><img src="team-group.jpg" alt="The Vintry team, Rathgar" loading="lazy" onerror="this.closest('figure').style.display='none'"></figure>
     <div class="team-grid">
-      <div class="member reveal"><div class="photo"><span class="mono">E</span><img src="evelyn.jpg" alt="Evelyn Jones" loading="lazy" onerror="this.style.display='none'"></div><h4>Evelyn Jones</h4><div class="role">The Vintry</div></div>
-      <div class="member reveal" data-delay="1"><div class="photo"><span class="mono">D</span><img src="david.jpg" alt="David Lonergan" loading="lazy" onerror="this.style.display='none'"></div><h4>David Lonergan</h4><div class="role">The Vintry</div></div>
-      <div class="member reveal" data-delay="2"><div class="photo"><span class="mono">L</span><img src="leslie.jpg" alt="Leslie Williams" loading="lazy" onerror="this.style.display='none'"></div><h4>Leslie Williams</h4><div class="role">The Vintry</div></div>
-      <div class="member reveal" data-delay="3"><div class="photo"><span class="mono">R</span><img src="ray.jpg" alt="Ray McCann" loading="lazy" onerror="this.style.display='none'"></div><h4>Ray McCann</h4><div class="role">The Vintry</div></div>
+      <div class="member reveal"><div class="photo"><span class="mono">E</span><img src="evelyn.webp" alt="Evelyn Jones" loading="lazy" onerror="this.style.display='none'"></div><h4>Evelyn Jones</h4><div class="role">The Vintry</div></div>
+      <div class="member reveal" data-delay="1"><div class="photo"><span class="mono">D</span><img src="david.webp" alt="David Lonergan" loading="lazy" onerror="this.style.display='none'"></div><h4>David Lonergan</h4><div class="role">The Vintry</div></div>
+      <div class="member reveal" data-delay="2"><div class="photo"><span class="mono">L</span><img src="leslie.webp" alt="Leslie Williams" loading="lazy" onerror="this.style.display='none'"></div><h4>Leslie Williams</h4><div class="role">The Vintry</div></div>
+      <div class="member reveal" data-delay="3"><div class="photo"><span class="mono">R</span><img src="ray.webp" alt="Ray McCann" loading="lazy" onerror="this.style.display='none'"></div><h4>Ray McCann</h4><div class="role">The Vintry</div></div>
     </div>
   </div>
 </section>
