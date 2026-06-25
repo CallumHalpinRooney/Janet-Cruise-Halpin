@@ -646,7 +646,7 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="yr"></span> The Vintry, Rathgar. All rights reserved. <span style="opacity:.55">· build VID‑1</span></span>
+      <span>© <span id="yr"></span> The Vintry, Rathgar. All rights reserved. <span style="opacity:.55">· build VRC‑1</span></span>
       <span>Enjoy wine sensibly · Over 18s only · drinkaware.ie</span>
     </div>
   </div>
@@ -913,7 +913,7 @@ async function pay(){
   setMsg('');
   try{
     const items=Object.entries(cart).map(([id,qty])=>({id,qty}));
-    const res=await fetch('/.netlify/functions/vintry-payment-intent',{
+    const res=await fetch('/api/vintry-payment-intent',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({items,delivery,email})});
     const data=await res.json();
