@@ -107,27 +107,44 @@ body.scrolled .nav{top:0}
 .nav-toggle{display:none;background:none;border:0;cursor:pointer;width:30px;height:22px;position:relative}
 .nav-toggle span{position:absolute;left:0;height:1.6px;width:100%;background:var(--pine);transition:.3s}
 .nav-toggle span:nth-child(1){top:2px}.nav-toggle span:nth-child(2){top:10px}.nav-toggle span:nth-child(3){top:18px}
+/* nav sits over the dark hero video until scrolled → light; solid → dark */
+.nav-links a{color:#fff;opacity:.92}
+.nav .wordmark img{filter:brightness(0) invert(1)}
+.nav-phone{color:#fff}
+.cart-btn{border-color:rgba(255,255,255,.7);color:#fff}
+.cart-count{background:#fff;color:var(--ink)}
+.nav-toggle span{background:#fff}
+.nav.solid .nav-links a{color:var(--pine)}
+.nav.solid .wordmark img{filter:none}
+.nav.solid .nav-phone{color:var(--clay)}
+.nav.solid .cart-btn{border-color:var(--clay);color:var(--clay)}
+.nav.solid .cart-count{background:var(--clay);color:#fff}
+.nav.solid .nav-toggle span{background:var(--pine)}
 
 /* ───────── hero ───────── */
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
-  background:
-    radial-gradient(120% 90% at 85% 10%, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 55%),
-    radial-gradient(130% 120% at 10% 110%, rgba(122,157,162,.4) 0%, rgba(122,157,162,0) 55%),
-    linear-gradient(158deg,#bcd9db 0%,#a3c8cd 52%,#8bbac1 100%)}
-.hero-grain,.hero-glow,.hero-photo::after{display:none}
-.hero .wrap{position:relative;z-index:3;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,6vw,84px);
-  align-items:center;padding:130px 0 90px;width:min(1180px,92vw)}
-.hero-copy{max-width:42ch}
-.hero .eyebrow{color:var(--clay-deep);margin-bottom:20px}
-.hero .wordmark{font-size:clamp(3.6rem,9vw,7.4rem);margin:0 0 .32em}
-.hero .wordmark img{height:.92em}
-.hero-tag{font-family:'EB Garamond';font-style:italic;font-size:clamp(1.3rem,2vw,1.7rem);color:var(--wine);margin:0 0 22px;line-height:1.5;max-width:30ch}
-.hero-sub{font-size:1.06rem;color:var(--ink);margin:0 0 36px;line-height:1.85;max-width:42ch}
-.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
-.hero-photo{position:relative;z-index:1;border-radius:8px;overflow:hidden;margin:0;
-  box-shadow:0 40px 80px -30px rgba(30,55,60,.5)}
-.hero-photo img{display:block;width:100%;border-radius:8px;aspect-ratio:4/5;object-fit:cover;will-change:transform}
-.hero-photo figcaption{display:none}
+/* ── HERO: fixed full-screen video the page scrolls up over (Soter effect) ── */
+.hero{position:fixed;inset:0;height:100svh;z-index:0;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;background:#0d1a1c}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,18,20,.5) 0%,rgba(9,18,20,.3) 40%,rgba(9,18,20,.72) 100%)}
+.hero-center{position:relative;z-index:2;padding:0 26px}
+.hero-logo{height:clamp(62px,12vw,138px);width:auto;display:block;margin:0 auto 28px;
+  filter:brightness(0) invert(1) blur(7px);opacity:0;transform:translateY(30px) scale(.95);
+  animation:heroReveal 2s var(--ease) .5s forwards}
+.hero-tag{font-family:'EB Garamond';font-style:italic;font-size:clamp(1.35rem,2.6vw,2.05rem);
+  color:rgba(255,255,255,.95);margin:0 auto 32px;max-width:28ch;line-height:1.4;text-shadow:0 2px 30px rgba(0,0,0,.45);
+  opacity:0;animation:fadeUp 1.5s var(--ease) 1.5s forwards}
+.hero-cta-v{opacity:0;animation:fadeUp 1.5s var(--ease) 1.95s forwards}
+.hero-cta-v a{display:inline-block;border:1px solid rgba(255,255,255,.6);color:#fff;padding:15px 34px;border-radius:40px;
+  font-family:'EB Garamond';font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;transition:.4s var(--ease)}
+.hero-cta-v a:hover{background:#fff;color:var(--ink);border-color:#fff}
+.hero-cue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;
+  align-items:center;gap:10px;color:rgba(255,255,255,.82);font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;
+  opacity:0;animation:fadeUp 1.5s var(--ease) 2.4s forwards}
+.hero-cue i{width:1px;height:44px;background:linear-gradient(rgba(255,255,255,.85),transparent);animation:drip 2.4s var(--ease) infinite}
+@keyframes heroReveal{to{opacity:1;transform:none;filter:brightness(0) invert(1) blur(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-spacer{height:100svh}
+.page{position:relative;z-index:1;background:var(--cream)}
 .btn{display:inline-flex;align-items:center;gap:12px;padding:17px 36px;border-radius:42px;font-size:.84rem;
   letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:.4s var(--ease);font-weight:500;font-family:'EB Garamond'}
 .btn-clay{background:var(--clay);color:var(--ivory)}
@@ -416,24 +433,19 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
 
 <!-- ───────── HERO ───────── -->
 <header class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-copy">
-      <p class="eyebrow">102 Rathgar Road · Dublin 6</p>
-      <h1 class="wordmark"><img src="logo.png" alt="The Vintry, Rathgar" /></h1>
-      <p class="hero-tag">Fine wine, kept beautifully — on Rathgar Road since 1991.</p>
-      <p class="hero-sub">A family-run wine merchant in the heart of Rathgar — rare vintages, grower Champagne and a quietly serious cellar, chosen by people who actually drink the stuff.</p>
-      <div class="hero-cta">
-        <a href="#shop" class="btn btn-clay">Explore the Cellar</a>
-        <a href="#discover" class="btn btn-ghost">Our Story</a>
-      </div>
-    </div>
-    <figure class="hero-photo" data-parallax="0.04">
-      <img src="storefront.jpg" alt="The Vintry shopfront, 102 Rathgar Road" />
-      <figcaption>Our home on Rathgar Road</figcaption>
-    </figure>
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="storefront.jpg">
+    <source src="hero.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-center">
+    <img class="hero-logo" src="logo.png" alt="The Vintry, Rathgar" />
+    <p class="hero-tag">Fine wine, kept beautifully — on Rathgar Road since 1991.</p>
+    <div class="hero-cta-v"><a href="#shop">Explore the Cellar</a></div>
   </div>
-  <div class="scroll-hint"><span>Scroll</span><i></i></div>
+  <div class="hero-cue"><span>Scroll</span><i></i></div>
 </header>
+<div class="hero-spacer" aria-hidden="true"></div>
+<div class="page">
 
 <!-- ───────── DISCOVER ───────── -->
 <section class="pad wrap" id="discover">
@@ -639,6 +651,7 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
     </div>
   </div>
 </footer>
+</div><!-- /.page -->
 
 <!-- ───────── CART DRAWER ───────── -->
 <div class="scrim" id="scrim" onclick="closeCart()"></div>
