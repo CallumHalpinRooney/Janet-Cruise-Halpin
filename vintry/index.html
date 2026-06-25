@@ -13,7 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <!-- To use The Vintry's REAL logo artwork instead of the styled text below,
      drop the file into /vintry (e.g. logo.svg) and see the note in the README. -->
 
@@ -28,22 +28,23 @@
 
 <style>
 :root{
-  /* ── The Vintry brand palette (from her shopfront) ── */
-  --sage:#93c7cc;        /* signature duck-egg blue (the shopfront paint) */
-  --sage-2:#7cb8be;      /* mid */
-  --sage-3:#579ba2;      /* deeper teal-blue */
-  --pine:#2c4d51;        /* deep teal (instead of black) */
-  --pine-2:#223e41;
-  --clay:#a23c25;        /* signature terracotta (the wordmark red) */
-  --clay-2:#b9543a;      /* lighter terracotta */
-  --clay-deep:#7c2c19;
-  --wine:#6e1322;        /* deep red wine — headings */
-  --cream:#e7f1f1;       /* very light duck-egg blue — main page tone */
-  --ivory:#eff7f6;
-  --paper:#f9fcfc;
-  --ink:#1a1413;         /* black — body text */
-  --line:rgba(44,77,81,.18);
-  --shadow:0 22px 60px -28px rgba(30,55,58,.4);
+  /* ── The Vintry — luxury palette: deep red, white, black ── */
+  --wine:#5c0f1a;        /* deep bordeaux — primary brand */
+  --wine-2:#7d1626;      /* brighter red accent */
+  --clay:#7d1626;        /* accent red */
+  --clay-2:#9a2230;      /* hover red */
+  --clay-deep:#42090f;   /* darkest red */
+  --sage:#e7d9c7;        /* warm parchment — light accent/text on black */
+  --sage-2:#cdbaa4;
+  --sage-3:#5c0f1a;      /* deep red — accent bands (topbar) */
+  --pine:#15110f;        /* near-black — dark sections */
+  --pine-2:#0a0807;
+  --cream:#faf6f0;       /* warm white — main page tone */
+  --ivory:#ffffff;       /* white */
+  --paper:#ffffff;
+  --ink:#13100f;         /* near-black — body text */
+  --line:rgba(20,12,12,.14);
+  --shadow:0 30px 70px -30px rgba(20,8,10,.45);
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box}
@@ -51,20 +52,21 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
   margin:0;background:var(--cream);color:var(--ink);
-  font-family:'EB Garamond',Georgia,serif;font-weight:300;
-  font-size:18px;line-height:1.78;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-family:'Jost',system-ui,sans-serif;font-weight:300;
+  font-size:17px;line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden;letter-spacing:.01em;
 }
-h1,h2,h3,h4{font-family:'EB Garamond',Georgia,serif;font-weight:500;line-height:1.05;margin:0;letter-spacing:.01em}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.04;margin:0;letter-spacing:0}
+.eyebrow,.nav-links a,.filter,.btn,.add,.cart-btn,.card .region,.member .role,.rev-meta,.info-row .k,.foot-col h5,.foot-bottom,.flag,.col-card .go,.facet h5,.facet label{font-family:'Jost',sans-serif}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 .wrap{width:min(1180px,92vw);margin-inline:auto}
-.eyebrow{font-family:'EB Garamond';font-weight:500;font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--clay)}
+.eyebrow{font-family:'Cormorant Garamond';font-weight:500;font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--clay)}
 .rule{width:64px;height:1px;background:var(--clay);margin:30px 0}
 
 /* ── reusable wordmark ── */
-.wordmark{font-family:'EB Garamond';color:var(--clay);white-space:nowrap;line-height:1;display:inline-flex;align-items:baseline;gap:.3em}
+.wordmark{font-family:'Cormorant Garamond';color:var(--clay);white-space:nowrap;line-height:1;display:inline-flex;align-items:baseline;gap:.3em}
 .wordmark .the{font-size:.74em;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
-.wordmark .name{font-family:'EB Garamond';font-style:normal;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+.wordmark .name{font-family:'Cormorant Garamond';font-style:normal;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
 .wordmark .name b{font-family:'Pinyon Script',cursive;font-style:normal;font-weight:400;font-size:1.78em;line-height:0;
   display:inline-block;vertical-align:-.2em;margin:0 -.04em 0 -.02em}
 /* her real logo file auto-replaces the text wordmark */
@@ -93,13 +95,13 @@ body.scrolled .nav{top:0}
 .nav .wordmark{font-size:1.7rem}
 .nav-links{display:flex;gap:34px;align-items:center}
 .nav-links a{font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pine);opacity:.86;transition:opacity .3s;position:relative;font-weight:400}
-.nav-phone{display:inline-flex;align-items:center;gap:8px;font-family:'EB Garamond';font-size:1.3rem;color:var(--clay);font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.nav-phone{display:inline-flex;align-items:center;gap:8px;font-family:'Cormorant Garamond';font-size:1.3rem;color:var(--clay);font-weight:600;letter-spacing:.01em;white-space:nowrap}
 .nav-phone::before{content:"☎";font-size:1rem}
 .nav-phone:hover{color:var(--clay-2)}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--clay);transition:width .4s var(--ease)}
 .nav-links a:hover{opacity:1}.nav-links a:hover::after{width:100%}
 .cart-btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--clay);color:var(--clay);
-  padding:9px 17px;border-radius:40px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;background:none;transition:.35s;font-family:'EB Garamond';font-weight:500}
+  padding:9px 17px;border-radius:40px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;background:none;transition:.35s;font-family:'Cormorant Garamond';font-weight:500}
 .cart-btn:hover{background:var(--clay);color:var(--ivory)}
 .cart-count{min-width:20px;height:20px;padding:0 6px;border-radius:20px;background:var(--clay);color:var(--ivory);
   font-size:.7rem;display:inline-flex;align-items:center;justify-content:center;font-weight:500}
@@ -123,19 +125,19 @@ body.scrolled .nav{top:0}
 
 /* ───────── hero ───────── */
 /* ── HERO: fixed full-screen video the page scrolls up over (Soter effect) ── */
-.hero{position:fixed;inset:0;height:100svh;z-index:0;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;background:#0d1a1c}
+.hero{position:fixed;inset:0;height:100svh;z-index:0;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;background:#0a0807}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,18,20,.5) 0%,rgba(9,18,20,.3) 40%,rgba(9,18,20,.72) 100%)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,5,6,.55) 0%,rgba(8,5,6,.32) 40%,rgba(8,5,6,.78) 100%)}
 .hero-center{position:relative;z-index:2;padding:0 26px}
 .hero-logo{height:clamp(62px,12vw,138px);width:auto;display:block;margin:0 auto 28px;
   filter:brightness(0) invert(1) blur(7px);opacity:0;transform:translateY(30px) scale(.95);
   animation:heroReveal 2s var(--ease) .5s forwards}
-.hero-tag{font-family:'EB Garamond';font-style:italic;font-size:clamp(1.35rem,2.6vw,2.05rem);
+.hero-tag{font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.35rem,2.6vw,2.05rem);
   color:rgba(255,255,255,.95);margin:0 auto 32px;max-width:28ch;line-height:1.4;text-shadow:0 2px 30px rgba(0,0,0,.45);
   opacity:0;animation:fadeUp 1.5s var(--ease) 1.5s forwards}
 .hero-cta-v{opacity:0;animation:fadeUp 1.5s var(--ease) 1.95s forwards}
 .hero-cta-v a{display:inline-block;border:1px solid rgba(255,255,255,.6);color:#fff;padding:15px 34px;border-radius:40px;
-  font-family:'EB Garamond';font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;transition:.4s var(--ease)}
+  font-family:'Cormorant Garamond';font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;transition:.4s var(--ease)}
 .hero-cta-v a:hover{background:#fff;color:var(--ink);border-color:#fff}
 .hero-cue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;
   align-items:center;gap:10px;color:rgba(255,255,255,.82);font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;
@@ -146,11 +148,11 @@ body.scrolled .nav{top:0}
 .hero-spacer{height:100svh}
 .page{position:relative;z-index:1;background:var(--cream)}
 .btn{display:inline-flex;align-items:center;gap:12px;padding:17px 36px;border-radius:42px;font-size:.84rem;
-  letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:.4s var(--ease);font-weight:500;font-family:'EB Garamond'}
+  letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:.4s var(--ease);font-weight:500;font-family:'Cormorant Garamond'}
 .btn-clay{background:var(--clay);color:var(--ivory)}
 .btn-clay:hover{background:var(--clay-2);transform:translateY(-2px)}
 .btn-ghost{border-color:var(--pine);color:var(--pine)}
-.btn-ghost:hover{background:rgba(63,86,79,.07)}
+.btn-ghost:hover{background:rgba(20,12,12,.07)}
 .hero-ghost{border-color:rgba(255,255,255,.7);color:#fff}
 .hero-ghost:hover{background:rgba(255,255,255,.14);border-color:#fff}
 .hero-hint{color:#fff;opacity:.85}
@@ -172,32 +174,32 @@ section{position:relative}
 .lede{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,90px);align-items:center}
 .lede h2{font-size:clamp(2.4rem,4.6vw,4.1rem);color:var(--wine);margin-bottom:.3em}
 .lede p{margin:0 0 18px;color:#2f2528}
-.figure-quote{font-family:'EB Garamond';font-style:italic;font-size:clamp(1.8rem,3.4vw,2.8rem);
+.figure-quote{font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.8rem,3.4vw,2.8rem);
   color:var(--pine);line-height:1.22;border-left:2px solid var(--clay);padding-left:30px}
-.figure-quote span{display:block;font-family:'EB Garamond';font-style:normal;font-size:.78rem;letter-spacing:.22em;
+.figure-quote span{display:block;font-family:'Cormorant Garamond';font-style:normal;font-size:.78rem;letter-spacing:.22em;
   text-transform:uppercase;color:var(--clay);margin-top:22px}
 
 /* discover intro */
 .discover-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);max-width:900px;margin:0 auto;color:#2f2528}
 .feature-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:820px;margin:clamp(40px,5vw,56px) auto 0}
 .feat{text-align:center;padding:26px 20px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
-.feat b{display:block;font-family:'EB Garamond';font-size:1.9rem;color:var(--clay);line-height:1.1}
+.feat b{display:block;font-family:'Cormorant Garamond';font-size:1.9rem;color:var(--clay);line-height:1.1}
 .feat span{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#6a565a;margin-top:8px}
 
 /* awards */
 .awards{background:var(--cream)}
 .awards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.award{background:var(--paper);border:1px solid rgba(63,86,79,.12);border-radius:8px;padding:32px 26px;text-align:center;
+.award{background:var(--paper);border:1px solid rgba(20,12,12,.12);border-radius:8px;padding:32px 26px;text-align:center;
   transition:transform .5s var(--ease),box-shadow .5s,border-color .5s}
 .award:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(162,60,37,.32)}
 .award .medal{font-size:1.5rem;color:var(--clay);margin-bottom:8px;line-height:1}
-.award h4{font-family:'EB Garamond';font-size:1.5rem;color:var(--wine);margin:4px 0 9px;line-height:1.15}
+.award h4{font-family:'Cormorant Garamond';font-size:1.5rem;color:var(--wine);margin:4px 0 9px;line-height:1.15}
 .award p{font-size:.82rem;color:#6a565a;margin:0;letter-spacing:.04em;text-transform:uppercase;font-size:.7rem;letter-spacing:.12em}
 
 /* about photo */
 .story-photo{margin:0}
 .story-photo img{width:100%;border-radius:8px;box-shadow:var(--shadow);aspect-ratio:4/3;object-fit:cover;background:var(--sage)}
-.story-photo figcaption{font-family:'EB Garamond';font-style:italic;font-size:clamp(1.25rem,2.3vw,1.7rem);
+.story-photo figcaption{font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.25rem,2.3vw,1.7rem);
   color:var(--pine);line-height:1.28;border-left:2px solid var(--clay);padding-left:22px;margin-top:26px}
 
 /* our team */
@@ -210,8 +212,8 @@ section{position:relative}
   background:linear-gradient(150deg,var(--sage-3),var(--pine))}
 .member .photo img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
 .member .photo .mono{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;
-  font-family:'EB Garamond';font-size:3.2rem;color:rgba(255,255,255,.9)}
-.member h4{font-family:'EB Garamond';font-size:1.55rem;color:var(--wine);margin:18px 0 3px}
+  font-family:'Cormorant Garamond';font-size:3.2rem;color:rgba(255,255,255,.9)}
+.member h4{font-family:'Cormorant Garamond';font-size:1.55rem;color:var(--wine);margin:18px 0 3px}
 .member .role{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--clay)}
 
 /* reviews */
@@ -221,23 +223,23 @@ section{position:relative}
   transition:transform .5s var(--ease),box-shadow .5s}
 .rev-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .rev-stars{color:#c79a3a;letter-spacing:3px;font-size:.95rem;margin-bottom:14px}
-.rev-text{font-family:'EB Garamond';font-style:italic;font-size:1.24rem;line-height:1.44;margin:0 0 20px;color:var(--ink)}
+.rev-text{font-family:'Cormorant Garamond';font-style:italic;font-size:1.24rem;line-height:1.44;margin:0 0 20px;color:var(--ink)}
 .rev-meta{margin-top:auto;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--clay)}
-.rev-meta b{display:block;font-family:'EB Garamond';font-weight:600;letter-spacing:.02em;color:var(--ink);text-transform:none;font-size:1.02rem;margin-bottom:3px}
+.rev-meta b{display:block;font-family:'Cormorant Garamond';font-weight:600;letter-spacing:.02em;color:var(--ink);text-transform:none;font-size:1.02rem;margin-bottom:3px}
 .rev-foot{text-align:center;margin-top:42px;font-size:.9rem;color:#5a4046}
 .rev-foot b{color:var(--clay)}
 
 /* marquee */
 .marquee{background:var(--ivory);color:var(--clay);overflow:hidden;padding:18px 0;border-block:1px solid var(--line)}
 .marquee-track{display:flex;gap:60px;white-space:nowrap;width:max-content;animation:scrollx 64s linear infinite}
-.marquee span{font-family:'EB Garamond';font-style:italic;font-size:1.5rem;display:inline-flex;gap:60px;align-items:center}
+.marquee span{font-family:'Cormorant Garamond';font-style:italic;font-size:1.5rem;display:inline-flex;gap:60px;align-items:center}
 .marquee span::after{content:"✦";color:var(--clay-2);font-style:normal;font-size:.8rem}
 @keyframes scrollx{to{transform:translateX(-50%)}}
 
 /* stats */
 .stats{background:var(--cream);border-block:1px solid var(--line)}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
-.stat .num{font-family:'EB Garamond';font-size:clamp(3rem,6vw,5rem);color:var(--clay);line-height:1}
+.stat .num{font-family:'Cormorant Garamond';font-size:clamp(3rem,6vw,5rem);color:var(--clay);line-height:1}
 .stat .lbl{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:#6a565a;margin-top:10px}
 
 /* collections */
@@ -250,15 +252,15 @@ section{position:relative}
 .col-card::before{content:"";position:absolute;inset:0;z-index:-3;transition:transform .9s var(--ease)}
 .col-card .door-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:-2;transition:transform .9s var(--ease)}
 .col-card:hover .door-bg{transform:scale(1.06)}
-.col-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,32,34,.28) 0%,rgba(18,32,34,.18) 38%,rgba(18,32,34,.82) 100%)}
+.col-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,7,8,.28) 0%,rgba(10,7,8,.18) 38%,rgba(10,7,8,.82) 100%)}
 .col-card:hover::before{transform:scale(1.07)}
-.col-card.c1::before{background:linear-gradient(150deg,#7a9d96,#3f564f)}
-.col-card.c2::before{background:linear-gradient(150deg,#b9543a,#7c2c19)}
-.col-card.c3::before{background:linear-gradient(150deg,#5e7d76,#33463f)}
+.col-card.c1::before{background:linear-gradient(150deg,#3a1418,#0c0809)}
+.col-card.c2::before{background:linear-gradient(150deg,#5c0f1a,#2a0709)}
+.col-card.c3::before{background:linear-gradient(150deg,#2a1012,#0a0708)}
 .col-card .door-bottle{position:absolute;right:7%;bottom:-2%;height:82%;width:auto;z-index:0;opacity:.22;pointer-events:none;transition:transform .9s var(--ease)}
 .col-card:hover .door-bottle{transform:translateY(-6px) rotate(-2deg)}
 .col-card .ix,.col-card h3,.col-card p,.col-card .go{position:relative;z-index:1}
-.col-card .ix{font-family:'EB Garamond';font-size:.95rem;color:var(--sage);letter-spacing:.1em}
+.col-card .ix{font-family:'Cormorant Garamond';font-size:.95rem;color:var(--sage);letter-spacing:.1em}
 .col-card h3{font-size:2.1rem;margin:6px 0;color:var(--ivory)}
 .col-card p{font-size:.9rem;color:rgba(249,244,235,.82);margin:0 0 8px}
 .col-card .go{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);display:inline-flex;gap:8px;align-items:center}
@@ -266,13 +268,32 @@ section{position:relative}
 
 /* shop */
 .shop{background:var(--ivory)}
-.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:54px}
-.filter{border:1px solid var(--line);background:none;color:var(--ink);padding:11px 22px;border-radius:0;
-  font-family:'EB Garamond';font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:.35s}
-.filter:hover{border-color:var(--wine);color:var(--wine)}
-.filter.active{background:var(--wine);color:#fff;border-color:var(--wine)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
-.card{background:var(--paper);border:1px solid rgba(44,77,81,.12);border-radius:3px;overflow:hidden;display:flex;flex-direction:column;
+/* faceted shop layout */
+.shop-layout{display:grid;grid-template-columns:248px 1fr;gap:clamp(28px,4vw,56px);align-items:start}
+.facets-toggle{display:none}
+.facets{position:sticky;top:96px;border-right:1px solid var(--line);padding-right:24px}
+.facet{border-bottom:1px solid var(--line);padding:18px 0}
+.facet:first-child{padding-top:0}
+.facet h5{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--wine);margin:0 0 14px;display:flex;justify-content:space-between;cursor:pointer}
+.facet h5::after{content:"–";color:var(--clay)}
+.facet.collapsed h5::after{content:"+"}
+.facet.collapsed .facet-body{display:none}
+.facet-body{display:flex;flex-direction:column;gap:9px;max-height:230px;overflow:auto}
+.facet label{display:flex;align-items:center;gap:9px;font-size:.82rem;color:var(--ink);cursor:pointer;line-height:1.2}
+.facet label:hover{color:var(--wine)}
+.facet input{appearance:none;width:14px;height:14px;border:1px solid #b3a39a;border-radius:2px;flex:none;cursor:pointer;transition:.2s;position:relative}
+.facet input:checked{background:var(--wine);border-color:var(--wine)}
+.facet input:checked::after{content:"✓";position:absolute;inset:0;color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center}
+.facet .count{margin-left:auto;font-size:.72rem;color:#9a8b85}
+.shop-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.result-count{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#6a565a}
+.result-count b{color:var(--wine);font-weight:500}
+.clear-filters{background:none;border:0;font-family:'Jost';font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);cursor:pointer;opacity:0;pointer-events:none;transition:.3s}
+.clear-filters.show{opacity:1;pointer-events:auto}
+.clear-filters:hover{color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.no-results{grid-column:1/-1;text-align:center;padding:60px 20px;font-family:'Cormorant Garamond';font-style:italic;font-size:1.5rem;color:#9a8b85}
+.card{background:var(--paper);border:1px solid rgba(20,12,12,.12);border-radius:3px;overflow:hidden;display:flex;flex-direction:column;
   transition:transform .55s var(--ease),box-shadow .55s,border-color .55s}
 .card:hover{transform:translateY(-7px);box-shadow:0 30px 60px -34px rgba(30,40,55,.5);border-color:rgba(110,19,34,.3)}
 .bottle{height:240px;display:flex;align-items:flex-end;justify-content:center;position:relative;overflow:hidden;
@@ -284,18 +305,35 @@ section{position:relative}
   letter-spacing:.18em;text-transform:uppercase;padding:5px 11px;border-radius:30px;font-weight:500}
 .card-body{padding:22px 20px 22px;display:flex;flex-direction:column;flex:1}
 .card .region{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay)}
-.card h4{font-family:'EB Garamond';font-size:1.4rem;color:var(--wine);margin:9px 0 4px;line-height:1.16}
+.card h4{font-family:'Cormorant Garamond';font-size:1.4rem;color:var(--wine);margin:9px 0 4px;line-height:1.16}
 .card .producer{font-size:.92rem;color:#5a4a4c;margin-bottom:16px;font-style:italic}
 .card .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding-top:15px;border-top:1px solid rgba(44,77,81,.12)}
-.price{font-family:'EB Garamond';font-size:1.6rem;color:var(--ink);font-weight:500}
+  padding-top:15px;border-top:1px solid rgba(20,12,12,.12)}
+.price{font-family:'Cormorant Garamond';font-size:1.6rem;color:var(--ink);font-weight:500}
 .add{border:1px solid var(--wine);background:none;color:var(--wine);border-radius:30px;padding:10px 18px;
-  font-family:'EB Garamond';font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+  font-family:'Cormorant Garamond';font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
 .add:hover{background:var(--wine);color:#fff}
 .add.added{background:var(--sage-3);border-color:var(--sage-3);color:var(--ivory)}
 .shop-note{text-align:center;margin-top:44px;font-size:.85rem;color:#6a565a}
 .shop-note b{color:var(--clay);font-weight:500}
 .shop-note a{color:var(--clay)}
+
+/* grapes */
+.grapes{background:var(--pine);color:var(--sage)}
+.grapes .sec-head h2{color:#fff}
+.grapes .sec-head p{color:var(--sage-2)}
+.grape-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.grape-card{position:relative;aspect-ratio:3/4;border-radius:4px;overflow:hidden;cursor:pointer;background:#160f11;isolation:isolate}
+.grape-card .gmedia{position:absolute;inset:0;z-index:-2;background-image:var(--gi),linear-gradient(155deg,#3a1418,#0a0708);
+  background-size:cover;background-position:center;transition:transform .9s var(--ease)}
+.grape-card:hover .gmedia{transform:scale(1.07)}
+.grape-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 38%,rgba(8,5,6,.85))}
+.grape-card .ginfo{position:absolute;left:0;right:0;bottom:0;padding:22px}
+.grape-card h4{font-size:1.5rem;color:#fff;margin:0;line-height:1.05}
+.grape-card .gcount{display:block;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-2);margin-top:6px}
+.grape-card::before{content:"Discover →";position:absolute;top:16px;right:16px;z-index:1;font-family:'Jost';font-size:.6rem;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);opacity:0;transform:translateY(-4px);transition:.4s}
+.grape-card:hover::before{opacity:1;transform:none}
 
 /* visit */
 .visit{background:var(--cream)}
@@ -311,7 +349,7 @@ section{position:relative}
 
 /* footer */
 footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(240,247,246,.78);padding:70px 0 40px}
-.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:46px;border-bottom:1px solid rgba(147,199,204,.2)}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:46px;border-bottom:1px solid rgba(231,217,199,.2)}
 .foot-brand .wordmark{font-size:2.1rem}
 .foot-col h5{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin:0 0 16px}
 .foot-col a{display:block;padding:5px 0;font-size:.95rem;transition:.3s;color:rgba(240,247,246,.82)}.foot-col a:hover{color:#fff}
@@ -328,23 +366,23 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
 .drawer-head h3{font-size:1.7rem;color:var(--wine)}
 .x{background:none;border:0;font-size:1.5rem;cursor:pointer;color:var(--ink);line-height:1}
 .cart-items{flex:1;overflow-y:auto;padding:10px 26px}
-.ci{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid rgba(63,86,79,.1)}
+.ci{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid rgba(20,12,12,.1)}
 .ci-thumb{width:46px;height:62px;flex:none;border-radius:3px;display:flex;align-items:center;justify-content:center;background:#e7efeb}
 .ci-thumb svg{height:50px}
 .ci-main{flex:1;min-width:0}
-.ci-main h5{font-family:'EB Garamond';font-size:1.15rem;color:var(--wine);margin:0;line-height:1.1}
+.ci-main h5{font-family:'Cormorant Garamond';font-size:1.15rem;color:var(--wine);margin:0;line-height:1.1}
 .ci-main .reg{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin:3px 0 8px}
 .qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:30px;overflow:hidden}
 .qty button{background:none;border:0;width:28px;height:28px;cursor:pointer;color:var(--clay);font-size:1rem}
 .qty span{min-width:26px;text-align:center;font-size:.85rem}
-.ci-price{text-align:right;font-family:'EB Garamond';font-size:1.2rem;color:var(--ink)}
+.ci-price{text-align:right;font-family:'Cormorant Garamond';font-size:1.2rem;color:var(--ink)}
 .ci-remove{display:block;background:none;border:0;color:#9aa8a2;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:6px}
 .ci-remove:hover{color:var(--clay)}
 .cart-empty{text-align:center;color:#7c8a84;padding:60px 20px}
-.cart-empty .big{font-family:'EB Garamond';font-style:italic;font-size:1.8rem;color:var(--pine);margin-bottom:8px}
+.cart-empty .big{font-family:'Cormorant Garamond';font-style:italic;font-size:1.8rem;color:var(--pine);margin-bottom:8px}
 .drawer-foot{border-top:1px solid var(--line);padding:22px 26px;background:var(--paper)}
 .line{display:flex;justify-content:space-between;font-size:.92rem;padding:5px 0;color:#2f2528}
-.line.total{font-family:'EB Garamond';font-size:1.5rem;color:var(--clay);padding-top:12px;margin-top:8px;border-top:1px solid var(--line)}
+.line.total{font-family:'Cormorant Garamond';font-size:1.5rem;color:var(--clay);padding-top:12px;margin-top:8px;border-top:1px solid var(--line)}
 .checkout-btn{width:100%;margin-top:16px;justify-content:center}
 .fine{font-size:.7rem;color:#8a968f;text-align:center;margin-top:12px}
 .deliv{display:grid;gap:8px;margin:6px 0 4px}
@@ -352,7 +390,7 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
 .deliv label:hover{border-color:var(--clay)}
 .deliv input{accent-color:var(--clay)}
 .deliv label.sel{border-color:var(--clay);background:rgba(162,60,37,.05)}
-.deliv .d-name{flex:1}.deliv .d-price{font-family:'EB Garamond';font-size:1.1rem}
+.deliv .d-name{flex:1}.deliv .d-price{font-family:'Cormorant Garamond';font-size:1.1rem}
 
 /* checkout modal */
 .modal-scrim{position:fixed;inset:0;background:rgba(33,46,40,.6);backdrop-filter:blur(4px);z-index:150;display:none;align-items:center;justify-content:center;padding:20px}
@@ -364,10 +402,10 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
 .modal-body{padding:24px 28px 28px}
 .field{margin-bottom:16px}
 .field label{display:block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);margin-bottom:7px}
-.field input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:6px;font-family:'EB Garamond';font-size:.95rem;background:var(--paper);color:var(--ink)}
+.field input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:6px;font-family:'Cormorant Garamond';font-size:.95rem;background:var(--paper);color:var(--ink)}
 .field input:focus{outline:none;border-color:var(--clay)}
 #card-element{padding:14px;border:1px solid var(--line);border-radius:6px;background:var(--paper)}
-.pay-row{display:flex;justify-content:space-between;font-family:'EB Garamond';font-size:1.4rem;color:var(--clay);margin:18px 0}
+.pay-row{display:flex;justify-content:space-between;font-family:'Cormorant Garamond';font-size:1.4rem;color:var(--clay);margin:18px 0}
 .msg{font-size:.82rem;padding:11px 14px;border-radius:6px;margin-bottom:14px;display:none}
 .msg.err{display:block;background:rgba(162,60,37,.08);color:var(--clay-deep)}
 .msg.ok{display:block;background:rgba(122,157,150,.18);color:var(--pine)}
@@ -386,6 +424,7 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
   .hero-photo{max-width:360px;margin:0 auto}
   .collections{grid-template-columns:1fr 1fr}
   .grid{grid-template-columns:1fr 1fr}
+  .grape-grid{grid-template-columns:repeat(2,1fr)}
   .team-grid{grid-template-columns:1fr 1fr;gap:30px}
   .rev-grid{grid-template-columns:1fr}
   .awards-grid{grid-template-columns:1fr 1fr}
@@ -393,6 +432,12 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
   .feature-row{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:1fr 1fr;gap:40px 20px}
   .foot-top{grid-template-columns:1fr 1fr}
+  /* shop becomes single column; facets collapse behind a toggle */
+  .shop-layout{grid-template-columns:1fr}
+  .facets-toggle{display:block;width:100%;margin-bottom:22px;padding:14px;border:1px solid var(--wine);background:none;
+    color:var(--wine);font-family:'Jost';font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
+  .facets{position:static;border-right:0;border-bottom:1px solid var(--line);padding-right:0;padding-bottom:18px;margin-bottom:24px;display:none}
+  .facets.open{display:block}
 }
 @media(max-width:680px){
   .nav-links{position:fixed;inset:0 0 0 auto;width:min(320px,82vw);background:var(--pine);flex-direction:column;
@@ -421,7 +466,7 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
   <a class="wordmark" href="#top"><img src="logo.png" alt="The Vintry, Rathgar" /></a>
   <div class="nav-links" id="navLinks">
     <a href="#discover">About</a>
-    <a href="#awards">Awards</a>
+    <a href="#grapes">Grapes</a>
     <a href="#shop">Shop</a>
     <a href="#reviews">Reviews</a>
     <a href="#visit">Visit</a>
@@ -571,6 +616,27 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
 </section>
 
 <!-- ───────── SHOP ───────── -->
+<!-- ───────── GRAPES ───────── -->
+<section class="grapes pad" id="grapes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">By the Grape</p>
+      <h2>Explore by variety.</h2>
+      <p>Discover the cellar through the grapes that define it — from noble Cabernet to a crisp Sauvignon Blanc.</p>
+    </div>
+    <div class="grape-grid">
+      <a class="grape-card reveal" style="--gi:url('grape-cabernet-sauvignon.jpg')" onclick="filterToGrape('Cabernet Sauvignon')"><span class="gmedia"></span><span class="ginfo"><h4>Cabernet Sauvignon</h4><span class="gcount">73 wines</span></span></a>
+      <a class="grape-card reveal" data-delay="1" style="--gi:url('grape-merlot.jpg')" onclick="filterToGrape('Merlot')"><span class="gmedia"></span><span class="ginfo"><h4>Merlot</h4><span class="gcount">66 wines</span></span></a>
+      <a class="grape-card reveal" data-delay="2" style="--gi:url('grape-pinot-noir.jpg')" onclick="filterToGrape('Pinot Noir')"><span class="gmedia"></span><span class="ginfo"><h4>Pinot Noir</h4><span class="gcount">44 wines</span></span></a>
+      <a class="grape-card reveal" data-delay="3" style="--gi:url('grape-chardonnay.jpg')" onclick="filterToGrape('Chardonnay')"><span class="gmedia"></span><span class="ginfo"><h4>Chardonnay</h4><span class="gcount">56 wines</span></span></a>
+      <a class="grape-card reveal" style="--gi:url('grape-syrah.jpg')" onclick="filterToGrape('Syrah')"><span class="gmedia"></span><span class="ginfo"><h4>Syrah</h4><span class="gcount">40 wines</span></span></a>
+      <a class="grape-card reveal" data-delay="1" style="--gi:url('grape-sauvignon-blanc.jpg')" onclick="filterToGrape('Sauvignon Blanc')"><span class="gmedia"></span><span class="ginfo"><h4>Sauvignon Blanc</h4><span class="gcount">32 wines</span></span></a>
+      <a class="grape-card reveal" data-delay="2" style="--gi:url('grape-tempranillo.jpg')" onclick="filterToGrape('Tempranillo')"><span class="gmedia"></span><span class="ginfo"><h4>Tempranillo</h4><span class="gcount">31 wines</span></span></a>
+      <a class="grape-card reveal" data-delay="3" style="--gi:url('grape-sangiovese.jpg')" onclick="filterToGrape('Sangiovese')"><span class="gmedia"></span><span class="ginfo"><h4>Sangiovese</h4><span class="gcount">18 wines</span></span></a>
+    </div>
+  </div>
+</section>
+
 <section class="shop pad" id="shop">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -578,9 +644,18 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
       <h2>The list.</h2>
       <p>Order online for free collection in Rathgar, or delivery across Dublin &amp; Ireland.</p>
     </div>
-    <div class="filters reveal" id="filters"></div>
-    <div class="grid" id="grid"></div>
-    <p class="shop-note reveal">Prices in euro, including VAT. <b>Free collection</b> in Rathgar · <b>Free delivery</b> over €150.<br>This is a curated selection of our shelves — for an older vintage or a case, just <a href="#visit">ask us</a>.</p>
+    <button class="facets-toggle" id="facetsToggle">Refine your selection</button>
+    <div class="shop-layout">
+      <aside class="facets reveal" id="facets"></aside>
+      <div class="shop-main">
+        <div class="shop-bar">
+          <span class="result-count" id="resultCount"></span>
+          <button class="clear-filters" id="clearFilters" onclick="clearFacets()">Clear all</button>
+        </div>
+        <div class="grid" id="grid"></div>
+        <p class="shop-note">Prices in euro, incl. VAT. <b>Free collection</b> in Rathgar · <b>Free delivery</b> over €150.<br>A curated selection of our cellar — for an older vintage, a magnum or a full case, <a href="#visit">speak to us</a>.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -646,7 +721,7 @@ footer{background:linear-gradient(160deg,var(--pine),var(--pine-2));color:rgba(2
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="yr"></span> The Vintry, Rathgar. All rights reserved. <span style="opacity:.55">· build VRC‑1</span></span>
+      <span>© <span id="yr"></span> The Vintry, Rathgar. All rights reserved. <span style="opacity:.55">· build LUX‑1</span></span>
       <span>Enjoy wine sensibly · Over 18s only · drinkaware.ie</span>
     </div>
   </div>
@@ -786,23 +861,88 @@ function bottle(hue){
 const euro = n => '€' + (Number.isInteger(n) ? n : n.toFixed(2));
 
 /* ════════════ RENDER SHOP ════════════ */
-let activeCat = 'all';
 const grid = document.getElementById('grid');
-const filtersEl = document.getElementById('filters');
+const facetsEl = document.getElementById('facets');
 
-CATS.forEach(c=>{
-  const b=document.createElement('button');
-  b.className='filter'+(c.key==='all'?' active':'');
-  b.textContent=c.label;b.dataset.k=c.key;
-  b.onclick=()=>{activeCat=c.key;syncFilters();renderGrid();};
-  filtersEl.appendChild(b);
-});
-function syncFilters(){document.querySelectorAll('.filter').forEach(f=>f.classList.toggle('active',f.dataset.k===activeCat));}
-function filterTo(k){activeCat=k;syncFilters();renderGrid();document.getElementById('shop').scrollIntoView({behavior:'smooth'});}
+const STYLE_LABEL={champagne:'Champagne & Sparkling',red:'Red Wine',white:'White Wine',port:'Port & Fortified',spirit:'Spirits',beer:'Beer & Cider'};
+function countryOf(p){
+  const r=p.region||'';
+  if(/Champagne|Bordeaux|Burgundy|Rhône|Chablis|Saint-|France/i.test(r))return 'France';
+  if(/Piedmont|Tuscany|Veneto|Italy/i.test(r))return 'Italy';
+  if(/Rioja|Spain/i.test(r))return 'Spain';
+  if(/Douro|Portugal/i.test(r))return 'Portugal';
+  if(/Marlborough|New Zealand|NZ/i.test(r))return 'New Zealand';
+  if(/Irish|Ireland/i.test(r))return 'Ireland';
+  if(/England/i.test(r))return 'England';
+  const parts=r.split(',');return (parts[parts.length-1]||'Other').trim();
+}
+function grapeOf(p){
+  const s=(p.name+' '+p.region).toLowerCase();
+  if(/sauvignon blanc/.test(s))return 'Sauvignon Blanc';
+  if(/pinot noir/.test(s))return 'Pinot Noir';
+  if(/chablis|grenouilles|santenay|vaulorent|defaix|verger/.test(s))return 'Chardonnay';
+  if(/barolo/.test(s))return 'Nebbiolo';
+  if(/chianti/.test(s))return 'Sangiovese';
+  if(/rioja|alberdi/.test(s))return 'Tempranillo';
+  if(/châteauneuf|beaucastel|mont-redon|jaboulet|narbantons|savigny/.test(s))return 'Grenache';
+  if(/montrose|phelan/.test(s))return 'Cabernet / Merlot';
+  return null;
+}
+const FACET_DEFS=[
+  {key:'style',label:'Style',get:p=>[STYLE_LABEL[p.cat]||'Other']},
+  {key:'country',label:'Country',get:p=>[countryOf(p)]},
+  {key:'grape',label:'Grape',get:p=>{const g=grapeOf(p);return g?[g]:[];}},
+];
+const sel={style:new Set(),country:new Set(),grape:new Set()};
+
+function buildFacets(){
+  facetsEl.innerHTML=FACET_DEFS.map(f=>{
+    const counts={};
+    CATALOG.forEach(p=>f.get(p).forEach(v=>{counts[v]=(counts[v]||0)+1;}));
+    const opts=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+    return `<div class="facet" data-f="${f.key}">
+      <h5 onclick="this.parentNode.classList.toggle('collapsed')">${f.label}</h5>
+      <div class="facet-body">
+        ${opts.map(v=>`<label><input type="checkbox" value="${v.replace(/"/g,'&quot;')}" data-facet="${f.key}"><span>${v}</span><span class="count">${counts[v]}</span></label>`).join('')}
+      </div></div>`;
+  }).join('');
+  facetsEl.querySelectorAll('input').forEach(cb=>cb.addEventListener('change',()=>{
+    if(cb.checked) sel[cb.dataset.facet].add(cb.value); else sel[cb.dataset.facet].delete(cb.value);
+    renderGrid();
+  }));
+}
+function passesFacets(p){
+  for(const f of FACET_DEFS){
+    if(sel[f.key].size===0) continue;
+    if(!f.get(p).some(v=>sel[f.key].has(v))) return false;
+  }
+  return true;
+}
+function clearFacets(){Object.values(sel).forEach(s=>s.clear());facetsEl.querySelectorAll('input').forEach(cb=>cb.checked=false);renderGrid();}
+function filterTo(catKey){
+  clearFacets();
+  const label=STYLE_LABEL[catKey];
+  if(label){sel.style.add(label);
+    const cb=facetsEl.querySelector('input[data-facet="style"][value="'+label.replace(/"/g,'&quot;')+'"]');
+    if(cb)cb.checked=true;}
+  renderGrid();
+  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+}
+function filterToGrape(g){
+  clearFacets();
+  const map={'Cabernet Sauvignon':'Cabernet / Merlot','Merlot':'Cabernet / Merlot','Shiraz':'Grenache','Syrah':'Grenache'};
+  const val=map[g]||g;
+  const cb=facetsEl.querySelector('input[data-facet="grape"][value="'+val.replace(/"/g,'&quot;')+'"]');
+  if(cb){cb.checked=true;sel.grape.add(val);}
+  renderGrid();
+  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+}
 
 function renderGrid(){
-  const items = CATALOG.filter(p=>activeCat==='all'||p.cat===activeCat);
-  grid.innerHTML = items.map(p=>`
+  const items = CATALOG.filter(passesFacets);
+  document.getElementById('resultCount').innerHTML='<b>'+items.length+'</b> '+(items.length===1?'wine':'wines');
+  document.getElementById('clearFilters').classList.toggle('show',Object.values(sel).some(s=>s.size>0));
+  grid.innerHTML = items.length ? items.map(p=>`
     <article class="card reveal">
       <div class="bottle">${p.flag?`<span class="flag">${p.flag}</span>`:''}${bottle(p.hue)}</div>
       <div class="card-body">
@@ -814,9 +954,11 @@ function renderGrid(){
           <button class="add" data-id="${p.id}" onclick="addToCart('${p.id}',this)">Add</button>
         </div>
       </div>
-    </article>`).join('');
+    </article>`).join('') : '<div class="no-results">No wines match — <a href="#" onclick="clearFacets();return false;" style="color:var(--clay)">clear filters</a>.</div>';
   observeReveals();
 }
+buildFacets();
+document.getElementById('facetsToggle').addEventListener('click',()=>facetsEl.classList.toggle('open'));
 
 /* ════════════ CART ════════════ */
 let cart = {};
@@ -969,13 +1111,24 @@ const statIO=new IntersectionObserver((es)=>{es.forEach(e=>{
 document.getElementById('navToggle').onclick=()=>{document.getElementById('navLinks').classList.toggle('open');};
 document.querySelectorAll('#navLinks a').forEach(a=>a.onclick=()=>document.getElementById('navLinks').classList.remove('open'));
 
+// Skip the shop footage at the very start of the hero video, loop from there.
+(function(){
+  var v=document.querySelector('.hero-video'); if(!v) return;
+  var START=2.2; // seconds to trim off the front — tweak if needed
+  v.removeAttribute('loop');
+  function go(){ try{ if(v.currentTime < START) v.currentTime=START; }catch(e){} }
+  v.addEventListener('loadedmetadata', go);
+  v.addEventListener('play', go);
+  v.addEventListener('ended', function(){ try{ v.currentTime=START; v.play(); }catch(e){} });
+})();
+
 document.getElementById('yr').textContent=new Date().getFullYear();
 loadCart();renderGrid();updateCart();observeReveals();
 document.querySelectorAll('[data-count]').forEach(el=>statIO.observe(el));
 onScroll();
 window.openCart=openCart;window.closeCart=closeCart;window.startCheckout=startCheckout;
 window.addToCart=addToCart;window.setQty=setQty;window.removeItem=removeItem;
-window.filterTo=filterTo;window.pay=pay;window.closeModal=closeModal;
+window.filterTo=filterTo;window.pay=pay;window.closeModal=closeModal;window.clearFacets=clearFacets;window.filterToGrape=filterToGrape;
 </script>
 </body>
 </html>
