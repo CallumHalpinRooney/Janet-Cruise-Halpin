@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/.netlify/functions/:fn", "destination": "/api/:fn" }
+  ],
+  "redirects": [
+    { "source": "/admin/:path*", "destination": "/", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/vintry/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
+  ]
+}
