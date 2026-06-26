@@ -19,3 +19,16 @@
   for = "/vintry/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# ── RETIRE THE OLD NETLIFY SITE ──────────────────────────────────────────────
+# The live site now runs on Vercel. This catch-all 301 permanently forwards
+# every old Netlify URL to the Vercel domain. A 301 tells Google the site has
+# moved, so it drops the old netlify.app URL from search results and transfers
+# ranking to the new address. (Vercel ignores netlify.toml, so this only
+# affects the old Netlify deploy — the new site is untouched.)
+# NOTE: keep this LAST so the rules above still apply on the old site.
+[[redirects]]
+  from = "/*"
+  to = "https://janet-cruise-halpin-xpgs.vercel.app/:splat"
+  status = 301
+  force = true
