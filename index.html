@@ -1904,6 +1904,55 @@
     margin-top: 0.75rem;
   }
   .inline-edit-panel.show { display: flex; }
+
+  /* ── ORIGINALS EDIT PANEL (admin only) ── */
+  .orig-edit-panel {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(44,74,53,0.06);
+    border: 1px solid rgba(44,74,53,0.2);
+  }
+  body.admin .orig-edit-panel { display: flex !important; }
+  .orig-edit-panel input,
+  .orig-edit-panel select {
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    border: 1px solid rgba(44,74,53,0.25);
+    background: #fff;
+    color: var(--ink);
+  }
+  .orig-save-btn, .orig-sold-btn {
+    padding: 0.4rem 0.75rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+  }
+  .orig-save-btn { background: var(--forest); color: var(--white); }
+  .orig-sold-btn { background: var(--ochre); color: var(--white); margin-top: 0.25rem; }
+  .original-card.sold .original-card-img { opacity: 0.45; }
+  .original-card.sold .inquire-btn { pointer-events: none; opacity: 0.4; }
+  .original-card.sold::after {
+    content: 'Sold';
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--ochre);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+  }
+  .original-card { position: relative; }
   .edit-field-row {
     display: flex;
     flex-direction: column;
@@ -2451,201 +2500,307 @@
   </p>
   <div class="originals-grid">
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="red-leaf">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Red_Leaf.png" alt="Red Leaf" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Red Leaf</p>
-        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Red Leaf</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Red Leaf', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Red Leaf"><input class="orig-edit-size" value="100×100cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="dancing">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Dancing.png" alt="Dancing" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Dancing</p>
-        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Dancing</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Dancing', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Dancing"><input class="orig-edit-size" value="100×100cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="sweet-summer">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Sweet_Summer.png" alt="Sweet Summer" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Sweet Summer</p>
-        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Sweet Summer</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Sweet Summer', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Sweet Summer"><input class="orig-edit-size" value="100×100cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="leaf-and-water">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Leaf_and_Water.png" alt="Leaf and Water" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Leaf and Water</p>
-        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Leaf and Water</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Leaf and Water', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Leaf and Water"><input class="orig-edit-size" value="100×100cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="blue-mantle">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Blue_Mantle.png" alt="Blue Mantle" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Blue Mantle</p>
-        <p class="original-card-size">100×70 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Blue Mantle</p>
+        <p class="original-card-size" data-orig-field="size">100×70 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Blue Mantle', '100×70cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Blue Mantle"><input class="orig-edit-size" value="100×70cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="blue-falls">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Blue_Falls.png" alt="Blue Falls" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Blue Falls</p>
-        <p class="original-card-size">100×70 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Blue Falls</p>
+        <p class="original-card-size" data-orig-field="size">100×70 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Blue Falls', '100×70cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Blue Falls"><input class="orig-edit-size" value="100×70cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="last-summer">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Last_Summer.png" alt="Last Summer" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Last Summer</p>
-        <p class="original-card-size">80×80 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Last Summer</p>
+        <p class="original-card-size" data-orig-field="size">80×80 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Last Summer', '80×80cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Last Summer"><input class="orig-edit-size" value="80×80cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="petals-on-green">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Petals_on_Green.png" alt="Petals on Green" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Petals on Green</p>
-        <p class="original-card-size">80×80 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Petals on Green</p>
+        <p class="original-card-size" data-orig-field="size">80×80 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Petals on Green', '80×80cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Petals on Green"><input class="orig-edit-size" value="80×80cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="holly-and-beech">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Holly_and_Beach.png" alt="Holly and Beech" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Holly and Beech</p>
-        <p class="original-card-size">80×80 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Holly and Beech</p>
+        <p class="original-card-size" data-orig-field="size">80×80 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Holly and Beech', '80×80cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Holly and Beech"><input class="orig-edit-size" value="80×80cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="mayloom">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Mayloom.png" alt="Mayloom" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Mayloom</p>
-        <p class="original-card-size">120×150 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Mayloom</p>
+        <p class="original-card-size" data-orig-field="size">120×150 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Mayloom', '120×150cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Mayloom"><input class="orig-edit-size" value="120×150cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="canopy">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Canopy.png" alt="Canopy" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Canopy</p>
-        <p class="original-card-size">120×150 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Canopy</p>
+        <p class="original-card-size" data-orig-field="size">120×150 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Canopy', '120×150cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Canopy"><input class="orig-edit-size" value="120×150cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="moon-tree">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Moon_Tree.png" alt="Moon Tree" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Moon Tree</p>
-        <p class="original-card-size">70×70 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Moon Tree</p>
+        <p class="original-card-size" data-orig-field="size">70×70 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Moon Tree', '70×70cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Moon Tree"><input class="orig-edit-size" value="70×70cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="touching-green">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Touching_Green.png" alt="Touching Green" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Touching Green</p>
-        <p class="original-card-size">150×120 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Touching Green</p>
+        <p class="original-card-size" data-orig-field="size">150×120 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Touching Green', '150×120cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Touching Green"><input class="orig-edit-size" value="150×120cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="spring-murmur">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Spring_Murmur.png" alt="Spring Murmur" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Spring Murmur</p>
-        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Spring Murmur</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Spring Murmur', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Spring Murmur"><input class="orig-edit-size" value="100×100cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="green-rising">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Green_Rising.png" alt="Green Rising" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Green Rising</p>
-        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Green Rising</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Green Rising', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Green Rising"><input class="orig-edit-size" value="100×100cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="sky-meadow">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Sky_Meadow.png" alt="Sky Meadow" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Sky Meadow</p>
-        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Sky Meadow</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Sky Meadow', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Sky Meadow"><input class="orig-edit-size" value="100×100cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="rose-thicket">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Rose_Thicket.png" alt="Rose Thicket" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Rose Thicket</p>
-        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Rose Thicket</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Rose Thicket', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Rose Thicket"><input class="orig-edit-size" value="100×100cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
       </div>
     </div>
 
-    <div class="original-card reveal">
+    <div class="original-card reveal" data-orig-id="soft-bloom">
       <div class="original-card-img">
         <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_600,c_fill/Soft_Bloom.png" alt="Soft Bloom" loading="lazy">
       </div>
       <div class="original-card-info">
-        <p class="original-card-title">Soft Bloom</p>
-        <p class="original-card-size">100×100 · Oil on Canvas</p>
+        <p class="original-card-title" data-orig-field="title">Soft Bloom</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
         <button class="inquire-btn" onclick="openModal('Soft Bloom', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none"><input class="orig-edit-title" value="Soft Bloom"><input class="orig-edit-size" value="100×100cm"><select class="orig-edit-medium"><option selected>Oil on Canvas</option><option>Oil on Board</option><option>Mixed Media</option></select><button class="orig-save-btn" onclick="saveOriginal(this)">Save</button><button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button></div>
+      </div>
+    </div>
+
+    <div class="original-card reveal" data-orig-id="wild-roses">
+      <div class="original-card-img">
+        <img src="https://res.cloudinary.com/dqguffxvg/image/upload/w_600,c_fill/Wild_Roses.jpg" alt="Wild Roses" loading="lazy">
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title" data-orig-field="title">Wild Roses</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Wild Roses', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none">
+          <input class="orig-edit-title" placeholder="Title" value="Wild Roses">
+          <input class="orig-edit-size" placeholder="e.g. 100×100cm" value="100×100cm">
+          <select class="orig-edit-medium">
+            <option value="Oil on Canvas" selected>Oil on Canvas</option>
+            <option value="Oil on Board">Oil on Board</option>
+            <option value="Mixed Media">Mixed Media</option>
+          </select>
+          <button class="orig-save-btn" onclick="saveOriginal(this)">Save</button>
+          <button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="original-card reveal" data-orig-id="amber-haze">
+      <div class="original-card-img">
+        <img src="https://res.cloudinary.com/dqguffxvg/image/upload/w_600,c_fill/Amber_Haze.jpg" alt="Amber Haze" loading="lazy">
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title" data-orig-field="title">Amber Haze</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Amber Haze', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none">
+          <input class="orig-edit-title" placeholder="Title" value="Amber Haze">
+          <input class="orig-edit-size" placeholder="e.g. 100×100cm" value="100×100cm">
+          <select class="orig-edit-medium">
+            <option value="Oil on Canvas" selected>Oil on Canvas</option>
+            <option value="Oil on Board">Oil on Board</option>
+            <option value="Mixed Media">Mixed Media</option>
+          </select>
+          <button class="orig-save-btn" onclick="saveOriginal(this)">Save</button>
+          <button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="original-card reveal" data-orig-id="teal-garden">
+      <div class="original-card-img">
+        <img src="https://res.cloudinary.com/dqguffxvg/image/upload/w_600,c_fill/Teal_Garden.jpg" alt="Teal Garden" loading="lazy">
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title" data-orig-field="title">Teal Garden</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Teal Garden', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none">
+          <input class="orig-edit-title" placeholder="Title" value="Teal Garden">
+          <input class="orig-edit-size" placeholder="e.g. 100×100cm" value="100×100cm">
+          <select class="orig-edit-medium">
+            <option value="Oil on Canvas" selected>Oil on Canvas</option>
+            <option value="Oil on Board">Oil on Board</option>
+            <option value="Mixed Media">Mixed Media</option>
+          </select>
+          <button class="orig-save-btn" onclick="saveOriginal(this)">Save</button>
+          <button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="original-card reveal" data-orig-id="blue-dusk">
+      <div class="original-card-img">
+        <img src="https://res.cloudinary.com/dqguffxvg/image/upload/w_600,c_fill/Blue_Dusk.jpg" alt="Blue Dusk" loading="lazy">
+      </div>
+      <div class="original-card-info">
+        <p class="original-card-title" data-orig-field="title">Blue Dusk</p>
+        <p class="original-card-size" data-orig-field="size">100×100 · Oil on Canvas</p>
+        <button class="inquire-btn" onclick="openModal('Blue Dusk', '100×100cm')">Inquire for Pricing</button>
+        <div class="orig-edit-panel" style="display:none">
+          <input class="orig-edit-title" placeholder="Title" value="Blue Dusk">
+          <input class="orig-edit-size" placeholder="e.g. 100×100cm" value="100×100cm">
+          <select class="orig-edit-medium">
+            <option value="Oil on Canvas" selected>Oil on Canvas</option>
+            <option value="Oil on Board">Oil on Board</option>
+            <option value="Mixed Media">Mixed Media</option>
+          </select>
+          <button class="orig-save-btn" onclick="saveOriginal(this)">Save</button>
+          <button class="orig-sold-btn" onclick="markOriginalSold(this)">Mark Sold</button>
+        </div>
       </div>
     </div>
 
@@ -3570,6 +3725,63 @@
     setTimeout(() => el.style.outline = '', 1800);
   }
 
+  // ── ORIGINALS EDITING ────────────────────────────────────────────────────
+  function saveOriginal(btn) {
+    const panel = btn.closest('.orig-edit-panel');
+    const card  = btn.closest('.original-card');
+    const title  = panel.querySelector('.orig-edit-title').value.trim();
+    const size   = panel.querySelector('.orig-edit-size').value.trim();
+    const medium = panel.querySelector('.orig-edit-medium').value;
+    if (!title) return;
+    card.querySelector('[data-orig-field="title"]').textContent = title;
+    card.querySelector('[data-orig-field="size"]').textContent  = `${size} · ${medium}`;
+    const inquireBtn = card.querySelector('.inquire-btn');
+    inquireBtn.onclick = () => openModal(title, size);
+    card.querySelector('.orig-edit-img')?.setAttribute('alt', title);
+    const id = card.dataset.origId;
+    try { localStorage.setItem('jch_orig_'+id, JSON.stringify({title, size, medium})); } catch(e) {}
+    const flash = document.createElement('span');
+    flash.textContent = 'Saved ✓';
+    flash.style.cssText = 'font-size:0.7rem;color:var(--forest);font-family:Jost,sans-serif;';
+    panel.appendChild(flash);
+    setTimeout(() => flash.remove(), 1800);
+  }
+  window.saveOriginal = saveOriginal;
+
+  function markOriginalSold(btn) {
+    const card = btn.closest('.original-card');
+    card.classList.toggle('sold');
+    btn.textContent = card.classList.contains('sold') ? 'Mark Available' : 'Mark Sold';
+    const id = card.dataset.origId;
+    try { localStorage.setItem('jch_orig_sold_'+id, card.classList.contains('sold') ? '1' : ''); } catch(e) {}
+  }
+  window.markOriginalSold = markOriginalSold;
+
+  // Restore saved originals edits from localStorage on load
+  (function() {
+    document.querySelectorAll('.original-card[data-orig-id]').forEach(card => {
+      const id = card.dataset.origId;
+      const saved = (() => { try { return JSON.parse(localStorage.getItem('jch_orig_'+id)||'null'); } catch(e){return null;} })();
+      if (saved) {
+        if (saved.title) card.querySelector('[data-orig-field="title"]').textContent = saved.title;
+        if (saved.size && saved.medium) card.querySelector('[data-orig-field="size"]').textContent = `${saved.size} · ${saved.medium}`;
+        const inquireBtn = card.querySelector('.inquire-btn');
+        if (inquireBtn && saved.title) inquireBtn.onclick = () => openModal(saved.title, saved.size || '');
+        const panel = card.querySelector('.orig-edit-panel');
+        if (panel) {
+          if (saved.title) panel.querySelector('.orig-edit-title').value = saved.title;
+          if (saved.size)  panel.querySelector('.orig-edit-size').value  = saved.size;
+          if (saved.medium) panel.querySelector('.orig-edit-medium').value = saved.medium;
+        }
+      }
+      if (localStorage.getItem('jch_orig_sold_'+id) === '1') {
+        card.classList.add('sold');
+        const soldBtn = card.querySelector('.orig-sold-btn');
+        if (soldBtn) soldBtn.textContent = 'Mark Available';
+      }
+    });
+  })();
+
   function findPaintingImg(paintingName) {
     /* Strip size suffix like " (100×100cm)" */
     const bare = paintingName.replace(/\s*\(.*\)$/, '').trim();
@@ -3595,6 +3807,10 @@
       'Sky Meadow':     'Sky_Meadow',
       'Rose Thicket':   'Rose_Thicket',
       'Soft Bloom':     'Soft_Bloom',
+      'Wild Roses':     'Wild_Roses',
+      'Amber Haze':     'Amber_Haze',
+      'Teal Garden':    'Teal_Garden',
+      'Blue Dusk':      'Blue_Dusk',
     };
     /* Fallback: derive Cloudinary key from the painting name directly */
     const key = map[bare] || bare.replace(/\s+/g, '_');
