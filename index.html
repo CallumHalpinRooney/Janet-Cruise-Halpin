@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Janet Cruise Halpin — Irish Artist | Original Paintings &amp; Fine-Art Prints</title>
 <meta name="description" content="Original oil paintings and limited-edition giclée fine-art prints by Janet Cruise Halpin, an Irish artist in Laragh, Co. Wicklow. Forests, shores and luminous Irish landscapes — signed editions, shipped worldwide.">
 <meta name="keywords" content="Janet Cruise Halpin, Irish artist, fine art prints, giclée prints, oil paintings, Wicklow artist, Irish landscape art, original paintings Ireland, Glendalough art">
@@ -67,7 +67,23 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* Belt-and-braces against the whole page being forced wider than the
+       screen — if anything overflows a hair, the browser would otherwise
+       zoom the entire layout out to fit, making the site look tiny on a
+       phone. Clip it here (on html as well as body) so the viewport always
+       maps 1:1 to the device width. */
+    overflow-x: hidden;
+    /* Stop iOS Safari from auto-resizing text on rotation / reader heuristics
+       so our responsive font sizes are honoured exactly. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Media never overflows its container — protects every grid/card/section
+     from a stray oversized image pushing the layout wider than the screen. */
+  img, svg, video, canvas { max-width: 100%; }
 
   @keyframes pageReveal {
     from { opacity: 0; }
@@ -1408,6 +1424,7 @@
     display: flex;
     gap: 2rem;
     list-style: none;
+    flex-wrap: wrap;
   }
   .footer-links a {
     font-size: 0.65rem;
