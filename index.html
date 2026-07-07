@@ -3241,7 +3241,12 @@
   function renderGrid(filterCat = 'all') {
     const grid = document.getElementById('printsGrid');
     grid.innerHTML = '';
-    paintings.forEach(p => {
+    // For-sale prints (available:true) render first so they sit at the top of
+    // the grid and of every category filter. Stable sort keeps the original
+    // order within each group.
+    const ordered = [...paintings].sort((a, b) =>
+      ((b.available === true) ? 1 : 0) - ((a.available === true) ? 1 : 0));
+    ordered.forEach(p => {
       const d = store[p.id];
       const visible  = filterCat === 'all' || d.cat === filterCat;
       const isOD     = !d.printed; // on-demand
