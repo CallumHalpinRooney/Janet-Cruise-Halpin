@@ -256,12 +256,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 
-/* ══ MARQUEE strip ══════════════════════════════════ */
-.strip{background:var(--espresso);color:var(--cream);padding:20px 0;overflow:hidden;white-space:nowrap}
-.strip__track{display:inline-flex;gap:60px;animation:marq 34s linear infinite;will-change:transform}
-.strip span{font-family:var(--serif);font-weight:300;font-size:1.05rem;letter-spacing:.16em;text-transform:uppercase;opacity:.9}
-.strip span::before{content:"—";margin-right:60px;opacity:.4}
-@keyframes marq{to{transform:translateX(-50%)}}
 
 /* ══ INTRO / PERSONALISED SERVICES ══════════════════ */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:center}
@@ -401,11 +395,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .contact__hours span:nth-child(even){text-align:right;color:var(--cream)}
 .map{margin-top:60px;border:1px solid var(--line-l);height:340px;filter:grayscale(.4) sepia(.25)}
 .map iframe{width:100%;height:100%;border:0;display:block}
-/* big closing marquee — ever's "Explore Every Detail of …" */
-.explore{background:var(--espresso);color:var(--cream);overflow:hidden;padding:clamp(40px,7vh,90px) 0;border-top:1px solid var(--line-l)}
-.explore__track{display:inline-flex;white-space:nowrap;animation:marq 40s linear infinite;will-change:transform}
-.explore__track span{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,7vw,6rem);letter-spacing:.01em;padding:0 .5em;text-transform:none}
-.explore__track span em{font-style:italic;color:var(--brown-soft)}
 .foot{background:var(--espresso);color:var(--cream-dim);padding:40px var(--pad);
   display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;
   font-size:.7rem;letter-spacing:.16em;text-transform:uppercase}
@@ -557,28 +546,20 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <div class="hero__bg" data-parallax="0.18"><div class="frame" style="height:100%;padding:0"><div class="ph" data-img="hero.jpg"></div></div></div>
   <div class="hero__scrim"></div>
   <div class="hero__inner">
-    <p class="hero__eyebrow">Thomas Collins Hair Studio · Rathgar, Dublin 6</p>
-    <h1 class="hero__title" data-split>beauty in every detail</h1>
-    <p class="hero__quote">&ldquo; Your hair, celebrated through every precise touch. &rdquo;</p>
+    <p class="hero__eyebrow">Hair Studio · Rathgar, Dublin 6</p>
+    <h1 class="hero__title" data-split>Thomas Collins</h1>
+    <p class="hero__quote">Cutting, colour and extensions on Rathgar Road, by appointment.</p>
   </div>
   <a href="#intro" class="hero__scroll">Scroll to explore</a>
 </section>
-
-<!-- ══ STRIP ══ -->
-<div class="strip" aria-hidden="true">
-  <div class="strip__track">
-    <span>Cut &amp; Finish</span><span>Colour</span><span>Balayage</span><span>Highlights</span><span>Hair Extensions</span><span>Bridal</span>
-    <span>Cut &amp; Finish</span><span>Colour</span><span>Balayage</span><span>Highlights</span><span>Hair Extensions</span><span>Bridal</span>
-  </div>
-</div>
 
 <!-- ══ INTRO / PERSONALISED ══ -->
 <section class="section section--ivory speckle" id="intro">
   <div class="split">
     <div class="intro__txt reveal">
-      <p class="eyebrow">The art of</p>
-      <h2 class="display intro__title" data-split>Understated<br>Hair</h2>
-      <p class="intro__lead">Every detail is designed with care to enhance your natural hair without losing what makes it yours. On Rathgar Road, each appointment begins with a conversation, from a precise dry cut to lived-in balayage and hand-tied extensions, and ends with a look that still feels like you.</p>
+      <p class="eyebrow">About the studio</p>
+      <h2 class="display intro__title" data-split>Good hair,<br>no fuss</h2>
+      <p class="intro__lead">We keep it straightforward: a proper chat about what you want, an unhurried appointment, and a cut or colour that suits your hair and your routine. From a sharp dry cut to lived-in balayage and hand-tied extensions, you leave looking like yourself on a good day.</p>
     </div>
     <div class="frame intro__img reveal" data-delay="1">
       <div class="ph" data-img="intro.jpg"></div>
@@ -592,27 +573,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   </div>
 </section>
 
-<!-- ══ SERVICES — booking rows ══ -->
-<section class="section section--mocha" id="services">
-  <div class="svc">
-    <div class="frame svc__img reveal">
-      <div class="ph" data-img="services.jpg"></div>
-      <div class="frame__border"></div>
-    </div>
-    <div class="svc__txt">
-      <p class="eyebrow reveal" style="margin-bottom:34px">Choose a service to book</p>
-      <div class="svc__list reveal" data-delay="1" id="svcList"><!-- rows injected --></div>
-    </div>
-  </div>
-</section>
-
 <!-- ══ NUMBERED CATEGORIES — ever-style 01–06 ══ -->
 <section class="section section--mocha" data-theme="dark" id="categories" style="padding-top:0">
   <div class="cats">
     <div class="cats__head reveal">
       <div>
-        <p class="eyebrow" style="margin-bottom:16px">What we do</p>
-        <h2 class="display" data-split style="font-size:clamp(2rem,4.6vw,3.6rem)">Every detail,<br>considered</h2>
+        <p class="eyebrow" style="margin-bottom:16px">Our services</p>
+        <h2 class="display" data-split style="font-size:clamp(2rem,4.6vw,3.6rem)">What we do</h2>
       </div>
       <p class="cats__hint">Drag to explore</p>
     </div>
@@ -622,7 +589,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 <!-- ══ COLLAGE — art of ══ -->
 <section class="section section--ivory speckle collage">
-  <div class="collage__title reveal"><h2 class="display">The Art of<br>Beautiful Hair</h2></div>
+  <div class="collage__title reveal"><h2 class="display">Around<br>the studio</h2></div>
   <div class="frame collage__img c1 reveal"><div class="ph" data-img="art-1.jpg"></div><div class="frame__border"></div></div>
   <div class="frame collage__img c2 reveal" data-delay="1"><div class="ph" data-img="art-2.jpg"></div><div class="frame__border"></div></div>
   <div class="frame collage__img c3 reveal" data-delay="2"><div class="ph" data-img="art-3.jpg"></div><div class="frame__border"></div></div>
@@ -634,7 +601,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <div class="quote__bg" data-parallax="0.12"><div class="ph" data-img="quote.jpg"></div></div>
   <div class="quote__scrim"></div>
   <div class="quote__inner reveal">
-    <p class="quote__text"><span class="quote__mark">&ldquo;</span>Your best hair is found in the smallest details.<span class="quote__mark">&rdquo;</span></p>
+    <p class="quote__text"><span class="quote__mark">&ldquo;</span>Good hair isn&rsquo;t complicated. It&rsquo;s a good cut, looked after well, by someone who actually listens.<span class="quote__mark">&rdquo;</span></p>
     <p class="quote__by">Thomas Collins</p>
   </div>
 </section>
@@ -644,20 +611,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <div class="feature__card reveal">
     <div class="frame feature__img"><div class="ph" data-img="feature.jpg"></div><div class="frame__border"></div></div>
     <p class="eyebrow feature__eyebrow">Thomas Collins Hair Studio</p>
-    <h2 class="feature__title" data-split>Your Moment of<br>Transformation Begins Here</h2>
-    <p class="feature__lead">Let&rsquo;s make this about you. A quiet, unhurried appointment, a considered result, and hair that still feels like yours long after you leave the chair. Because feeling good starts here.</p>
+    <h2 class="feature__title" data-split>Ready when<br>you are</h2>
+    <p class="feature__lead">Book in for a consultation or your next appointment. Tell us what you&rsquo;re after and we&rsquo;ll be honest about what will actually work for your hair. No pressure, no upsell.</p>
     <button class="btn btn--dark" data-book>Book an appointment</button>
   </div>
 </section>
 
 <!-- ══ PRICE LIST ══ -->
 <section class="section section--mocha" data-theme="dark" id="prices">
-  <p class="eyebrow reveal" style="text-align:center">Endless possibility with</p>
-  <h2 class="display reveal" data-split style="text-align:center;margin:18px 0 26px">Personalised Services</h2>
-  <p class="reveal" data-delay="1" style="text-align:center;max-width:46ch;margin:0 auto 50px;color:var(--cream-dim)">At Thomas Collins, no detail is overlooked. Each appointment is crafted to complement your natural hair, because beautiful hair is personal.</p>
+  <p class="eyebrow reveal" style="text-align:center">Services &amp; pricing</p>
+  <h2 class="display reveal" data-split style="text-align:center;margin:18px 0 26px">Prices</h2>
+  <p class="reveal" data-delay="1" style="text-align:center;max-width:46ch;margin:0 auto 50px;color:var(--cream-dim)">Starting prices below. Colour and extensions are quoted at a quick consultation first, so you always know the cost before we begin.</p>
   <div class="price reveal" data-delay="1" id="priceList"><!-- injected --></div>
   <p class="price__note" style="color:var(--cream-dim)">Prices from — final quote confirmed at your consultation.</p>
-  <div class="reveal" data-delay="2" style="text-align:center;margin-top:44px"><button class="btn btn--ghost" data-book>Check all services</button></div>
 </section>
 
 <!-- ══ GALLERY ══ -->
@@ -681,9 +647,24 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <div class="frame reveal" style="aspect-ratio:4/5"><div class="ph" data-img="story.jpg"></div><div class="frame__border"></div></div>
     <div class="reveal" data-delay="1">
       <p class="eyebrow">Our story</p>
-      <h2 class="display" style="margin:22px 0 26px;font-size:clamp(2rem,4.5vw,3.4rem)">Hair, crafted<br>on Rathgar Road</h2>
-      <p style="color:var(--cream-dim);max-width:46ch;margin-bottom:18px">Thomas Collins Hair Studio sits at 101 Rathgar Road in the heart of Dublin 6 — a warm, welcoming salon built on craft, honesty and genuine care for the people in the chair.</p>
-      <p style="color:var(--cream-dim);max-width:46ch">From everyday cuts and colour to statement balayage, luxury extensions and bridal styling, every appointment is unhurried and tailored. We&rsquo;d love to look after your hair.</p>
+      <h2 class="display" style="margin:22px 0 26px;font-size:clamp(2rem,4.5vw,3.4rem)">A salon on<br>Rathgar Road</h2>
+      <p style="color:var(--cream-dim);max-width:46ch;margin-bottom:18px">Thomas Collins Hair Studio sits at 101 Rathgar Road in Dublin 6. It&rsquo;s a small, friendly salon where you tend to see the same face each visit and never feel rushed out the door.</p>
+      <p style="color:var(--cream-dim);max-width:46ch">Everyday cuts and colour, balayage, extensions and bridal styling. We take the time to get it right, and we&rsquo;d love to look after your hair.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES — booking rows ══ -->
+<section class="section section--mocha" id="services">
+  <div class="svc">
+    <div class="frame svc__img reveal">
+      <div class="ph" data-img="services.jpg"></div>
+      <div class="frame__border"></div>
+    </div>
+    <div class="svc__txt">
+      <p class="eyebrow reveal" style="margin-bottom:14px">Book in</p>
+      <h2 class="display reveal" data-split style="font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:30px">Pick a service<br>and a time</h2>
+      <div class="svc__list reveal" data-delay="1" id="svcList"><!-- rows injected --></div>
     </div>
   </div>
 </section>
@@ -733,14 +714,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <div class="map reveal" data-delay="2">
     <iframe title="Map to Thomas Collins Hair Studio" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
       src="https://www.google.com/maps?q=101+Rathgar+Road+Dublin+D06+VX72&output=embed"></iframe>
-  </div>
-</section>
-
-<!-- ══ EXPLORE marquee ══ -->
-<section class="explore" aria-hidden="true">
-  <div class="explore__track">
-    <span>Explore Every <em>Detail</em> of Thomas Collins</span>
-    <span>Explore Every <em>Detail</em> of Thomas Collins</span>
   </div>
 </section>
 
@@ -917,22 +890,22 @@ $('#yr').textContent = new Date().getFullYear();
    ══════════════════════════════════════════════════════════ */
 const CATEGORIES = [
   { name:'Cutting', img:'cat-1.jpg',
-    desc:'A cut that grows out beautifully, never awkwardly. Shaped to the way your hair falls and the way you actually wear it, precise, wearable and quietly yours.',
+    desc:'Cuts that actually grow out well. We shape to your hair type, your face and how much time you’ll realistically spend styling it in the morning.',
     links:[['Dry Cut','cut-finish'],['Cut & Blow Dry','cut-blowdry'],['Gents Cut','gents']] },
   { name:'Colour', img:'cat-2.jpg',
-    desc:'Colour with quiet depth. From a soft root melt to a rich all-over tone, every shade is mixed to flatter your skin and stay beautiful from the very first wash.',
+    desc:'Full colour, tints and glosses, matched to your skin tone and kept easy to maintain between visits.',
     links:[['Full Head Colour','full-colour'],['Toner & Gloss','toner'],['Root Touch-Up','full-colour']] },
   { name:'Balayage & Highlights', img:'cat-3.jpg',
-    desc:'Light, placed by hand. Sun-soft balayage and lived-in highlights, painted to catch the light and grow out without a hard line in sight.',
+    desc:'Hand-painted balayage, highlights and babylights for a soft, sun-lightened finish and no harsh regrowth line to chase.',
     links:[['Balayage / Ombré','balayage'],['Highlights','highlights'],['Babylights','highlights']] },
   { name:'Extensions', img:'cat-4.jpg',
-    desc:'Length and body that feel like your own. Hand-tied and carefully matched, gently placed for fuller hair that moves naturally and stays comfortable all day.',
+    desc:'Hand-tied and tape-in extensions, colour-matched and fitted comfortably for length and thickness that lasts.',
     links:[['Hand-Tied Wefts','extensions'],['Tape-In','extensions'],['Consultation','extensions']] },
   { name:'Treatments', img:'cat-5.jpg',
-    desc:'Care that shows. Bond-building, smoothing and scalp rituals that leave hair softer, stronger and quietly luminous, session after session.',
+    desc:'Olaplex, keratin smoothing and scalp treatments to get condition and shine back into tired or over-worked hair.',
     links:[['Olaplex','treatment'],['Keratin Smoothing','treatment'],['Scalp Ritual','treatment']] },
   { name:'Bridal & Occasion', img:'cat-6.jpg',
-    desc:'Your day, held to the last detail. Trials, timings and a finish that lasts from the first look to the last dance, calm, considered and completely you.',
+    desc:'Trials, timings and a long-wearing finish for weddings and big days, planned calmly and well in advance.',
     links:[['Bridal Trial','bridal'],['Wedding Day','bridal'],['Occasion Styling','bridal']] },
 ];
 $('#catsTrack').innerHTML = CATEGORIES.map((c,i)=>`

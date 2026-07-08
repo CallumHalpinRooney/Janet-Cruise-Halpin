@@ -11,10 +11,10 @@ The design is a close match to **ever.co.id**, rebranded for Thomas Collins:
   alternate with the beige as you scroll.
 - **Type** — an elegant serif display (Fraunces, standing in for the reference's
   Bradford) paired with a light uppercase sans (Jost, for Maax).
-- **Section flow** mirrors ever.co.id: hero "beauty in every detail" → "the art
-  of understated hair" → a **numbered 01–06 services carousel** → "Endless
-  possibility with Personalised Services" → "Your Moment of Transformation
-  Begins Here" → FAQ → an "Explore Every Detail" closing marquee.
+- **Section flow**: hero → "about the studio" intro → a **numbered 01–06
+  services carousel** → studio collage → pull-quote → "ready when you are" →
+  prices → gallery → our story → the **booking list** (kept low on purpose, so
+  visitors get a feel for the studio before booking) → FAQ → find us.
 - **Motion** uses the same libraries ever.co.id runs, self-hosted in `vendor/`:
   **Lenis** (smooth momentum scroll), **GSAP** + **SplitType** (headings that
   rise in character by character). A single IntersectionObserver drives every
