@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Thomas Collins Hair Studio — Rathgar, Dublin 6 | Cut · Colour · Extensions</title>
-<meta name="description" content="Thomas Collins Hair Studio — a premium hair salon on Rathgar Road, Dublin 6. Cutting, colour, balayage, highlights, hair extensions and bridal styling. Book your appointment online.">
-<meta name="keywords" content="Thomas Collins Hair Studio, hairdresser Rathgar, hair salon Dublin 6, balayage Dublin, hair extensions Dublin, highlights Rathgar, blow dry Dublin, bridal hair Dublin">
+<title>Thomas Collins Hair Studio — Rathgar, Dublin 6 | Cut · Colour · Highlights</title>
+<meta name="description" content="Thomas Collins Hair Studio — a hair salon on Rathgar Road, Dublin 6. Cutting, colour, balayage, highlights, blow-dries and treatments. Book your appointment online.">
+<meta name="keywords" content="Thomas Collins Hair Studio, hairdresser Rathgar, hair salon Dublin 6, balayage Dublin, highlights Rathgar, blow dry Dublin, gents barber Rathgar, GHD curls Dublin">
 <meta name="author" content="Thomas Collins Hair Studio">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://janet-cruise-halpin-xpgs.vercel.app/thomas-collins/">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="business.business">
 <meta property="og:site_name" content="Thomas Collins Hair Studio">
 <meta property="og:title" content="Thomas Collins Hair Studio — Rathgar, Dublin 6">
-<meta property="og:description" content="A premium hair studio on Rathgar Road, Dublin 6. Cut, colour, balayage, extensions & bridal. Book online.">
+<meta property="og:description" content="A hair studio on Rathgar Road, Dublin 6. Cut, colour, balayage, highlights, blow-dries & treatments. Book online.">
 <meta property="og:url" content="https://janet-cruise-halpin-xpgs.vercel.app/thomas-collins/">
 
 <!-- Local business structured data -->
@@ -349,13 +349,18 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .feature__lead{margin:22px auto 32px;max-width:46ch;color:var(--ink-dim)}
 .section--mocha .feature__lead{color:var(--cream-dim)}
 
-/* ══ PRICE LIST ═════════════════════════════════════ */
-.price{max-width:820px;margin:0 auto}
-.price__row{display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line-d)}
-.price__name{font-family:var(--serif);font-weight:300;font-size:1.3rem;color:var(--espresso)}
-.price__dots{flex:1;border-bottom:1px dotted var(--line-d);transform:translateY(-4px)}
-.price__val{font-size:.82rem;letter-spacing:.12em;color:var(--brown);white-space:nowrap}
-.price__note{text-align:center;margin-top:26px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
+/* ══ PRICE LIST (on the dark "Prices" section) ══════ */
+.price{max-width:760px;margin:0 auto}
+.price__group{margin-top:46px}
+.price__group:first-child{margin-top:0}
+.price__grouphd{display:flex;align-items:center;gap:20px;justify-content:center;margin-bottom:6px;
+  font-family:var(--sans);font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--brown-soft)}
+.price__grouphd::before,.price__grouphd::after{content:"";height:1px;flex:1;background:var(--line-l)}
+.price__row{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--line-l)}
+.price__name{font-family:var(--serif);font-weight:300;font-size:1.15rem;color:var(--cream)}
+.price__dots{flex:1;border-bottom:1px dotted var(--line-l);transform:translateY(-4px)}
+.price__val{font-size:.82rem;letter-spacing:.1em;color:var(--brown-soft);white-space:nowrap}
+.price__note{text-align:center;margin-top:26px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim)}
 
 /* ══ GALLERY ════════════════════════════════════════ */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -548,7 +553,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <div class="hero__inner">
     <p class="hero__eyebrow">Hair Studio · Rathgar, Dublin 6</p>
     <h1 class="hero__title" data-split>Thomas Collins</h1>
-    <p class="hero__quote">Cutting, colour and extensions on Rathgar Road, by appointment.</p>
+    <p class="hero__quote">Cutting, colour and blow-dries on Rathgar Road, by appointment.</p>
   </div>
   <a href="#intro" class="hero__scroll">Scroll to explore</a>
 </section>
@@ -559,7 +564,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <div class="intro__txt reveal">
       <p class="eyebrow">About the studio</p>
       <h2 class="display intro__title" data-split>Good hair,<br>no fuss</h2>
-      <p class="intro__lead">We keep it straightforward: a proper chat about what you want, an unhurried appointment, and a cut or colour that suits your hair and your routine. From a sharp dry cut to lived-in balayage and hand-tied extensions, you leave looking like yourself on a good day.</p>
+      <p class="intro__lead">We keep it straightforward: a proper chat about what you want, an unhurried appointment, and a cut or colour that suits your hair and your routine. From a sharp dry cut to lived-in balayage and a proper blow-dry, you leave looking like yourself on a good day.</p>
     </div>
     <div class="frame intro__img reveal" data-delay="1">
       <div class="ph" data-img="intro.jpg"></div>
@@ -621,9 +626,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 <section class="section section--mocha" data-theme="dark" id="prices">
   <p class="eyebrow reveal" style="text-align:center">Services &amp; pricing</p>
   <h2 class="display reveal" data-split style="text-align:center;margin:18px 0 26px">Prices</h2>
-  <p class="reveal" data-delay="1" style="text-align:center;max-width:46ch;margin:0 auto 50px;color:var(--cream-dim)">Starting prices below. Colour and extensions are quoted at a quick consultation first, so you always know the cost before we begin.</p>
+  <p class="reveal" data-delay="1" style="text-align:center;max-width:48ch;margin:0 auto 50px;color:var(--cream-dim)">Our full price list. Balayage and colour correction are quoted at a quick consultation first, so you always know the cost before we begin.</p>
   <div class="price reveal" data-delay="1" id="priceList"><!-- injected --></div>
-  <p class="price__note" style="color:var(--cream-dim)">Prices from — final quote confirmed at your consultation.</p>
+  <p class="price__note" style="color:var(--cream-dim)">Prices are a guide and may vary with hair length and thickness.</p>
 </section>
 
 <!-- ══ GALLERY ══ -->
@@ -649,7 +654,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
       <p class="eyebrow">Our story</p>
       <h2 class="display" style="margin:22px 0 26px;font-size:clamp(2rem,4.5vw,3.4rem)">A salon on<br>Rathgar Road</h2>
       <p style="color:var(--cream-dim);max-width:46ch;margin-bottom:18px">Thomas Collins Hair Studio sits at 101 Rathgar Road in Dublin 6. It&rsquo;s a small, friendly salon where you tend to see the same face each visit and never feel rushed out the door.</p>
-      <p style="color:var(--cream-dim);max-width:46ch">Everyday cuts and colour, balayage, extensions and bridal styling. We take the time to get it right, and we&rsquo;d love to look after your hair.</p>
+      <p style="color:var(--cream-dim);max-width:46ch">Everyday cuts and colour, highlights, balayage, blow-dries and treatments. We take the time to get it right, and we&rsquo;d love to look after your hair.</p>
     </div>
   </div>
 </section>
@@ -811,18 +816,50 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* ══════════════════════════════════════════════════════════
    DATA — services, hours, faqs, prices  (edit freely)
    ══════════════════════════════════════════════════════════ */
+/* Bookable services — a curated slice of the full price list (below),
+   with durations used to generate time slots. Prices from the studio's
+   own price list. */
 const SERVICES = [
-  { id:'cut-finish',  name:'Cut & Finish',        tag:'Styling',    dur:60,  price:'from €55' },
-  { id:'cut-blowdry', name:'Cut & Blow Dry',      tag:'Styling',    dur:75,  price:'from €60' },
-  { id:'blow-dry',    name:'Blow Dry',            tag:'Styling',    dur:45,  price:'from €35' },
-  { id:'gents',       name:'Gents Cut',           tag:'Styling',    dur:30,  price:'from €25' },
-  { id:'full-colour', name:'Full Head Colour',    tag:'Colour',     dur:120, price:'from €85' },
-  { id:'highlights',  name:'Highlights',          tag:'Colour',     dur:150, price:'from €90' },
-  { id:'balayage',    name:'Balayage / Ombré',    tag:'Colour',     dur:180, price:'from €140' },
-  { id:'toner',       name:'Toner / Gloss',       tag:'Colour',     dur:45,  price:'from €25' },
-  { id:'extensions',  name:'Hair Extensions',     tag:'Extensions', dur:60,  price:'Consultation' },
-  { id:'treatment',   name:'Treatment (Olaplex)', tag:'Care',       dur:30,  price:'from €25' },
-  { id:'bridal',      name:'Bridal & Occasion',   tag:'Occasion',   dur:90,  price:'POA' },
+  { id:'ladies-cut',      name:'Ladies Cut & Blow-Dry',  tag:'Cuts',       dur:60,  price:'from €70' },
+  { id:'ladies-restyle',  name:'Ladies Restyle',         tag:'Cuts',       dur:75,  price:'from €75' },
+  { id:'senior-cut',      name:'Senior Stylist Cut',     tag:'Cuts',       dur:60,  price:'from €60' },
+  { id:'childrens-cut',   name:'Children’s Cut (to 12)', tag:'Cuts',       dur:30,  price:'from €35' },
+  { id:'gents-cut',       name:'Gents Cut',              tag:'Gents',      dur:30,  price:'from €30' },
+  { id:'blow-dry',        name:'Blow-Dry',               tag:'Styling',    dur:45,  price:'from €25' },
+  { id:'ghd-curls',       name:'GHD Curls',              tag:'Styling',    dur:45,  price:'from €40' },
+  { id:'up-style',        name:'Up-Style',               tag:'Styling',    dur:60,  price:'from €45' },
+  { id:'full-highlights', name:'Highlights — Full Head', tag:'Colour',     dur:150, price:'€115' },
+  { id:'half-highlights', name:'Highlights — Half Head', tag:'Colour',     dur:120, price:'€70' },
+  { id:'root-regrowth',   name:'Root Regrowth',          tag:'Colour',     dur:90,  price:'€60' },
+  { id:'toner',           name:'Toner / Glossing',       tag:'Colour',     dur:45,  price:'€20' },
+  { id:'balayage',        name:'Balayage',               tag:'Colour',     dur:180, price:'On request' },
+  { id:'colour-correction',name:'Colour Correction',     tag:'Colour',     dur:150, price:'On request' },
+  { id:'wellaplex',       name:'Wellaplex Treatment',    tag:'Treatments', dur:30,  price:'€30' },
+];
+
+/* Full price list, exactly as the studio's card. */
+const PRICES = [
+  { group:'Cuts', items:[
+    ['Thomas','€70'],['Thomas Restyle','€75'],
+    ['Senior Stylist','€60'],['Senior Stylist Restyle','€65'],
+    ['Senior Stylist — Senior Citizens','€50'],['Students / Girls','€45'],
+    ['Girls up to 12 yrs','€35'],['Girls up to 12 yrs — Dry Cut','€25'],
+  ]},
+  { group:'Gents', items:[
+    ['Thomas','€30'],['Senior Stylist','€25'],
+    ['Students','€18'],['Boys up to 12 yrs','€15'],
+  ]},
+  { group:'Stylist / Blow-Dries', items:[
+    ['Short','€25'],['Medium','€30'],['Long','€35'],
+    ['Up-Styles','€45'],['GHD Curls with Blow-Dry','€45'],['GHD Curls, no Blow-Dry','€40'],
+  ]},
+  { group:'Colour / Highlights', items:[
+    ['Highlights — Full Head','€115'],['Highlights — Half Head','€70'],
+    ['T-Bar Highlights','€50'],['Root Regrowth','€60'],
+    ['Masking','€30'],['Toner / Glossing','€20'],
+    ['Balayage','On request'],['Colour Correction','On request'],
+    ['Body Waves','€85'],['Conditioning Treatment','€22'],['Wellaplex Treatment','€30'],
+  ]},
 ];
 
 /* Opening hours — 0 = Sunday … 6 = Saturday. null = closed. */
@@ -839,11 +876,11 @@ const SLOT_STEP = 30; // minutes
 
 const FAQS = [
   ['Where is the studio and what are the opening hours?','Thomas Collins Hair Studio is at 101 Rathgar Road, Dublin 6 (D06 VX72). We&rsquo;re open Tuesday to Friday from 9:30, with a late night on Thursday until 20:00, and Saturday from 9:00 to 17:00. Closed Sunday and Monday.'],
-  ['It&rsquo;s my first visit — what should I know?','Please arrive a few minutes early so we can talk through what you&rsquo;re looking for over a quick consultation. If you&rsquo;re booking colour, extensions or a big change, a patch test or consultation may be needed first — just mention it in your booking notes.'],
-  ['Do I need a consultation for colour or extensions?','For major colour corrections, balayage and all hair-extension work, yes — a short consultation lets us assess your hair and give you an accurate quote and timing. You can request one as your service and we&rsquo;ll take it from there.'],
+  ['It&rsquo;s my first visit — what should I know?','Please arrive a few minutes early so we can talk through what you&rsquo;re looking for over a quick consultation. If you&rsquo;re booking colour or a big change, a patch test or consultation may be needed first — just mention it in your booking notes.'],
+  ['Do I need a consultation for balayage or colour correction?','Yes — balayage and colour correction are quoted at a short consultation so we can assess your hair and give you an accurate price and timing before we start. You can request one as your service and we&rsquo;ll take it from there.'],
+  ['Do you have different prices for different stylists?','We do — a cut or colour with Thomas is priced differently to one with a senior stylist, and we offer student and senior-citizen rates too. The full price list is on this page.'],
   ['What forms of payment do you accept?','We accept cash and all major cards, including contactless, in the studio. Any deposit for larger appointments is arranged when we confirm your booking.'],
   ['What is your cancellation policy?','Life happens — we simply ask for at least 24 hours&rsquo; notice if you need to move or cancel an appointment, so we can offer the time to someone else.'],
-  ['How do I care for my extensions?','We&rsquo;ll send you home with full aftercare advice and recommend the right products on the day. In short: brush gently with the right brush, avoid heavy oils at the bonds, and keep up with your maintenance appointments.'],
 ];
 
 /* ══════════════════════════════════════════════════════════
@@ -867,12 +904,16 @@ $('#svcList').innerHTML = SERVICES.map((s,i)=>`
     <span class="svc__arrow" aria-hidden="true"></span>
   </button>`).join('');
 
-// price list
-$('#priceList').innerHTML = SERVICES.map(s=>`
-  <div class="price__row">
-    <span class="price__name">${s.name}</span>
-    <span class="price__dots"></span>
-    <span class="price__val">${s.price}</span>
+// price list — grouped by category, matching the studio's card
+$('#priceList').innerHTML = PRICES.map(g=>`
+  <div class="price__group">
+    <div class="price__grouphd">${g.group}</div>
+    ${g.items.map(([n,v])=>`
+      <div class="price__row">
+        <span class="price__name">${n}</span>
+        <span class="price__dots"></span>
+        <span class="price__val">${v}</span>
+      </div>`).join('')}
   </div>`).join('');
 
 // faq
@@ -885,28 +926,22 @@ $('#faqList').innerHTML = FAQS.map(([q,a])=>`
 $('#yr').textContent = new Date().getFullYear();
 
 /* ══════════════════════════════════════════════════════════
-   NUMBERED CATEGORIES (ever-style 01–06) — drag carousel
+   NUMBERED CATEGORIES (ever-style) — drag carousel
    Each treatment link opens the booking flow prefilled.
    ══════════════════════════════════════════════════════════ */
 const CATEGORIES = [
-  { name:'Cutting', img:'cat-1.jpg',
-    desc:'Cuts that actually grow out well. We shape to your hair type, your face and how much time you’ll realistically spend styling it in the morning.',
-    links:[['Dry Cut','cut-finish'],['Cut & Blow Dry','cut-blowdry'],['Gents Cut','gents']] },
-  { name:'Colour', img:'cat-2.jpg',
-    desc:'Full colour, tints and glosses, matched to your skin tone and kept easy to maintain between visits.',
-    links:[['Full Head Colour','full-colour'],['Toner & Gloss','toner'],['Root Touch-Up','full-colour']] },
-  { name:'Balayage & Highlights', img:'cat-3.jpg',
-    desc:'Hand-painted balayage, highlights and babylights for a soft, sun-lightened finish and no harsh regrowth line to chase.',
-    links:[['Balayage / Ombré','balayage'],['Highlights','highlights'],['Babylights','highlights']] },
-  { name:'Extensions', img:'cat-4.jpg',
-    desc:'Hand-tied and tape-in extensions, colour-matched and fitted comfortably for length and thickness that lasts.',
-    links:[['Hand-Tied Wefts','extensions'],['Tape-In','extensions'],['Consultation','extensions']] },
-  { name:'Treatments', img:'cat-5.jpg',
-    desc:'Olaplex, keratin smoothing and scalp treatments to get condition and shine back into tired or over-worked hair.',
-    links:[['Olaplex','treatment'],['Keratin Smoothing','treatment'],['Scalp Ritual','treatment']] },
-  { name:'Bridal & Occasion', img:'cat-6.jpg',
-    desc:'Trials, timings and a long-wearing finish for weddings and big days, planned calmly and well in advance.',
-    links:[['Bridal Trial','bridal'],['Wedding Day','bridal'],['Occasion Styling','bridal']] },
+  { name:'Cuts', img:'cat-1.jpg',
+    desc:'Cuts that grow out well, shaped to your hair and how you actually wear it. Ladies, gents and children, with senior-stylist, student and senior-citizen pricing.',
+    links:[['Ladies Cut & Blow-Dry','ladies-cut'],['Ladies Restyle','ladies-restyle'],['Gents Cut','gents-cut']] },
+  { name:'Blow-Dries & Styling', img:'cat-2.jpg',
+    desc:'A proper blow-dry for every length, GHD curls, and up-styles for nights out and occasions.',
+    links:[['Blow-Dry','blow-dry'],['GHD Curls','ghd-curls'],['Up-Style','up-style']] },
+  { name:'Colour & Highlights', img:'cat-3.jpg',
+    desc:'Full and half-head highlights, T-bar, root regrowth, toners and glossing, matched to your skin tone and kept easy to maintain.',
+    links:[['Highlights — Full Head','full-highlights'],['Highlights — Half Head','half-highlights'],['Root Regrowth','root-regrowth']] },
+  { name:'Balayage & Treatments', img:'cat-4.jpg',
+    desc:'Hand-painted balayage and colour correction, quoted at a consultation, plus conditioning, Wellaplex and body waves to keep hair in good condition.',
+    links:[['Balayage','balayage'],['Colour Correction','colour-correction'],['Wellaplex Treatment','wellaplex']] },
 ];
 $('#catsTrack').innerHTML = CATEGORIES.map((c,i)=>`
   <article class="cat">

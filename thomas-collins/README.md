@@ -33,7 +33,7 @@ code changes needed:
 | `hero.jpg`       | Full-screen hero background               |
 | `intro.jpg`      | "Understated Hair" portrait               |
 | `services.jpg`   | Beside the numbered booking list          |
-| `cat-1…6.jpg`    | The 01–06 carousel — Cutting / Colour / Balayage & Highlights / Extensions / Treatments / Bridal |
+| `cat-1…4.jpg`    | The services carousel — Cuts / Blow-Dries & Styling / Colour & Highlights / Balayage & Treatments |
 | `art-1…4.jpg`    | "The Art of Beautiful Hair" collage       |
 | `quote.jpg`      | Behind the pull-quote                      |
 | `feature.jpg`    | "Your Moment of Transformation" card      |
