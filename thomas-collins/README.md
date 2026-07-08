@@ -4,10 +4,22 @@ Premium single-page site for **Thomas Collins Hair Studio**, 101 Rathgar Road,
 Dublin 6 (D06 VX72). Served at `/thomas-collins/` on the same deployment as the
 rest of this repo (Vercel).
 
-The design language is modelled on **ever.co.id** — warm mocha + ivory sections,
-an elegant serif display (Fraunces) paired with light uppercase sans labels
-(Jost), hairline dividers, framed sepia imagery and quiet scroll-reveal motion —
-rebranded to Thomas Collins' black-and-cream identity.
+The design is a close match to **ever.co.id**, rebranded for Thomas Collins:
+
+- **Palette** lifted from the reference — beige `#f9f6f1`, warm golds
+  (`#9b754d` / `#7a6047` / `#96846f`) and near-black warm dark sections that
+  alternate with the beige as you scroll.
+- **Type** — an elegant serif display (Fraunces, standing in for the reference's
+  Bradford) paired with a light uppercase sans (Jost, for Maax).
+- **Section flow** mirrors ever.co.id: hero "beauty in every detail" → "the art
+  of understated hair" → a **numbered 01–06 services carousel** → "Endless
+  possibility with Personalised Services" → "Your Moment of Transformation
+  Begins Here" → FAQ → an "Explore Every Detail" closing marquee.
+- **Motion** uses the same libraries ever.co.id runs, self-hosted in `vendor/`:
+  **Lenis** (smooth momentum scroll), **GSAP** + **SplitType** (headings that
+  rise in character by character). A single IntersectionObserver drives every
+  reveal, and everything degrades gracefully (plain, in-place content) if the
+  scripts are unavailable or the visitor prefers reduced motion.
 
 ## Adding real photos (recommended)
 
@@ -19,12 +31,12 @@ code changes needed:
 | File name        | Where it appears                          |
 |------------------|-------------------------------------------|
 | `hero.jpg`       | Full-screen hero background               |
-| `intro.jpg`      | "Personalised Services" portrait          |
+| `intro.jpg`      | "Understated Hair" portrait               |
 | `services.jpg`   | Beside the numbered booking list          |
-| `cat-1…4.jpg`    | The Chair / Colour / Extensions / Bridal tiles |
+| `cat-1…6.jpg`    | The 01–06 carousel — Cutting / Colour / Balayage & Highlights / Extensions / Treatments / Bridal |
 | `art-1…4.jpg`    | "The Art of Beautiful Hair" collage       |
 | `quote.jpg`      | Behind the pull-quote                      |
-| `feature.jpg`    | "Your moment of transformation" card      |
+| `feature.jpg`    | "Your Moment of Transformation" card      |
 | `gallery-1…7.jpg`| Gallery grid                              |
 | `story.jpg`      | "Our Story" portrait                      |
 
