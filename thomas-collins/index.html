@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Thomas Collins Hair Studio — Rathgar, Dublin 6 | Cut · Colour · Extensions</title>
+<meta name="description" content="Thomas Collins Hair Studio — a premium hair salon on Rathgar Road, Dublin 6. Cutting, colour, balayage, highlights, hair extensions and bridal styling. Book your appointment online.">
+<meta name="keywords" content="Thomas Collins Hair Studio, hairdresser Rathgar, hair salon Dublin 6, balayage Dublin, hair extensions Dublin, highlights Rathgar, blow dry Dublin, bridal hair Dublin">
+<meta name="author" content="Thomas Collins Hair Studio">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://janet-cruise-halpin-xpgs.vercel.app/thomas-collins/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="business.business">
+<meta property="og:site_name" content="Thomas Collins Hair Studio">
+<meta property="og:title" content="Thomas Collins Hair Studio — Rathgar, Dublin 6">
+<meta property="og:description" content="A premium hair studio on Rathgar Road, Dublin 6. Cut, colour, balayage, extensions & bridal. Book online.">
+<meta property="og:url" content="https://janet-cruise-halpin-xpgs.vercel.app/thomas-collins/">
+
+<!-- Local business structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "Thomas Collins Hair Studio",
+  "image": "https://janet-cruise-halpin-xpgs.vercel.app/thomas-collins/hero.jpg",
+  "url": "https://janet-cruise-halpin-xpgs.vercel.app/thomas-collins/",
+  "telephone": "+353 1 490 0234",
+  "email": "thomascollinshs@gmail.com",
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "101 Rathgar Road",
+    "addressLocality": "Rathgar, Dublin 6",
+    "postalCode": "D06 VX72",
+    "addressCountry": "IE"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Friday"], "opens": "09:30", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "09:30", "closes": "20:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "17:00" }
+  ],
+  "sameAs": ["https://www.instagram.com/thomascollinshairstudio/"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════════════════════════
+   THOMAS COLLINS HAIR STUDIO
+   Design language modelled on ever.co.id — warm mocha + ivory,
+   elegant serif display (Fraunces) with light uppercase sans
+   labels (Jost), hairline dividers, framed sepia imagery and
+   quiet scroll-reveal motion.
+   ══════════════════════════════════════════════════════════════ */
+
+:root{
+  --ivory:#F4EEE5;        /* light section background      */
+  --ivory-2:#EFE7DA;
+  --mocha:#8C7B69;        /* dark section background       */
+  --mocha-deep:#6E5E4E;
+  --brown:#9A7F5E;        /* mid warm-brown headings/accent*/
+  --brown-soft:#B29B7F;
+  --espresso:#3E3323;     /* darkest text on ivory         */
+  --cream:#F5EFE4;        /* text/buttons on mocha         */
+  --cream-dim:rgba(245,239,228,.72);
+  --ink-dim:rgba(62,51,35,.60);
+  --line-d:rgba(62,51,35,.20);   /* divider on ivory       */
+  --line-l:rgba(245,239,228,.30);/* divider on mocha        */
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Jost','Helvetica Neue',Arial,sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --pad:clamp(20px,5vw,80px);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--ivory);
+  color:var(--espresso);
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--brown);color:var(--cream)}
+
+/* ── Typography helpers ─────────────────────────────── */
+.eyebrow{
+  font-family:var(--sans);font-weight:400;
+  font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--brown);
+}
+.serif{font-family:var(--serif);font-weight:300}
+.display{
+  font-family:var(--sans);font-weight:300;text-transform:uppercase;
+  letter-spacing:.04em;line-height:1.02;
+  font-size:clamp(2.6rem,7vw,5.6rem);
+  color:var(--brown);
+}
+.section{padding:clamp(70px,11vh,150px) var(--pad);position:relative}
+.section--mocha{background:var(--mocha);color:var(--cream)}
+.section--mocha .eyebrow{color:var(--cream-dim)}
+.section--mocha .display{color:var(--cream)}
+
+/* subtle paper speckle for ivory sections */
+.speckle::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+}
+
+/* ── Reveal on scroll ───────────────────────────────── */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+[data-delay="1"]{transition-delay:.09s}
+[data-delay="2"]{transition-delay:.18s}
+[data-delay="3"]{transition-delay:.27s}
+[data-delay="4"]{transition-delay:.36s}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ══ Framed image / placeholder ═════════════════════ */
+.frame{position:relative;padding:12px;background:transparent}
+.ph{
+  position:relative;width:100%;height:100%;overflow:hidden;
+  background:linear-gradient(135deg,#7c6b58,#9a8a76 60%,#5f5040);
+  background-size:cover;background-position:center;
+}
+.ph::after{ /* monogram watermark shown until a photo is dropped in */
+  content:"TC";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:300;font-size:clamp(3rem,9vw,7rem);
+  color:rgba(245,239,228,.16);letter-spacing:.06em;
+}
+.ph.has-img::after{display:none}
+.frame__border{position:absolute;inset:0;border:1px solid var(--line-l);pointer-events:none}
+.section--ivory .frame__border{border-color:rgba(62,51,35,.22)}
+
+/* crosshair line overlay (decorative) */
+.crosshair{position:absolute;inset:0;pointer-events:none;opacity:.5}
+
+/* ══ Buttons ════════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  font-family:var(--sans);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
+  padding:1.15em 2.4em;border:1px solid transparent;
+  transition:background .5s var(--ease),color .5s var(--ease),border-color .5s var(--ease);
+  cursor:pointer;font-weight:400;
+}
+.btn--solid{background:var(--cream);color:var(--espresso)}
+.btn--solid:hover{background:var(--brown);color:var(--cream)}
+.btn--ghost{background:transparent;color:var(--cream);border-color:var(--line-l)}
+.btn--ghost:hover{background:var(--cream);color:var(--espresso);border-color:var(--cream)}
+.btn--dark{background:var(--espresso);color:var(--cream)}
+.btn--dark:hover{background:var(--brown)}
+.section--ivory .btn--ghost{color:var(--espresso);border-color:var(--line-d)}
+.section--ivory .btn--ghost:hover{background:var(--espresso);color:var(--cream);border-color:var(--espresso)}
+
+/* ══ NAV ════════════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px var(--pad);
+  color:var(--cream);
+  transition:background .5s var(--ease),color .5s var(--ease),padding .5s var(--ease);
+}
+.nav.solid{background:var(--mocha);padding:14px var(--pad);box-shadow:0 1px 0 var(--line-l)}
+.nav__burger{display:flex;flex-direction:column;gap:5px;width:30px;padding:6px 0}
+.nav__burger span{height:1.4px;width:26px;background:currentColor;transition:transform .4s var(--ease),opacity .3s}
+.nav.open .nav__burger span:nth-child(1){transform:translateY(6.4px) rotate(45deg)}
+.nav.open .nav__burger span:nth-child(2){opacity:0}
+.nav.open .nav__burger span:nth-child(3){transform:translateY(-6.4px) rotate(-45deg)}
+.nav__brand{
+  font-family:var(--serif);font-weight:400;letter-spacing:.34em;
+  font-size:1.05rem;text-transform:uppercase;text-indent:.34em;
+  position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;
+}
+.nav__brand small{display:block;font-family:var(--sans);font-weight:300;
+  font-size:.44rem;letter-spacing:.42em;text-align:center;margin-top:3px;opacity:.75;text-indent:.42em}
+.nav__cta{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase}
+.nav__cta:hover{color:var(--cream);opacity:.7}
+
+/* Fullscreen menu */
+.menu{
+  position:fixed;inset:0;z-index:55;background:var(--mocha);color:var(--cream);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 var(--pad);
+  clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease);
+  pointer-events:none;
+}
+.menu.open{clip-path:inset(0 0 0 0);pointer-events:auto}
+.menu__list{list-style:none;display:flex;flex-direction:column;gap:clamp(6px,2vh,18px)}
+.menu__list a{
+  font-family:var(--serif);font-weight:300;text-transform:uppercase;
+  font-size:clamp(2rem,7vw,4.4rem);letter-spacing:.02em;color:var(--cream);
+  display:inline-block;opacity:.5;transition:opacity .4s,padding-left .4s var(--ease);
+}
+.menu__list a:hover{opacity:1;padding-left:.4em}
+.menu__foot{margin-top:clamp(28px,6vh,60px);display:flex;flex-wrap:wrap;gap:28px;align-items:center;
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim)}
+.menu__foot a:hover{color:var(--cream)}
+
+/* ══ HERO ═══════════════════════════════════════════ */
+.hero{position:relative;height:100svh;min-height:600px;overflow:hidden;background:var(--mocha-deep)}
+.hero__bg{position:absolute;inset:-8% 0 0 0;height:116%}
+.hero__bg .ph{background:linear-gradient(160deg,#3f342a,#8a7963 55%,#4a3d30)}
+.hero__bg .ph::after{color:rgba(245,239,228,.10)}
+.hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,32,24,.5),rgba(40,32,24,.18) 30%,rgba(40,32,24,.5))}
+.hero__inner{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--pad);color:var(--cream)}
+.hero__eyebrow{margin-bottom:26px;color:var(--cream-dim);animation:fadeUp 1.2s .3s both var(--ease)}
+.hero__title{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(2.7rem,9.5vw,7.5rem);line-height:.98;letter-spacing:-.01em;
+  animation:fadeUp 1.3s .5s both var(--ease);
+}
+.hero__title em{font-style:italic;font-weight:300}
+.hero__scroll{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;color:var(--cream-dim);
+  display:flex;flex-direction:column;align-items:center;gap:12px;animation:fadeUp 1.2s 1s both var(--ease)}
+.hero__scroll::after{content:"";width:1px;height:42px;background:var(--cream-dim);animation:scrollLine 2.2s var(--ease) infinite}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+
+/* ══ MARQUEE strip ══════════════════════════════════ */
+.strip{background:var(--espresso);color:var(--cream);padding:20px 0;overflow:hidden;white-space:nowrap}
+.strip__track{display:inline-flex;gap:60px;animation:marq 34s linear infinite;will-change:transform}
+.strip span{font-family:var(--serif);font-weight:300;font-size:1.05rem;letter-spacing:.16em;text-transform:uppercase;opacity:.9}
+.strip span::before{content:"—";margin-right:60px;opacity:.4}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ══ INTRO / PERSONALISED SERVICES ══════════════════ */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:center}
+.intro__title{margin:24px 0 30px}
+.intro__lead{max-width:34ch;color:var(--ink-dim);font-size:1.02rem}
+.intro__img{aspect-ratio:4/5}
+.intro__img .ph{background:linear-gradient(150deg,#9c8c78,#c9b9a3 55%,#6f5f4c)}
+
+/* ══ SERVICES LIST (booking rows) ═══════════════════ */
+.svc{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,6vw,80px);align-items:start}
+.svc__img{position:sticky;top:110px;aspect-ratio:3/4}
+.svc__img .ph{background:linear-gradient(155deg,#8b7a66,#b6a58f 60%,#655746)}
+.svc__list{border-top:1px solid var(--line-l)}
+.svc__row{
+  width:100%;text-align:left;display:grid;grid-template-columns:auto 1fr auto auto;
+  align-items:center;gap:20px;
+  padding:26px 4px;border-bottom:1px solid var(--line-l);
+  transition:padding .45s var(--ease),background .45s var(--ease);
+}
+.svc__num{font-size:.72rem;letter-spacing:.2em;color:var(--cream-dim);font-variant-numeric:tabular-nums;min-width:34px}
+.svc__name{
+  font-family:var(--sans);font-weight:400;text-transform:uppercase;letter-spacing:.12em;
+  font-size:clamp(.92rem,1.8vw,1.18rem);color:var(--cream);
+  transition:font-weight .3s,letter-spacing .45s var(--ease);
+}
+.svc__tag{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cream-dim);white-space:nowrap}
+.svc__arrow{width:20px;height:20px;position:relative;transition:transform .5s var(--ease);color:var(--cream)}
+.svc__arrow::before{content:"↗";font-size:1.1rem;line-height:20px}
+.svc__row:hover{padding-left:16px;padding-right:0;background:linear-gradient(90deg,rgba(245,239,228,.06),transparent)}
+.svc__row:hover .svc__name{font-weight:500;letter-spacing:.16em}
+.svc__row:hover .svc__arrow{transform:translate(6px,-6px)}
+.svc__row:focus-visible{outline:1px solid var(--cream);outline-offset:4px}
+.svc__price{font-size:.7rem;letter-spacing:.14em;color:var(--brown-soft);white-space:nowrap}
+
+/* ══ TILES (categories) ═════════════════════════════ */
+.tiles{display:flex;gap:clamp(16px,3vw,40px);justify-content:center;flex-wrap:wrap}
+.tile{position:relative;width:min(30vw,300px);aspect-ratio:1;flex:0 0 auto}
+.tile:nth-child(1){transform:rotate(-3deg)}
+.tile:nth-child(3){transform:rotate(3deg)}
+.tile:nth-child(4){transform:rotate(-2deg) translateY(20px)}
+.tile .ph{background:linear-gradient(150deg,#6f5f4d,#a1917b)}
+.tile__label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:300;text-transform:uppercase;letter-spacing:.22em;
+  font-size:clamp(.8rem,1.6vw,1.15rem);color:var(--cream);text-indent:.22em;z-index:2;text-align:center;padding:10px}
+.tile:hover .ph{filter:brightness(1.12)}
+.tile .ph{transition:filter .5s}
+
+/* ══ COLLAGE (art of) ═══════════════════════════════ */
+.collage{position:relative;min-height:min(90vh,760px)}
+.collage__title{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;z-index:3;pointer-events:none}
+.collage__title .display{max-width:12ch}
+.collage__img{position:absolute;overflow:hidden}
+.collage__img .ph{background:linear-gradient(150deg,#8a7a64,#5f5040)}
+.c1{width:clamp(120px,15vw,220px);aspect-ratio:3/5;top:6%;left:6%}
+.c2{width:clamp(140px,17vw,240px);aspect-ratio:3/4;bottom:0;left:22%;z-index:2}
+.c3{width:clamp(160px,20vw,300px);aspect-ratio:4/3;top:22%;right:16%;z-index:2}
+.c4{width:clamp(110px,13vw,190px);aspect-ratio:2/3;bottom:8%;right:4%}
+
+/* ══ QUOTE ══════════════════════════════════════════ */
+.quote{position:relative;min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:var(--mocha-deep)}
+.quote__bg{position:absolute;inset:0}
+.quote__bg .ph{background:linear-gradient(160deg,#4a3d30,#8a7963 60%,#4a3d30)}
+.quote__scrim{position:absolute;inset:0;background:rgba(45,36,26,.5)}
+.quote__inner{position:relative;z-index:2;padding:0 var(--pad);color:var(--cream)}
+.quote__text{font-family:var(--serif);font-weight:300;font-size:clamp(1.6rem,4.4vw,3.2rem);line-height:1.28;max-width:20ch;margin:0 auto}
+.quote__mark{font-family:var(--serif)}
+.quote__by{margin-top:28px;font-family:var(--serif);letter-spacing:.34em;text-transform:uppercase;font-size:.9rem;text-indent:.34em;opacity:.85}
+
+/* ══ FEATURE card ═══════════════════════════════════ */
+.feature{display:flex;justify-content:center}
+.feature__card{max-width:620px;text-align:center;padding:14px}
+.feature__img{aspect-ratio:16/11;margin-bottom:36px}
+.feature__img .ph{background:linear-gradient(150deg,#9a8a74,#c4b49d 55%,#6f5f4c)}
+.feature__eyebrow{margin-bottom:18px}
+.feature__title{font-family:var(--sans);font-weight:300;text-transform:uppercase;letter-spacing:.06em;
+  font-size:clamp(1.5rem,4vw,2.5rem);line-height:1.1;color:var(--espresso)}
+.section--mocha .feature__title{color:var(--cream)}
+.feature__lead{margin:22px auto 32px;max-width:46ch;color:var(--ink-dim)}
+.section--mocha .feature__lead{color:var(--cream-dim)}
+
+/* ══ PRICE LIST ═════════════════════════════════════ */
+.price{max-width:820px;margin:0 auto}
+.price__row{display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line-d)}
+.price__name{font-family:var(--serif);font-weight:300;font-size:1.3rem;color:var(--espresso)}
+.price__dots{flex:1;border-bottom:1px dotted var(--line-d);transform:translateY(-4px)}
+.price__val{font-size:.82rem;letter-spacing:.12em;color:var(--brown);white-space:nowrap}
+.price__note{text-align:center;margin-top:26px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* ══ GALLERY ════════════════════════════════════════ */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gallery .frame{padding:0}
+.gallery .ph{aspect-ratio:1}
+.gallery .g-tall{grid-row:span 2}
+.gallery .g-tall .ph{aspect-ratio:1/2.06}
+.gy1{background:linear-gradient(150deg,#8a7a64,#b3a389)}
+.gy2{background:linear-gradient(150deg,#6f5f4d,#9c8c76)}
+.gy3{background:linear-gradient(150deg,#9a8a74,#6f5f4c)}
+.gy4{background:linear-gradient(150deg,#7c6b58,#a99a84)}
+.gy5{background:linear-gradient(150deg,#b3a389,#6f5f4c)}
+
+/* ══ FAQ ════════════════════════════════════════════ */
+.faq{display:grid;grid-template-columns:.9fr 1.4fr;gap:clamp(30px,6vw,90px);align-items:start}
+.faq__intro .display{margin:20px 0 26px;font-size:clamp(2rem,4.5vw,3.4rem)}
+.faq__intro p{max-width:32ch;color:var(--ink-dim);margin-bottom:30px}
+.faq__list{border-top:1px solid var(--line-d)}
+.faq__item{border-bottom:1px solid var(--line-d)}
+.faq__q{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:24px 2px;font-family:var(--sans);font-weight:400;text-transform:uppercase;
+  letter-spacing:.12em;font-size:.82rem;color:var(--espresso)}
+.faq__q .pm{position:relative;width:16px;height:16px;flex:0 0 auto}
+.faq__q .pm::before,.faq__q .pm::after{content:"";position:absolute;background:var(--brown);transition:transform .4s var(--ease)}
+.faq__q .pm::before{top:7.2px;left:0;width:16px;height:1.4px}
+.faq__q .pm::after{left:7.2px;top:0;height:16px;width:1.4px}
+.faq__item.open .pm::after{transform:scaleY(0)}
+.faq__a{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.faq__a p{padding:0 2px 26px;max-width:60ch;color:var(--ink-dim);font-size:.96rem}
+
+/* ══ CONTACT / FOOTER ═══════════════════════════════ */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,80px)}
+.contact__block h4{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cream-dim);margin-bottom:14px;font-weight:400}
+.contact__block p,.contact__block a{font-family:var(--serif);font-weight:300;font-size:1.35rem;line-height:1.5;color:var(--cream)}
+.contact__block a:hover{color:var(--brown-soft)}
+.contact__hours{display:grid;grid-template-columns:auto auto;gap:4px 24px;font-family:var(--sans);font-size:.82rem;letter-spacing:.06em;color:var(--cream-dim)}
+.contact__hours span:nth-child(even){text-align:right;color:var(--cream)}
+.map{margin-top:60px;border:1px solid var(--line-l);height:340px;filter:grayscale(.4) sepia(.25)}
+.map iframe{width:100%;height:100%;border:0;display:block}
+.foot{background:var(--espresso);color:var(--cream-dim);padding:40px var(--pad);
+  display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase}
+.foot a:hover{color:var(--cream)}
+
+/* ══ BOOKING MODAL ══════════════════════════════════ */
+.bk{position:fixed;inset:0;z-index:100;display:none}
+.bk.open{display:block}
+.bk__scrim{position:absolute;inset:0;background:rgba(40,32,24,.62);backdrop-filter:blur(3px);opacity:0;transition:opacity .4s}
+.bk.open .bk__scrim{opacity:1}
+.bk__panel{
+  position:absolute;top:0;right:0;height:100%;width:min(560px,100%);
+  background:var(--ivory);color:var(--espresso);
+  transform:translateX(100%);transition:transform .55s var(--ease);
+  display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(40,32,24,.3);
+}
+.bk.open .bk__panel{transform:none}
+.bk__head{padding:22px var(--pad);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line-d);flex:0 0 auto}
+.bk__head .t{font-family:var(--serif);font-weight:300;font-size:1.3rem;letter-spacing:.02em}
+.bk__close{font-size:1.4rem;line-height:1;width:40px;height:40px;border-radius:50%;transition:background .3s}
+.bk__close:hover{background:rgba(62,51,35,.08)}
+.bk__steps{display:flex;gap:8px;padding:16px var(--pad) 0;flex:0 0 auto}
+.bk__steps span{flex:1;height:2px;background:var(--line-d);position:relative;overflow:hidden}
+.bk__steps span.done::after,.bk__steps span.active::after{content:"";position:absolute;inset:0;background:var(--brown);
+  transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.bk__steps span.active::after,.bk__steps span.done::after{transform:scaleX(1)}
+.bk__body{flex:1 1 auto;overflow-y:auto;padding:26px var(--pad) 30px}
+.bk__foot{flex:0 0 auto;padding:18px var(--pad);border-top:1px solid var(--line-d);display:flex;gap:12px;justify-content:space-between;align-items:center;background:var(--ivory)}
+.bk__step{display:none;animation:bkIn .45s var(--ease)}
+.bk__step.active{display:block}
+@keyframes bkIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.bk__label{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--brown);margin-bottom:6px}
+.bk__h{font-family:var(--serif);font-weight:300;font-size:1.7rem;margin-bottom:22px;line-height:1.15}
+
+/* option cards */
+.opt{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:16px 18px;border:1px solid var(--line-d);margin-bottom:10px;transition:border-color .3s,background .3s;background:#fff9}
+.opt:hover{border-color:var(--brown)}
+.opt.sel{border-color:var(--espresso);background:#fff}
+.opt__name{font-family:var(--serif);font-weight:400;font-size:1.12rem}
+.opt__meta{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-top:3px}
+.opt__price{font-size:.72rem;letter-spacing:.1em;color:var(--brown);white-space:nowrap}
+
+/* calendar */
+.cal__head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.cal__nav{width:38px;height:38px;border:1px solid var(--line-d);border-radius:50%;font-size:1rem;transition:background .3s,opacity .3s}
+.cal__nav:hover{background:rgba(62,51,35,.06)}
+.cal__nav:disabled{opacity:.25;cursor:not-allowed}
+.cal__month{font-family:var(--serif);font-weight:400;font-size:1.15rem;letter-spacing:.03em}
+.cal__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal__dow{text-align:center;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);padding:6px 0}
+.cal__day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.9rem;
+  border:1px solid transparent;transition:background .25s,color .25s,border-color .25s;border-radius:2px}
+.cal__day.avail{cursor:pointer;color:var(--espresso)}
+.cal__day.avail:hover{border-color:var(--brown)}
+.cal__day.off{color:rgba(62,51,35,.22);cursor:default}
+.cal__day.sel{background:var(--espresso);color:var(--cream)}
+.cal__day.empty{border:none}
+
+/* time slots */
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.slot{padding:13px 0;text-align:center;border:1px solid var(--line-d);font-size:.9rem;letter-spacing:.06em;
+  transition:background .25s,color .25s,border-color .25s}
+.slot:hover{border-color:var(--brown)}
+.slot.sel{background:var(--espresso);color:var(--cream);border-color:var(--espresso)}
+.slots__empty{color:var(--ink-dim);font-size:.9rem;padding:20px 0}
+
+/* form fields */
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brown);margin-bottom:7px}
+.field input,.field textarea{width:100%;padding:13px 14px;border:1px solid var(--line-d);background:#fffc;
+  font-family:var(--sans);font-size:.98rem;color:var(--espresso);transition:border-color .3s}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--brown)}
+.field textarea{resize:vertical;min-height:80px}
+.field.err input{border-color:#b5543f}
+.hint{font-size:.72rem;color:var(--ink-dim);margin-top:2px}
+
+/* review */
+.rev{border:1px solid var(--line-d);padding:20px;background:#fff9;margin-bottom:20px}
+.rev__row{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid var(--line-d);font-size:.92rem}
+.rev__row:last-child{border-bottom:none}
+.rev__row span:first-child{color:var(--ink-dim);letter-spacing:.06em;text-transform:uppercase;font-size:.7rem;align-self:center}
+.rev__row span:last-child{font-family:var(--serif);font-size:1.05rem;text-align:right}
+
+/* success */
+.done{text-align:center;padding:30px 0}
+.done__mark{width:74px;height:74px;border-radius:50%;border:1px solid var(--brown);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:2rem;color:var(--brown);font-family:var(--serif)}
+.done h3{font-family:var(--serif);font-weight:300;font-size:1.8rem;margin-bottom:14px}
+.done p{color:var(--ink-dim);max-width:34ch;margin:0 auto 8px}
+
+/* ══ Responsive ═════════════════════════════════════ */
+@media (max-width:860px){
+  .split,.svc,.faq,.contact{grid-template-columns:1fr}
+  .svc__img,.intro__img{position:static;max-width:420px}
+  .svc__img{order:2;margin-top:20px}
+  .nav__brand{font-size:.9rem}
+  .collage{min-height:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .collage__title{position:static;order:-1;grid-column:1/-1;padding:20px 0 10px}
+  .collage__img{position:static}
+  .c1,.c2,.c3,.c4{width:100%}
+  .gallery{grid-template-columns:1fr 1fr}
+  .gallery .g-tall{grid-row:auto}
+  .gallery .g-tall .ph{aspect-ratio:1}
+  .contact__block a{font-size:1.15rem}
+}
+@media (max-width:560px){
+  .svc__row{grid-template-columns:auto 1fr auto;gap:12px}
+  .svc__price{display:none}
+  .nav__brand small{display:none}
+  .slots{grid-template-columns:repeat(2,1fr)}
+  .strip span{font-size:.9rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<header class="nav" id="nav">
+  <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#top" class="nav__brand">Thomas Collins<small>Hair Studio</small></a>
+  <button class="nav__cta" data-book>Make an Appointment</button>
+</header>
+
+<!-- ══ MENU ══ -->
+<nav class="menu" id="menu" aria-hidden="true">
+  <ul class="menu__list">
+    <li><a href="#services" data-close>Services</a></li>
+    <li><a href="#prices" data-close>Price List</a></li>
+    <li><a href="#gallery" data-close>Gallery</a></li>
+    <li><a href="#story" data-close>Our Story</a></li>
+    <li><a href="#faq" data-close>FAQ</a></li>
+    <li><a href="#find" data-close>Find Us</a></li>
+  </ul>
+  <div class="menu__foot">
+    <a href="tel:+35314900234">01 490 0234</a>
+    <a href="https://www.instagram.com/thomascollinshairstudio/" target="_blank" rel="noopener">Instagram</a>
+    <a href="mailto:thomascollinshs@gmail.com">Email</a>
+    <button data-book style="letter-spacing:.2em;text-transform:uppercase;color:var(--cream)">Book Now →</button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="top">
+  <div class="hero__bg" data-parallax="0.18"><div class="frame" style="height:100%;padding:0"><div class="ph" data-img="hero.jpg"></div></div></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__inner">
+    <p class="hero__eyebrow">Thomas Collins Hair Studio · Rathgar, Dublin 6</p>
+    <h1 class="hero__title">where beauty lives<br>in the <em>detail</em></h1>
+  </div>
+  <a href="#intro" class="hero__scroll">Scroll to explore</a>
+</section>
+
+<!-- ══ STRIP ══ -->
+<div class="strip" aria-hidden="true">
+  <div class="strip__track">
+    <span>Cut &amp; Finish</span><span>Colour</span><span>Balayage</span><span>Highlights</span><span>Hair Extensions</span><span>Bridal</span>
+    <span>Cut &amp; Finish</span><span>Colour</span><span>Balayage</span><span>Highlights</span><span>Hair Extensions</span><span>Bridal</span>
+  </div>
+</div>
+
+<!-- ══ INTRO / PERSONALISED ══ -->
+<section class="section section--ivory speckle" id="intro">
+  <div class="split">
+    <div class="intro__txt reveal">
+      <p class="eyebrow">A studio built around you</p>
+      <h2 class="display intro__title">Personalised<br>Services</h2>
+      <p class="intro__lead">On Rathgar Road since day one, Thomas Collins Hair Studio is a quiet, considered space where every appointment begins with a conversation. From a precise dry cut to lived-in balayage and hand-tied extensions, each look is shaped detail by detail — around your hair, and around you.</p>
+    </div>
+    <div class="frame intro__img reveal" data-delay="1">
+      <div class="ph" data-img="intro.jpg"></div>
+      <svg class="crosshair" viewBox="0 0 100 125" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="50" y1="8" x2="50" y2="117" stroke="rgba(245,239,228,.5)" stroke-width=".4"/>
+        <line x1="12" y1="62" x2="88" y2="62" stroke="rgba(245,239,228,.5)" stroke-width=".4"/>
+        <path d="M74 20 L74 105 L20 105 Z" fill="none" stroke="rgba(245,239,228,.4)" stroke-width=".4"/>
+      </svg>
+      <div class="frame__border"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES — booking rows ══ -->
+<section class="section section--mocha" id="services">
+  <div class="svc">
+    <div class="frame svc__img reveal">
+      <div class="ph" data-img="services.jpg"></div>
+      <div class="frame__border"></div>
+    </div>
+    <div class="svc__txt">
+      <p class="eyebrow reveal" style="margin-bottom:34px">Choose a service to book</p>
+      <div class="svc__list reveal" data-delay="1" id="svcList"><!-- rows injected --></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CATEGORY TILES ══ -->
+<section class="section section--mocha" style="padding-top:0">
+  <p class="eyebrow reveal" style="text-align:center;margin-bottom:44px">Every detail, considered</p>
+  <div class="tiles">
+    <div class="tile reveal"><div class="frame" style="height:100%;padding:0"><div class="ph" data-img="cat-1.jpg"></div><div class="frame__border"></div></div><span class="tile__label">The Chair</span></div>
+    <div class="tile reveal" data-delay="1"><div class="frame" style="height:100%;padding:0"><div class="ph" data-img="cat-2.jpg"></div><div class="frame__border"></div></div><span class="tile__label">Colour</span></div>
+    <div class="tile reveal" data-delay="2"><div class="frame" style="height:100%;padding:0"><div class="ph" data-img="cat-3.jpg"></div><div class="frame__border"></div></div><span class="tile__label">Extensions</span></div>
+    <div class="tile reveal" data-delay="3"><div class="frame" style="height:100%;padding:0"><div class="ph" data-img="cat-4.jpg"></div><div class="frame__border"></div></div><span class="tile__label">Bridal</span></div>
+  </div>
+</section>
+
+<!-- ══ COLLAGE — art of ══ -->
+<section class="section section--ivory speckle collage">
+  <div class="collage__title reveal"><h2 class="display">The Art of<br>Beautiful Hair</h2></div>
+  <div class="frame collage__img c1 reveal"><div class="ph" data-img="art-1.jpg"></div><div class="frame__border"></div></div>
+  <div class="frame collage__img c2 reveal" data-delay="1"><div class="ph" data-img="art-2.jpg"></div><div class="frame__border"></div></div>
+  <div class="frame collage__img c3 reveal" data-delay="2"><div class="ph" data-img="art-3.jpg"></div><div class="frame__border"></div></div>
+  <div class="frame collage__img c4 reveal" data-delay="3"><div class="ph" data-img="art-4.jpg"></div><div class="frame__border"></div></div>
+</section>
+
+<!-- ══ QUOTE ══ -->
+<section class="quote">
+  <div class="quote__bg" data-parallax="0.12"><div class="ph" data-img="quote.jpg"></div></div>
+  <div class="quote__scrim"></div>
+  <div class="quote__inner reveal">
+    <p class="quote__text"><span class="quote__mark">&ldquo;</span>Your best hair is found in the smallest details.<span class="quote__mark">&rdquo;</span></p>
+    <p class="quote__by">Thomas Collins</p>
+  </div>
+</section>
+
+<!-- ══ FEATURE card ══ -->
+<section class="section section--ivory speckle feature">
+  <div class="feature__card reveal">
+    <div class="frame feature__img"><div class="ph" data-img="feature.jpg"></div><div class="frame__border"></div></div>
+    <p class="eyebrow feature__eyebrow">Thomas Collins Hair Studio</p>
+    <h2 class="feature__title">Your moment of<br>transformation begins here</h2>
+    <p class="feature__lead">Let&rsquo;s make this about you — an unhurried appointment, a considered result, and hair that still feels like yours long after you leave the chair.</p>
+    <button class="btn btn--dark" data-book>Book an appointment</button>
+  </div>
+</section>
+
+<!-- ══ PRICE LIST ══ -->
+<section class="section section--mocha" id="prices">
+  <p class="eyebrow reveal" style="text-align:center">Price list</p>
+  <h2 class="display reveal" style="text-align:center;margin:18px 0 50px">Our Pricing</h2>
+  <div class="price reveal" data-delay="1" id="priceList"><!-- injected --></div>
+  <p class="price__note" style="color:var(--cream-dim)">Prices from — final quote confirmed at your consultation.</p>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section class="section section--ivory speckle" id="gallery">
+  <p class="eyebrow reveal" style="text-align:center">The work</p>
+  <h2 class="display reveal" style="text-align:center;margin:18px 0 50px">Gallery</h2>
+  <div class="gallery reveal" data-delay="1">
+    <div class="frame g-tall"><div class="ph gy1" data-img="gallery-1.jpg"></div><div class="frame__border"></div></div>
+    <div class="frame"><div class="ph gy2" data-img="gallery-2.jpg"></div><div class="frame__border"></div></div>
+    <div class="frame"><div class="ph gy3" data-img="gallery-3.jpg"></div><div class="frame__border"></div></div>
+    <div class="frame"><div class="ph gy4" data-img="gallery-4.jpg"></div><div class="frame__border"></div></div>
+    <div class="frame g-tall"><div class="ph gy5" data-img="gallery-5.jpg"></div><div class="frame__border"></div></div>
+    <div class="frame"><div class="ph gy1" data-img="gallery-6.jpg"></div><div class="frame__border"></div></div>
+    <div class="frame"><div class="ph gy3" data-img="gallery-7.jpg"></div><div class="frame__border"></div></div>
+  </div>
+</section>
+
+<!-- ══ OUR STORY ══ -->
+<section class="section section--mocha" id="story">
+  <div class="split">
+    <div class="frame reveal" style="aspect-ratio:4/5"><div class="ph" data-img="story.jpg"></div><div class="frame__border"></div></div>
+    <div class="reveal" data-delay="1">
+      <p class="eyebrow">Our story</p>
+      <h2 class="display" style="margin:22px 0 26px;font-size:clamp(2rem,4.5vw,3.4rem)">Hair, crafted<br>on Rathgar Road</h2>
+      <p style="color:var(--cream-dim);max-width:46ch;margin-bottom:18px">Thomas Collins Hair Studio sits at 101 Rathgar Road in the heart of Dublin 6 — a warm, welcoming salon built on craft, honesty and genuine care for the people in the chair.</p>
+      <p style="color:var(--cream-dim);max-width:46ch">From everyday cuts and colour to statement balayage, luxury extensions and bridal styling, every appointment is unhurried and tailored. We&rsquo;d love to look after your hair.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="section section--ivory speckle" id="faq">
+  <div class="faq">
+    <div class="faq__intro reveal">
+      <p class="eyebrow">Good to know</p>
+      <h2 class="display">Frequently<br>Asked</h2>
+      <p>Can&rsquo;t find your answer? Send us a message or give the studio a call — we&rsquo;re always happy to help.</p>
+      <button class="btn btn--ghost" data-book>Book now</button>
+    </div>
+    <div class="faq__list reveal" data-delay="1" id="faqList"><!-- injected --></div>
+  </div>
+</section>
+
+<!-- ══ CONTACT / FIND US ══ -->
+<section class="section section--mocha" id="find">
+  <p class="eyebrow reveal" style="text-align:center">Locations</p>
+  <h2 class="display reveal" style="text-align:center;margin:18px 0 56px">Find Us</h2>
+  <div class="contact reveal" data-delay="1">
+    <div class="contact__block">
+      <h4>The Studio</h4>
+      <p>101 Rathgar Road<br>Rathgar, Dublin 6<br>D06 VX72</p>
+      <br>
+      <h4>Get in touch</h4>
+      <a href="tel:+35314900234">01 490 0234</a><br>
+      <a href="tel:+353871433504">087 143 3504</a><br>
+      <a href="mailto:thomascollinshs@gmail.com">thomascollinshs@gmail.com</a><br>
+      <a href="https://www.instagram.com/thomascollinshairstudio/" target="_blank" rel="noopener">@thomascollinshairstudio</a>
+    </div>
+    <div class="contact__block">
+      <h4>Opening hours</h4>
+      <div class="contact__hours">
+        <span>Monday</span><span>Closed</span>
+        <span>Tuesday</span><span>9:30 – 18:00</span>
+        <span>Wednesday</span><span>9:30 – 18:00</span>
+        <span>Thursday</span><span>9:30 – 20:00</span>
+        <span>Friday</span><span>9:30 – 18:00</span>
+        <span>Saturday</span><span>9:00 – 17:00</span>
+        <span>Sunday</span><span>Closed</span>
+      </div>
+      <div style="margin-top:34px"><button class="btn btn--ghost" data-book>Make an appointment</button></div>
+    </div>
+  </div>
+  <div class="map reveal" data-delay="2">
+    <iframe title="Map to Thomas Collins Hair Studio" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=101+Rathgar+Road+Dublin+D06+VX72&output=embed"></iframe>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>© <span id="yr"></span> Thomas Collins Hair Studio</span>
+  <span>101 Rathgar Road · Dublin 6 · D06 VX72</span>
+  <a href="https://www.instagram.com/thomascollinshairstudio/" target="_blank" rel="noopener">Instagram</a>
+</footer>
+
+<!-- ══ BOOKING MODAL ══ -->
+<div class="bk" id="bk" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Book an appointment">
+  <div class="bk__scrim" data-close-bk></div>
+  <div class="bk__panel">
+    <div class="bk__head">
+      <span class="t">Book an appointment</span>
+      <button class="bk__close" data-close-bk aria-label="Close">&times;</button>
+    </div>
+    <div class="bk__steps" id="bkSteps">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="bk__body" id="bkBody">
+
+      <!-- STEP 1 — service -->
+      <div class="bk__step active" data-step="0">
+        <p class="bk__label">Step 1 of 5</p>
+        <h3 class="bk__h">Which service?</h3>
+        <div id="bkServices"></div>
+      </div>
+
+      <!-- STEP 2 — date -->
+      <div class="bk__step" data-step="1">
+        <p class="bk__label">Step 2 of 5</p>
+        <h3 class="bk__h">Choose a date</h3>
+        <div class="cal">
+          <div class="cal__head">
+            <button class="cal__nav" id="calPrev" aria-label="Previous month">‹</button>
+            <span class="cal__month" id="calMonth"></span>
+            <button class="cal__nav" id="calNext" aria-label="Next month">›</button>
+          </div>
+          <div class="cal__grid" id="calDow"></div>
+          <div class="cal__grid" id="calGrid" style="margin-top:6px"></div>
+        </div>
+      </div>
+
+      <!-- STEP 3 — time -->
+      <div class="bk__step" data-step="2">
+        <p class="bk__label">Step 3 of 5</p>
+        <h3 class="bk__h">Pick a time</h3>
+        <div class="slots" id="bkSlots"></div>
+      </div>
+
+      <!-- STEP 4 — details -->
+      <div class="bk__step" data-step="3">
+        <p class="bk__label">Step 4 of 5</p>
+        <h3 class="bk__h">Your details</h3>
+        <div class="field" id="fName"><label>Full name</label><input type="text" id="inName" autocomplete="name" placeholder="Jane Doe"></div>
+        <div class="field" id="fPhone"><label>Phone</label><input type="tel" id="inPhone" autocomplete="tel" placeholder="087 123 4567"></div>
+        <div class="field" id="fEmail"><label>Email</label><input type="email" id="inEmail" autocomplete="email" placeholder="you@email.com"></div>
+        <div class="field"><label>Notes (optional)</label><textarea id="inNotes" placeholder="Anything we should know — length, inspiration, previous colour…"></textarea></div>
+      </div>
+
+      <!-- STEP 5 — review / done -->
+      <div class="bk__step" data-step="4">
+        <div id="bkReview">
+          <p class="bk__label">Step 5 of 5</p>
+          <h3 class="bk__h">Review &amp; confirm</h3>
+          <div class="rev" id="revBox"></div>
+          <p class="hint">We&rsquo;ll confirm your appointment by text or email. This is a request — final confirmation comes from the studio.</p>
+        </div>
+        <div id="bkDone" style="display:none">
+          <div class="done">
+            <div class="done__mark">✓</div>
+            <h3>Request received</h3>
+            <p id="doneMsg">Thank you — we&rsquo;ll be in touch shortly to confirm your appointment.</p>
+            <p class="hint" id="doneFallback" style="margin-top:14px"></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="bk__foot" id="bkFoot">
+      <button class="btn btn--ghost" id="bkBack" style="visibility:hidden">Back</button>
+      <button class="btn btn--dark" id="bkNext" disabled>Continue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   DATA — services, hours, faqs, prices  (edit freely)
+   ══════════════════════════════════════════════════════════ */
+const SERVICES = [
+  { id:'cut-finish',  name:'Cut & Finish',        tag:'Styling',    dur:60,  price:'from €55' },
+  { id:'cut-blowdry', name:'Cut & Blow Dry',      tag:'Styling',    dur:75,  price:'from €60' },
+  { id:'blow-dry',    name:'Blow Dry',            tag:'Styling',    dur:45,  price:'from €35' },
+  { id:'gents',       name:'Gents Cut',           tag:'Styling',    dur:30,  price:'from €25' },
+  { id:'full-colour', name:'Full Head Colour',    tag:'Colour',     dur:120, price:'from €85' },
+  { id:'highlights',  name:'Highlights',          tag:'Colour',     dur:150, price:'from €90' },
+  { id:'balayage',    name:'Balayage / Ombré',    tag:'Colour',     dur:180, price:'from €140' },
+  { id:'toner',       name:'Toner / Gloss',       tag:'Colour',     dur:45,  price:'from €25' },
+  { id:'extensions',  name:'Hair Extensions',     tag:'Extensions', dur:60,  price:'Consultation' },
+  { id:'treatment',   name:'Treatment (Olaplex)', tag:'Care',       dur:30,  price:'from €25' },
+  { id:'bridal',      name:'Bridal & Occasion',   tag:'Occasion',   dur:90,  price:'POA' },
+];
+
+/* Opening hours — 0 = Sunday … 6 = Saturday. null = closed. */
+const HOURS = {
+  0:null,
+  1:null,
+  2:{open:'09:30',close:'18:00'},
+  3:{open:'09:30',close:'18:00'},
+  4:{open:'09:30',close:'20:00'},
+  5:{open:'09:30',close:'18:00'},
+  6:{open:'09:00',close:'17:00'},
+};
+const SLOT_STEP = 30; // minutes
+
+const FAQS = [
+  ['Where is the studio and what are the opening hours?','Thomas Collins Hair Studio is at 101 Rathgar Road, Dublin 6 (D06 VX72). We&rsquo;re open Tuesday to Friday from 9:30, with a late night on Thursday until 20:00, and Saturday from 9:00 to 17:00. Closed Sunday and Monday.'],
+  ['It&rsquo;s my first visit — what should I know?','Please arrive a few minutes early so we can talk through what you&rsquo;re looking for over a quick consultation. If you&rsquo;re booking colour, extensions or a big change, a patch test or consultation may be needed first — just mention it in your booking notes.'],
+  ['Do I need a consultation for colour or extensions?','For major colour corrections, balayage and all hair-extension work, yes — a short consultation lets us assess your hair and give you an accurate quote and timing. You can request one as your service and we&rsquo;ll take it from there.'],
+  ['What forms of payment do you accept?','We accept cash and all major cards, including contactless, in the studio. Any deposit for larger appointments is arranged when we confirm your booking.'],
+  ['What is your cancellation policy?','Life happens — we simply ask for at least 24 hours&rsquo; notice if you need to move or cancel an appointment, so we can offer the time to someone else.'],
+  ['How do I care for my extensions?','We&rsquo;ll send you home with full aftercare advice and recommend the right products on the day. In short: brush gently with the right brush, avoid heavy oils at the bonds, and keep up with your maintenance appointments.'],
+];
+
+/* ══════════════════════════════════════════════════════════
+   BUILD static lists
+   ══════════════════════════════════════════════════════════ */
+const $=(s,e=document)=>e.querySelector(s);
+const $$=(s,e=document)=>[...e.querySelectorAll(s)];
+
+// service rows (booking entry points)
+$('#svcList').innerHTML = SERVICES.map((s,i)=>`
+  <button class="svc__row" data-svc="${s.id}">
+    <span class="svc__num">${String(i+1).padStart(3,'0')}</span>
+    <span class="svc__name">${s.name}</span>
+    <span class="svc__tag">${s.tag}</span>
+    <span class="svc__price">${s.price}</span>
+    <span class="svc__arrow" aria-hidden="true"></span>
+  </button>`).join('');
+
+// price list
+$('#priceList').innerHTML = SERVICES.map(s=>`
+  <div class="price__row">
+    <span class="price__name">${s.name}</span>
+    <span class="price__dots"></span>
+    <span class="price__val">${s.price}</span>
+  </div>`).join('');
+
+// faq
+$('#faqList').innerHTML = FAQS.map(([q,a])=>`
+  <div class="faq__item">
+    <button class="faq__q">${q}<span class="pm"></span></button>
+    <div class="faq__a"><p>${a}</p></div>
+  </div>`).join('');
+
+$('#yr').textContent = new Date().getFullYear();
+
+/* ══════════════════════════════════════════════════════════
+   IMAGE / LOGO auto-detect — drop real photos into this folder
+   named to match data-img (hero.jpg, services.jpg, gallery-1.jpg…)
+   and they appear automatically. Until then, elegant placeholders.
+   ══════════════════════════════════════════════════════════ */
+$$('.ph[data-img]').forEach(el=>{
+  const src = el.dataset.img;
+  const img = new Image();
+  img.onload = ()=>{ el.style.backgroundImage=`url("${src}")`; el.classList.add('has-img'); };
+  img.src = src;
+});
+
+/* ══════════════════════════════════════════════════════════
+   NAV / MENU
+   ══════════════════════════════════════════════════════════ */
+const nav=$('#nav'), menu=$('#menu'), burger=$('#burger');
+function toggleMenu(open){
+  const o = open===undefined ? !menu.classList.contains('open') : open;
+  menu.classList.toggle('open',o);
+  nav.classList.toggle('open',o);
+  burger.setAttribute('aria-expanded',o);
+  menu.setAttribute('aria-hidden',!o);
+  document.body.style.overflow = o?'hidden':'';
+}
+burger.addEventListener('click',()=>toggleMenu());
+$$('[data-close]').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
+
+// solid nav after scrolling past hero
+const heroEl=$('.hero');
+new IntersectionObserver(([e])=>{
+  nav.classList.toggle('solid',!e.isIntersecting);
+},{rootMargin:'-70px 0px 0px 0px'}).observe(heroEl);
+
+/* ══════════════════════════════════════════════════════════
+   REVEAL on scroll
+   ══════════════════════════════════════════════════════════ */
+const revO=new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revO.unobserve(e.target);} });
+},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+$$('.reveal').forEach(el=>revO.observe(el));
+
+/* ══════════════════════════════════════════════════════════
+   PARALLAX (gentle, rAF-batched)
+   ══════════════════════════════════════════════════════════ */
+const paras=$$('[data-parallax]');
+let ticking=false;
+function onScroll(){
+  if(ticking) return; ticking=true;
+  requestAnimationFrame(()=>{
+    const vh=window.innerHeight;
+    paras.forEach(p=>{
+      const r=p.getBoundingClientRect();
+      if(r.bottom<0||r.top>vh) return;
+      const speed=parseFloat(p.dataset.parallax);
+      const off=(r.top+r.height/2 - vh/2)*speed;
+      p.style.transform=`translate3d(0,${off.toFixed(1)}px,0)`;
+    });
+    ticking=false;
+  });
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',onScroll);
+onScroll();
+
+/* ══════════════════════════════════════════════════════════
+   FAQ accordion
+   ══════════════════════════════════════════════════════════ */
+$$('.faq__item').forEach(item=>{
+  const q=$('.faq__q',item), a=$('.faq__a',item);
+  q.addEventListener('click',()=>{
+    const open=item.classList.contains('open');
+    $$('.faq__item').forEach(o=>{o.classList.remove('open');$('.faq__a',o).style.maxHeight=null;});
+    if(!open){ item.classList.add('open'); a.style.maxHeight=a.scrollHeight+'px'; }
+  });
+});
+
+/* ══════════════════════════════════════════════════════════
+   BOOKING SYSTEM
+   ══════════════════════════════════════════════════════════ */
+const bk=$('#bk');
+const state={ step:0, service:null, date:null, time:null };
+const STEPS=5;
+
+function openBk(serviceId){
+  if(serviceId){ state.service=SERVICES.find(s=>s.id===serviceId)||null; }
+  bk.classList.add('open'); bk.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  toggleMenu(false);
+  // reset done view + footer buttons (they get hidden on the confirmation screen)
+  $('#bkReview').style.display=''; $('#bkDone').style.display='none';
+  btnNext.style.display=''; btnBack.style.display='';
+  btnNext.textContent='Continue';
+  renderServices();
+  go(state.service?1:0);
+}
+function closeBk(){
+  bk.classList.remove('open'); bk.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+$$('[data-book]').forEach(b=>b.addEventListener('click',()=>openBk()));
+$$('[data-close-bk]').forEach(b=>b.addEventListener('click',closeBk));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeBk(); toggleMenu(false);} });
+
+// service rows open booking prefilled
+$$('.svc__row').forEach(r=>r.addEventListener('click',()=>openBk(r.dataset.svc)));
+
+// ── step navigation ──
+const stepEls=$$('.bk__step');
+const stepBars=$$('#bkSteps span');
+const btnNext=$('#bkNext'), btnBack=$('#bkBack');
+
+function go(n){
+  state.step=Math.max(0,Math.min(STEPS-1,n));
+  stepEls.forEach(el=>el.classList.toggle('active',+el.dataset.step===state.step));
+  stepBars.forEach((b,i)=>{ b.classList.toggle('done',i<state.step); b.classList.toggle('active',i===state.step); });
+  btnBack.style.visibility = state.step===0?'hidden':'visible';
+  // step-specific build
+  if(state.step===1) buildCalendar();
+  if(state.step===2) buildSlots();
+  if(state.step===4) buildReview();
+  $('#bkBody').scrollTop=0;
+  updateNext();
+}
+function updateNext(){
+  let ok=false, label='Continue';
+  if(state.step===0) ok=!!state.service;
+  if(state.step===1) ok=!!state.date;
+  if(state.step===2) ok=!!state.time;
+  if(state.step===3) ok=true;
+  if(state.step===4){ ok=true; label='Confirm booking'; }
+  btnNext.textContent = state.step===STEPS-1 ? 'Confirm booking' : 'Continue';
+  btnNext.disabled=!ok;
+}
+btnBack.addEventListener('click',()=>go(state.step-1));
+btnNext.addEventListener('click',()=>{
+  if(state.step===3){ if(!validateDetails()) return; }
+  if(state.step===STEPS-1){ submitBooking(); return; }
+  go(state.step+1);
+});
+
+// ── step 1: services ──
+function renderServices(){
+  $('#bkServices').innerHTML=SERVICES.map(s=>`
+    <button class="opt${state.service&&state.service.id===s.id?' sel':''}" data-opt="${s.id}">
+      <span><span class="opt__name">${s.name}</span><span class="opt__meta">${s.tag} · approx ${s.dur} min</span></span>
+      <span class="opt__price">${s.price}</span>
+    </button>`).join('');
+  $$('#bkServices .opt').forEach(o=>o.addEventListener('click',()=>{
+    state.service=SERVICES.find(s=>s.id===o.dataset.opt);
+    $$('#bkServices .opt').forEach(x=>x.classList.remove('sel'));
+    o.classList.add('sel'); updateNext();
+  }));
+}
+
+// ── step 2: calendar ──
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DOW=['Su','Mo','Tu','We','Th','Fr','Sa'];
+let calCursor=new Date(); calCursor.setDate(1);
+const today=new Date(); today.setHours(0,0,0,0);
+
+$('#calDow').innerHTML=DOW.map(d=>`<div class="cal__dow">${d}</div>`).join('');
+$('#calPrev').addEventListener('click',()=>{ calCursor.setMonth(calCursor.getMonth()-1); buildCalendar(); });
+$('#calNext').addEventListener('click',()=>{ calCursor.setMonth(calCursor.getMonth()+1); buildCalendar(); });
+
+function buildCalendar(){
+  $('#calMonth').textContent=`${MONTHS[calCursor.getMonth()]} ${calCursor.getFullYear()}`;
+  const y=calCursor.getFullYear(), m=calCursor.getMonth();
+  const first=new Date(y,m,1).getDay();
+  const days=new Date(y,m+1,0).getDate();
+  // disable prev button if at/ before current month
+  const thisMonth=new Date(); thisMonth.setDate(1); thisMonth.setHours(0,0,0,0);
+  $('#calPrev').disabled = (y<thisMonth.getFullYear())||(y===thisMonth.getFullYear()&&m<=thisMonth.getMonth());
+  let html='';
+  for(let i=0;i<first;i++) html+='<div class="cal__day empty"></div>';
+  for(let d=1;d<=days;d++){
+    const date=new Date(y,m,d); date.setHours(0,0,0,0);
+    const dow=date.getDay();
+    const open=!!HOURS[dow];
+    const past=date<today;
+    const avail=open&&!past;
+    const sel=state.date&&sameDay(date,state.date);
+    html+=`<div class="cal__day ${avail?'avail':'off'}${sel?' sel':''}" data-d="${avail?date.toISOString():''}">${d}</div>`;
+  }
+  $('#calGrid').innerHTML=html;
+  $$('#calGrid .cal__day.avail').forEach(el=>el.addEventListener('click',()=>{
+    state.date=new Date(el.dataset.d); state.time=null;
+    $$('#calGrid .cal__day').forEach(x=>x.classList.remove('sel'));
+    el.classList.add('sel'); updateNext();
+  }));
+}
+function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
+
+// ── step 3: time slots ──
+function buildSlots(){
+  const box=$('#bkSlots');
+  if(!state.date){ box.innerHTML=''; return; }
+  const h=HOURS[state.date.getDay()];
+  const dur=state.service?state.service.dur:60;
+  if(!h){ box.innerHTML='<p class="slots__empty">Closed on this day — please choose another date.</p>'; return; }
+  const slots=[];
+  let t=toMin(h.open); const end=toMin(h.close);
+  const now=new Date();
+  const isToday=sameDay(state.date,now);
+  while(t+dur<=end){
+    // if today, only future slots (30-min buffer)
+    if(!(isToday && t <= now.getHours()*60+now.getMinutes()+30)) slots.push(t);
+    t+=SLOT_STEP;
+  }
+  if(!slots.length){ box.innerHTML='<p class="slots__empty">No times left on this date — please choose another day.</p>'; return; }
+  box.innerHTML=slots.map(mn=>`<button class="slot${state.time===mn?' sel':''}" data-t="${mn}">${fromMin(mn)}</button>`).join('');
+  $$('#bkSlots .slot').forEach(s=>s.addEventListener('click',()=>{
+    state.time=+s.dataset.t;
+    $$('#bkSlots .slot').forEach(x=>x.classList.remove('sel'));
+    s.classList.add('sel'); updateNext();
+  }));
+}
+const toMin=s=>{const[h,m]=s.split(':').map(Number);return h*60+m;};
+const fromMin=mn=>{let h=Math.floor(mn/60),m=mn%60;return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;};
+
+// ── step 4: validate ──
+function validateDetails(){
+  let ok=true;
+  const name=$('#inName').value.trim();
+  const phone=$('#inPhone').value.trim();
+  const email=$('#inEmail').value.trim();
+  const setErr=(id,bad)=>$(id).classList.toggle('err',bad);
+  setErr('#fName',!name); if(!name) ok=false;
+  setErr('#fPhone',phone.replace(/\D/g,'').length<7); if(phone.replace(/\D/g,'').length<7) ok=false;
+  const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  setErr('#fEmail',!emailOk); if(!emailOk) ok=false;
+  return ok;
+}
+
+// ── step 5: review ──
+function dateLabel(){
+  if(!state.date) return '';
+  return state.date.toLocaleDateString('en-IE',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+function buildReview(){
+  const s=state.service;
+  $('#revBox').innerHTML=`
+    <div class="rev__row"><span>Service</span><span>${s?s.name:'—'}</span></div>
+    <div class="rev__row"><span>Approx.</span><span>${s?s.dur+' min · '+s.price:'—'}</span></div>
+    <div class="rev__row"><span>Date</span><span>${dateLabel()}</span></div>
+    <div class="rev__row"><span>Time</span><span>${state.time!=null?fromMin(state.time):'—'}</span></div>
+    <div class="rev__row"><span>Name</span><span>${esc($('#inName').value.trim())}</span></div>
+    <div class="rev__row"><span>Phone</span><span>${esc($('#inPhone').value.trim())}</span></div>`;
+}
+const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// ── submit ──
+async function submitBooking(){
+  btnNext.disabled=true; btnNext.textContent='Sending…';
+  const payload={
+    service: state.service?state.service.name:'',
+    service_id: state.service?state.service.id:'',
+    price: state.service?state.service.price:'',
+    duration: state.service?state.service.dur:'',
+    date: state.date?state.date.toISOString().slice(0,10):'',
+    date_label: dateLabel(),
+    time: state.time!=null?fromMin(state.time):'',
+    name: $('#inName').value.trim(),
+    phone: $('#inPhone').value.trim(),
+    email: $('#inEmail').value.trim(),
+    notes: $('#inNotes').value.trim(),
+    source: 'thomas-collins-web',
+  };
+  let delivered=false;
+  try{
+    const res=await fetch('/api/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    delivered=res.ok;
+  }catch(e){ delivered=false; }
+
+  // Always show confirmation (request captured). Offer a call/email fallback if the
+  // endpoint isn't wired up yet, so a booking is never silently lost.
+  $('#bkReview').style.display='none';
+  $('#bkDone').style.display='';
+  $('#doneMsg').innerHTML=`Thank you, ${esc(payload.name.split(' ')[0]||'')} — your request for <strong>${esc(payload.service)}</strong> on ${esc(payload.date_label)} at ${esc(payload.time)} has been sent. We&rsquo;ll confirm shortly.`;
+  if(!delivered){
+    const subject=encodeURIComponent(`Booking request — ${payload.service}`);
+    const body=encodeURIComponent(`Hi Thomas Collins Hair Studio,\n\nI'd like to book:\n• ${payload.service}\n• ${payload.date_label} at ${payload.time}\n\nName: ${payload.name}\nPhone: ${payload.phone}\nEmail: ${payload.email}\nNotes: ${payload.notes}`);
+    $('#doneFallback').innerHTML=`To be sure we&rsquo;ve got it, you can also <a href="mailto:thomascollinshs@gmail.com?subject=${subject}&body=${body}" style="color:var(--brown);text-decoration:underline">email us</a> or call <a href="tel:+35314900234" style="color:var(--brown);text-decoration:underline">01 490 0234</a>.`;
+  }else{
+    $('#doneFallback').textContent='';
+  }
+  stepBars.forEach(b=>b.classList.add('done'));
+  // hide footer nav on the confirmation screen; openBk() restores them next time
+  btnNext.style.display='none'; btnBack.style.display='none';
+}
+</script>
+</body>
+</html>
