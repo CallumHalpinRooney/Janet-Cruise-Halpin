@@ -631,7 +631,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <p class="eyebrow reveal" style="text-align:center">Services &amp; pricing</p>
   <h2 class="display reveal" data-split style="text-align:center;margin:18px 0 26px">Prices</h2>
   <p class="reveal" data-delay="1" style="text-align:center;max-width:48ch;margin:0 auto 50px;color:var(--cream-dim)">Our full price list. Balayage and colour correction are quoted at a quick consultation first, so you always know the cost before we begin.</p>
-  <div class="price reveal" data-delay="1" id="priceList"><!-- injected --></div>
+  <div class="price" id="priceList"><!-- injected --></div>
   <p class="price__note" style="color:var(--cream-dim)">Prices are a guide and may vary with hair length and thickness.</p>
 </section>
 
@@ -1309,20 +1309,29 @@ async function submitBooking(){
   $$('.reveal').forEach(el=>io.observe(el));
   splitMap.forEach((_,el)=>io.observe(el));
 
-  // ── booking rows "come up" one after another (ever-style cascade) ──
+  // rows/items rise in one after another when their block scrolls into view
+  function cascade(container, items, stagger){
+    if(!container || !items.length) return;
+    gsap.set(items,{y:48,opacity:0});
+    const o=new IntersectionObserver((ents,obs)=>{
+      ents.forEach(e=>{
+        if(!e.isIntersecting) return;
+        obs.disconnect();
+        gsap.to(items,{y:0,opacity:1,duration:.75,ease:'power3.out',stagger});
+      });
+    },{threshold:0,rootMargin:'0px 0px -12% 0px'});
+    o.observe(container);
+  }
+
   if(USE_GSAP){
-    const rows=$$('#svcList .svc__row');
-    if(rows.length){
-      gsap.set(rows,{y:54,opacity:0});
-      const bio=new IntersectionObserver((ents,obs)=>{
-        ents.forEach(e=>{
-          if(!e.isIntersecting) return;
-          obs.disconnect();
-          gsap.to(rows,{y:0,opacity:1,duration:.8,ease:'power3.out',stagger:0.07});
-        });
-      },{threshold:0,rootMargin:'0px 0px -12% 0px'});
-      bio.observe($('#svcList'));
-    }
+    // ── booking rows "come up" one after another (ever-style cascade) ──
+    cascade($('#svcList'), $$('#svcList .svc__row'), 0.07);
+
+    // ── price list: each category cascades in as it reaches the viewport ──
+    $$('#priceList .price__group').forEach(group=>{
+      const items=[group.querySelector('.price__grouphd'), ...$$('.price__row',group)];
+      cascade(group, items, 0.05);
+    });
   }
 })();
 </script>
