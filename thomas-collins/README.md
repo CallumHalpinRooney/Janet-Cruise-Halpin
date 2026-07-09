@@ -29,13 +29,16 @@ folder** using the matching name below — the page detects it on load and swaps
 it in automatically, no code changes needed. If a name is missing, an elegant
 warm placeholder shows in its place.
 
-A looping **hero video** is supported too: drop `hero.mp4` (or `hero.webm`) into
-this folder and it plays muted behind the hero automatically, falling back to
-`hero.jpg` if absent.
+The hero plays a muted, looping **video** (`hero.mp4`) with `hero-poster.jpg`
+(its own first frame) shown until it starts — so there's no image-swap flash.
+Reduced-motion visitors just see the poster still. To change the clip, replace
+`hero.mp4` and regenerate the poster from its first frame.
 
-| File name        | Where it appears                          |
-|------------------|-------------------------------------------|
-| `hero.jpg`       | Full-screen hero background               |
+| File name          | Where it appears                          |
+|--------------------|-------------------------------------------|
+| `hero.mp4`         | Muted looping hero background video       |
+| `hero-poster.jpg`  | Hero poster / still fallback (a video frame) |
+| `hero.jpg`         | Social / link-preview image (og:image)    |
 | `intro.jpg`      | "Understated Hair" portrait               |
 | `services.jpg`   | Beside the numbered booking list          |
 | `cat-1…4.jpg`    | The services carousel — Cuts / Blow-Dries & Styling / Colour & Highlights / Balayage & Treatments |
