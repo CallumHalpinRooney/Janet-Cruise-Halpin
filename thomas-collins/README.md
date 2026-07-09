@@ -23,10 +23,15 @@ The design is a close match to **ever.co.id**, rebranded for Thomas Collins:
 
 ## Adding real photos (recommended)
 
-The page ships with elegant warm placeholders so it looks complete out of the
-box. To use real photography, just drop image files into **this folder** named
-to match — the page detects them on load and swaps them in automatically, no
-code changes needed:
+The folder ships with real studio photography (extracted from the salon's
+Instagram). To swap any of them, just drop a replacement image into **this
+folder** using the matching name below — the page detects it on load and swaps
+it in automatically, no code changes needed. If a name is missing, an elegant
+warm placeholder shows in its place.
+
+A looping **hero video** is supported too: drop `hero.mp4` (or `hero.webm`) into
+this folder and it plays muted behind the hero automatically, falling back to
+`hero.jpg` if absent.
 
 | File name        | Where it appears                          |
 |------------------|-------------------------------------------|

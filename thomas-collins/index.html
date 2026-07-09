@@ -227,7 +227,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .hero__bg{position:absolute;inset:-8% 0 0 0;height:116%}
 .hero__bg .ph{background:linear-gradient(160deg,#3f342a,#8a7963 55%,#4a3d30)}
 .hero__bg .ph::after{color:rgba(245,239,228,.10)}
-.hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,32,24,.5),rgba(40,32,24,.18) 30%,rgba(40,32,24,.5))}
+/* slow cinematic zoom so the hero feels alive even as a still */
+.hero__bg .ph.has-img{animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.14)}}
+@media (prefers-reduced-motion:reduce){.hero__bg .ph.has-img{animation:none}}
+/* optional looping hero video — appears if hero.mp4 is dropped in the folder */
+.hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.hero__scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,32,24,.5),rgba(40,32,24,.18) 30%,rgba(40,32,24,.5))}
 .hero__inner{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--pad);color:var(--cream)}
 .hero__eyebrow{margin-bottom:26px;color:var(--cream-dim);animation:fadeUp 1.2s .3s both var(--ease)}
 .hero__title{
@@ -976,6 +982,21 @@ $$('.ph[data-img]').forEach(el=>{
   img.onload = ()=>{ el.style.backgroundImage=`url("${src}")`; el.classList.add('has-img'); };
   img.src = src;
 });
+
+/* Optional hero video — drop hero.mp4 (or hero.webm) into this folder and it
+   plays muted/looping behind the hero automatically. Falls back to hero.jpg. */
+(function(){
+  const bg=$('.hero__bg'); if(!bg) return;
+  const v=document.createElement('video');
+  v.muted=true; v.loop=true; v.autoplay=true; v.playsInline=true;
+  v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.preload='auto';
+  v.className='hero__video';
+  v.addEventListener('loadeddata',()=>{ bg.appendChild(v); v.play().catch(()=>{}); },{once:true});
+  // try mp4 then webm; if neither loads, the still hero image stays
+  v.src='hero.mp4';
+  v.addEventListener('error',()=>{ if(v.src.endsWith('hero.mp4')){ v.src='hero.webm'; } },{once:true});
+  v.load();
+})();
 
 /* ══════════════════════════════════════════════════════════
    NAV / MENU
