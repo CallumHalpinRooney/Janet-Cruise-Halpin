@@ -673,7 +673,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <div class="svc__txt">
       <p class="eyebrow reveal" style="margin-bottom:14px">Book in</p>
       <h2 class="display reveal" data-split style="font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:30px">Pick a service<br>and a time</h2>
-      <div class="svc__list reveal" data-delay="1" id="svcList"><!-- rows injected --></div>
+      <div class="svc__list" id="svcList"><!-- rows injected --></div>
     </div>
   </div>
 </section>
@@ -1308,6 +1308,22 @@ async function submitBooking(){
 
   $$('.reveal').forEach(el=>io.observe(el));
   splitMap.forEach((_,el)=>io.observe(el));
+
+  // ── booking rows "come up" one after another (ever-style cascade) ──
+  if(USE_GSAP){
+    const rows=$$('#svcList .svc__row');
+    if(rows.length){
+      gsap.set(rows,{y:54,opacity:0});
+      const bio=new IntersectionObserver((ents,obs)=>{
+        ents.forEach(e=>{
+          if(!e.isIntersecting) return;
+          obs.disconnect();
+          gsap.to(rows,{y:0,opacity:1,duration:.8,ease:'power3.out',stagger:0.07});
+        });
+      },{threshold:0,rootMargin:'0px 0px -12% 0px'});
+      bio.observe($('#svcList'));
+    }
+  }
 })();
 </script>
 </body>
