@@ -13,7 +13,8 @@
        created_at timestamptz default now(),
        service text, service_id text, price text, duration int,
        date date, date_label text, "time" text,
-       name text, phone text, email text, notes text, source text
+       name text, phone text, email text, notes text, source text,
+       deposit_amount int default 0, deposit_status text, payment_intent text
      );
 
    Optional EmailJS env vars:

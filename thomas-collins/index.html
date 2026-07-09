@@ -790,7 +790,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
           <p class="bk__label">Step 5 of 5</p>
           <h3 class="bk__h">Review &amp; confirm</h3>
           <div class="rev" id="revBox"></div>
-          <p class="hint">We&rsquo;ll confirm your appointment by text or email. This is a request — final confirmation comes from the studio.</p>
+          <p class="hint" id="bkHint">We&rsquo;ll confirm your appointment by text or email. This is a request — final confirmation comes from the studio.</p>
         </div>
         <div id="bkDone" style="display:none">
           <div class="done">
@@ -877,6 +877,14 @@ const HOURS = {
   6:{open:'09:00',close:'17:00'},
 };
 const SLOT_STEP = 30; // minutes
+
+/* ── Deposit (no-show protection) ──────────────────────────
+   A small deposit taken by card via Stripe Checkout confirms the booking
+   and is deducted from the final bill. The balance is paid however the
+   client likes at the studio — cash, card or contactless.
+   Turn `enabled` to true ONLY once STRIPE_SECRET_KEY is set in Vercel
+   (see /api/deposit.js). Until then bookings work as a simple request. */
+const DEPOSIT = { enabled:false, amount:10, noticeHours:48 };
 
 const FAQS = [
   ['Where is the studio and what are the opening hours?','Thomas Collins Hair Studio is at 101 Rathgar Road, Dublin 6 (D06 VX72). We&rsquo;re open Tuesday to Friday from 9:30, with a late night on Thursday until 20:00, and Saturday from 9:00 to 17:00. Closed Sunday and Monday.'],
@@ -1101,7 +1109,7 @@ function updateNext(){
   if(state.step===2) ok=!!state.time;
   if(state.step===3) ok=true;
   if(state.step===4){ ok=true; label='Confirm booking'; }
-  btnNext.textContent = state.step===STEPS-1 ? 'Confirm booking' : 'Continue';
+  btnNext.textContent = state.step===STEPS-1 ? (DEPOSIT.enabled ? `Pay €${DEPOSIT.amount} deposit` : 'Confirm booking') : 'Continue';
   btnNext.disabled=!ok;
 }
 btnBack.addEventListener('click',()=>go(state.step-1));
@@ -1211,20 +1219,29 @@ function dateLabel(){
 }
 function buildReview(){
   const s=state.service;
-  $('#revBox').innerHTML=`
+  let html=`
     <div class="rev__row"><span>Service</span><span>${s?s.name:'—'}</span></div>
     <div class="rev__row"><span>Approx.</span><span>${s?s.dur+' min · '+s.price:'—'}</span></div>
     <div class="rev__row"><span>Date</span><span>${dateLabel()}</span></div>
     <div class="rev__row"><span>Time</span><span>${state.time!=null?fromMin(state.time):'—'}</span></div>
     <div class="rev__row"><span>Name</span><span>${esc($('#inName').value.trim())}</span></div>
     <div class="rev__row"><span>Phone</span><span>${esc($('#inPhone').value.trim())}</span></div>`;
+  if(DEPOSIT.enabled){
+    html+=`<div class="rev__row"><span>Deposit now</span><span>€${DEPOSIT.amount} <span style="color:var(--ink-dim);font-size:.8em;text-transform:none;letter-spacing:0">· off your bill</span></span></div>`;
+  }
+  $('#revBox').innerHTML=html;
+  const hint=$('#bkHint');
+  if(hint){
+    hint.innerHTML = DEPOSIT.enabled
+      ? `A €${DEPOSIT.amount} deposit confirms your appointment and comes off your final bill — the rest is paid at the studio (cash or card). Free cancellation up to ${DEPOSIT.noticeHours} hours before; the deposit is kept for later cancellations or no-shows.<br><br>No card? <a href="tel:+35314900234" style="color:var(--brown);text-decoration:underline">Call the studio to book</a> instead.`
+      : `We&rsquo;ll confirm your appointment by text or email. This is a request — final confirmation comes from the studio.`;
+  }
 }
 const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 // ── submit ──
-async function submitBooking(){
-  btnNext.disabled=true; btnNext.textContent='Sending…';
-  const payload={
+function currentPayload(){
+  return {
     service: state.service?state.service.name:'',
     service_id: state.service?state.service.id:'',
     price: state.service?state.service.price:'',
@@ -1238,28 +1255,77 @@ async function submitBooking(){
     notes: $('#inNotes').value.trim(),
     source: 'thomas-collins-web',
   };
+}
+
+async function submitBooking(){
+  const payload=currentPayload();
+
+  // ── With deposits on: pay €X first via Stripe Checkout. The booking is
+  //    recorded server-side only once the payment succeeds. ──
+  if(DEPOSIT.enabled){
+    btnNext.disabled=true; btnNext.textContent='Opening secure payment…';
+    try{
+      const res=await fetch('/api/deposit',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({ ...payload, amount:DEPOSIT.amount, origin:location.origin })});
+      const j=await res.json();
+      if(res.ok && j.url){
+        try{ sessionStorage.setItem('tc_pending', JSON.stringify({name:payload.name,service:payload.service,date_label:payload.date_label,time:payload.time})); }catch(e){}
+        location.href=j.url; return;
+      }
+    }catch(e){ /* fall through to request-only */ }
+    // deposit endpoint unavailable (keys not set yet) → don't lose the booking
+  }
+
+  // ── Request-only path (deposits off, or deposit endpoint unavailable) ──
+  btnNext.disabled=true; btnNext.textContent='Sending…';
   let delivered=false;
   try{
     const res=await fetch('/api/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     delivered=res.ok;
   }catch(e){ delivered=false; }
+  showDone({
+    msg:`Thank you, ${esc(payload.name.split(' ')[0]||'')} — your request for <strong>${esc(payload.service)}</strong> on ${esc(payload.date_label)} at ${esc(payload.time)} has been sent. We&rsquo;ll confirm shortly.`,
+    fallback: delivered ? '' : payload,
+  });
+}
 
-  // Always show confirmation (request captured). Offer a call/email fallback if the
-  // endpoint isn't wired up yet, so a booking is never silently lost.
+// Shared confirmation screen. opts:{ msg, fallback:(payload|''|falsy) }
+function showDone(opts){
   $('#bkReview').style.display='none';
   $('#bkDone').style.display='';
-  $('#doneMsg').innerHTML=`Thank you, ${esc(payload.name.split(' ')[0]||'')} — your request for <strong>${esc(payload.service)}</strong> on ${esc(payload.date_label)} at ${esc(payload.time)} has been sent. We&rsquo;ll confirm shortly.`;
-  if(!delivered){
-    const subject=encodeURIComponent(`Booking request — ${payload.service}`);
-    const body=encodeURIComponent(`Hi Thomas Collins Hair Studio,\n\nI'd like to book:\n• ${payload.service}\n• ${payload.date_label} at ${payload.time}\n\nName: ${payload.name}\nPhone: ${payload.phone}\nEmail: ${payload.email}\nNotes: ${payload.notes}`);
+  $('#doneMsg').innerHTML=opts.msg;
+  const p=opts.fallback;
+  if(p){
+    const subject=encodeURIComponent(`Booking request — ${p.service}`);
+    const body=encodeURIComponent(`Hi Thomas Collins Hair Studio,\n\nI'd like to book:\n• ${p.service}\n• ${p.date_label} at ${p.time}\n\nName: ${p.name}\nPhone: ${p.phone}\nEmail: ${p.email}\nNotes: ${p.notes}`);
     $('#doneFallback').innerHTML=`To be sure we&rsquo;ve got it, you can also <a href="mailto:thomascollinshs@gmail.com?subject=${subject}&body=${body}" style="color:var(--brown);text-decoration:underline">email us</a> or call <a href="tel:+35314900234" style="color:var(--brown);text-decoration:underline">01 490 0234</a>.`;
   }else{
     $('#doneFallback').textContent='';
   }
   stepBars.forEach(b=>b.classList.add('done'));
-  // hide footer nav on the confirmation screen; openBk() restores them next time
   btnNext.style.display='none'; btnBack.style.display='none';
 }
+
+// ── Handle the return from Stripe Checkout (?deposit=success|cancelled) ──
+(function handleDepositReturn(){
+  const q=new URLSearchParams(location.search);
+  const kind=q.get('deposit'); if(!kind) return;
+  const sid=q.get('s')||'';
+  history.replaceState(null,'',location.pathname+location.hash);
+  let last={}; try{ last=JSON.parse(sessionStorage.getItem('tc_pending')||'{}'); }catch(e){}
+  sessionStorage.removeItem('tc_pending');
+  openBk(); go(4);
+  if(kind==='success'){
+    // record the paid booking server-side (verifies the Stripe session)
+    fetch('/api/deposit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'confirm',session_id:sid})}).catch(()=>{});
+    const who=last.name?`, ${esc(last.name.split(' ')[0])}`:'';
+    const what=last.service?` for <strong>${esc(last.service)}</strong>`:'';
+    const when=last.date_label?` on ${esc(last.date_label)}${last.time?` at ${esc(last.time)}`:''}`:'';
+    showDone({ msg:`Thank you${who} — your deposit is paid and your appointment${what}${when} is confirmed. See you then!`, fallback:'' });
+  }else{
+    showDone({ msg:`Your deposit wasn&rsquo;t completed, so the appointment isn&rsquo;t held yet. You can try again, or call the studio to book.`, fallback:last.service?last:{service:last.service||'appointment',date_label:last.date_label||'',time:last.time||'',name:last.name||'',phone:'',email:'',notes:''} });
+  }
+})();
 
 /* ══════════════════════════════════════════════════════════
    SCROLL STACK — the ever.co.id motion:

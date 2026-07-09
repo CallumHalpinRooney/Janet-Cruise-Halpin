@@ -163,7 +163,8 @@ select.sortsel{padding:9px 12px;border:1px solid var(--line);font-family:var(--s
   created_at timestamptz default now(),
   service text, service_id text, price text, duration int,
   date date, date_label text, "time" text,
-  name text, phone text, email text, notes text, source text
+  name text, phone text, email text, notes text, source text,
+  deposit_amount int default 0, deposit_status text, payment_intent text
 );
 -- allow the site to insert and this dashboard to read:
 alter table bookings enable row level security;
@@ -290,6 +291,7 @@ function cardHTML(b){
     </div>
     <div class="card__body">
       <div class="card__svc"><b>${esc(b.service||'—')}</b>${b.price?` · <span class="card__price">${esc(b.price)}</span>`:''}</div>
+      ${b.deposit_status==='paid'?`<div style="margin-top:6px;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--good)">✓ Deposit €${esc(b.deposit_amount||10)} paid</div>`:(b.deposit_status==='awaiting'?`<div style="margin-top:6px;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brown-soft)">Awaiting deposit</div>`:'')}
       <div class="card__name">${esc(b.name||'—')}</div>
       <div class="card__row"><span class="ic">✆</span>${phoneRaw?`<a href="tel:${esc(phoneRaw)}">${esc(b.phone)}</a>`:'<span style="color:var(--muted)">no phone</span>'}</div>
       <div class="card__row"><span class="ic">✉</span>${b.email?`<a href="mailto:${esc(b.email)}">${esc(b.email)}</a>`:'<span style="color:var(--muted)">no email</span>'}</div>
