@@ -307,16 +307,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .cat__top{display:flex;align-items:baseline;gap:16px;border-top:1px solid var(--line-l);padding-top:18px;margin-bottom:14px}
 .cat__num{font-family:var(--serif);font-weight:300;font-size:1rem;color:var(--brown-soft);font-variant-numeric:tabular-nums}
 .cat__name{font-family:var(--serif);font-weight:300;text-transform:uppercase;letter-spacing:.12em;font-size:clamp(1.15rem,2vw,1.4rem);color:var(--cream)}
-.cat__desc{color:var(--cream-dim);font-size:.92rem;line-height:1.68;margin-bottom:22px}
-.cat__label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--brown-soft);margin-bottom:8px}
-.cat__links{display:flex;flex-direction:column}
-.cat__link{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0;
-  border-bottom:1px solid var(--line-l);font-family:var(--sans);font-size:.86rem;letter-spacing:.05em;color:var(--cream);
-  transition:padding-left .4s var(--ease),color .3s}
-.cat__link::after{content:"↗";color:var(--brown-soft);font-size:.95rem;transition:transform .4s var(--ease)}
-.cat__link:hover{padding-left:9px;color:var(--brown-soft)}
-.cat__link:hover::after{transform:translate(4px,-4px)}
-.cat__link:focus-visible{outline:1px solid var(--cream);outline-offset:3px}
+.cat__desc{color:var(--cream-dim);font-size:.92rem;line-height:1.68;margin-bottom:22px;max-width:38ch}
+.cat__book{display:inline-flex;align-items:center;gap:.6em;padding:2px 0;
+  font-family:var(--sans);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cream);
+  border-bottom:1px solid var(--line-l);transition:color .3s,border-color .3s}
+.cat__book span{color:var(--brown-soft);transition:transform .4s var(--ease)}
+.cat__book:hover{color:var(--brown-soft);border-color:var(--brown-soft)}
+.cat__book:hover span{transform:translate(4px,-4px)}
+.cat__book:focus-visible{outline:1px solid var(--cream);outline-offset:4px}
 
 /* ══ COLLAGE (art of) ═══════════════════════════════ */
 .collage{position:relative;min-height:min(90vh,760px)}
@@ -936,28 +934,21 @@ $('#yr').textContent = new Date().getFullYear();
    Each treatment link opens the booking flow prefilled.
    ══════════════════════════════════════════════════════════ */
 const CATEGORIES = [
-  { name:'Cuts', img:'cat-1.jpg',
-    desc:'Cuts that grow out well, shaped to your hair and how you actually wear it. Ladies, gents and children, with senior-stylist, student and senior-citizen pricing.',
-    links:[['Ladies Cut & Blow-Dry','ladies-cut'],['Ladies Restyle','ladies-restyle'],['Gents Cut','gents-cut']] },
-  { name:'Blow-Dries & Styling', img:'cat-2.jpg',
-    desc:'A proper blow-dry for every length, GHD curls, and up-styles for nights out and occasions.',
-    links:[['Blow-Dry','blow-dry'],['GHD Curls','ghd-curls'],['Up-Style','up-style']] },
-  { name:'Colour & Highlights', img:'cat-3.jpg',
-    desc:'Full and half-head highlights, T-bar, root regrowth, toners and glossing, matched to your skin tone and kept easy to maintain.',
-    links:[['Highlights — Full Head','full-highlights'],['Highlights — Half Head','half-highlights'],['Root Regrowth','root-regrowth']] },
-  { name:'Balayage & Treatments', img:'cat-4.jpg',
-    desc:'Hand-painted balayage and colour correction, quoted at a consultation, plus conditioning, Wellaplex and body waves to keep hair in good condition.',
-    links:[['Balayage','balayage'],['Colour Correction','colour-correction'],['Wellaplex Treatment','wellaplex']] },
+  { name:'Cuts', img:'cat-1.jpg', book:'ladies-cut',
+    desc:'Precise, wearable cuts for ladies, gents and children — shaped to your hair and how you actually wear it, so it grows out well between visits.' },
+  { name:'Blow-Dries & Styling', img:'cat-2.jpg', book:'blow-dry',
+    desc:'A proper blow-dry for every length, soft GHD curls, and polished up-styles for nights out and big occasions.' },
+  { name:'Colour & Highlights', img:'cat-3.jpg', book:'full-highlights',
+    desc:'Highlights, root regrowth, toners and glossing — matched to your skin tone and kept easy to live with day to day.' },
+  { name:'Balayage & Treatments', img:'cat-4.jpg', book:'balayage',
+    desc:'Hand-painted balayage and careful colour correction, with conditioning and bond treatments to keep your hair in beautiful condition.' },
 ];
 $('#catsTrack').innerHTML = CATEGORIES.map((c,i)=>`
   <article class="cat">
     <div class="frame cat__frame"><div class="ph" data-img="${c.img}"></div><div class="frame__border"></div></div>
     <div class="cat__top"><span class="cat__num">${String(i+1).padStart(2,'0')}</span><h3 class="cat__name">${c.name}</h3></div>
     <p class="cat__desc">${c.desc}</p>
-    <p class="cat__label">Treatment</p>
-    <div class="cat__links">
-      ${c.links.map(([label,id])=>`<button class="cat__link" data-svc="${id}">${label}</button>`).join('')}
-    </div>
+    <button class="cat__book" data-svc="${c.book}">Book <span aria-hidden="true">↗</span></button>
   </article>`).join('');
 
 /* drag-to-scroll for the carousel (pointer + wheel), plus keyboard focus */
@@ -1082,9 +1073,9 @@ $$('[data-book]').forEach(b=>b.addEventListener('click',()=>openBk()));
 $$('[data-close-bk]').forEach(b=>b.addEventListener('click',closeBk));
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeBk(); toggleMenu(false);} });
 
-// service rows + category treatment links open booking prefilled
+// service rows + category "Book" buttons open booking prefilled
 $$('.svc__row').forEach(r=>r.addEventListener('click',()=>openBk(r.dataset.svc)));
-$$('.cat__link').forEach(r=>r.addEventListener('click',()=>openBk(r.dataset.svc)));
+$$('.cat__book').forEach(r=>r.addEventListener('click',()=>openBk(r.dataset.svc)));
 
 // ── step navigation ──
 const stepEls=$$('.bk__step');
