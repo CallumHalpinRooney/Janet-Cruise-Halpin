@@ -1,11 +1,11 @@
-# Orla Giury — website
+# Orla Guiry — website
 
-Single-page landing site for **Orla Giury**, a small Irish artist who makes
+Single-page landing site for **Orla Guiry**, a small Irish artist who makes
 intricate hand-drawn Celtic line art (trees of life, hearts, swans, knotwork)
 and sells across Etsy, Pinterest, Facebook & Instagram. The site is the front
 door: it shows the work and points visitors to her socials and email.
 
-Served at `/orla-giury/` on the same Vercel deployment as the rest of the repo.
+Served at `/orla-guiry/` on the same Vercel deployment as the rest of the repo.
 
 ## Design
 
