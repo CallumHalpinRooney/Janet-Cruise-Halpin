@@ -122,29 +122,54 @@ header.nav.scrolled{
 /* ---- hero -------------------------------------------------------------- */
 .hero{
   min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  padding-top:120px;padding-bottom:60px;position:relative;
+  padding-top:132px;padding-bottom:44px;position:relative;overflow:hidden;
 }
-.hero .eyebrow{margin-bottom:26px}
+.hero-grid{
+  display:grid;grid-template-columns:1.32fr .68fr;
+  gap:clamp(24px,5vw,72px);align-items:center;
+}
+.hero .eyebrow{margin-bottom:26px;display:block}
 .hero h1{
   font-family:'Fraunces',serif;font-weight:300;
-  font-size:clamp(3.4rem,12vw,11rem);
-  line-height:.92;letter-spacing:-.02em;
-  margin-bottom:8px;
+  font-size:clamp(3.6rem,13.5vw,12.5rem);
+  line-height:.86;letter-spacing:-.03em;
+  margin-bottom:22px;
 }
 .hero h1 em{font-style:italic;color:var(--rust)}
-.hero-lower{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  flex-wrap:wrap;gap:30px;margin-top:38px;
-  border-top:1px solid var(--line);padding-top:26px;
-}
 .hero-tag{
   font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-  font-size:clamp(1.25rem,2.4vw,1.9rem);line-height:1.35;max-width:22ch;
+  font-size:clamp(1.2rem,2.3vw,1.75rem);line-height:1.4;max-width:26ch;
+  color:var(--ink-2);
 }
-.hero-desc{max-width:38ch;font-size:.98rem;color:var(--ink-2);line-height:1.7}
+/* feature artwork */
+.hero-feature{
+  position:relative;border-radius:4px;overflow:hidden;aspect-ratio:4/5;
+  box-shadow:0 50px 90px -46px rgba(26,19,12,.55);
+}
+.hero-feature img{width:100%;height:100%;object-fit:cover;
+  animation:heroImg 1.5s var(--ease) both}
+.hero-feature figcaption{
+  position:absolute;left:0;bottom:0;width:100%;padding:16px 18px;color:#fff;
+  font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  background:linear-gradient(to top,rgba(0,0,0,.58),transparent);
+}
+@keyframes heroImg{from{transform:scale(1.14);opacity:0;clip-path:inset(0 0 100% 0)}
+  to{transform:scale(1);opacity:1;clip-path:inset(0 0 0 0)}}
+/* load-in for the hero text */
+.hero-text .eyebrow,.hero-text h1,.hero-text .hero-tag{
+  opacity:0;transform:translateY(30px);animation:heroUp 1s var(--ease) forwards}
+.hero-text h1{animation-delay:.1s}
+.hero-text .hero-tag{animation-delay:.24s}
+@keyframes heroUp{to{opacity:1;transform:none}}
+.hero-lower{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:30px;margin-top:clamp(30px,5vh,54px);
+  border-top:1px solid var(--line);padding-top:24px;
+}
+.hero-desc{max-width:52ch;font-size:.98rem;color:var(--ink-2);line-height:1.7}
 .scroll-cue{
   font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--ink-dim);display:flex;align-items:center;gap:10px;
+  color:var(--ink-dim);display:flex;align-items:center;gap:10px;white-space:nowrap;
 }
 .scroll-cue::before{content:"";width:38px;height:1px;background:var(--ink-dim);
   animation:cue 2.4s var(--ease) infinite}
@@ -202,23 +227,31 @@ section{position:relative}
   .index-row.active .r-arrow{opacity:1;transform:translateX(0)}
   .index-row.active .r-meta{color:var(--ink)}
 }
-/* floating cursor image */
+/* dim veil + large centred image (appears in the middle of the screen) */
+.reveal-veil{
+  position:fixed;inset:0;z-index:38;pointer-events:none;opacity:0;
+  background:radial-gradient(120% 120% at 50% 50%,transparent 30%,rgba(20,19,16,.28) 100%);
+  transition:opacity .5s var(--ease);
+}
+.reveal-veil.show{opacity:1}
 .reveal{
-  position:fixed;top:0;left:0;z-index:40;pointer-events:none;
-  width:clamp(220px,24vw,360px);aspect-ratio:1/1;
-  border-radius:3px;overflow:hidden;opacity:0;
-  transform:translate(-50%,-50%) scale(.82);
-  transition:opacity .4s var(--ease),transform .5s var(--ease);
-  box-shadow:0 30px 70px -30px rgba(26,19,12,.6);
+  position:fixed;top:50%;left:50%;z-index:40;pointer-events:none;
+  width:min(46vw,540px);aspect-ratio:1/1;
+  border-radius:4px;overflow:hidden;opacity:0;
+  transform:translate(-50%,-50%) scale(.9);
+  transition:opacity .5s var(--ease),transform .65s var(--ease);
+  box-shadow:0 50px 110px -40px rgba(20,15,8,.75);
   will-change:transform,opacity;
 }
-.reveal.show{opacity:1}
-.reveal img{width:100%;height:100%;object-fit:cover}
+.reveal.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.reveal img{width:100%;height:100%;object-fit:cover;
+  transform:scale(1.05);transition:transform 4s linear}
+.reveal.show img{transform:scale(1)}
 .reveal-cap{
   position:absolute;left:0;bottom:0;width:100%;
-  padding:14px 16px 12px;color:#fff;
-  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
-  background:linear-gradient(to top,rgba(0,0,0,.6),transparent);
+  padding:20px 22px 18px;color:#fff;
+  font-family:'Fraunces',serif;font-weight:400;font-size:1.05rem;letter-spacing:.01em;
+  background:linear-gradient(to top,rgba(0,0,0,.62),transparent);
 }
 
 /* ---- gallery grid (all works; primary view on touch) ------------------ */
@@ -385,6 +418,9 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
   .shops{grid-template-columns:repeat(2,1fr)}
   .gallery{grid-template-columns:repeat(2,1fr)}
   .hero-lower{flex-direction:column;align-items:flex-start}
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-feature{aspect-ratio:16/11;max-height:44vh}
+  .reveal{width:min(74vw,420px)}
 }
 @media(max-width:540px){
   .shops{grid-template-columns:1fr}
@@ -394,6 +430,8 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;scroll-behavior:auto!important}
   .reveal-up{opacity:1;transform:none}
+  .hero-text .eyebrow,.hero-text h1,.hero-text .hero-tag,.hero-feature img{
+    opacity:1!important;transform:none!important;clip-path:none!important}
 }
 </style>
 </head>
@@ -414,15 +452,41 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
 </header>
 
 <!-- ══ HERO ═════════════════════════════════════════════════════════════ -->
-<section class="hero wrap" id="top">
-  <div>
-    <span class="eyebrow">Irish artist · hand-drawn Celtic line art</span>
-    <h1 class="serif">Orla<br><em>Giury</em></h1>
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow">Irish artist · hand-drawn Celtic line art</span>
+      <h1 class="serif">Orla<br><em>Giury</em></h1>
+      <p class="hero-tag serif">Every line drawn by hand — and, folded into it, something meant for someone.</p>
+    </div>
+    <figure class="hero-feature">
+      <img src="art/tree-rainbow.jpg" alt="Rainbow Tree of Life — hand-drawn Celtic art by Orla Giury">
+      <figcaption>Rainbow Tree of Life</figcaption>
+    </figure>
   </div>
-  <div class="hero-lower">
-    <p class="hero-tag serif">Every line drawn by hand — trees of life, hearts &amp; knotwork rooted in Ireland.</p>
-    <p class="hero-desc">Intricate pen-and-ink Celtic art, made one careful loop at a time. Original pieces, prints, cards and more — find them across Etsy, Pinterest, Facebook &amp; Instagram.</p>
+  <div class="wrap hero-lower">
+    <p class="hero-desc">Intricate pen-and-ink Celtic art, made one careful loop at a time — trees of life, hearts, swans and knotwork. Original commissions, keepsakes, prints and cards, found across Etsy, Pinterest, Facebook &amp; Instagram.</p>
     <span class="scroll-cue">Scroll</span>
+  </div>
+</section>
+
+<!-- ══ ABOUT ════════════════════════════════════════════════════════════ -->
+<section class="about pad" id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy reveal-up">
+      <span class="eyebrow">About the artist</span>
+      <h2 class="serif">A small Irish studio, and a <em>lot</em> of tiny lines.</h2>
+      <p>Orla Giury is an independent artist working from Ireland, drawing intricate Celtic and free-flowing line art entirely by hand. Each piece begins as a single line and grows — loop by loop — into trees of life, hearts, swans, stags and knotwork.</p>
+      <p>Most begin as commissions. Somewhere in the pattern there's usually something personal — a name, a date, a few words — woven in so quietly that only the person it's for would know to look. A piece made to hold onto someone, or a moment worth keeping.</p>
+      <p>What starts on paper finds its way onto prints, cards, mugs and keepsakes, so a little bit of hand-drawn Irish art — and its meaning — can be kept close.</p>
+    </div>
+    <div class="about-media reveal-up">
+      <img src="art/studio.jpg" alt="Orla Giury's studio desk with work in progress" loading="lazy">
+      <div class="badge">
+        <span class="serif">Hand-drawn</span>
+        <small>Made in Ireland</small>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -434,7 +498,7 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
   </div>
 
   <div class="index-list" id="indexList">
-    <!-- rows populated with data-img; hovering floats the piece in near the cursor -->
+    <!-- rows populated with data-img; hovering shows the piece large in the centre of the screen -->
     <a class="index-row" href="#find" data-img="art/tree-rainbow.jpg" data-cap="Rainbow Tree of Life">
       <span class="r-title serif"><span class="r-idx">01</span>Rainbow Tree of Life<span class="r-arrow serif">→</span></span>
       <span class="r-meta">Colour · Print</span>
@@ -473,26 +537,6 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
   <div class="gallery" id="gallery"></div>
 </section>
 
-<!-- ══ ABOUT ════════════════════════════════════════════════════════════ -->
-<section class="about pad" id="about">
-  <div class="wrap about-grid">
-    <div class="about-copy reveal-up">
-      <span class="eyebrow">About the artist</span>
-      <h2 class="serif">A small Irish studio, and a <em>lot</em> of tiny lines.</h2>
-      <p>Orla Giury is an independent artist working from Ireland, drawing intricate Celtic and free-flowing line art entirely by hand. Each piece begins as a single line and grows — loop by loop — into trees of life, hearts, swans, stags and knotwork.</p>
-      <p>What starts on paper finds its way onto prints, greeting cards, mugs, tumblers and seasonal pieces, so a little bit of hand-drawn Irish art can live in everyday things.</p>
-      <p>This site is simply the front door — the work itself lives and sells across her socials and shops.</p>
-    </div>
-    <div class="about-media reveal-up">
-      <img src="art/studio.jpg" alt="Orla Giury's studio desk with work in progress" loading="lazy">
-      <div class="badge">
-        <span class="serif">Hand-drawn</span>
-        <small>Made in Ireland</small>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ══ FIND / SHOP ══════════════════════════════════════════════════════ -->
 <section class="find pad" id="find">
   <div class="wrap">
@@ -511,8 +555,8 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
 <section class="contact pad" id="contact">
   <div class="wrap contact-inner">
     <div class="reveal-up">
-      <h2 class="serif">Let's <em>talk</em>.</h2>
-      <p class="lead">Commissions, prints, stockist enquiries or just a hello — email is the best way to reach Orla directly.</p>
+      <h2 class="serif">Commission a <em>piece</em>.</h2>
+      <p class="lead">Most of Orla's work starts with a conversation — a person to celebrate, a moment to mark, someone to remember. Tell her the story and she'll draw it into the lines, with the meaning kept just for you. Prints, stockist enquiries or simply a hello are always welcome too — email is the best way to reach her directly.</p>
       <a class="email-big serif" id="emailLink" href="#">email</a>
     </div>
     <form class="reveal-up" id="contactForm">
@@ -547,8 +591,9 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
   </div>
 </footer>
 
-<!-- floating hover-reveal image -->
-<div class="reveal" id="reveal"><img id="revealImg" src="" alt=""><div class="reveal-cap" id="revealCap"></div></div>
+<!-- centred hover-reveal image + dim veil -->
+<div class="reveal-veil" id="revealVeil"></div>
+<div class="reveal" id="reveal"><img id="revealImg" src="" alt=""><div class="reveal-cap serif" id="revealCap"></div></div>
 
 <script>
 /* ────────────────────────────────────────────────────────────────────────
@@ -616,23 +661,15 @@ const WORKS = [
   });
 })();
 
-/* ---- signature hover-reveal (pointer devices only) --------------------- */
+/* ---- signature hover-reveal: piece appears LARGE, centred on screen ----- */
 (function(){
   if(!window.matchMedia('(hover:hover)').matches) return;
   const list = document.getElementById('indexList');
   const rows = [...list.querySelectorAll('.index-row')];
   const reveal = document.getElementById('reveal');
+  const veil   = document.getElementById('revealVeil');
   const rImg = document.getElementById('revealImg');
   const rCap = document.getElementById('revealCap');
-  let tx=0,ty=0,cx=0,cy=0,raf=null;
-
-  function loop(){
-    cx += (tx-cx)*0.16; cy += (ty-cy)*0.16;
-    reveal.style.transform =
-      `translate(${cx}px,${cy}px) translate(-50%,-50%) scale(${reveal.classList.contains('show')?1:0.82})`;
-    raf = requestAnimationFrame(loop);
-  }
-  window.addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;},{passive:true});
 
   rows.forEach(row=>{
     row.addEventListener('mouseenter',()=>{
@@ -640,15 +677,17 @@ const WORKS = [
       rows.forEach(r=>r.classList.remove('active'));
       row.classList.add('active');
       rImg.src = row.dataset.img;
+      rImg.alt = row.dataset.cap;
       rCap.textContent = row.dataset.cap;
       reveal.classList.add('show');
-      if(!raf) loop();
+      veil.classList.add('show');
     });
   });
   list.addEventListener('mouseleave',()=>{
     list.classList.remove('has-hover');
     rows.forEach(r=>r.classList.remove('active'));
     reveal.classList.remove('show');
+    veil.classList.remove('show');
   });
 })();
 
