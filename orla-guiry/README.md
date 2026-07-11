@@ -38,7 +38,7 @@ object near the bottom of `index.html`:
 
 ```js
 const CONFIG = {
-  email: "hello@orlagiury.com",   // ← Orla's real email
+  email: "hello@orlaguiry.com",   // ← Orla's real email
   socials: [
     { name: "Etsy",      ..., url: "https://www.etsy.com/" },      // ← real shop URL
     { name: "Instagram", ..., url: "https://www.instagram.com/" }, // ← real profile URL
@@ -48,9 +48,9 @@ const CONFIG = {
 };
 ```
 
-Edit those five values and the shop cards, footer links, the big email link and
-the contact form (which opens a pre-filled email) all update automatically —
-no other changes needed.
+Edit those five values and the shop cards, footer links, and the contact
+section's "Email Orla" button (a plain mailto, no backend) all update
+automatically. No other changes needed.
 
 ## Images
 
