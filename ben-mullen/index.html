@@ -28,6 +28,13 @@
   "url": "https://janet-cruise-halpin-xpgs.vercel.app/ben-mullen/",
   "email": "office@benmullen.ie",
   "telephone": "+353 85 126 9885",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Wicklow House, Market Square",
+    "addressLocality": "Wicklow",
+    "postalCode": "A67 W589",
+    "addressCountry": "IE"
+  },
   "areaServed": "IE",
   "knowsAbout": ["Architecture", "Landscape design", "Conservation", "Exhibition design"]
 }
@@ -275,6 +282,40 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .recog__desc{color:var(--grey)}
 .recog__year{font-size:.8rem;letter-spacing:.1em;color:var(--grey);white-space:nowrap}
 
+/* ── Awards accordion (native <details>) ───────────────────── */
+.awards{border-top:1px solid var(--line)}
+.award{border-bottom:1px solid var(--line)}
+.award>summary{
+  list-style:none;cursor:pointer;
+  display:grid;grid-template-columns:auto 1fr auto auto;align-items:baseline;
+  gap:10px 22px;padding:24px 0;
+}
+.award>summary::-webkit-details-marker{display:none}
+.award__sign{
+  width:16px;height:16px;position:relative;align-self:center;transition:transform .35s var(--ease);
+}
+.award__sign::before,.award__sign::after{content:"";position:absolute;background:var(--ink);transition:opacity .3s}
+.award__sign::before{top:7px;left:0;width:16px;height:2px}
+.award__sign::after{left:7px;top:0;width:2px;height:16px}
+.award[open] .award__sign{transform:rotate(90deg)}
+.award[open] .award__sign::after{opacity:0}
+.award__name{font-size:clamp(1.05rem,1.7vw,1.35rem);font-weight:500;letter-spacing:-.005em}
+.award__for{color:var(--grey);font-size:.9rem}
+.award__year{font-size:.8rem;letter-spacing:.1em;color:var(--grey);white-space:nowrap}
+@media(max-width:640px){
+  .award>summary{grid-template-columns:auto 1fr auto}
+  .award__for{grid-column:2/-1;order:3}
+}
+.award__panel{
+  overflow:hidden;max-height:0;
+  transition:max-height .5s var(--ease),opacity .4s ease,padding .4s ease;
+  opacity:0;padding:0 0 0 38px;
+}
+.award[open] .award__panel{max-height:420px;opacity:1;padding:0 0 26px 38px}
+.award__panel p{max-width:60ch;color:var(--ink-soft)}
+.award__panel .body-serif{font-family:var(--serif);font-weight:300;font-size:1.15rem;line-height:1.3;color:var(--ink);margin-bottom:.5em}
+@media(max-width:640px){.award__panel,.award[open] .award__panel{padding-left:0}}
+
 /* ── Footer / contact ──────────────────────────────────────── */
 .foot{background:var(--black);color:var(--paper);padding:clamp(60px,10vh,130px) var(--pad) 40px}
 .foot__grid{
@@ -323,8 +364,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 <header class="hero" id="top">
   <div class="hero__media" id="heroMedia">
     <div class="shot is-on"><div class="frame" data-ph="Kilmantin Road" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-01.jpg" alt="Kilmantin Road — interior" onerror="this.classList.add('is-missing')"></div></div>
-    <div class="shot"><div class="frame" data-ph="The Fall" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-02.jpg" alt="The Fall — installation" onerror="this.classList.add('is-missing')"></div></div>
-    <div class="shot"><div class="frame" data-ph="OTIUM" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-03.jpg" alt="OTIUM — installation" onerror="this.classList.add('is-missing')"></div></div>
   </div>
   <div class="hero__inner">
     <h1 class="hero__statement">The practice works with architecture and landscape design to address environmental concerns as the primary aesthetic problems of our time.</h1>
@@ -354,63 +393,63 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
     <div class="gcol">
 
-      <a class="card card--tall reveal" href="#contact">
+      <a class="card card--tall reveal" href="project.html?p=kilmantin-road">
         <div class="frame" data-ph="Kilmantin Road">
           <img src="img/kilmantin-01.jpg" alt="Kilmantin Road — timber and terracotta detail" loading="lazy" onerror="this.classList.add('is-missing')">
         </div>
         <div class="card__meta">
           <span class="card__title">Kilmantin Road</span>
-          <span class="card__cat">Buildings</span>
+          <span class="card__cat">Residential</span>
         </div>
         <div class="card__scope">Design · Self-build · Project Management — 2021–2024 · AAI Award 2025</div>
       </a>
 
-      <a class="card reveal" href="#contact">
+      <a class="card reveal" href="project.html?p=the-fall">
         <div class="frame" data-ph="The Fall">
           <img src="img/the-fall-01.jpg" alt="The Fall — timber installation at the RHA" loading="lazy" onerror="this.classList.add('is-missing')">
         </div>
         <div class="card__meta">
           <span class="card__title">The Fall</span>
-          <span class="card__cat">Exhibitions</span>
+          <span class="card__cat">Exhibition</span>
         </div>
-        <div class="card__scope">Competition · Detailed Design — Art of Architecture Pavilion 2025, RHA</div>
+        <div class="card__scope">Royal Hibernian Academy, Dublin — Art of Architecture Pavilion 2025</div>
       </a>
 
-      <a class="card card--wide reveal" href="#contact">
+      <a class="card card--wide reveal" href="project.html?p=the-old-boathouse">
         <div class="frame" data-ph="The Old Boathouse">
           <img src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy" onerror="this.classList.add('is-missing')">
         </div>
         <div class="card__meta">
           <span class="card__title">The Old Boathouse</span>
-          <span class="card__cat">Buildings</span>
+          <span class="card__cat">Conservation</span>
         </div>
-        <div class="card__scope">Design · Conservation · Specification — A Protected Structure</div>
+        <div class="card__scope">Conservation of an 1865 maritime structure — a protected structure, Wicklow</div>
       </a>
 
     </div>
 
     <div class="gcol">
 
-      <a class="card card--tall reveal" href="#contact">
+      <a class="card card--tall reveal" href="project.html?p=otium">
         <div class="frame" data-ph="OTIUM">
           <img src="img/otium-01.jpg" alt="OTIUM — installation" loading="lazy" onerror="this.classList.add('is-missing')">
         </div>
         <div class="card__meta">
           <span class="card__title">OTIUM</span>
-          <span class="card__cat">Exhibitions</span>
+          <span class="card__cat">Exhibition</span>
         </div>
-        <div class="card__scope">Design · Installation</div>
+        <div class="card__scope">The Architecture Centre, RIAI, Dublin — drawings &amp; sculpture</div>
       </a>
 
-      <a class="card card--sq reveal" href="#contact">
-        <div class="frame" data-ph="Dysart">
+      <a class="card card--sq reveal" href="project.html?p=dysart">
+        <div class="frame" data-ph="Dysart Drawings">
           <img src="img/dysart-01.jpg" alt="Dysart — drawings" loading="lazy" onerror="this.classList.add('is-missing')">
         </div>
         <div class="card__meta">
-          <span class="card__title">Dysart</span>
-          <span class="card__cat">Buildings</span>
+          <span class="card__title">Dysart Drawings</span>
+          <span class="card__cat">Exhibition</span>
         </div>
-        <div class="card__scope">Design · Drawings</div>
+        <div class="card__scope">Drawings — ongoing, 2023</div>
       </a>
 
       <div class="card card--note reveal">
@@ -426,23 +465,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   </div>
 </section>
 
-<!-- ══ FEATURE ══════════════════════════════════════════════ -->
-<section class="feature feature--flip reveal">
-  <div class="feature__media">
-    <div class="frame" data-ph="Kilmantin Road — detail">
-      <img src="img/kilmantin-02.jpg" alt="Kilmantin Road, detail" loading="lazy" onerror="this.classList.add('is-missing')">
-    </div>
-  </div>
-  <div class="feature__text">
-    <span class="label">Buildings — 2021 · 2024</span>
-    <h2 class="feature__title">Kilmantin Road</h2>
-    <div class="feature__body">
-      <p>A house designed, built and managed from the ground up. Kilmantin Road brought the practice's whole scope together — design, self-build and project management — and was recognised with an AAI Award in 2025.</p>
-      <p>The work sits lightly on its site, ordered by the materials it is made of and the landscape it looks onto.</p>
-    </div>
-  </div>
-</section>
-
 <!-- ══ ABOUT ════════════════════════════════════════════════ -->
 <section class="section section--dark" id="about">
   <div class="head reveal"><span class="label">About</span></div>
@@ -453,29 +475,78 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
       </div>
     </div>
     <div class="about__text reveal">
-      <p class="about__lead">The practice works with architecture and landscape design to address environmental concerns as the primary aesthetic problems of our time.</p>
+      <p class="about__lead">An architectural practice based in Wicklow, Ireland, working within the traditional boundaries of architecture to address environmental concerns as the primary spatial, ethical and aesthetic problems of our time.</p>
       <div class="about__body">
-        <p>Ben Mullen is a graduate of SAUL, the School of Architecture at the University of Limerick. The practice works across new buildings, conservation and exhibition, taking each project from first sketch through to construction.</p>
-        <p>Work ranges from private houses and the conservation of protected structures to installation and competition pieces — including OTIUM and The Fall, exhibited as the Art of Architecture Pavilion at the RHA in 2025.</p>
+        <p>Projects are developed from first principles, with sensitivity to site, new material cultures and the histories of construction. The practice is accredited in conservation at grade 3.</p>
+        <p>Ben Mullen — B.Arch, BA Fine Art, MRIAI — is a graduate of SAUL, the School of Architecture at the University of Limerick, and the National College of Art &amp; Design. In 2025 he received the RIAI Emerging Architect Award, and in 2023 the inaugural Eileen Gray E-1027 Research Fellowship at the CCI in Paris.</p>
+        <p>Since 2016 he has been a Design Fellow at the School of Architecture, Planning &amp; Environmental Policy in UCD, and a design critic to schools of architecture across Ireland and the UK.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ RECOGNITION ══════════════════════════════════════════ -->
+<!-- ══ AWARDS & RECOGNITION ═════════════════════════════════ -->
 <section class="section">
-  <div class="head reveal"><span class="label">Recognition</span></div>
-  <div class="recog">
-    <div class="recog__row reveal">
-      <span class="recog__name">AAI Award</span>
-      <span class="recog__desc">Kilmantin Road — Architectural Association of Ireland</span>
-      <span class="recog__year">2025</span>
+  <div class="head reveal">
+    <div class="head__index">
+      <span class="label">Awards &amp; Recognition</span>
+      <span class="head__count">Select a line to read more</span>
     </div>
-    <div class="recog__row reveal">
-      <span class="recog__name">Art of Architecture Pavilion</span>
-      <span class="recog__desc">The Fall — Royal Hibernian Academy (RHA)</span>
-      <span class="recog__year">2025</span>
-    </div>
+  </div>
+  <div class="awards reveal">
+
+    <details class="award">
+      <summary>
+        <span class="award__sign" aria-hidden="true"></span>
+        <span class="award__name">RIAI Emerging Architect Award</span>
+        <span class="award__for">Ben Mullen</span>
+        <span class="award__year">2025</span>
+      </summary>
+      <div class="award__panel">
+        <p class="body-serif">Awarded to Ben Mullen by the Royal Institute of the Architects of Ireland.</p>
+        <p>The RIAI is the professional and regulatory body for architects in Ireland, founded in 1839. Its Emerging Architect Award recognises an architect who has made a significant contribution to architecture in the early years of independent practice.</p>
+      </div>
+    </details>
+
+    <details class="award">
+      <summary>
+        <span class="award__sign" aria-hidden="true"></span>
+        <span class="award__name">AAI Award</span>
+        <span class="award__for">Kilmantin Road</span>
+        <span class="award__year">2025</span>
+      </summary>
+      <div class="award__panel">
+        <p class="body-serif">Kilmantin Road received an AAI Award in 2025.</p>
+        <p>Run by the Architectural Association of Ireland — founded in 1896 and Ireland's longest-established forum for architecture — the AAI Awards are an annual, independently juried celebration of design excellence across built and unbuilt work by architects practising in Ireland.</p>
+      </div>
+    </details>
+
+    <details class="award">
+      <summary>
+        <span class="award__sign" aria-hidden="true"></span>
+        <span class="award__name">Art of Architecture Pavilion, RHA</span>
+        <span class="award__for">The Fall</span>
+        <span class="award__year">2025</span>
+      </summary>
+      <div class="award__panel">
+        <p class="body-serif">The Fall was commissioned as the Art of Architecture Pavilion for 2025.</p>
+        <p>The Royal Hibernian Academy (RHA), founded in 1823, is one of Ireland's oldest art institutions. Each year its Annual Exhibition includes the Art of Architecture Pavilion — a commissioned, full-scale architectural installation shown among the exhibited work in Dublin.</p>
+      </div>
+    </details>
+
+    <details class="award">
+      <summary>
+        <span class="award__sign" aria-hidden="true"></span>
+        <span class="award__name">Eileen Gray E-1027 Research Fellowship</span>
+        <span class="award__for">Ben Mullen — inaugural</span>
+        <span class="award__year">2023</span>
+      </summary>
+      <div class="award__panel">
+        <p class="body-serif">Ben Mullen held the inaugural fellowship in 2023.</p>
+        <p>Hosted at the Centre Culturel Irlandais (CCI) in Paris, the fellowship supports architectural research connected to Eileen Gray's modernist villa E-1027 on the Côte d'Azur — a landmark of twentieth-century architecture and design.</p>
+      </div>
+    </details>
+
   </div>
 </section>
 
@@ -490,7 +561,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
       <h4>Office</h4>
       <a href="mailto:office@benmullen.ie">office@benmullen.ie</a>
       <a href="tel:+353851269885">+353 85 126 9885</a>
-      <p>Ireland</p>
+      <p>Wicklow House,<br>Market Square,<br>Wicklow, A67 W589</p>
     </div>
     <div class="foot__col reveal">
       <h4>Index</h4>
@@ -500,8 +571,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     </div>
   </div>
   <div class="foot__bar">
-    <span>© <span id="yr"></span> ben mullen architects</span>
-    <span>Architecture &amp; landscape design</span>
+    <span>© <span id="yr"></span> ben mullen architects · Wicklow, Ireland</span>
+    <span>MRIAI · Accredited in conservation, grade 3</span>
   </div>
 </footer>
 
@@ -513,18 +584,6 @@ const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
 },{rootMargin:'0px 0px -8% 0px',threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-/* Hero crossfade slideshow */
-(function(){
-  const shots = Array.from(document.querySelectorAll('#heroMedia .shot'));
-  if(shots.length<2) return;
-  let i=0;
-  setInterval(()=>{
-    shots[i].classList.remove('is-on');
-    i=(i+1)%shots.length;
-    shots[i].classList.add('is-on');
-  },4200);
-})();
 </script>
 </body>
 </html>
