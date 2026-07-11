@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ben mullen architects — architecture &amp; landscape design, Ireland</title>
+<meta name="description" content="ben mullen architects — a practice working with architecture and landscape design to address environmental concerns as the primary aesthetic problems of our time. Selected buildings, exhibitions and conservation across Ireland.">
+<meta name="keywords" content="ben mullen architects, architect Ireland, landscape design, conservation architect, SAUL, Kilmantin Road, Rose Cottage, The Old Boathouse, Olivemount Road, OTIUM, The Fall, AAI Award">
+<meta name="author" content="ben mullen architects">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://janet-cruise-halpin-xpgs.vercel.app/ben-mullen/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ben mullen architects">
+<meta property="og:title" content="ben mullen architects">
+<meta property="og:description" content="A practice working with architecture and landscape design to address environmental concerns as the primary aesthetic problems of our time.">
+<meta property="og:url" content="https://janet-cruise-halpin-xpgs.vercel.app/ben-mullen/">
+<meta property="og:image" content="https://janet-cruise-halpin-xpgs.vercel.app/ben-mullen/img/hero-01.jpg">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "ben mullen architects",
+  "description": "A practice working with architecture and landscape design to address environmental concerns as the primary aesthetic problems of our time.",
+  "url": "https://janet-cruise-halpin-xpgs.vercel.app/ben-mullen/",
+  "email": "office@benmullen.ie",
+  "telephone": "+353 85 126 9885",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Wicklow House, Market Square",
+    "addressLocality": "Wicklow",
+    "postalCode": "A67 W589",
+    "addressCountry": "IE"
+  },
+  "areaServed": "IE",
+  "knowsAbout": ["Architecture", "Landscape design", "Conservation", "Exhibition design"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   BEN MULLEN ARCHITECTS
+   Design language modelled on kononenkogroup.com — systematic, minimal:
+   a near-white canvas, black type, a single grey (#929292) for secondary
+   text, hairline rules, full-bleed imagery and a refined serif used only
+   for the large statements. Sans (Inter) carries every label and body line.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root{
+  --paper:#ffffff;
+  --paper-2:#f4f4f2;
+  --ink:#0a0a0a;
+  --ink-soft:#1a1a1a;
+  --grey:#929292;
+  --grey-2:#b7b7b7;
+  --black:#000000;
+  --line:rgba(0,0,0,.14);
+  --line-inv:rgba(255,255,255,.16);
+  --sans:'Inter','Helvetica Neue',Arial,sans-serif;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --pad:clamp(20px,4.5vw,72px);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.5;
+  letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--black);color:var(--paper)}
+
+/* ── Type helpers ──────────────────────────────────────────── */
+.label{
+  font-family:var(--sans);font-weight:500;
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--grey);
+}
+.serif{font-family:var(--serif);font-weight:300;letter-spacing:-.01em;line-height:1.08}
+
+/* ── Navigation ────────────────────────────────────────────── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px var(--pad);
+  mix-blend-mode:difference;color:#fff;
+  transition:padding .4s var(--ease);
+}
+.nav a{color:#fff}
+.nav__brand{
+  font-weight:500;font-size:1rem;letter-spacing:.01em;
+}
+.nav__menu{display:flex;gap:clamp(18px,3vw,42px)}
+.nav__menu a{
+  font-size:.82rem;letter-spacing:.04em;position:relative;padding:2px 0;
+}
+.nav__menu a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:-1px;height:1px;
+  background:currentColor;transition:right .4s var(--ease);
+}
+.nav__menu a:hover::after{right:0}
+@media(max-width:640px){
+  .nav__menu{gap:16px}
+  .nav__menu a:nth-child(2){display:none}
+}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero{
+  position:relative;height:100svh;min-height:600px;width:100%;
+  overflow:hidden;background:#111;
+}
+.hero__media{position:absolute;inset:0}
+.hero__media .shot{position:absolute;inset:0;opacity:0;transition:opacity 1.6s var(--ease)}
+.hero__media .shot.is-on{opacity:1}
+.hero__media .shot::after{color:rgba(255,255,255,.5)}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,.06) 34%,rgba(0,0,0,.10) 74%,rgba(0,0,0,.44) 100%);
+}
+.hero__inner{
+  position:absolute;z-index:3;inset:auto var(--pad) clamp(34px,6vh,68px) var(--pad);
+  color:#fff;
+}
+.hero__statement{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.7rem,3.6vw,3.4rem);
+  line-height:1.06;letter-spacing:-.015em;
+  max-width:19ch;
+}
+.hero__meta{
+  margin-top:22px;display:flex;gap:26px;flex-wrap:wrap;
+  font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);
+}
+
+/* ── Sections ──────────────────────────────────────────────── */
+.section{padding:clamp(66px,10vh,140px) var(--pad);position:relative}
+.section--dark{background:var(--black);color:var(--paper)}
+.section--dark .label{color:var(--grey-2)}
+.rule{height:1px;background:var(--line);width:100%}
+.section--dark .rule{background:var(--line-inv)}
+
+.head{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:8px;
+  padding-bottom:26px;
+}
+.head__index{display:flex;align-items:baseline;justify-content:space-between;gap:20px}
+.head__count{font-size:.72rem;letter-spacing:.1em;color:var(--grey)}
+
+/* ── Statement block ───────────────────────────────────────── */
+.statement{
+  padding:clamp(70px,13vh,170px) var(--pad);
+  display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(30px,5vw,64px);
+}
+@media(min-width:900px){.statement{grid-template-columns:minmax(0,.34fr) minmax(0,1fr)}}
+.statement__lead{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.5rem,2.9vw,2.6rem);line-height:1.14;letter-spacing:-.012em;
+  max-width:24ch;
+}
+.statement__body{max-width:56ch;color:var(--ink-soft)}
+.statement__body p+p{margin-top:1.1em}
+.statement__body .muted{color:var(--grey);font-size:.95em}
+
+/* ── Projects ──────────────────────────────────────────────── */
+.projects{padding:clamp(20px,4vw,40px) var(--pad) clamp(66px,10vh,120px)}
+.projects__head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:20px;padding:20px 0 30px;border-top:1px solid var(--line);
+}
+/* Masonry index — two balanced columns hold his mixed portrait / landscape /
+   square shots at their true proportions, with no cropping. */
+.grid{display:flex;gap:clamp(14px,2vw,32px);align-items:flex-start}
+.gcol{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:clamp(26px,4vw,54px)}
+@media(max-width:720px){.grid{flex-direction:column}}
+.card{display:block;width:100%;position:relative}
+.frame{
+  position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;
+  background:var(--paper-2);
+}
+.card--tall .frame{aspect-ratio:3/4}
+.card--wide .frame{aspect-ratio:3/2}
+.card--sq .frame{aspect-ratio:1/1}
+.frame img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 1.2s var(--ease),opacity .6s ease;
+}
+.card:hover .frame img{transform:scale(1.03)}
+/* Placeholder shown until a real photograph is dropped in (see README) */
+.frame::after{
+  content:attr(data-ph);position:absolute;inset:0;z-index:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;text-align:center;
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);
+  background:
+    repeating-linear-gradient(-45deg,rgba(0,0,0,.03) 0 10px,rgba(0,0,0,0) 10px 20px),
+    var(--paper-2);
+}
+.frame img{position:relative;z-index:1}
+.frame img.is-missing{opacity:0}
+/* Hero placeholders sit in a dark hero — keep them dark, not light hatch */
+.hero__media .frame::after{
+  color:rgba(255,255,255,.34);
+  background:
+    repeating-linear-gradient(-45deg,rgba(255,255,255,.03) 0 10px,rgba(255,255,255,0) 10px 20px),
+    #141414;
+}
+.card__meta{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding:14px 0 0;
+}
+.card__title{font-size:1rem;font-weight:500;letter-spacing:.005em}
+.card__cat{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
+.card__scope{margin-top:4px;font-size:.82rem;color:var(--grey)}
+.card--note{cursor:default}
+.note{
+  border-top:1px solid var(--line);padding-top:18px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.note p{font-family:var(--serif);font-weight:300;font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.18;letter-spacing:-.01em;color:var(--ink)}
+.note__link{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);transition:color .3s}
+.note__link:hover{color:var(--ink)}
+
+/* ── Feature (image + text) ────────────────────────────────── */
+.feature{
+  display:grid;grid-template-columns:minmax(0,1fr);align-items:center;
+  gap:clamp(28px,5vw,72px);
+  padding:clamp(50px,8vh,110px) var(--pad);
+}
+@media(min-width:900px){.feature{grid-template-columns:1.15fr .85fr}
+  .feature--flip .feature__media{order:2}}
+.feature__media .frame{aspect-ratio:5/6}
+.feature__title{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.6rem,3vw,2.7rem);line-height:1.1;letter-spacing:-.012em;
+  margin:14px 0 18px;
+}
+.feature__body{max-width:46ch;color:var(--ink-soft)}
+.feature__body p+p{margin-top:1em}
+
+/* ── About ─────────────────────────────────────────────────── */
+.about{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(30px,5vw,70px);
+}
+@media(min-width:900px){.about{grid-template-columns:.4fr .6fr}}
+.about__portrait .frame{aspect-ratio:5/4;max-width:520px}
+.about__lead{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.45rem,2.6vw,2.3rem);line-height:1.16;letter-spacing:-.01em;
+  max-width:26ch;margin-bottom:26px;
+}
+.about__body{max-width:52ch;color:rgba(255,255,255,.82)}
+.about__body p+p{margin-top:1em}
+
+/* ── Recognition list ──────────────────────────────────────── */
+.recog{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+.recog__row{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:6px 30px;
+  padding:22px 0;border-top:1px solid var(--line);
+}
+@media(min-width:760px){
+  .recog__row{grid-template-columns:minmax(0,2.4fr) minmax(0,3fr) auto;align-items:baseline}
+}
+.recog__row:last-child{border-bottom:1px solid var(--line)}
+.recog__name{font-size:1.05rem;font-weight:500}
+.recog__desc{color:var(--grey)}
+.recog__year{font-size:.8rem;letter-spacing:.1em;color:var(--grey);white-space:nowrap}
+
+/* ── Awards accordion (native <details>) ───────────────────── */
+.awards{border-top:1px solid var(--line)}
+.award{border-bottom:1px solid var(--line)}
+.award>summary{
+  list-style:none;cursor:pointer;
+  display:grid;grid-template-columns:auto 1fr auto auto;align-items:baseline;
+  gap:10px 22px;padding:24px 0;
+}
+.award>summary::-webkit-details-marker{display:none}
+.award__sign{
+  width:16px;height:16px;position:relative;align-self:center;transition:transform .35s var(--ease);
+}
+.award__sign::before,.award__sign::after{content:"";position:absolute;background:var(--ink);transition:opacity .3s}
+.award__sign::before{top:7px;left:0;width:16px;height:2px}
+.award__sign::after{left:7px;top:0;width:2px;height:16px}
+.award[open] .award__sign{transform:rotate(90deg)}
+.award[open] .award__sign::after{opacity:0}
+.award__name{font-size:clamp(1.05rem,1.7vw,1.35rem);font-weight:500;letter-spacing:-.005em}
+.award__for{color:var(--grey);font-size:.9rem}
+.award__year{font-size:.8rem;letter-spacing:.1em;color:var(--grey);white-space:nowrap}
+@media(max-width:640px){
+  .award>summary{grid-template-columns:auto 1fr auto}
+  .award__for{grid-column:2/-1;order:3}
+}
+.award__panel{
+  overflow:hidden;max-height:0;
+  transition:max-height .5s var(--ease),opacity .4s ease,padding .4s ease;
+  opacity:0;padding:0 0 0 38px;
+}
+.award[open] .award__panel{max-height:420px;opacity:1;padding:0 0 26px 38px}
+.award__panel p{max-width:60ch;color:var(--ink-soft)}
+.award__panel .body-serif{font-family:var(--serif);font-weight:300;font-size:1.15rem;line-height:1.3;color:var(--ink);margin-bottom:.5em}
+@media(max-width:640px){.award__panel,.award[open] .award__panel{padding-left:0}}
+
+/* ── Footer / contact ──────────────────────────────────────── */
+.foot{background:var(--black);color:var(--paper);padding:clamp(60px,10vh,130px) var(--pad) 40px}
+.foot__grid{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:44px 30px;
+  padding-bottom:64px;
+}
+@media(min-width:820px){.foot__grid{grid-template-columns:1.4fr 1fr 1fr}}
+.foot__big{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(2rem,5vw,3.8rem);line-height:1.02;letter-spacing:-.02em;
+}
+.foot__big a{border-bottom:1px solid rgba(255,255,255,.25);transition:border-color .3s}
+.foot__big a:hover{border-color:#fff}
+.foot__col h4{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey-2);margin-bottom:14px;font-weight:500}
+.foot__col a,.foot__col p{display:block;color:rgba(255,255,255,.86);font-size:.95rem;line-height:1.9}
+.foot__col a:hover{color:#fff}
+.foot__bar{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  padding-top:26px;border-top:1px solid var(--line-inv);
+  font-size:.74rem;letter-spacing:.06em;color:var(--grey-2);
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero__media .shot{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<nav class="nav">
+  <a class="nav__brand" href="#top">ben mullen architects</a>
+  <div class="nav__menu">
+    <a href="#work">Index</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ═════════════════════════════════════════════════ -->
+<header class="hero" id="top">
+  <div class="hero__media" id="heroMedia">
+    <div class="shot is-on"><div class="frame" data-ph="Kilmantin Road" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-01.jpg" alt="Kilmantin Road — interior" onerror="this.classList.add('is-missing')"></div></div>
+  </div>
+  <div class="hero__inner">
+    <h1 class="hero__statement">The practice works with architecture and landscape design to address environmental concerns as the primary aesthetic problems of our time.</h1>
+    <div class="hero__meta">
+      <span>Architecture</span><span>Landscape</span><span>Conservation</span><span>Ireland</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══ STATEMENT ════════════════════════════════════════════ -->
+<section class="statement reveal">
+  <p class="statement__lead">A small practice concerned with how buildings and their landscapes hold together over time.</p>
+  <div class="statement__body">
+    <p>ben mullen architects works across new buildings, conservation and exhibition, from initial design through to self-build and construction management. Each project begins from its ground — its climate, its materials and the ecology it belongs to — and treats environmental concern not as a constraint but as the starting point of the design.</p>
+    <p class="muted">Selected buildings, exhibitions and conservation work follow below. For new commissions and collaborations, please get in touch.</p>
+  </div>
+</section>
+
+<!-- ══ SELECTED WORK ════════════════════════════════════════ -->
+<section class="projects" id="work">
+  <div class="projects__head reveal">
+    <span class="label">Selected Projects</span>
+    <span class="label" style="color:var(--grey)">Index — 2021 · 2025</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="gcol">
+
+      <a class="card card--tall reveal" href="project.html?p=kilmantin-road">
+        <div class="frame" data-ph="Kilmantin Road">
+          <img src="img/kilmantin-01.jpg" alt="Kilmantin Road — timber and terracotta detail" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">Kilmantin Road</span>
+          <span class="card__cat">Residential</span>
+        </div>
+        <div class="card__scope">Design · Self-build · Project Management — 2021–2024 · AAI Award 2025</div>
+      </a>
+
+      <a class="card reveal" href="project.html?p=the-fall">
+        <div class="frame" data-ph="The Fall">
+          <img src="img/the-fall-01.jpg" alt="The Fall — timber installation at the RHA" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">The Fall</span>
+          <span class="card__cat">Exhibition</span>
+        </div>
+        <div class="card__scope">Royal Hibernian Academy, Dublin — Art of Architecture Pavilion 2025</div>
+      </a>
+
+      <a class="card card--wide reveal" href="project.html?p=the-old-boathouse">
+        <div class="frame" data-ph="The Old Boathouse">
+          <img src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">The Old Boathouse</span>
+          <span class="card__cat">Conservation</span>
+        </div>
+        <div class="card__scope">Conservation of an 1865 maritime structure — a protected structure, Wicklow</div>
+      </a>
+
+    </div>
+
+    <div class="gcol">
+
+      <a class="card card--tall reveal" href="project.html?p=otium">
+        <div class="frame" data-ph="OTIUM">
+          <img src="img/otium-01.jpg" alt="OTIUM — installation" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">OTIUM</span>
+          <span class="card__cat">Exhibition</span>
+        </div>
+        <div class="card__scope">The Architecture Centre, RIAI, Dublin — drawings &amp; sculpture</div>
+      </a>
+
+      <a class="card card--sq reveal" href="project.html?p=dysart">
+        <div class="frame" data-ph="Dysart Drawings">
+          <img src="img/dysart-01.jpg" alt="Dysart — drawings" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">Dysart Drawings</span>
+          <span class="card__cat">Exhibition</span>
+        </div>
+        <div class="card__scope">Drawings — ongoing, 2023</div>
+      </a>
+
+      <div class="card card--note reveal">
+        <div class="note">
+          <span class="label">Index</span>
+          <p>Buildings, exhibitions and conservation across Ireland, 2021–2025. Further projects and drawings available on request.</p>
+          <a class="note__link" href="#contact">Enquire →</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ ABOUT ════════════════════════════════════════════════ -->
+<section class="section section--dark" id="about">
+  <div class="head reveal"><span class="label">About</span></div>
+  <div class="about">
+    <div class="about__portrait reveal">
+      <div class="frame" data-ph="Ben Mullen — portrait">
+        <img src="img/about-01.jpg" alt="Ben Mullen" loading="lazy" onerror="this.classList.add('is-missing')">
+      </div>
+    </div>
+    <div class="about__text reveal">
+      <p class="about__lead">An architectural practice based in Wicklow, Ireland, working within the traditional boundaries of architecture to address environmental concerns as the primary spatial, ethical and aesthetic problems of our time.</p>
+      <div class="about__body">
+        <p>Projects are developed from first principles, with sensitivity to site, new material cultures and the histories of construction. The practice is accredited in conservation at grade 3.</p>
+        <p>Ben Mullen — B.Arch, BA Fine Art, MRIAI — is a graduate of SAUL, the School of Architecture at the University of Limerick, and the National College of Art &amp; Design. In 2025 he received the RIAI Emerging Architect Award, and in 2023 the inaugural Eileen Gray E-1027 Research Fellowship at the CCI in Paris.</p>
+        <p>Since 2016 he has been a Design Fellow at the School of Architecture, Planning &amp; Environmental Policy in UCD, and a design critic to schools of architecture across Ireland and the UK.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AWARDS & RECOGNITION ═════════════════════════════════ -->
+<section class="section">
+  <div class="head reveal">
+    <div class="head__index">
+      <span class="label">Awards &amp; Recognition</span>
+      <span class="head__count">Select a line to read more</span>
+    </div>
+  </div>
+  <div class="awards reveal">
+
+    <details class="award">
+      <summary>
+        <span class="award__sign" aria-hidden="true"></span>
+        <span class="award__name">RIAI Emerging Architect Award</span>
+        <span class="award__for">Ben Mullen</span>
+        <span class="award__year">2025</span>
+      </summary>
+      <div class="award__panel">
+        <p class="body-serif">Awarded to Ben Mullen by the Royal Institute of the Architects of Ireland.</p>
+        <p>The RIAI is the professional and regulatory body for architects in Ireland, founded in 1839. Its Emerging Architect Award recognises an architect who has made a significant contribution to architecture in the early years of independent practice.</p>
+      </div>
+    </details>
+
+    <details class="award">
+      <summary>
+        <span class="award__sign" aria-hidden="true"></span>
+        <span class="award__name">AAI Award</span>
+        <span class="award__for">Kilmantin Road</span>
+        <span class="award__year">2025</span>
+      </summary>
+      <div class="award__panel">
+        <p class="body-serif">Kilmantin Road received an AAI Award in 2025.</p>
+        <p>Run by the Architectural Association of Ireland — founded in 1896 and Ireland's longest-established forum for architecture — the AAI Awards are an annual, independently juried celebration of design excellence across built and unbuilt work by architects practising in Ireland.</p>
+      </div>
+    </details>
+
+    <details class="award">
+      <summary>
+        <span class="award__sign" aria-hidden="true"></span>
+        <span class="award__name">Art of Architecture Pavilion, RHA</span>
+        <span class="award__for">The Fall</span>
+        <span class="award__year">2025</span>
+      </summary>
+      <div class="award__panel">
+        <p class="body-serif">The Fall was commissioned as the Art of Architecture Pavilion for 2025.</p>
+        <p>The Royal Hibernian Academy (RHA), founded in 1823, is one of Ireland's oldest art institutions. Each year its Annual Exhibition includes the Art of Architecture Pavilion — a commissioned, full-scale architectural installation shown among the exhibited work in Dublin.</p>
+      </div>
+    </details>
+
+    <details class="award">
+      <summary>
+        <span class="award__sign" aria-hidden="true"></span>
+        <span class="award__name">Eileen Gray E-1027 Research Fellowship</span>
+        <span class="award__for">Ben Mullen — inaugural</span>
+        <span class="award__year">2023</span>
+      </summary>
+      <div class="award__panel">
+        <p class="body-serif">Ben Mullen held the inaugural fellowship in 2023.</p>
+        <p>Hosted at the Centre Culturel Irlandais (CCI) in Paris, the fellowship supports architectural research connected to Eileen Gray's modernist villa E-1027 on the Côte d'Azur — a landmark of twentieth-century architecture and design.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- ══ CONTACT / FOOTER ═════════════════════════════════════ -->
+<footer class="foot" id="contact">
+  <div class="foot__grid">
+    <div class="foot__big reveal">
+      Let's build<br>something.<br>
+      <a href="mailto:office@benmullen.ie">office@benmullen.ie</a>
+    </div>
+    <div class="foot__col reveal">
+      <h4>Office</h4>
+      <a href="mailto:office@benmullen.ie">office@benmullen.ie</a>
+      <a href="tel:+353851269885">+353 85 126 9885</a>
+      <p>Wicklow House,<br>Market Square,<br>Wicklow, A67 W589</p>
+    </div>
+    <div class="foot__col reveal">
+      <h4>Index</h4>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <span>© <span id="yr"></span> ben mullen architects · Wicklow, Ireland</span>
+    <span>MRIAI · Accredited in conservation, grade 3</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* Scroll reveal */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Project — ben mullen architects</title>
+<meta name="description" content="A project by ben mullen architects — architecture, landscape and conservation in Wicklow, Ireland.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ffffff;--paper-2:#f4f4f2;--ink:#0a0a0a;--ink-soft:#1a1a1a;
+  --grey:#929292;--grey-2:#b7b7b7;--black:#000;--line:rgba(0,0,0,.14);--line-inv:rgba(255,255,255,.16);
+  --sans:'Inter','Helvetica Neue',Arial,sans-serif;--serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --ease:cubic-bezier(.22,.61,.36,1);--pad:clamp(20px,4.5vw,72px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.5;letter-spacing:.005em;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--black);color:var(--paper)}
+.label{font-family:var(--sans);font-weight:500;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey)}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px var(--pad);background:rgba(255,255,255,.86);backdrop-filter:saturate(1.2) blur(9px);border-bottom:1px solid var(--line)}
+.nav__brand{font-weight:500;font-size:1rem}
+.nav__menu{display:flex;gap:clamp(16px,3vw,42px)}
+.nav__menu a{font-size:.82rem;letter-spacing:.04em;position:relative;padding:2px 0}
+.nav__menu a::after{content:"";position:absolute;left:0;right:100%;bottom:-1px;height:1px;background:currentColor;transition:right .4s var(--ease)}
+.nav__menu a:hover::after{right:0}
+@media(max-width:560px){.nav__menu a:nth-child(1){display:none}}
+
+/* head */
+.wrap{padding:calc(70px + clamp(30px,7vh,90px)) var(--pad) clamp(60px,10vh,120px);max-width:1500px;margin:0 auto}
+.back{display:inline-block;margin-bottom:clamp(24px,5vh,54px);font-size:.8rem;letter-spacing:.06em;color:var(--grey);transition:color .3s}
+.back:hover{color:var(--ink)}
+.phead{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(24px,4vw,60px);padding-bottom:clamp(30px,5vh,56px);border-bottom:1px solid var(--line)}
+@media(min-width:900px){.phead{grid-template-columns:1.3fr .7fr;align-items:end}}
+.phead__title{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.02em}
+.phead__cat{margin-top:14px;color:var(--grey)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 24px}
+.fact{display:flex;flex-direction:column;gap:4px}
+.fact dt{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+.fact dd{font-size:.95rem;color:var(--ink-soft)}
+.fact--award dd{color:var(--ink);font-weight:500}
+
+/* description */
+.pbody{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(20px,4vw,60px);padding:clamp(34px,6vh,70px) 0}
+@media(min-width:900px){.pbody{grid-template-columns:.32fr .68fr}}
+.pbody__lead{font-family:var(--serif);font-weight:300;font-size:clamp(1.3rem,2vw,1.7rem);line-height:1.2;letter-spacing:-.01em;color:var(--ink);max-width:22ch}
+.pbody__text{max-width:60ch;color:var(--ink-soft)}
+.pbody__text p+p{margin-top:1.05em}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(10px,1.6vw,20px)}
+.gal figure{background:var(--paper-2);overflow:hidden}
+.gal img{width:100%;height:auto;display:block}
+.gal .g-wide{grid-column:1/-1}
+@media(min-width:760px){
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+  .gal .g-wide{grid-column:1/-1}
+}
+
+/* pager */
+.pager{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(50px,9vh,110px);padding-top:26px;border-top:1px solid var(--line)}
+.pager a{display:flex;flex-direction:column;gap:6px}
+.pager .label{color:var(--grey)}
+.pager__name{font-family:var(--serif);font-weight:300;font-size:clamp(1.2rem,2.4vw,1.9rem);letter-spacing:-.01em}
+.pager__next{text-align:right;margin-left:auto}
+
+/* footer */
+.foot{background:var(--black);color:var(--paper);padding:clamp(48px,8vh,90px) var(--pad) 36px;margin-top:0}
+.foot__bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.74rem;letter-spacing:.06em;color:var(--grey-2)}
+.foot__bar a:hover{color:#fff}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__brand" href="index.html">ben mullen architects</a>
+  <div class="nav__menu">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <a class="back" href="index.html#work">← Index</a>
+
+  <header class="phead">
+    <div>
+      <h1 class="phead__title" id="pTitle">Project</h1>
+      <div class="phead__cat label" id="pCat"></div>
+    </div>
+    <dl class="facts" id="pFacts"></dl>
+  </header>
+
+  <section class="pbody">
+    <p class="pbody__lead" id="pLead"></p>
+    <div class="pbody__text" id="pText"></div>
+  </section>
+
+  <section class="gal" id="pGallery"></section>
+
+  <nav class="pager" id="pPager"></nav>
+</main>
+
+<footer class="foot">
+  <div class="foot__bar">
+    <span>© <span id="yr"></span> ben mullen architects · Wicklow, Ireland</span>
+    <span><a href="mailto:office@benmullen.ie">office@benmullen.ie</a></span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ── One source of truth for every project (his own content) ───────── */
+const PROJECTS = [
+  {
+    slug:'kilmantin-road', title:'Kilmantin Road', cat:'Residential',
+    facts:{ Type:'Residential extension', Location:'Wicklow, Ireland', Years:'2021–2024', Scope:'Design · Self-build · Project management', Award:'AAI Award, 2025' },
+    lead:'A mid-terrace town house terraced by hand into platform gardens facing the sea.',
+    body:[
+      'A mid-terrace, mass-concrete town house is adapted for contemporary living. The landlocked site is terraced by hand with cut and fill; soil is moved through the house to create a series of platform gardens facing the sea. Irregular and found geometries extrapolate, producing two interlocking cubic forms. The new volumes are connected back to the middle house via a square-plan courtyard, for light and for air.',
+      'The house is constructed with terracotta clay blocks, set atop a fair-faced concrete retaining base. Masonry from a previous construction is reused in the making of a landscape in miniature to the rear.',
+      'External joinery is surface-mounted, producing subtle tensions between interior and exterior within the depth of the walls. All structural components are exposed — for economy, ornament and politic.'
+    ],
+    imgs:['kilmantin-03.jpg','kilmantin-01.jpg','kilmantin-02.jpg','kilmantin-04.jpg','kilmantin-05.jpg','kilmantin-06.jpg'],
+    wide:[0]
+  },
+  {
+    slug:'the-fall', title:'The Fall', cat:'Exhibition',
+    facts:{ Type:'Exhibition', Venue:'Royal Hibernian Academy, Dublin', Year:'2025', Photography:'Peter McGovern', Award:'Art of Architecture Pavilion, RHA 2025' },
+    lead:'An ‘A’-frame calligram of off-the-shelf timber, draped in wool — a top-lit chamber at the RHA.',
+    body:[
+      'November 2024: ‘Subtle Foreshadowing’ is trending on TikTok — footage of people falling, with the ending intercut throughout. The Fall takes 58 of these clips, recut to release other possible readings. Many of the clips are imprinted with the words “Subtle foreshadowing”, and this is left intact, making explicit their rerouting.',
+      'In the midst of decadence, decline, and collapse we fall off, fall over, fall down. The architecture is a doorway and a window for this point of view. An ‘A’ frame — both glyph and trestle, the structure is a calligram, 4.5 metres high and wide, made of off-the-shelf 2×4” softwood timbers, draped in wool, uncut and off the shelf, to produce a successively insulated, top-lit chamber.',
+      'The curtain walls form an opening into the attic space. The light, itself a recording, is — like the other material components — off-the-shelf and borrowed for reuse.'
+    ],
+    imgs:['the-fall-02.jpg','the-fall-01.jpg','the-fall-03.jpg','the-fall-04.jpg','the-fall-05.jpg'],
+    wide:[0]
+  },
+  {
+    slug:'otium', title:'OTIUM', cat:'Exhibition',
+    facts:{ Type:'Exhibition', Venue:'The Architecture Centre, RIAI, Dublin', Photography:'Aisling McCoy, Ben Mullen' },
+    lead:'108 drawings and sculpture — the building site reframed as a place of architectural experiment.',
+    body:[
+      'An exhibition of drawings and sculpture addressing themes of research-by-design in contemporary architectural practice. The exhibition presents 108 drawings made during residency at the Centre Culturel Irlandais in Paris, analysing the image language of ‘Dysart’, an ongoing project by Tom dePaor, in which landscape, garden and domesticity coalesce with punk vernaculars in the production of a new, disciplined and performative architecture.',
+      'The drawings were made in direct response to photographs taken by dePaor and Peter Maybury — an archive that documents Dysart’s diachronic development in time, as both artefact and method. The work is presented alongside contract documents, site photographs and ephemera from a domestic self-build project by ben mullen architects.',
+      'The exhibition seeks to expand the theoretical framework and dominant methodologies of professional practice, reframing the building site as a place of sustained architectural experimentation where material culture, circular economics and the procurement of labour are re-evaluated under the geopolitical conditions of climate action.'
+    ],
+    imgs:['otium-02.jpg','otium-01.jpg','otium-03.jpg','otium-04.jpg','otium-05.jpg'],
+    wide:[0]
+  },
+  {
+    slug:'the-old-boathouse', title:'The Old Boathouse', cat:'Conservation',
+    facts:{ Type:'Conservation', Location:'Wicklow, Ireland', Status:'Ongoing — 2026', Note:'A protected structure' },
+    lead:'Conservation of an 1865 maritime structure, adapted for a traditional music school.',
+    body:[
+      'Adaptation and refurbishment of a historic maritime structure in Wicklow, Ireland. The building was constructed in 1865, funded by Robert Jones Garden to house the Robert Theophilus Garden (RNLI ON 116) in memory of his father.',
+      'Following construction of a new lifeboat house in the lee of the east pier in 1886, the old boathouse was repurposed as a municipal store and public restroom. In 1981, Comhaltas Ceoltóirí Éireann took lease of the structure and has used it as an Irish cultural building since.',
+      'The project calls for the conservation of the structure, renewal of all building services with significant energy-upgrade works, and the adaptation of the building to house a small traditional music school.'
+    ],
+    imgs:['boathouse-01.jpg','boathouse-02.jpg'],
+    wide:[]
+  },
+  {
+    slug:'dysart', title:'Dysart Drawings', cat:'Exhibition',
+    facts:{ Type:'Exhibition — drawings', Location:'Wicklow', Status:'Ongoing — 2023' },
+    lead:'Drawings analysing the image language of ‘Dysart’.',
+    body:[
+      'An exhibition of drawings analysing the image language of ‘Dysart’, an ongoing project by dePaor, in which landscape, garden and domesticity coalesce with punk vernaculars in the production of new, disciplined and performative architectures.',
+      'The drawings are made in response to photographs taken by dePaor and Peter Maybury — an archive that documents Dysart’s diachronic development in time, as both artefact and method.'
+    ],
+    imgs:['dysart-01.jpg','dysart-02.jpg','dysart-03.jpg','dysart-04.jpg','dysart-05.jpg'],
+    wide:[]
+  }
+];
+
+const bySlug = Object.fromEntries(PROJECTS.map((p,i)=>[p.slug,{...p,i}]));
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+function render(){
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('p');
+  const p = bySlug[slug] || PROJECTS[0];
+  const idx = bySlug[p.slug].i;
+
+  document.title = p.title + ' — ben mullen architects';
+  document.getElementById('pTitle').textContent = p.title;
+  document.getElementById('pCat').textContent = p.cat;
+
+  const dl = document.getElementById('pFacts');
+  dl.innerHTML = Object.entries(p.facts).map(([k,v])=>{
+    const cls = k==='Award' ? 'fact fact--award' : 'fact';
+    return `<div class="${cls}"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`;
+  }).join('');
+
+  document.getElementById('pLead').textContent = p.lead;
+  document.getElementById('pText').innerHTML = p.body.map(t=>`<p>${esc(t)}</p>`).join('');
+
+  const gal = document.getElementById('pGallery');
+  gal.innerHTML = p.imgs.map((src,j)=>{
+    const wide = (p.wide||[]).includes(j) ? ' g-wide' : '';
+    return `<figure class="reveal${wide}"><img src="img/${src}" alt="${esc(p.title)} — ${j+1}" loading="lazy"></figure>`;
+  }).join('');
+
+  const prev = PROJECTS[(idx-1+PROJECTS.length)%PROJECTS.length];
+  const next = PROJECTS[(idx+1)%PROJECTS.length];
+  document.getElementById('pPager').innerHTML =
+    `<a href="project.html?p=${prev.slug}"><span class="label">Previous</span><span class="pager__name">${esc(prev.title)}</span></a>`+
+    `<a class="pager__next" href="project.html?p=${next.slug}"><span class="label">Next</span><span class="pager__name">${esc(next.title)}</span></a>`;
+
+  const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -6% 0px',threshold:.06});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  window.scrollTo(0,0);
+}
+render();
+window.addEventListener('popstate', render);
+</script>
+</body>
+</html>
