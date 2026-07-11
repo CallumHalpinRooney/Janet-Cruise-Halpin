@@ -104,77 +104,86 @@ header.nav.scrolled{
 }
 .brand{
   font-family:'Fraunces',serif;font-weight:400;
-  font-size:1.15rem;letter-spacing:.02em;
+  font-size:1.15rem;letter-spacing:.02em;color:var(--dark-cream);
+  transition:color .5s var(--ease);
 }
-.brand span{color:var(--rust)}
+.brand span{color:#f0c9a6;transition:color .5s var(--ease)}
 .nav-links{display:flex;gap:34px;align-items:center}
 .nav-links a{
   font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
-  position:relative;padding:4px 0;color:var(--ink);
+  position:relative;padding:4px 0;color:var(--dark-cream);
+  transition:color .5s var(--ease);
 }
 .nav-links a::after{
   content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
   background:var(--rust);transition:width .4s var(--ease);
 }
 .nav-links a:hover::after{width:100%}
+/* once scrolled onto the cream page, flip nav ink dark */
+header.nav.scrolled .brand{color:var(--ink)}
+header.nav.scrolled .brand span{color:var(--rust)}
+header.nav.scrolled .nav-links a{color:var(--ink)}
+header.nav.scrolled .menu-btn span{background:var(--ink)}
 .menu-btn{display:none}
 
-/* ---- hero -------------------------------------------------------------- */
+/* ---- hero — full-bleed Irish coast at sunset --------------------------- */
 .hero{
-  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  padding-top:132px;padding-bottom:44px;position:relative;overflow:hidden;
+  min-height:100svh;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:120px 0 clamp(34px,6vh,64px);color:var(--dark-cream);
 }
-.hero-grid{
-  display:grid;grid-template-columns:1.32fr .68fr;
-  gap:clamp(24px,5vw,72px);align-items:center;
-}
-.hero .eyebrow{margin-bottom:26px;display:block}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;
+  animation:heroZoom 14s var(--ease) both}
+@keyframes heroZoom{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero-bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(18,14,10,.72) 0%,rgba(18,14,10,.24) 42%,rgba(18,14,10,.12) 100%);}
+.hero-inner{position:relative;z-index:1}
+.hero .eyebrow{margin-bottom:20px;display:block;color:#f0c9a6}
 .hero h1{
   font-family:'Fraunces',serif;font-weight:300;
-  font-size:clamp(3.6rem,13.5vw,12.5rem);
-  line-height:.86;letter-spacing:-.03em;
-  margin-bottom:22px;
+  font-size:clamp(3.8rem,15vw,13rem);
+  line-height:.84;letter-spacing:-.03em;margin-bottom:22px;
+  text-shadow:0 2px 40px rgba(0,0,0,.35);
 }
-.hero h1 em{font-style:italic;color:var(--rust)}
-.hero-tag{
-  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-  font-size:clamp(1.2rem,2.3vw,1.75rem);line-height:1.4;max-width:26ch;
-  color:var(--ink-2);
-}
-/* feature artwork */
-.hero-feature{
-  position:relative;border-radius:4px;overflow:hidden;aspect-ratio:4/5;
-  box-shadow:0 50px 90px -46px rgba(26,19,12,.55);
-}
-.hero-feature img{width:100%;height:100%;object-fit:cover;
-  animation:heroImg 1.5s var(--ease) both}
-.hero-feature figcaption{
-  position:absolute;left:0;bottom:0;width:100%;padding:16px 18px;color:#fff;
-  font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
-  background:linear-gradient(to top,rgba(0,0,0,.58),transparent);
-}
-@keyframes heroImg{from{transform:scale(1.14);opacity:0;clip-path:inset(0 0 100% 0)}
-  to{transform:scale(1);opacity:1;clip-path:inset(0 0 0 0)}}
-/* load-in for the hero text */
-.hero-text .eyebrow,.hero-text h1,.hero-text .hero-tag{
-  opacity:0;transform:translateY(30px);animation:heroUp 1s var(--ease) forwards}
-.hero-text h1{animation-delay:.1s}
-.hero-text .hero-tag{animation-delay:.24s}
-@keyframes heroUp{to{opacity:1;transform:none}}
+.hero h1 em{font-style:italic;color:#fff}
 .hero-lower{
   display:flex;justify-content:space-between;align-items:flex-end;
-  flex-wrap:wrap;gap:30px;margin-top:clamp(30px,5vh,54px);
-  border-top:1px solid var(--line);padding-top:24px;
+  flex-wrap:wrap;gap:26px;margin-top:8px;
 }
-.hero-desc{max-width:52ch;font-size:.98rem;color:var(--ink-2);line-height:1.7}
+.hero-tag{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:clamp(1.25rem,2.6vw,2rem);line-height:1.4;max-width:24ch;
+  color:var(--dark-cream);
+}
+.hero-desc{max-width:40ch;font-size:.96rem;color:rgba(243,236,224,.86);line-height:1.7}
+/* load-in for the hero text */
+.hero .eyebrow,.hero h1,.hero-tag,.hero-desc{
+  opacity:0;transform:translateY(30px);animation:heroUp 1.1s var(--ease) forwards}
+.hero h1{animation-delay:.12s}
+.hero-tag{animation-delay:.26s}
+.hero-desc{animation-delay:.36s}
+@keyframes heroUp{to{opacity:1;transform:none}}
 .scroll-cue{
   font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--ink-dim);display:flex;align-items:center;gap:10px;white-space:nowrap;
+  color:rgba(243,236,224,.8);display:flex;align-items:center;gap:10px;white-space:nowrap;
 }
-.scroll-cue::before{content:"";width:38px;height:1px;background:var(--ink-dim);
+.scroll-cue::before{content:"";width:38px;height:1px;background:rgba(243,236,224,.8);
   animation:cue 2.4s var(--ease) infinite}
 @keyframes cue{0%,100%{transform:scaleX(.4);transform-origin:left;opacity:.5}
   50%{transform:scaleX(1);transform-origin:left;opacity:1}}
+
+/* ---- atmosphere band --------------------------------------------------- */
+.band{position:relative;min-height:60vh;display:flex;align-items:center;
+  overflow:hidden;color:var(--dark-cream)}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.band::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(18,14,10,.78),rgba(18,14,10,.5) 52%,rgba(18,14,10,.12))}
+.band .band-copy{position:relative;z-index:2;max-width:30ch}
+.band .band-copy p{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.3}
+.band .band-copy .eyebrow{color:#f0c9a6;display:block;margin-bottom:18px}
 
 /* ---- section scaffolding ---------------------------------------------- */
 section{position:relative}
@@ -254,14 +263,15 @@ section{position:relative}
   background:linear-gradient(to top,rgba(0,0,0,.62),transparent);
 }
 
-/* ---- gallery grid (all works; primary view on touch) ------------------ */
+/* ---- curated grid (primary view on touch) ----------------------------- */
 .gallery{
-  display:grid;grid-template-columns:repeat(3,1fr);
+  display:flex;flex-wrap:wrap;justify-content:center;
   gap:clamp(10px,1.4vw,20px);margin-top:44px;
 }
 .tile{
   position:relative;overflow:hidden;background:var(--cream-2);
   aspect-ratio:1/1;border-radius:2px;
+  flex:1 1 calc(33.333% - 20px);min-width:230px;max-width:calc(33.333% - 14px);
 }
 .tile img{
   width:100%;height:100%;object-fit:cover;
@@ -403,12 +413,13 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
     z-index:55;
   }
   .nav-links.open{transform:translateY(0)}
-  .nav-links a{font-size:1.5rem;letter-spacing:.06em}
+  .nav-links a{font-size:1.5rem;letter-spacing:.06em;color:var(--ink)}
   .menu-btn{
     display:flex;flex-direction:column;gap:5px;background:none;border:none;
     cursor:pointer;z-index:60;padding:6px;
   }
-  .menu-btn span{width:26px;height:1.5px;background:var(--ink);transition:transform .4s var(--ease),opacity .3s}
+  .menu-btn span{width:26px;height:1.5px;background:var(--dark-cream);transition:transform .4s var(--ease),opacity .3s,background .4s var(--ease)}
+  .menu-btn.open span{background:var(--ink)}
   .menu-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
   .menu-btn.open span:nth-child(2){opacity:0}
   .menu-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
@@ -416,21 +427,20 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
   .about-media{order:-1}
   .about-media .badge{left:0}
   .shops{grid-template-columns:repeat(2,1fr)}
-  .gallery{grid-template-columns:repeat(2,1fr)}
-  .hero-lower{flex-direction:column;align-items:flex-start}
-  .hero-grid{grid-template-columns:1fr;gap:34px}
-  .hero-feature{aspect-ratio:16/11;max-height:44vh}
+  .tile{flex:1 1 calc(50% - 12px);max-width:calc(50% - 10px)}
+  .hero-lower{flex-direction:column;align-items:flex-start;gap:22px}
   .reveal{width:min(74vw,420px)}
+  .band{min-height:52vh}
 }
 @media(max-width:540px){
   .shops{grid-template-columns:1fr}
-  .gallery{grid-template-columns:1fr 1fr}
+  .tile{flex:1 1 100%;max-width:100%}
   .foot-social{gap:16px;flex-wrap:wrap}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;scroll-behavior:auto!important}
   .reveal-up{opacity:1;transform:none}
-  .hero-text .eyebrow,.hero-text h1,.hero-text .hero-tag,.hero-feature img{
+  .hero .eyebrow,.hero h1,.hero-tag,.hero-desc,.hero-bg img{
     opacity:1!important;transform:none!important;clip-path:none!important}
 }
 </style>
@@ -453,20 +463,15 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
 
 <!-- ══ HERO ═════════════════════════════════════════════════════════════ -->
 <section class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <span class="eyebrow">Irish artist · hand-drawn Celtic line art</span>
-      <h1 class="serif">Orla<br><em>Giury</em></h1>
-      <p class="hero-tag serif">Every line drawn by hand — and, folded into it, something meant for someone.</p>
+  <div class="hero-bg"><img src="art/hero.jpg" alt="Sunset over the Irish coast"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Irish artist · nature-drawn Celtic line art</span>
+    <h1 class="serif">Orla<br><em>Giury</em></h1>
+    <div class="hero-lower">
+      <p class="hero-tag serif">Hand-drawn by the Irish sea — and, folded into every line, something meant for someone.</p>
+      <p class="hero-desc">Intricate trees of life, blossoms and knotwork, drawn one careful loop at a time. Commissions, keepsakes, prints &amp; cards — across Etsy, Pinterest, Facebook &amp; Instagram.</p>
+      <span class="scroll-cue">Scroll</span>
     </div>
-    <figure class="hero-feature">
-      <img src="art/tree-rainbow.jpg" alt="Rainbow Tree of Life — hand-drawn Celtic art by Orla Giury">
-      <figcaption>Rainbow Tree of Life</figcaption>
-    </figure>
-  </div>
-  <div class="wrap hero-lower">
-    <p class="hero-desc">Intricate pen-and-ink Celtic art, made one careful loop at a time — trees of life, hearts, swans and knotwork. Original commissions, keepsakes, prints and cards, found across Etsy, Pinterest, Facebook &amp; Instagram.</p>
-    <span class="scroll-cue">Scroll</span>
   </div>
 </section>
 
@@ -475,16 +480,16 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
   <div class="wrap about-grid">
     <div class="about-copy reveal-up">
       <span class="eyebrow">About the artist</span>
-      <h2 class="serif">A small Irish studio, and a <em>lot</em> of tiny lines.</h2>
-      <p>Orla Giury is an independent artist working from Ireland, drawing intricate Celtic and free-flowing line art entirely by hand. Each piece begins as a single line and grows — loop by loop — into trees of life, hearts, swans, stags and knotwork.</p>
+      <h2 class="serif">Rooted in nature, drawn <em>by hand</em>.</h2>
+      <p>Orla Giury is an independent artist working from the Irish coast, drawing intricate Celtic and free-flowing line art entirely by hand. Sea, sky and growing things find their way in — each piece begins as a single line and grows, loop by loop, into trees of life, blossoms and knotwork.</p>
       <p>Most begin as commissions. Somewhere in the pattern there's usually something personal — a name, a date, a few words — woven in so quietly that only the person it's for would know to look. A piece made to hold onto someone, or a moment worth keeping.</p>
-      <p>What starts on paper finds its way onto prints, cards, mugs and keepsakes, so a little bit of hand-drawn Irish art — and its meaning — can be kept close.</p>
+      <p>What starts on paper finds its way onto prints, cards and keepsakes, so a little bit of hand-drawn Irish art — and its meaning — can be kept close.</p>
     </div>
     <div class="about-media reveal-up">
-      <img src="art/studio.jpg" alt="Orla Giury's studio desk with work in progress" loading="lazy">
+      <img src="art/about.jpg" alt="A monstera leaf — the growing, natural world behind Orla Giury's work" loading="lazy">
       <div class="badge">
         <span class="serif">Hand-drawn</span>
-        <small>Made in Ireland</small>
+        <small>By the Irish sea</small>
       </div>
     </div>
   </div>
@@ -499,42 +504,41 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
 
   <div class="index-list" id="indexList">
     <!-- rows populated with data-img; hovering shows the piece large in the centre of the screen -->
-    <a class="index-row" href="#find" data-img="art/tree-rainbow.jpg" data-cap="Rainbow Tree of Life">
-      <span class="r-title serif"><span class="r-idx">01</span>Rainbow Tree of Life<span class="r-arrow serif">→</span></span>
-      <span class="r-meta">Colour · Print</span>
-    </a>
-    <a class="index-row" href="#find" data-img="art/tree-of-life.jpg" data-cap="Tree of Life">
-      <span class="r-title serif"><span class="r-idx">02</span>Tree of Life<span class="r-arrow serif">→</span></span>
+    <a class="index-row" href="#find" data-img="art/work-tree.jpg" data-cap="Tree of Life">
+      <span class="r-title serif"><span class="r-idx">01</span>Tree of Life<span class="r-arrow serif">→</span></span>
       <span class="r-meta">Pen &amp; Ink</span>
     </a>
-    <a class="index-row" href="#find" data-img="art/celtic-heart.jpg" data-cap="Celtic Heart">
-      <span class="r-title serif"><span class="r-idx">03</span>Celtic Heart<span class="r-arrow serif">→</span></span>
-      <span class="r-meta">Ornament</span>
+    <a class="index-row" href="#find" data-img="art/work-rainbow.jpg" data-cap="Rainbow Tree of Life">
+      <span class="r-title serif"><span class="r-idx">02</span>Rainbow Tree of Life<span class="r-arrow serif">→</span></span>
+      <span class="r-meta">Colour · Print</span>
     </a>
-    <a class="index-row" href="#find" data-img="art/swans.jpg" data-cap="Paired Swans">
-      <span class="r-title serif"><span class="r-idx">04</span>Paired Swans<span class="r-arrow serif">→</span></span>
-      <span class="r-meta">Framed</span>
+    <a class="index-row" href="#find" data-img="art/work-flower.jpg" data-cap="Blossom">
+      <span class="r-title serif"><span class="r-idx">03</span>Blossom<span class="r-arrow serif">→</span></span>
+      <span class="r-meta">Colour · Framed</span>
     </a>
-    <a class="index-row" href="#find" data-img="art/wave-spiral.jpg" data-cap="Celtic Wave">
-      <span class="r-title serif"><span class="r-idx">05</span>Celtic Wave<span class="r-arrow serif">→</span></span>
-      <span class="r-meta">Spiral Study</span>
+    <a class="index-row" href="#find" data-img="art/work-feathers.jpg" data-cap="Feathers">
+      <span class="r-title serif"><span class="r-idx">04</span>Feathers<span class="r-arrow serif">→</span></span>
+      <span class="r-meta">Colour Study</span>
     </a>
-    <a class="index-row" href="#find" data-img="art/stag-mug.jpg" data-cap="The Stag">
-      <span class="r-title serif"><span class="r-idx">06</span>The Stag<span class="r-arrow serif">→</span></span>
-      <span class="r-meta">On a mug</span>
-    </a>
-    <a class="index-row" href="#find" data-img="art/pumpkin-glow.jpg" data-cap="Samhain Lantern">
-      <span class="r-title serif"><span class="r-idx">07</span>Samhain Lantern<span class="r-arrow serif">→</span></span>
-      <span class="r-meta">Carved · Seasonal</span>
-    </a>
-    <a class="index-row" href="#find" data-img="art/floral-compass.jpg" data-cap="Wildflower Compass">
-      <span class="r-title serif"><span class="r-idx">08</span>Wildflower Compass<span class="r-arrow serif">→</span></span>
-      <span class="r-meta">Framed</span>
+    <a class="index-row" href="#find" data-img="art/work-gold.jpg" data-cap="Golden Knotwork">
+      <span class="r-title serif"><span class="r-idx">05</span>Golden Knotwork<span class="r-arrow serif">→</span></span>
+      <span class="r-meta">Detail</span>
     </a>
   </div>
 
-  <!-- full grid — everything, and the primary view on touch devices -->
+  <!-- curated grid — the same pieces, and the primary view on touch devices -->
   <div class="gallery" id="gallery"></div>
+</section>
+
+<!-- ══ ATMOSPHERE BAND ══════════════════════════════════════════════════ -->
+<section class="band" aria-hidden="false">
+  <img src="art/band.jpg" alt="Golden sunset over the sea in Ireland" loading="lazy">
+  <div class="wrap">
+    <div class="band-copy reveal-up">
+      <span class="eyebrow">Made by the sea</span>
+      <p class="serif">The same light, the same shoreline — drawn quietly into every piece.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ══ FIND / SHOP ══════════════════════════════════════════════════════ -->
@@ -631,24 +635,13 @@ const CONFIG = {
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
 
-/* ---- gallery grid (all works) ------------------------------------------ */
+/* ---- curated grid (the five pieces) ------------------------------------ */
 const WORKS = [
-  ["tree-rainbow","Rainbow Tree of Life","Colour Print"],
-  ["tree-of-life","Tree of Life","Pen & Ink"],
-  ["swirl-tree-colour","Spirit Tree","Colour"],
-  ["celtic-heart","Celtic Heart","Ornament"],
-  ["swans","Paired Swans","Framed"],
-  ["stag-mug","The Stag","On a mug"],
-  ["pumpkin-glow","Samhain Lantern","Seasonal"],
-  ["wave-spiral","Celtic Wave","Spiral Study"],
-  ["floral-compass","Wildflower Compass","Framed"],
-  ["celtic-gold","Golden Knotwork","Detail"],
-  ["cottage","Home","Framed"],
-  ["cat-bottle","The Cat","Tumbler"],
-  ["flower-stem","Single Bloom","Framed"],
-  ["swirl-line","Spiral Study","Pen & Ink"],
-  ["framed-styled","Tree of Life","Styled"],
-  ["framed-gift","Tree of Life","Gift set"]
+  ["work-tree","Tree of Life","Pen & Ink"],
+  ["work-rainbow","Rainbow Tree of Life","Colour Print"],
+  ["work-flower","Blossom","Colour · Framed"],
+  ["work-feathers","Feathers","Colour Study"],
+  ["work-gold","Golden Knotwork","Detail"]
 ];
 (function(){
   const g = document.getElementById('gallery');

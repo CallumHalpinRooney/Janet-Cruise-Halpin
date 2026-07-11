@@ -12,14 +12,22 @@ Served at `/orla-giury/` on the same Vercel deployment as the rest of the repo.
 Modelled on the minimalist, editorial feel of **pell-mell.fr** — generous
 whitespace, hairline rules, a quiet cream canvas and a warm terracotta accent.
 
+- **Vibe** — the brand leans into Orla's earth / nature / wellness world
+  (the "Greystones sea-swim" audience): a full-bleed Irish-coast sunset hero,
+  a coastal atmosphere band, a plant image in About. Her line-art is the
+  jewellery; nature imagery sets the mood.
 - **Type** — Fraunces (light serif display) + Jost (uppercase sans labels).
 - **Signature interaction** — the *Selected work* section is a hover-reveal
-  **index**: hovering a row dims the rest and floats that piece in near the
-  cursor (exactly like the reference site). On touch devices there's no hover,
-  so the **gallery grid** just below is the primary way to browse the work.
-- **Sections**: hero → selected-work index + gallery → about the artist →
-  where to find the work (Etsy / Instagram / Pinterest / Facebook) → contact
-  (email + a form that opens the visitor's mail app) → footer.
+  **index**: hovering a row dims the rest and shows that piece **large in the
+  centre of the screen** (over a soft veil), matching the reference site. On
+  touch devices there's no hover, so the **curated grid** just below is the
+  primary way to browse the work.
+- **Sections**: hero (sunset) → about the artist (nature + remembrance theme)
+  → selected work (5 curated pieces) → atmosphere band → where to find the work
+  (Etsy / Instagram / Pinterest / Facebook) → contact (commissions; email + a
+  form that opens the visitor's mail app) → footer.
+- Copy subtly carries the made-for-someone / keepsake / remembrance thread
+  (commissions with a name, date or few words hidden in the pattern).
 - Motion is a single IntersectionObserver reveal; everything degrades to plain
   in-place content with `prefers-reduced-motion`.
 
@@ -44,9 +52,16 @@ Edit those five values and the shop cards, footer links, the big email link and
 the contact form (which opens a pre-filled email) all update automatically —
 no other changes needed.
 
-## Artwork images
+## Images
 
-The pieces in `art/` were taken from Orla's own social posts and cropped /
-optimised for the web. To swap or add a piece, drop a square `.jpg` into `art/`
-and reference it in the `WORKS` array (gallery) and/or the `.index-row`
-markup (hover index) in `index.html`.
+Taken from Orla's own social posts, cropped / optimised for the web:
+
+- `hero.jpg` — Irish-coast sunset (full-bleed hero background)
+- `band.jpg` — golden sea sunset (atmosphere band)
+- `about.jpg` — monstera leaf (About)
+- `work-tree`, `work-rainbow`, `work-flower`, `work-feathers`, `work-gold`
+  — the five curated artwork pieces
+
+To swap or add a work, drop a square `.jpg` into `art/` and reference it in the
+`WORKS` array (grid) and the `.index-row` markup (hover index) in `index.html`.
+To change the mood images, just replace `hero.jpg` / `band.jpg` / `about.jpg`.
