@@ -177,22 +177,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   display:flex;align-items:baseline;justify-content:space-between;
   gap:20px;padding:20px 0 30px;border-top:1px solid var(--line);
 }
-.grid{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(14px,2.6vw,40px) clamp(14px,2vw,32px);
-}
-@media(max-width:720px){.grid{grid-template-columns:minmax(0,1fr)}}
-.card{display:block;position:relative}
-.card:nth-child(4n+1),.card:nth-child(4n+4){grid-row:span 1}
-/* alternate vertical offset for an architectural, staggered index */
-@media(min-width:721px){
-  .card:nth-child(even){transform:translateY(clamp(20px,5vw,64px))}
-}
+/* Masonry index — two balanced columns hold his mixed portrait / landscape /
+   square shots at their true proportions, with no cropping. */
+.grid{display:flex;gap:clamp(14px,2vw,32px);align-items:flex-start}
+.gcol{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:clamp(26px,4vw,54px)}
+@media(max-width:720px){.grid{flex-direction:column}}
+.card{display:block;width:100%;position:relative}
 .frame{
   position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;
   background:var(--paper-2);
 }
 .card--tall .frame{aspect-ratio:3/4}
+.card--wide .frame{aspect-ratio:3/2}
+.card--sq .frame{aspect-ratio:1/1}
 .frame img{
   width:100%;height:100%;object-fit:cover;
   transition:transform 1.2s var(--ease),opacity .6s ease;
@@ -224,6 +221,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .card__title{font-size:1rem;font-weight:500;letter-spacing:.005em}
 .card__cat{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
 .card__scope{margin-top:4px;font-size:.82rem;color:var(--grey)}
+.card--note{cursor:default}
+.note{
+  border-top:1px solid var(--line);padding-top:18px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.note p{font-family:var(--serif);font-weight:300;font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.18;letter-spacing:-.01em;color:var(--ink)}
+.note__link{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);transition:color .3s}
+.note__link:hover{color:var(--ink)}
 
 /* ── Feature (image + text) ────────────────────────────────── */
 .feature{
@@ -247,7 +252,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(30px,5vw,70px);
 }
 @media(min-width:900px){.about{grid-template-columns:.4fr .6fr}}
-.about__portrait .frame{aspect-ratio:4/5;max-width:440px}
+.about__portrait .frame{aspect-ratio:5/4;max-width:520px}
 .about__lead{
   font-family:var(--serif);font-weight:300;
   font-size:clamp(1.45rem,2.6vw,2.3rem);line-height:1.16;letter-spacing:-.01em;
@@ -317,9 +322,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 <!-- ══ HERO ═════════════════════════════════════════════════ -->
 <header class="hero" id="top">
   <div class="hero__media" id="heroMedia">
-    <div class="shot is-on"><div class="frame" data-ph="Kilmantin Road" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-01.jpg" alt="Kilmantin Road" onerror="this.classList.add('is-missing')"></div></div>
-    <div class="shot"><div class="frame" data-ph="Rose Cottage" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-02.jpg" alt="Rose Cottage" onerror="this.classList.add('is-missing')"></div></div>
-    <div class="shot"><div class="frame" data-ph="The Fall" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-03.jpg" alt="The Fall" onerror="this.classList.add('is-missing')"></div></div>
+    <div class="shot is-on"><div class="frame" data-ph="Kilmantin Road" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-01.jpg" alt="Kilmantin Road — interior" onerror="this.classList.add('is-missing')"></div></div>
+    <div class="shot"><div class="frame" data-ph="The Fall" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-02.jpg" alt="The Fall — installation" onerror="this.classList.add('is-missing')"></div></div>
+    <div class="shot"><div class="frame" data-ph="OTIUM" style="position:absolute;inset:0;aspect-ratio:auto"><img src="img/hero-03.jpg" alt="OTIUM — installation" onerror="this.classList.add('is-missing')"></div></div>
   </div>
   <div class="hero__inner">
     <h1 class="hero__statement">The practice works with architecture and landscape design to address environmental concerns as the primary aesthetic problems of our time.</h1>
@@ -347,71 +352,76 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
   <div class="grid">
 
-    <a class="card reveal" href="#contact">
-      <div class="frame" data-ph="Kilmantin Road">
-        <img src="img/kilmantin-01.jpg" alt="Kilmantin Road" loading="lazy" onerror="this.classList.add('is-missing')">
-      </div>
-      <div class="card__meta">
-        <span class="card__title">Kilmantin Road</span>
-        <span class="card__cat">Buildings</span>
-      </div>
-      <div class="card__scope">Design · Self-build · Project Management — 2021–2024 · AAI Award 2025</div>
-    </a>
+    <div class="gcol">
 
-    <a class="card card--tall reveal" href="#contact">
-      <div class="frame" data-ph="Rose Cottage">
-        <img src="img/rose-cottage-01.jpg" alt="Rose Cottage" loading="lazy" onerror="this.classList.add('is-missing')">
-      </div>
-      <div class="card__meta">
-        <span class="card__title">Rose Cottage</span>
-        <span class="card__cat">Buildings</span>
-      </div>
-      <div class="card__scope">Design · Planning · Tender · Construction — 2023–present</div>
-    </a>
+      <a class="card card--tall reveal" href="#contact">
+        <div class="frame" data-ph="Kilmantin Road">
+          <img src="img/kilmantin-01.jpg" alt="Kilmantin Road — timber and terracotta detail" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">Kilmantin Road</span>
+          <span class="card__cat">Buildings</span>
+        </div>
+        <div class="card__scope">Design · Self-build · Project Management — 2021–2024 · AAI Award 2025</div>
+      </a>
 
-    <a class="card reveal" href="#contact">
-      <div class="frame" data-ph="The Old Boathouse">
-        <img src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy" onerror="this.classList.add('is-missing')">
-      </div>
-      <div class="card__meta">
-        <span class="card__title">The Old Boathouse</span>
-        <span class="card__cat">Buildings</span>
-      </div>
-      <div class="card__scope">Design · Conservation · Specification — A Protected Structure</div>
-    </a>
+      <a class="card reveal" href="#contact">
+        <div class="frame" data-ph="The Fall">
+          <img src="img/the-fall-01.jpg" alt="The Fall — timber installation at the RHA" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">The Fall</span>
+          <span class="card__cat">Exhibitions</span>
+        </div>
+        <div class="card__scope">Competition · Detailed Design — Art of Architecture Pavilion 2025, RHA</div>
+      </a>
 
-    <a class="card reveal" href="#contact">
-      <div class="frame" data-ph="Olivemount Road">
-        <img src="img/olivemount-01.jpg" alt="Olivemount Road" loading="lazy" onerror="this.classList.add('is-missing')">
-      </div>
-      <div class="card__meta">
-        <span class="card__title">Olivemount Road</span>
-        <span class="card__cat">Buildings</span>
-      </div>
-      <div class="card__scope">Design · Planning · Tender · Construction Management</div>
-    </a>
+      <a class="card card--wide reveal" href="#contact">
+        <div class="frame" data-ph="The Old Boathouse">
+          <img src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">The Old Boathouse</span>
+          <span class="card__cat">Buildings</span>
+        </div>
+        <div class="card__scope">Design · Conservation · Specification — A Protected Structure</div>
+      </a>
 
-    <a class="card card--tall reveal" href="#contact">
-      <div class="frame" data-ph="OTIUM">
-        <img src="img/otium-01.jpg" alt="OTIUM" loading="lazy" onerror="this.classList.add('is-missing')">
-      </div>
-      <div class="card__meta">
-        <span class="card__title">OTIUM</span>
-        <span class="card__cat">Exhibitions</span>
-      </div>
-      <div class="card__scope">Design · Installation</div>
-    </a>
+    </div>
 
-    <a class="card reveal" href="#contact">
-      <div class="frame" data-ph="The Fall">
-        <img src="img/the-fall-01.jpg" alt="The Fall" loading="lazy" onerror="this.classList.add('is-missing')">
+    <div class="gcol">
+
+      <a class="card card--tall reveal" href="#contact">
+        <div class="frame" data-ph="OTIUM">
+          <img src="img/otium-01.jpg" alt="OTIUM — installation" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">OTIUM</span>
+          <span class="card__cat">Exhibitions</span>
+        </div>
+        <div class="card__scope">Design · Installation</div>
+      </a>
+
+      <a class="card card--sq reveal" href="#contact">
+        <div class="frame" data-ph="Dysart">
+          <img src="img/dysart-01.jpg" alt="Dysart — drawings" loading="lazy" onerror="this.classList.add('is-missing')">
+        </div>
+        <div class="card__meta">
+          <span class="card__title">Dysart</span>
+          <span class="card__cat">Buildings</span>
+        </div>
+        <div class="card__scope">Design · Drawings</div>
+      </a>
+
+      <div class="card card--note reveal">
+        <div class="note">
+          <span class="label">Index</span>
+          <p>Buildings, exhibitions and conservation across Ireland, 2021–2025. Further projects and drawings available on request.</p>
+          <a class="note__link" href="#contact">Enquire →</a>
+        </div>
       </div>
-      <div class="card__meta">
-        <span class="card__title">The Fall</span>
-        <span class="card__cat">Exhibitions</span>
-      </div>
-      <div class="card__scope">Competition · Detailed Design — Art of Architecture Pavilion 2025, RHA</div>
-    </a>
+
+    </div>
 
   </div>
 </section>

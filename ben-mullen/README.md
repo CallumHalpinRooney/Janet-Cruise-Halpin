@@ -26,42 +26,42 @@ rest of the repo.
 All copy is **ben mullen architects' own** (projects, scope, awards, bio,
 contact) — only the *visual layout* is modelled on the reference site.
 
-## Content (all real, from benmullen.ie)
+## Content (all his own)
 
 - **Statement** — "The practice works with architecture and landscape design to
   address environmental concerns as the primary aesthetic problems of our time."
-- **Projects**
+- **Projects (selected)** — the five with photography to hand:
   - **Kilmantin Road** — Buildings — Design · Self-build · Project Management —
     2021–2024 · **AAI Award 2025**
-  - **Rose Cottage** — Buildings — Design · Planning · Tender · Construction — 2023–present
-  - **The Old Boathouse** — Buildings — Design · Conservation · Specification — A Protected Structure
-  - **Olivemount Road** — Buildings — Design · Planning · Tender · Construction Management
-  - **OTIUM** — Exhibitions — Design · Installation
   - **The Fall** — Exhibitions — Competition · Detailed Design — Art of Architecture Pavilion 2025, RHA
+  - **OTIUM** — Exhibitions — Design · Installation
+  - **The Old Boathouse** — Buildings — Design · Conservation · Specification — A Protected Structure
+  - **Dysart** — Buildings — Design · Drawings
 - **About** — Graduate of SAUL, School of Architecture University of Limerick.
 - **Contact** — office@benmullen.ie · +353 85 126 9885
 
-## Images  ⚠️ needed
+> Rose Cottage and Olivemount Road (listed on benmullen.ie) are held back for
+> now — no photography was available for them. Add images named
+> `rose-cottage-01.jpg` / `olivemount-01.jpg` and copy an existing card block to
+> reinstate them.
 
-The photographs on his current site (benmullen.ie) are served through the Cargo
-CMS as a JavaScript slideshow and **could not be pulled automatically** in this
-environment. Until the real photos are dropped in, every image slot shows a
-labelled hatched placeholder — the site is fully laid out and presentable, it
-just needs the real photography.
+## Images
 
-Drop the files into `ben-mullen/img/` with these exact names and they appear
-automatically (no code change needed):
+Real project photography lives in `ben-mullen/img/`, harvested from the client's
+own material (his staging build + supplied shots). Each `<img>` keeps a labelled
+hatched placeholder behind it, so a missing/renamed file degrades gracefully
+rather than showing a broken image.
 
-| File | Used for | Suggested crop |
-|------|----------|----------------|
-| `hero-01.jpg`, `hero-02.jpg`, `hero-03.jpg` | hero slideshow | wide / full-bleed |
-| `kilmantin-01.jpg`, `kilmantin-02.jpg` | Kilmantin Road (grid + feature) | 4:3 and 5:6 |
-| `rose-cottage-01.jpg` | Rose Cottage (tall card) | 3:4 |
-| `boathouse-01.jpg` | The Old Boathouse | 4:3 |
-| `olivemount-01.jpg` | Olivemount Road | 4:3 |
-| `otium-01.jpg` | OTIUM (tall card) | 3:4 |
-| `the-fall-01.jpg` | The Fall | 4:3 |
-| `about-01.jpg` | About portrait | 4:5 |
+| File | Project / use |
+|------|---------------|
+| `hero-01/02/03.jpg` | hero crossfade — Kilmantin interior · The Fall · OTIUM |
+| `kilmantin-01.jpg` | Kilmantin Road — timber window detail (index card) |
+| `kilmantin-02.jpg` | Kilmantin Road — self-build interior (feature) |
+| `the-fall-01.jpg` | The Fall — RHA installation |
+| `otium-01.jpg` | OTIUM — installation |
+| `boathouse-01.jpg` | The Old Boathouse — archival |
+| `dysart-01.jpg` | Dysart — drawing |
+| `about-01.jpg` | About — studio / exhibition wall |
 
-Save as optimised JPG/WebP (long edge ~2000px). If a name is missing the slot
-just falls back to its placeholder, so images can be added one at a time.
+To swap any photograph, replace the file of the same name (optimised JPG/WebP,
+long edge ~2000px) — no code change needed.
