@@ -352,48 +352,37 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .studio__cap{display:flex;justify-content:space-between;gap:12px;padding-top:13px;font-size:.8rem;color:var(--grey)}
 .studio__cap .n{color:var(--ink)}
 
-/* ── Selected work — pinned horizontal reel ─────────────────── */
-.reel{position:relative;height:100svh;background:var(--paper);overflow:hidden}
-.reel__head{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:clamp(18px,3.2vw,32px) var(--pad);mix-blend-mode:difference;color:#fff}
-.reel__head .label{color:#fff}
-.reel__count{color:rgba(255,255,255,.82)}
-.reel__viewport{height:100%;display:flex;align-items:center;position:relative}
-.reel__track{display:flex;align-items:center;gap:clamp(16px,2vw,40px);padding:0 var(--pad);will-change:transform}
-.panel{position:relative;flex:0 0 auto;height:min(74svh,720px);display:block;overflow:hidden;background:var(--paper-2)}
-.panel--wide{width:min(66vw,860px)}
-.panel--tall{width:min(42vw,520px)}
-.panel--sq{width:min(52vw,640px)}
-.panel__media{position:absolute;inset:0;overflow:hidden;transition:transform 1s var(--ease)}
-.panel:hover .panel__media{transform:scale(1.03)}
-.panel__media img{position:absolute;top:0;left:-7%;width:114%;height:100%;object-fit:cover}
-.panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,0) 32%,rgba(0,0,0,.05) 60%,rgba(0,0,0,.64))}
-.panel__info{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:clamp(20px,2.2vw,34px);color:#fff;display:flex;flex-direction:column;gap:7px}
-.panel__num{font-size:.7rem;letter-spacing:.24em;opacity:.85}
-.panel__title{font-family:var(--serif);font-weight:300;font-size:clamp(1.7rem,3.2vw,3rem);line-height:1;letter-spacing:-.02em}
-.panel__row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:2px}
-.panel__cat{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;opacity:.88}
-.panel__view{font-size:.7rem;letter-spacing:.08em;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease),transform .4s var(--ease);white-space:nowrap}
-.panel:hover .panel__view{opacity:1;transform:none}
-.panel__scope{font-size:.82rem;opacity:.82;max-width:46ch}
-.panel--end{width:min(52vw,560px);background:var(--black);color:var(--paper);display:flex;align-items:center}
-.panel--end::after{display:none}
-.panel__end{padding:clamp(24px,3vw,48px);display:flex;flex-direction:column;gap:16px}
-.panel__end p{font-family:var(--serif);font-weight:300;font-size:clamp(1.3rem,2vw,1.8rem);line-height:1.2}
-.panel__enq{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-2);transition:color .3s}
-.panel__enq:hover{color:#fff}
-.reel__progress{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(14px,2vh,26px);height:1px;background:rgba(0,0,0,.14);z-index:4}
-.reel__progress span{display:block;height:100%;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
-@media(max-width:820px){
-  .reel{height:auto;overflow:visible}
-  .reel__head{position:static;mix-blend-mode:normal;color:var(--ink);padding-top:clamp(40px,8vh,70px)}
-  .reel__head .label,.reel__count{color:var(--grey)}
-  .reel__viewport{height:auto;display:block}
-  .reel__track{flex-direction:column;gap:12px;padding:14px var(--pad) 0;transform:none!important}
-  .panel,.panel--wide,.panel--tall,.panel--sq,.panel--end{width:100%!important;height:66svh}
-  .panel__media img{left:0;width:100%}
-  .panel__media{transform:none!important}
-  .panel__view{opacity:1;transform:none}
-  .reel__progress{display:none}
+/* ── Selected work — names index + featured stage ───────────── */
+.work{padding:clamp(60px,9vh,120px) var(--pad)}
+.work__head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-top:1px solid var(--line);padding-top:22px;margin-bottom:clamp(30px,5vw,60px)}
+.work__layout{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(26px,4vw,56px)}
+@media(min-width:900px){.work__layout{grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);align-items:center}}
+/* names index */
+.work__names{display:flex;flex-direction:column;gap:clamp(4px,.6vw,10px)}
+.wname{position:relative;display:block;font-weight:600;text-transform:uppercase;letter-spacing:-.005em;line-height:1.02;
+  font-size:clamp(1.8rem,4.4vw,3.5rem);color:var(--grey-2);transition:color .45s var(--ease)}
+.wname.is-active{color:var(--ink)}
+.wname__thumb{display:none}
+@media(min-width:900px) and (hover:hover){
+  .work__names:hover .wname{color:var(--grey-2)}
+  .work__names:hover .wname.is-active{color:var(--ink)}
+}
+/* featured stage */
+.work__stage{position:relative}
+.wstage{position:relative;display:block;width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--paper-2)}
+.wstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05);
+  transition:opacity .7s var(--ease),transform 1.3s var(--ease)}
+.wstage img.is-on{opacity:1;transform:scale(1)}
+.wstage__meta{display:flex;justify-content:space-between;gap:16px;padding-top:14px;font-size:.82rem;color:var(--grey);letter-spacing:.02em}
+.wstage__view{white-space:nowrap}
+/* mobile: stacked cards (name + its image), no stage */
+@media(max-width:899px){
+  .work__stage{display:none}
+  .work__names{gap:clamp(26px,6vw,40px)}
+  .wname{font-size:clamp(1.5rem,7vw,2.2rem);color:var(--ink)}
+  .wname__t{display:block;margin-top:12px;order:2}
+  .wname{display:flex;flex-direction:column}
+  .wname__thumb{display:block;order:1;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--paper-2)}
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -533,76 +522,50 @@ body.loading .nav,body.loading .progress{opacity:0}
   <p class="interlude__quote" data-reveal="lines">All structural components are exposed — for economy, ornament and politic.</p>
 </section>
 
-<!-- ══ SELECTED WORK — pinned horizontal reel ═══════════════ -->
-<section class="reel" id="work">
-  <div class="reel__head">
+<!-- ══ SELECTED WORK — names index + featured stage ═════════ -->
+<section class="work" id="work">
+  <div class="work__head reveal">
     <span class="label">Selected Projects</span>
-    <span class="label reel__count"><span class="reel__i">01</span> / 05 &nbsp;—&nbsp; Index 2021·2025</span>
+    <span class="label" style="color:var(--grey)">Index 2021·2025</span>
   </div>
 
-  <div class="reel__viewport">
-    <div class="reel__track">
-
-      <a class="panel panel--wide" href="project.html?p=kilmantin-road" data-i="01">
-        <div class="panel__media"><img src="img/kilmantin-03.jpg" alt="Kilmantin Road" loading="lazy"></div>
-        <div class="panel__info">
-          <span class="panel__num">01</span>
-          <h3 class="panel__title">Kilmantin Road</h3>
-          <div class="panel__row"><span class="panel__cat">Residential · AAI Award 2025</span><span class="panel__view">View project ↗</span></div>
-          <span class="panel__scope">Design · Self-build · Project management — 2021–2024</span>
-        </div>
+  <div class="work__layout">
+    <nav class="work__names" aria-label="Selected projects">
+      <a class="wname is-active" href="project.html?p=otium" data-slug="otium" data-cat="Exhibition — The Architecture Centre, RIAI">
+        <span class="wname__t">OTIUM</span>
+        <img class="wname__thumb" src="img/otium-01.jpg" alt="OTIUM" loading="lazy">
       </a>
-
-      <a class="panel panel--wide" href="project.html?p=the-fall" data-i="02">
-        <div class="panel__media"><img src="img/the-fall-02.jpg" alt="The Fall" loading="lazy"></div>
-        <div class="panel__info">
-          <span class="panel__num">02</span>
-          <h3 class="panel__title">The Fall</h3>
-          <div class="panel__row"><span class="panel__cat">Exhibition · RHA</span><span class="panel__view">View project ↗</span></div>
-          <span class="panel__scope">Art of Architecture Pavilion, Royal Hibernian Academy — 2025</span>
-        </div>
+      <a class="wname" href="project.html?p=the-fall" data-slug="the-fall" data-cat="Exhibition — Royal Hibernian Academy">
+        <span class="wname__t">The Fall</span>
+        <img class="wname__thumb" src="img/the-fall-02.jpg" alt="The Fall" loading="lazy">
       </a>
-
-      <a class="panel panel--tall" href="project.html?p=otium" data-i="03">
-        <div class="panel__media"><img src="img/otium-02.jpg" alt="OTIUM" loading="lazy"></div>
-        <div class="panel__info">
-          <span class="panel__num">03</span>
-          <h3 class="panel__title">OTIUM</h3>
-          <div class="panel__row"><span class="panel__cat">Exhibition · RIAI</span><span class="panel__view">View project ↗</span></div>
-          <span class="panel__scope">The Architecture Centre, Dublin — 108 drawings &amp; sculpture</span>
-        </div>
+      <a class="wname" href="project.html?p=dysart" data-slug="dysart" data-cat="Exhibition — drawings, Wicklow">
+        <span class="wname__t">Dysart Drawings</span>
+        <img class="wname__thumb" src="img/dysart-01.jpg" alt="Dysart Drawings" loading="lazy">
       </a>
-
-      <a class="panel panel--wide" href="project.html?p=the-old-boathouse" data-i="04">
-        <div class="panel__media"><img src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy"></div>
-        <div class="panel__info">
-          <span class="panel__num">04</span>
-          <h3 class="panel__title">The Old Boathouse</h3>
-          <div class="panel__row"><span class="panel__cat">Conservation</span><span class="panel__view">View project ↗</span></div>
-          <span class="panel__scope">An 1865 protected maritime structure, Wicklow — ongoing</span>
-        </div>
+      <a class="wname" href="project.html?p=kilmantin-road" data-slug="kilmantin-road" data-cat="Residential — AAI Award 2025">
+        <span class="wname__t">Kilmantin Road</span>
+        <img class="wname__thumb" src="img/kilmantin-03.jpg" alt="Kilmantin Road" loading="lazy">
       </a>
-
-      <a class="panel panel--sq" href="project.html?p=dysart" data-i="05">
-        <div class="panel__media"><img src="img/dysart-01.jpg" alt="Dysart Drawings" loading="lazy"></div>
-        <div class="panel__info">
-          <span class="panel__num">05</span>
-          <h3 class="panel__title">Dysart Drawings</h3>
-          <div class="panel__row"><span class="panel__cat">Exhibition</span><span class="panel__view">View project ↗</span></div>
-          <span class="panel__scope">Drawings — ongoing, 2023</span>
-        </div>
+      <a class="wname" href="project.html?p=the-old-boathouse" data-slug="the-old-boathouse" data-cat="Conservation — a protected structure, Wicklow">
+        <span class="wname__t">The Old Boathouse</span>
+        <img class="wname__thumb" src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy">
       </a>
+    </nav>
 
-      <div class="panel panel--end">
-        <div class="panel__end">
-          <span class="label" style="color:var(--grey-2)">Index</span>
-          <p>Buildings, exhibitions and conservation across Ireland, 2021–2025. Further projects and drawings available on request.</p>
-          <a class="panel__enq" href="#contact">Enquire →</a>
-        </div>
+    <div class="work__stage reveal">
+      <a class="wstage" href="project.html?p=otium" id="wstageLink">
+        <img data-slug="otium" class="is-on" src="img/otium-01.jpg" alt="">
+        <img data-slug="the-fall" src="img/the-fall-02.jpg" alt="">
+        <img data-slug="dysart" src="img/dysart-01.jpg" alt="">
+        <img data-slug="kilmantin-road" src="img/kilmantin-03.jpg" alt="">
+        <img data-slug="the-old-boathouse" src="img/boathouse-01.jpg" alt="">
+      </a>
+      <div class="wstage__meta">
+        <span id="wstageCat">Exhibition — The Architecture Centre, RIAI</span>
+        <span class="wstage__view">View project ↗</span>
       </div>
-
     </div>
-    <div class="reel__progress"><span></span></div>
   </div>
 </section>
 
@@ -698,11 +661,14 @@ body.loading .nav,body.loading .progress{opacity:0}
     <a href="https://www.instagram.com/benmullenarchitects/" target="_blank" rel="noopener">@benmullenarchitects →</a>
   </div>
   <div class="studio__track" data-lenis-prevent>
-    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-01.jpg" alt="Toplight interior" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Toplight</span><span>Interior</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-01.jpg" alt="Toplight and mirror to the sky" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Toplight</span><span>Interior</span></figcaption></figure>
     <figure class="studio__item reveal"><div class="frame"><img src="media/studio-02.jpg" alt="Valentia slate quarry" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Valentia slate</span><span>Material</span></figcaption></figure>
-    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-03.jpg" alt="Lintel patio" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Lintel patio</span><span>Landscape</span></figcaption></figure>
-    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-04.jpg" alt="New return, in design" loading="lazy"></div><figcaption class="studio__cap"><span class="n">New return</span><span>In design</span></figcaption></figure>
-    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-05.jpg" alt="Study model" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Study model</span><span>Process</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-03.jpg" alt="Terracotta and timber" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Terracotta &amp; timber</span><span>Detail</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-04.jpg" alt="Timber return window" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Timber return</span><span>Craft</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-05.jpg" alt="Lintel patio" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Lintel patio</span><span>Landscape</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-06.jpg" alt="Material study" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Material study</span><span>Process</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-07.jpg" alt="On site" loading="lazy"></div><figcaption class="studio__cap"><span class="n">On site</span><span>Self-build</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-08.jpg" alt="Fieldwork" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Fieldwork</span><span>Research</span></figcaption></figure>
   </div>
 </section>
 
@@ -825,31 +791,27 @@ body.loading .nav,body.loading .progress{opacity:0}
       scrollTrigger:{ trigger:'.interlude', start:'top bottom', end:'bottom top', scrub:true }}); }
   }
 
-  /* ── Pinned horizontal project reel (desktop) ── */
-  function buildReel(){
-    const reel=$('.reel'), track=$('.reel__track');
-    if(!reel||!track) return;
-    const mm=gsap.matchMedia();
-    mm.add('(min-width:821px)',()=>{
-      const dist=()=> Math.max(0, track.scrollWidth - window.innerWidth);
-      const tween=gsap.to(track,{x:()=>-dist(),ease:'none'});
-      ScrollTrigger.create({
-        animation:tween, trigger:reel, start:'top top',
-        end:()=>'+='+dist(), pin:true, scrub:1, anticipatePin:1, invalidateOnRefresh:true
-      });
-      const panels=$$('.reel .panel');
-      panels.forEach(pan=>{
-        const img=pan.querySelector('.panel__media img');
-        if(img) gsap.fromTo(img,{xPercent:-5},{xPercent:5,ease:'none',
-          scrollTrigger:{ trigger:pan, containerAnimation:tween, start:'left right', end:'right left', scrub:true }});
-      });
-      const iEl=$('.reel__i'), pbar=$('.reel__progress span');
-      tween.eventCallback('onUpdate',()=>{
-        const pr=tween.progress();
-        if(pbar) gsap.set(pbar,{scaleX:pr});
-        if(iEl){ const n=Math.max(1,Math.min(5,Math.floor(pr*panels.length)+1)); iEl.textContent=String(n).padStart(2,'0'); }
-      });
+  /* ── Selected work — names index drives the featured stage ── */
+  function buildWork(){
+    const names=$$('.wname');
+    if(!names.length) return;
+    const stageImgs=$$('.wstage img'), link=$('#wstageLink'), catEl=$('#wstageCat');
+    const desktop=matchMedia('(min-width:900px) and (hover:hover)');
+    function activate(n){
+      const slug=n.dataset.slug;
+      names.forEach(x=>x.classList.toggle('is-active', x===n));
+      stageImgs.forEach(im=>im.classList.toggle('is-on', im.dataset.slug===slug));
+      if(catEl) catEl.textContent=n.dataset.cat||'';
+      if(link) link.setAttribute('href', n.getAttribute('href'));
+    }
+    names.forEach(n=>{
+      n.addEventListener('mouseenter',()=>{ if(desktop.matches) activate(n); });
+      n.addEventListener('focus',()=>{ if(desktop.matches) activate(n); });
     });
+    if(LIBS && !reduce){
+      gsap.from('.wname',{yPercent:60,opacity:0,duration:1,ease:'expo.out',stagger:.07,
+        scrollTrigger:{ trigger:'.work__names', start:'top 82%' }});
+    }
   }
 
   /* ── Nav: hide on scroll down, reveal on up ── */
@@ -954,7 +916,7 @@ body.loading .nav,body.loading .progress{opacity:0}
 
   /* ── Boot ── */
   gsap.set('.reveal',{opacity:0,y:30});
-  buildNav(); buildProgress(); buildCursor(); buildMagnetic(); buildParallax(); buildReel(); wireAccordion();
+  buildNav(); buildProgress(); buildCursor(); buildMagnetic(); buildParallax(); buildWork(); wireAccordion();
   const kick=()=>{ buildReveals(); runPreloader(); };
   if(document.fonts && document.fonts.ready){ document.fonts.ready.then(kick); setTimeout(()=>{ if(!document.body.classList.contains('loaded')) kick(); },1200); }
   else kick();
