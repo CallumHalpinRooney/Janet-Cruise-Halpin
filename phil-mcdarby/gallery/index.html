@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gallery — Phil McDarby</title>
+<meta name="description" content="The full body of work by Phil McDarby — high-fantasy digital art including the Wood Dragons series, and landscape photography from across Ireland. Fine-art prints available on enquiry.">
+<meta name="author" content="Phil McDarby">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://janet-cruise-halpin-xpgs.vercel.app/phil-mcdarby/gallery/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Phil McDarby">
+<meta property="og:title" content="Gallery — Phil McDarby">
+<meta property="og:description" content="High-fantasy digital art and Irish landscape photography. Fine-art prints available on enquiry.">
+<meta property="og:url" content="https://janet-cruise-halpin-xpgs.vercel.app/phil-mcdarby/gallery/">
+<meta property="og:image" content="https://janet-cruise-halpin-xpgs.vercel.app/phil-mcdarby/img/the-amber-dragons-hoard.jpg">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f0d0b'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23b99b5e' text-anchor='middle'%3EPM%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/CormorantGaramond.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/Inter.woff2" crossorigin>
+<link rel="stylesheet" href="/phil-mcdarby/css/site.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav scrolled">
+  <a class="nav-mark" href="/phil-mcdarby/">Phil&nbsp;McDarby</a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="/phil-mcdarby/gallery/" aria-current="page">Gallery</a>
+    <a href="/phil-mcdarby/about/">About</a>
+    <a href="/phil-mcdarby/contact/">Contact</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <span class="label label--gold reveal in">The collection</span>
+    <h1 class="page-title reveal in">The Work</h1>
+    <p class="page-intro reveal in" data-delay="1">Sixty-two works across digital art and photography.
+    Every piece is available as a fine-art print — open any work to enquire.</p>
+  </div>
+
+  <div class="filters" role="group" aria-label="Filter works by collection">
+    <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All works</button>
+    <button class="filter-btn" type="button" data-filter="digital-art" aria-pressed="false">Digital art</button>
+    <button class="filter-btn" type="button" data-filter="photography" aria-pressed="false">Photography</button>
+  </div>
+
+  <div class="gallery-grid" id="gallery-grid"></div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-mark">Phil McDarby</p>
+      <p class="footer-line">Digital artist, photographer &amp; composer — Dublin, Ireland</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/phil-mcdarby/gallery/">Gallery</a>
+      <a href="/phil-mcdarby/about/">About</a>
+      <a href="/phil-mcdarby/contact/">Contact</a>
+    </nav>
+    <p class="footer-copy">All imagery &copy; Phil McDarby. Fine-art prints of every work are available on enquiry.</p>
+  </div>
+</footer>
+
+<script src="/phil-mcdarby/js/works-data.js"></script>
+<script src="/phil-mcdarby/js/site.js"></script>
+<script>
+  /* Editorial grid: span decided by each work's own aspect ratio, with a
+     gentle vertical inset every few pieces so the rows never feel rigid. */
+  (() => {
+    const grid = document.getElementById('gallery-grid');
+    const buttons = document.querySelectorAll('.filter-btn');
+
+    const spanFor = (w, i) => {
+      const ar = w.w / w.h;
+      if (ar > 2.6) return 'span-6';                 // true panoramas run full width
+      if (ar > 1.9) return 'span-4';                 // wide landscapes
+      if (ar > 1.15) return i % 5 === 0 ? 'span-4' : 'span-3';
+      return '';                                     // portraits stay narrow (span 2)
+    };
+
+    const render = (filter) => {
+      grid.innerHTML = '';
+      const list = filter === 'all' ? WORKS : WORKS.filter((w) => w.collection === filter);
+      list.forEach((w, i) => {
+        const card = workCard(w, { eager: i < 3, underCaption: true });
+        const span = spanFor(w, i);
+        if (span) card.classList.add(span);
+        if (i % 4 === 1 && !span.includes('6')) card.classList.add('inset');
+        grid.appendChild(card);
+      });
+      observeReveals(grid);
+      watchArtworkLoads(grid);
+    };
+
+    buttons.forEach((btn) => btn.addEventListener('click', () => {
+      if (btn.getAttribute('aria-pressed') === 'true') return;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      grid.classList.add('switching');
+      setTimeout(() => {
+        render(btn.dataset.filter);
+        requestAnimationFrame(() => grid.classList.remove('switching'));
+      }, 500);
+    }));
+
+    render('all');
+  })();
+</script>
+</body>
+</html>
