@@ -352,37 +352,30 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .studio__cap{display:flex;justify-content:space-between;gap:12px;padding-top:13px;font-size:.8rem;color:var(--grey)}
 .studio__cap .n{color:var(--ink)}
 
-/* ── Selected work — names index + featured stage ───────────── */
-.work{padding:clamp(60px,9vh,120px) var(--pad)}
-.work__head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-top:1px solid var(--line);padding-top:22px;margin-bottom:clamp(30px,5vw,60px)}
-.work__layout{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(26px,4vw,56px)}
-@media(min-width:900px){.work__layout{grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);align-items:center}}
-/* names index */
-.work__names{display:flex;flex-direction:column;gap:clamp(4px,.6vw,10px)}
-.wname{position:relative;display:block;font-weight:600;text-transform:uppercase;letter-spacing:-.005em;line-height:1.02;
-  font-size:clamp(1.8rem,4.4vw,3.5rem);color:var(--grey-2);transition:color .45s var(--ease)}
-.wname.is-active{color:var(--ink)}
-.wname__thumb{display:none}
-@media(min-width:900px) and (hover:hover){
-  .work__names:hover .wname{color:var(--grey-2)}
-  .work__names:hover .wname.is-active{color:var(--ink)}
-}
-/* featured stage */
-.work__stage{position:relative}
-.wstage{position:relative;display:block;width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--paper-2)}
-.wstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05);
-  transition:opacity .7s var(--ease),transform 1.3s var(--ease)}
-.wstage img.is-on{opacity:1;transform:scale(1)}
-.wstage__meta{display:flex;justify-content:space-between;gap:16px;padding-top:14px;font-size:.82rem;color:var(--grey);letter-spacing:.02em}
-.wstage__view{white-space:nowrap}
-/* mobile: stacked cards (name + its image), no stage */
+/* ── Selected work — scroll-driven sticky image stack ───────── */
+.work{padding:clamp(50px,7vh,90px) var(--pad) clamp(50px,8vh,110px)}
+.work__head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-top:1px solid var(--line);padding-top:22px}
+.work__scroll{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
+/* names index — fixed/centred while the images scroll past */
+.work__names{position:sticky;top:0;align-self:start;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(6px,1vw,15px)}
+.wname{display:block;font-weight:600;text-transform:uppercase;letter-spacing:-.005em;line-height:1.04;
+  font-size:clamp(1.7rem,3.6vw,3.1rem);color:var(--ink);opacity:.2;transition:opacity .45s var(--ease)}
+.wname.is-active{opacity:1}
+/* sticky image stack — each slides up, sticks, the next slides over it */
+.work__stack{position:relative}
+.wcard{position:sticky;top:clamp(84px,13vh,120px);display:block;height:min(66svh,600px);overflow:hidden;background:var(--paper-2);margin-bottom:clamp(16px,4vh,40px)}
+.wcard:last-child{margin-bottom:0}
+.wcard img{width:100%;height:100%;object-fit:cover;will-change:transform}
+.wcard__cap{display:none}
+/* mobile: no sticky/names — a simple stacked index with captions */
 @media(max-width:899px){
-  .work__stage{display:none}
-  .work__names{gap:clamp(26px,6vw,40px)}
-  .wname{font-size:clamp(1.5rem,7vw,2.2rem);color:var(--ink)}
-  .wname__t{display:block;margin-top:12px;order:2}
-  .wname{display:flex;flex-direction:column}
-  .wname__thumb{display:block;order:1;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--paper-2)}
+  .work__scroll{display:block}
+  .work__names{display:none}
+  .wcard{position:static;height:auto;margin-bottom:clamp(30px,7vw,46px)}
+  .wcard img{height:auto;aspect-ratio:4/3}
+  .wcard__cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:12px;color:var(--ink)}
+  .wcard__t{font-weight:600;text-transform:uppercase;font-size:1.15rem;letter-spacing:-.005em}
+  .wcard__c{font-size:.72rem;color:var(--grey);text-transform:uppercase;letter-spacing:.14em;white-space:nowrap}
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -529,42 +522,36 @@ body.loading .nav,body.loading .progress{opacity:0}
     <span class="label" style="color:var(--grey)">Index 2021·2025</span>
   </div>
 
-  <div class="work__layout">
+  <div class="work__scroll">
     <nav class="work__names" aria-label="Selected projects">
-      <a class="wname is-active" href="project.html?p=otium" data-slug="otium" data-cat="Exhibition — The Architecture Centre, RIAI">
-        <span class="wname__t">OTIUM</span>
-        <img class="wname__thumb" src="img/otium-01.jpg" alt="OTIUM" loading="lazy">
-      </a>
-      <a class="wname" href="project.html?p=the-fall" data-slug="the-fall" data-cat="Exhibition — Royal Hibernian Academy">
-        <span class="wname__t">The Fall</span>
-        <img class="wname__thumb" src="img/the-fall-02.jpg" alt="The Fall" loading="lazy">
-      </a>
-      <a class="wname" href="project.html?p=dysart" data-slug="dysart" data-cat="Exhibition — drawings, Wicklow">
-        <span class="wname__t">Dysart Drawings</span>
-        <img class="wname__thumb" src="img/dysart-01.jpg" alt="Dysart Drawings" loading="lazy">
-      </a>
-      <a class="wname" href="project.html?p=kilmantin-road" data-slug="kilmantin-road" data-cat="Residential — AAI Award 2025">
-        <span class="wname__t">Kilmantin Road</span>
-        <img class="wname__thumb" src="img/kilmantin-03.jpg" alt="Kilmantin Road" loading="lazy">
-      </a>
-      <a class="wname" href="project.html?p=the-old-boathouse" data-slug="the-old-boathouse" data-cat="Conservation — a protected structure, Wicklow">
-        <span class="wname__t">The Old Boathouse</span>
-        <img class="wname__thumb" src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy">
-      </a>
+      <a class="wname is-active" data-slug="otium" href="project.html?p=otium">OTIUM</a>
+      <a class="wname" data-slug="the-fall" href="project.html?p=the-fall">The Fall</a>
+      <a class="wname" data-slug="dysart" href="project.html?p=dysart">Dysart Drawings</a>
+      <a class="wname" data-slug="kilmantin-road" href="project.html?p=kilmantin-road">Kilmantin Road</a>
+      <a class="wname" data-slug="the-old-boathouse" href="project.html?p=the-old-boathouse">The Old Boathouse</a>
     </nav>
 
-    <div class="work__stage reveal">
-      <a class="wstage" href="project.html?p=otium" id="wstageLink">
-        <img data-slug="otium" class="is-on" src="img/otium-01.jpg" alt="">
-        <img data-slug="the-fall" src="img/the-fall-02.jpg" alt="">
-        <img data-slug="dysart" src="img/dysart-01.jpg" alt="">
-        <img data-slug="kilmantin-road" src="img/kilmantin-03.jpg" alt="">
-        <img data-slug="the-old-boathouse" src="img/boathouse-01.jpg" alt="">
+    <div class="work__stack">
+      <a class="wcard" data-slug="otium" href="project.html?p=otium">
+        <img src="img/otium-01.jpg" alt="OTIUM" loading="lazy">
+        <span class="wcard__cap"><span class="wcard__t">OTIUM</span><span class="wcard__c">Exhibition — RIAI</span></span>
       </a>
-      <div class="wstage__meta">
-        <span id="wstageCat">Exhibition — The Architecture Centre, RIAI</span>
-        <span class="wstage__view">View project ↗</span>
-      </div>
+      <a class="wcard" data-slug="the-fall" href="project.html?p=the-fall">
+        <img src="img/the-fall-02.jpg" alt="The Fall" loading="lazy">
+        <span class="wcard__cap"><span class="wcard__t">The Fall</span><span class="wcard__c">Exhibition — RHA</span></span>
+      </a>
+      <a class="wcard" data-slug="dysart" href="project.html?p=dysart">
+        <img src="img/dysart-01.jpg" alt="Dysart Drawings" loading="lazy">
+        <span class="wcard__cap"><span class="wcard__t">Dysart Drawings</span><span class="wcard__c">Exhibition</span></span>
+      </a>
+      <a class="wcard" data-slug="kilmantin-road" href="project.html?p=kilmantin-road">
+        <img src="img/kilmantin-03.jpg" alt="Kilmantin Road" loading="lazy">
+        <span class="wcard__cap"><span class="wcard__t">Kilmantin Road</span><span class="wcard__c">Residential — AAI 2025</span></span>
+      </a>
+      <a class="wcard" data-slug="the-old-boathouse" href="project.html?p=the-old-boathouse">
+        <img src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy">
+        <span class="wcard__cap"><span class="wcard__t">The Old Boathouse</span><span class="wcard__c">Conservation</span></span>
+      </a>
     </div>
   </div>
 </section>
@@ -791,27 +778,38 @@ body.loading .nav,body.loading .progress{opacity:0}
       scrollTrigger:{ trigger:'.interlude', start:'top bottom', end:'bottom top', scrub:true }}); }
   }
 
-  /* ── Selected work — names index drives the featured stage ── */
+  /* ── Selected work — sticky image stack drives the names index ── */
   function buildWork(){
-    const names=$$('.wname');
-    if(!names.length) return;
-    const stageImgs=$$('.wstage img'), link=$('#wstageLink'), catEl=$('#wstageCat');
-    const desktop=matchMedia('(min-width:900px) and (hover:hover)');
-    function activate(n){
-      const slug=n.dataset.slug;
-      names.forEach(x=>x.classList.toggle('is-active', x===n));
-      stageImgs.forEach(im=>im.classList.toggle('is-on', im.dataset.slug===slug));
-      if(catEl) catEl.textContent=n.dataset.cat||'';
-      if(link) link.setAttribute('href', n.getAttribute('href'));
+    const names=$$('.wname'), cards=$$('.wcard');
+    if(!cards.length) return;
+    const setActive=slug=> names.forEach(n=>n.classList.toggle('is-active', n.dataset.slug===slug));
+    if(!LIBS || reduce){
+      const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) setActive(e.target.dataset.slug); }),
+        {rootMargin:'-45% 0px -45% 0px'});
+      cards.forEach(c=>io.observe(c));
+      return;
     }
-    names.forEach(n=>{
-      n.addEventListener('mouseenter',()=>{ if(desktop.matches) activate(n); });
-      n.addEventListener('focus',()=>{ if(desktop.matches) activate(n); });
+    const mm=gsap.matchMedia();
+    /* desktop: sticky-driven active state + image drift */
+    mm.add('(min-width:900px)',()=>{
+      cards.forEach(card=>{
+        ScrollTrigger.create({
+          trigger:card, start:'top top+=140', end:'bottom top+=140',
+          onToggle:self=>{ if(self.isActive) setActive(card.dataset.slug); }
+        });
+        const img=card.querySelector('img');
+        if(img) gsap.fromTo(img,{yPercent:-4,scale:1.07},{yPercent:4,scale:1.07,ease:'none',
+          scrollTrigger:{ trigger:card, start:'top bottom', end:'bottom top', scrub:true }});
+      });
     });
-    if(LIBS && !reduce){
-      gsap.from('.wname',{yPercent:60,opacity:0,duration:1,ease:'expo.out',stagger:.07,
-        scrollTrigger:{ trigger:'.work__names', start:'top 82%' }});
-    }
+    /* mobile: highlight is irrelevant (names hidden), but keep images gently revealing */
+    mm.add('(max-width:899px)',()=>{
+      cards.forEach(card=>{
+        const img=card.querySelector('img');
+        if(img) gsap.fromTo(img,{scale:1.12},{scale:1,duration:1.3,ease:'expo.out',
+          scrollTrigger:{ trigger:card, start:'top 88%' }});
+      });
+    });
   }
 
   /* ── Nav: hide on scroll down, reveal on up ── */
