@@ -29,8 +29,28 @@ const observeReveals = (root = document) => {
 const watchArtworkLoads = (root = document) => {
   root.querySelectorAll('img.artwork, .work-stage img').forEach((img) => {
     const done = () => img.classList.add('loaded');
-    if (img.complete && img.naturalWidth > 0) done();
+    // complete covers both decoded and already-errored images — either way
+    // the load/error events have fired and would never call done()
+    if (img.complete) done();
     else { img.addEventListener('load', done, { once: true }); img.addEventListener('error', done, { once: true }); }
+  });
+};
+
+/* keep Tab inside an open dialog — the page behind is invisible */
+const trapFocus = (container) => {
+  container.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const items = [...container.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )].filter((el) => el.offsetParent !== null || el === document.activeElement);
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !container.contains(document.activeElement))) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || !container.contains(document.activeElement))) {
+      e.preventDefault(); first.focus();
+    }
   });
 };
 
@@ -83,6 +103,7 @@ const lightbox = (() => {
       <button class="lightbox-close" type="button">Close</button>
     `;
     document.body.appendChild(el);
+    trapFocus(el);
     el.querySelector('.lightbox-close').addEventListener('click', close);
     el.addEventListener('click', (e) => { if (e.target === el) close(); });
     document.addEventListener('keydown', (e) => {
@@ -174,7 +195,7 @@ const enquiryModal = (() => {
           </div>
           <p class="form-error" role="alert"></p>
         </form>
-        <div class="modal-success">
+        <div class="modal-success" role="status" tabindex="-1">
           <p class="big">Thank you.</p>
           <p>Your enquiry has been sent. Phil will be in touch shortly to arrange your print.</p>
           <button class="text-link" type="button" data-close>Back to the work</button>
@@ -182,6 +203,7 @@ const enquiryModal = (() => {
       </div>
     `;
     document.body.appendChild(el);
+    trapFocus(el.querySelector('.modal-panel'));
 
     const sizeSelect = el.querySelector('#enq-size');
     PRINT_SIZES.forEach((s) => {
@@ -248,15 +270,16 @@ const enquiryModal = (() => {
           framing: form.framing.value,
           message: form.message.value.trim(),
           website: form.website.value,
-          work_title: currentWork.title,
+          // the API resolves title + image server-side from the slug
           work_slug: currentWork.slug,
-          work_image: location.origin + BASE + currentWork.image,
           page: location.href,
         }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       form.style.display = 'none';
-      el.querySelector('.modal-success').classList.add('show');
+      const success = el.querySelector('.modal-success');
+      success.classList.add('show');
+      success.focus();
       form.reset();
     } catch (_) {
       err.textContent = 'Something went wrong sending your enquiry — please try again in a moment.';

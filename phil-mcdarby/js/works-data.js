@@ -75,7 +75,7 @@ const WORKS = [
     image: "img/the-green-man-awakens.jpg",
     w: 900, h: 1107,
     featured: true,
-    note: "Created in Photohop over about 6 weeks - a combination of digital painting and elements of my own photography.\n\nA detailed breakdown of the process can be found here, and the original Landscape format image is here.",
+    note: "Created in Photoshop over about 6 weeks - a combination of digital painting and elements of my own photography.",
   },
   {
     slug: "an-encounter-at-greenspindle",

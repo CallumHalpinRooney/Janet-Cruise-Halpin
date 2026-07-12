@@ -41,7 +41,7 @@
   --line-strong:rgba(233, 227, 215, .22);
   --text:       #e9e3d7;
   --text-dim:   #a2988a;
-  --text-faint: #6e6558;
+  --text-faint: #8d8375;   /* ≥4.5:1 on --ink and --ink-2 — used on small functional text */
   --gold:       #b99b5e;   /* used sparingly: labels, active states */
 
   /* type */

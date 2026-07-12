@@ -53,7 +53,9 @@
     </div>
 
     <div>
-      <form id="contact-form" novalidate class="reveal in" data-delay="2">
+      <!-- onsubmit guard: before site JS binds, a native GET submit would
+           reload the page with the message (and PII) in the URL — block it -->
+      <form id="contact-form" novalidate onsubmit="return false" class="reveal in" data-delay="2">
         <div class="contact-form-head">
           <span class="label label--gold">Write to Phil</span>
         </div>
@@ -89,7 +91,7 @@
         <p class="form-error" role="alert"></p>
       </form>
 
-      <div class="form-success" id="contact-success">
+      <div class="form-success" id="contact-success" role="status" tabindex="-1">
         <p class="big">Thank you.</p>
         <p>Your message has been sent. Phil will be in touch shortly.</p>
       </div>
@@ -149,7 +151,9 @@
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         form.style.display = 'none';
-        document.getElementById('contact-success').classList.add('show');
+        const success = document.getElementById('contact-success');
+        success.classList.add('show');
+        success.focus();
       } catch (_) {
         err.textContent = 'Something went wrong sending your message — please try again in a moment.';
         err.classList.add('show');
