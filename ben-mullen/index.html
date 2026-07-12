@@ -352,6 +352,50 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .studio__cap{display:flex;justify-content:space-between;gap:12px;padding-top:13px;font-size:.8rem;color:var(--grey)}
 .studio__cap .n{color:var(--ink)}
 
+/* ── Selected work — pinned horizontal reel ─────────────────── */
+.reel{position:relative;height:100svh;background:var(--paper);overflow:hidden}
+.reel__head{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:clamp(18px,3.2vw,32px) var(--pad);mix-blend-mode:difference;color:#fff}
+.reel__head .label{color:#fff}
+.reel__count{color:rgba(255,255,255,.82)}
+.reel__viewport{height:100%;display:flex;align-items:center;position:relative}
+.reel__track{display:flex;align-items:center;gap:clamp(16px,2vw,40px);padding:0 var(--pad);will-change:transform}
+.panel{position:relative;flex:0 0 auto;height:min(74svh,720px);display:block;overflow:hidden;background:var(--paper-2)}
+.panel--wide{width:min(66vw,860px)}
+.panel--tall{width:min(42vw,520px)}
+.panel--sq{width:min(52vw,640px)}
+.panel__media{position:absolute;inset:0;overflow:hidden;transition:transform 1s var(--ease)}
+.panel:hover .panel__media{transform:scale(1.03)}
+.panel__media img{position:absolute;top:0;left:-7%;width:114%;height:100%;object-fit:cover}
+.panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,0) 32%,rgba(0,0,0,.05) 60%,rgba(0,0,0,.64))}
+.panel__info{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:clamp(20px,2.2vw,34px);color:#fff;display:flex;flex-direction:column;gap:7px}
+.panel__num{font-size:.7rem;letter-spacing:.24em;opacity:.85}
+.panel__title{font-family:var(--serif);font-weight:300;font-size:clamp(1.7rem,3.2vw,3rem);line-height:1;letter-spacing:-.02em}
+.panel__row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:2px}
+.panel__cat{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;opacity:.88}
+.panel__view{font-size:.7rem;letter-spacing:.08em;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease),transform .4s var(--ease);white-space:nowrap}
+.panel:hover .panel__view{opacity:1;transform:none}
+.panel__scope{font-size:.82rem;opacity:.82;max-width:46ch}
+.panel--end{width:min(52vw,560px);background:var(--black);color:var(--paper);display:flex;align-items:center}
+.panel--end::after{display:none}
+.panel__end{padding:clamp(24px,3vw,48px);display:flex;flex-direction:column;gap:16px}
+.panel__end p{font-family:var(--serif);font-weight:300;font-size:clamp(1.3rem,2vw,1.8rem);line-height:1.2}
+.panel__enq{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-2);transition:color .3s}
+.panel__enq:hover{color:#fff}
+.reel__progress{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(14px,2vh,26px);height:1px;background:rgba(0,0,0,.14);z-index:4}
+.reel__progress span{display:block;height:100%;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
+@media(max-width:820px){
+  .reel{height:auto;overflow:visible}
+  .reel__head{position:static;mix-blend-mode:normal;color:var(--ink);padding-top:clamp(40px,8vh,70px)}
+  .reel__head .label,.reel__count{color:var(--grey)}
+  .reel__viewport{height:auto;display:block}
+  .reel__track{flex-direction:column;gap:12px;padding:14px var(--pad) 0;transform:none!important}
+  .panel,.panel--wide,.panel--tall,.panel--sq,.panel--end{width:100%!important;height:66svh}
+  .panel__media img{left:0;width:100%}
+  .panel__media{transform:none!important}
+  .panel__view{opacity:1;transform:none}
+  .reel__progress{display:none}
+}
+
 /* ══════════════════════════════════════════════════════════════
    PREMIUM MOTION LAYER — Lenis smooth scroll · GSAP ScrollTrigger
    line-mask text reveals · image clip reveals · parallax · cursor
@@ -489,86 +533,76 @@ body.loading .nav,body.loading .progress{opacity:0}
   <p class="interlude__quote" data-reveal="lines">All structural components are exposed — for economy, ornament and politic.</p>
 </section>
 
-<!-- ══ SELECTED WORK ════════════════════════════════════════ -->
-<section class="projects" id="work">
-  <div class="projects__head reveal">
+<!-- ══ SELECTED WORK — pinned horizontal reel ═══════════════ -->
+<section class="reel" id="work">
+  <div class="reel__head">
     <span class="label">Selected Projects</span>
-    <span class="label" style="color:var(--grey)">Index — 2021 · 2025</span>
+    <span class="label reel__count"><span class="reel__i">01</span> / 05 &nbsp;—&nbsp; Index 2021·2025</span>
   </div>
 
-  <div class="grid">
+  <div class="reel__viewport">
+    <div class="reel__track">
 
-    <div class="gcol">
-
-      <a class="card card--tall reveal" href="project.html?p=kilmantin-road">
-        <div class="frame" data-ph="Kilmantin Road">
-          <img src="img/kilmantin-01.jpg" alt="Kilmantin Road — timber and terracotta detail" loading="lazy" onerror="this.classList.add('is-missing')">
+      <a class="panel panel--wide" href="project.html?p=kilmantin-road" data-i="01">
+        <div class="panel__media"><img src="img/kilmantin-03.jpg" alt="Kilmantin Road" loading="lazy"></div>
+        <div class="panel__info">
+          <span class="panel__num">01</span>
+          <h3 class="panel__title">Kilmantin Road</h3>
+          <div class="panel__row"><span class="panel__cat">Residential · AAI Award 2025</span><span class="panel__view">View project ↗</span></div>
+          <span class="panel__scope">Design · Self-build · Project management — 2021–2024</span>
         </div>
-        <div class="card__meta">
-          <span class="card__title">Kilmantin Road</span>
-          <span class="card__cat">Residential</span>
-        </div>
-        <div class="card__scope">Design · Self-build · Project Management — 2021–2024 · AAI Award 2025</div>
       </a>
 
-      <a class="card reveal" href="project.html?p=the-fall">
-        <div class="frame" data-ph="The Fall">
-          <img src="img/the-fall-01.jpg" alt="The Fall — timber installation at the RHA" loading="lazy" onerror="this.classList.add('is-missing')">
+      <a class="panel panel--wide" href="project.html?p=the-fall" data-i="02">
+        <div class="panel__media"><img src="img/the-fall-02.jpg" alt="The Fall" loading="lazy"></div>
+        <div class="panel__info">
+          <span class="panel__num">02</span>
+          <h3 class="panel__title">The Fall</h3>
+          <div class="panel__row"><span class="panel__cat">Exhibition · RHA</span><span class="panel__view">View project ↗</span></div>
+          <span class="panel__scope">Art of Architecture Pavilion, Royal Hibernian Academy — 2025</span>
         </div>
-        <div class="card__meta">
-          <span class="card__title">The Fall</span>
-          <span class="card__cat">Exhibition</span>
-        </div>
-        <div class="card__scope">Royal Hibernian Academy, Dublin — Art of Architecture Pavilion 2025</div>
       </a>
 
-      <a class="card card--wide reveal" href="project.html?p=the-old-boathouse">
-        <div class="frame" data-ph="The Old Boathouse">
-          <img src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy" onerror="this.classList.add('is-missing')">
+      <a class="panel panel--tall" href="project.html?p=otium" data-i="03">
+        <div class="panel__media"><img src="img/otium-02.jpg" alt="OTIUM" loading="lazy"></div>
+        <div class="panel__info">
+          <span class="panel__num">03</span>
+          <h3 class="panel__title">OTIUM</h3>
+          <div class="panel__row"><span class="panel__cat">Exhibition · RIAI</span><span class="panel__view">View project ↗</span></div>
+          <span class="panel__scope">The Architecture Centre, Dublin — 108 drawings &amp; sculpture</span>
         </div>
-        <div class="card__meta">
-          <span class="card__title">The Old Boathouse</span>
-          <span class="card__cat">Conservation</span>
-        </div>
-        <div class="card__scope">Conservation of an 1865 maritime structure — a protected structure, Wicklow</div>
       </a>
 
-    </div>
-
-    <div class="gcol">
-
-      <a class="card card--tall reveal" href="project.html?p=otium">
-        <div class="frame" data-ph="OTIUM">
-          <img src="img/otium-01.jpg" alt="OTIUM — installation" loading="lazy" onerror="this.classList.add('is-missing')">
+      <a class="panel panel--wide" href="project.html?p=the-old-boathouse" data-i="04">
+        <div class="panel__media"><img src="img/boathouse-01.jpg" alt="The Old Boathouse" loading="lazy"></div>
+        <div class="panel__info">
+          <span class="panel__num">04</span>
+          <h3 class="panel__title">The Old Boathouse</h3>
+          <div class="panel__row"><span class="panel__cat">Conservation</span><span class="panel__view">View project ↗</span></div>
+          <span class="panel__scope">An 1865 protected maritime structure, Wicklow — ongoing</span>
         </div>
-        <div class="card__meta">
-          <span class="card__title">OTIUM</span>
-          <span class="card__cat">Exhibition</span>
-        </div>
-        <div class="card__scope">The Architecture Centre, RIAI, Dublin — drawings &amp; sculpture</div>
       </a>
 
-      <a class="card card--sq reveal" href="project.html?p=dysart">
-        <div class="frame" data-ph="Dysart Drawings">
-          <img src="img/dysart-01.jpg" alt="Dysart — drawings" loading="lazy" onerror="this.classList.add('is-missing')">
+      <a class="panel panel--sq" href="project.html?p=dysart" data-i="05">
+        <div class="panel__media"><img src="img/dysart-01.jpg" alt="Dysart Drawings" loading="lazy"></div>
+        <div class="panel__info">
+          <span class="panel__num">05</span>
+          <h3 class="panel__title">Dysart Drawings</h3>
+          <div class="panel__row"><span class="panel__cat">Exhibition</span><span class="panel__view">View project ↗</span></div>
+          <span class="panel__scope">Drawings — ongoing, 2023</span>
         </div>
-        <div class="card__meta">
-          <span class="card__title">Dysart Drawings</span>
-          <span class="card__cat">Exhibition</span>
-        </div>
-        <div class="card__scope">Drawings — ongoing, 2023</div>
       </a>
 
-      <div class="card card--note reveal">
-        <div class="note">
-          <span class="label">Index</span>
+      <div class="panel panel--end">
+        <div class="panel__end">
+          <span class="label" style="color:var(--grey-2)">Index</span>
           <p>Buildings, exhibitions and conservation across Ireland, 2021–2025. Further projects and drawings available on request.</p>
-          <a class="note__link" href="#contact">Enquire →</a>
+          <a class="panel__enq" href="#contact">Enquire →</a>
         </div>
       </div>
 
     </div>
-
+    <div class="reel__progress"><span></span></div>
   </div>
 </section>
 
@@ -791,6 +825,33 @@ body.loading .nav,body.loading .progress{opacity:0}
       scrollTrigger:{ trigger:'.interlude', start:'top bottom', end:'bottom top', scrub:true }}); }
   }
 
+  /* ── Pinned horizontal project reel (desktop) ── */
+  function buildReel(){
+    const reel=$('.reel'), track=$('.reel__track');
+    if(!reel||!track) return;
+    const mm=gsap.matchMedia();
+    mm.add('(min-width:821px)',()=>{
+      const dist=()=> Math.max(0, track.scrollWidth - window.innerWidth);
+      const tween=gsap.to(track,{x:()=>-dist(),ease:'none'});
+      ScrollTrigger.create({
+        animation:tween, trigger:reel, start:'top top',
+        end:()=>'+='+dist(), pin:true, scrub:1, anticipatePin:1, invalidateOnRefresh:true
+      });
+      const panels=$$('.reel .panel');
+      panels.forEach(pan=>{
+        const img=pan.querySelector('.panel__media img');
+        if(img) gsap.fromTo(img,{xPercent:-5},{xPercent:5,ease:'none',
+          scrollTrigger:{ trigger:pan, containerAnimation:tween, start:'left right', end:'right left', scrub:true }});
+      });
+      const iEl=$('.reel__i'), pbar=$('.reel__progress span');
+      tween.eventCallback('onUpdate',()=>{
+        const pr=tween.progress();
+        if(pbar) gsap.set(pbar,{scaleX:pr});
+        if(iEl){ const n=Math.max(1,Math.min(5,Math.floor(pr*panels.length)+1)); iEl.textContent=String(n).padStart(2,'0'); }
+      });
+    });
+  }
+
   /* ── Nav: hide on scroll down, reveal on up ── */
   function buildNav(){
     const nav=$('.nav'); let last=0;
@@ -889,11 +950,11 @@ body.loading .nav,body.loading .progress{opacity:0}
       .add(heroIntro,'-=.75');
   }
 
-  function start(){ document.body.classList.add('loaded'); }
+  function start(){ document.body.classList.add('loaded'); ScrollTrigger.refresh(); }
 
   /* ── Boot ── */
   gsap.set('.reveal',{opacity:0,y:30});
-  buildNav(); buildProgress(); buildCursor(); buildMagnetic(); buildParallax(); wireAccordion();
+  buildNav(); buildProgress(); buildCursor(); buildMagnetic(); buildParallax(); buildReel(); wireAccordion();
   const kick=()=>{ buildReveals(); runPreloader(); };
   if(document.fonts && document.fonts.ready){ document.fonts.ready.then(kick); setTimeout(()=>{ if(!document.body.classList.contains('loaded')) kick(); },1200); }
   else kick();
