@@ -338,20 +338,119 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   font-size:.74rem;letter-spacing:.06em;color:var(--grey-2);
 }
 
-/* ── Scroll reveal ─────────────────────────────────────────── */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
-.reveal.in{opacity:1;transform:none}
+/* ── From the studio (horizontal scroll strip) ─────────────── */
+.studio{padding:clamp(60px,9vh,120px) 0 clamp(50px,8vh,110px)}
+.studio__head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:0 var(--pad) 30px}
+.studio__head a{font-size:.8rem;letter-spacing:.06em;color:var(--grey);transition:color .3s}
+.studio__head a:hover{color:var(--ink)}
+.studio__track{display:flex;gap:clamp(16px,2vw,34px);overflow-x:auto;scroll-snap-type:x proximity;padding:0 var(--pad) 20px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.studio__track::-webkit-scrollbar{display:none}
+.studio__item{flex:0 0 auto;width:min(76vw,340px);scroll-snap-align:start}
+.studio__item .frame{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--paper-2)}
+.studio__item img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.studio__item:hover img{transform:scale(1.04)}
+.studio__cap{display:flex;justify-content:space-between;gap:12px;padding-top:13px;font-size:.8rem;color:var(--grey)}
+.studio__cap .n{color:var(--ink)}
+
+/* ══════════════════════════════════════════════════════════════
+   PREMIUM MOTION LAYER — Lenis smooth scroll · GSAP ScrollTrigger
+   line-mask text reveals · image clip reveals · parallax · cursor
+   ══════════════════════════════════════════════════════════════ */
+
+/* Lenis required styles (self-hosted in vendor/) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:clip}
+
+/* Generic reveal (animated by GSAP; visible if motion is reduced/JS fails) */
+.reveal{opacity:0;transform:translateY(30px)}
+.no-motion .reveal{opacity:1;transform:none}
+
+/* Line-mask reveal — JS splits text into .line > .line__i */
+.line{overflow:hidden;display:block}
+.line__i{display:block;will-change:transform}
+
+/* Image clip reveal + hover zoom already handled on .frame img */
+.frame img{will-change:transform,clip-path}
+
+/* Scroll progress */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:#fff;mix-blend-mode:difference;z-index:200;transition:opacity .4s}
+
+/* Preloader */
+.preloader{position:fixed;inset:0;z-index:1000;background:var(--black);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px}
+.preloader__name{font-family:var(--serif);font-weight:300;font-size:clamp(1.35rem,3vw,2.1rem);color:#fff;letter-spacing:.03em;opacity:0}
+.preloader__track{width:min(240px,46vw);height:1px;background:rgba(255,255,255,.16);overflow:hidden}
+.preloader__bar{height:100%;width:100%;background:#fff;transform:scaleX(0);transform-origin:0 50%}
+.preloader__pct{position:absolute;bottom:26px;right:28px;font-size:.68rem;letter-spacing:.18em;color:rgba(255,255,255,.55)}
+body.loading{overflow:hidden;height:100vh}
+body.loading .nav,body.loading .progress{opacity:0}
+
+/* Custom cursor (fine pointers only) */
+.cursor,.cursor-dot{display:none}
+@media (pointer:fine) and (min-width:760px){
+  html{cursor:none}
+  a,button,summary,[role=button],.card{cursor:none}
+  .cursor{position:fixed;top:0;left:0;width:16px;height:16px;border:1px solid #fff;border-radius:50%;pointer-events:none;z-index:300;transform:translate(-50%,-50%);
+    display:flex;align-items:center;justify-content:center;mix-blend-mode:difference;
+    transition:width .4s var(--ease),height .4s var(--ease),background-color .4s,opacity .3s}
+  .cursor-dot{position:fixed;top:0;left:0;width:5px;height:5px;background:#fff;border-radius:50%;pointer-events:none;z-index:301;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:opacity .3s}
+  .cursor.is-hover{width:52px;height:52px;background:#fff}
+  .cursor.is-view{width:78px;height:78px;background:#fff}
+  .cursor__label{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:#000;opacity:0;transition:opacity .3s;mix-blend-mode:normal;font-weight:500}
+  .cursor.is-view .cursor__label{opacity:1}
+  .cursor.is-view + .cursor-dot,.cursor.is-hover + .cursor-dot{opacity:0}
+  .cursor.is-hidden,.cursor.is-hidden + .cursor-dot{opacity:0}
+}
+
+/* Hero scroll cue */
+.hero__cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;color:rgba(255,255,255,.72)}
+.hero__cue span{font-size:.6rem;letter-spacing:.26em;text-transform:uppercase}
+.hero__cue i{width:1px;height:46px;background:linear-gradient(rgba(255,255,255,.75),rgba(255,255,255,0));display:block;transform-origin:top;animation:cue 2.6s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0);opacity:0}25%{opacity:1}55%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* Full-bleed parallax interlude */
+.interlude{position:relative;height:min(88vh,780px);overflow:hidden;background:#0d0d0d}
+.interlude__media{position:absolute;inset:-14% 0;height:128%}
+.interlude__media img{width:100%;height:100%;object-fit:cover;will-change:transform}
+.interlude::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.1) 42%,rgba(0,0,0,.55))}
+.interlude__k{position:absolute;top:clamp(30px,6vh,64px);left:var(--pad);z-index:2;color:rgba(255,255,255,.72)}
+.interlude__quote{position:absolute;z-index:2;left:var(--pad);right:var(--pad);bottom:clamp(38px,8vh,92px);color:#fff;max-width:24ch;
+  font-family:var(--serif);font-weight:300;font-size:clamp(1.7rem,3.6vw,3.1rem);line-height:1.08;letter-spacing:-.018em}
+
+/* Magnetic wrap */
+.magnetic{display:inline-block;will-change:transform}
+
+/* Nav hide/reveal on scroll */
+.nav{transition:transform .55s var(--ease),background-color .4s,padding .45s var(--ease),opacity .4s}
+.nav--hidden{transform:translateY(-102%)}
+
 @media(prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-  .hero__media .shot{transition:none}
+  .reveal,.line__i{opacity:1!important;transform:none!important}
+  .preloader{display:none}
+  html{cursor:auto}
+  .interlude__media{inset:0;height:100%}
 }
 </style>
 </head>
-<body>
+<body class="loading">
+
+<noscript><style>.preloader{display:none!important}.reveal,.line__i{opacity:1!important;transform:none!important}body.loading{overflow:auto!important;height:auto!important}</style></noscript>
+
+<!-- ══ PRELOADER ════════════════════════════════════════════ -->
+<div class="preloader" id="preloader">
+  <div class="preloader__name">ben mullen architects</div>
+  <div class="preloader__track"><div class="preloader__bar"></div></div>
+  <div class="preloader__pct">000</div>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="cursor" id="cursor"><span class="cursor__label" id="cursorLabel"></span></div>
+<div class="cursor-dot" id="cursorDot"></div>
 
 <!-- ══ NAV ══════════════════════════════════════════════════ -->
 <nav class="nav">
-  <a class="nav__brand" href="#top">ben mullen architects</a>
+  <a class="nav__brand magnetic" href="#top">ben mullen architects</a>
   <div class="nav__menu">
     <a href="#work">Index</a>
     <a href="#work">Work</a>
@@ -371,15 +470,23 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
       <span>Architecture</span><span>Landscape</span><span>Conservation</span><span>Ireland</span>
     </div>
   </div>
+  <div class="hero__cue"><span>Scroll</span><i></i></div>
 </header>
 
 <!-- ══ STATEMENT ════════════════════════════════════════════ -->
-<section class="statement reveal">
-  <p class="statement__lead">A small practice concerned with how buildings and their landscapes hold together over time.</p>
+<section class="statement">
+  <p class="statement__lead" data-reveal="lines">Working within the traditional boundaries of architecture — from first principles, and from the ground.</p>
   <div class="statement__body">
-    <p>ben mullen architects works across new buildings, conservation and exhibition, from initial design through to self-build and construction management. Each project begins from its ground — its climate, its materials and the ecology it belongs to — and treats environmental concern not as a constraint but as the starting point of the design.</p>
-    <p class="muted">Selected buildings, exhibitions and conservation work follow below. For new commissions and collaborations, please get in touch.</p>
+    <p class="reveal">ben mullen architects works across new buildings, conservation and exhibition, from initial design through to self-build and construction management. Each project is developed with sensitivity to site, new material cultures and the histories of construction — treating environmental concern not as a constraint, but as the starting point of the design.</p>
+    <p class="muted reveal">Selected buildings, exhibitions and conservation work follow below. For new commissions and collaborations, please get in touch.</p>
   </div>
+</section>
+
+<!-- ══ INTERLUDE (full-bleed parallax) ══════════════════════ -->
+<section class="interlude" aria-hidden="true">
+  <div class="interlude__media"><img src="img/the-fall-02.jpg" alt=""></div>
+  <span class="interlude__k label" style="color:rgba(255,255,255,.72)">Material · Ornament · Politic</span>
+  <p class="interlude__quote" data-reveal="lines">All structural components are exposed — for economy, ornament and politic.</p>
 </section>
 
 <!-- ══ SELECTED WORK ════════════════════════════════════════ -->
@@ -550,6 +657,21 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   </div>
 </section>
 
+<!-- ══ FROM THE STUDIO (Instagram) ══════════════════════════ -->
+<section class="studio">
+  <div class="studio__head reveal">
+    <span class="label">From the studio</span>
+    <a href="https://www.instagram.com/benmullenarchitects/" target="_blank" rel="noopener">@benmullenarchitects →</a>
+  </div>
+  <div class="studio__track" data-lenis-prevent>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-01.jpg" alt="Toplight interior" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Toplight</span><span>Interior</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-02.jpg" alt="Valentia slate quarry" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Valentia slate</span><span>Material</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-03.jpg" alt="Lintel patio" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Lintel patio</span><span>Landscape</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-04.jpg" alt="New return, in design" loading="lazy"></div><figcaption class="studio__cap"><span class="n">New return</span><span>In design</span></figcaption></figure>
+    <figure class="studio__item reveal"><div class="frame"><img src="media/studio-05.jpg" alt="Study model" loading="lazy"></div><figcaption class="studio__cap"><span class="n">Study model</span><span>Process</span></figcaption></figure>
+  </div>
+</section>
+
 <!-- ══ CONTACT / FOOTER ═════════════════════════════════════ -->
 <footer class="foot" id="contact">
   <div class="foot__grid">
@@ -567,7 +689,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
       <h4>Index</h4>
       <a href="#work">Work</a>
       <a href="#about">About</a>
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.instagram.com/benmullenarchitects/" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
   <div class="foot__bar">
@@ -576,14 +698,209 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   </div>
 </footer>
 
+<!-- Lenis (momentum scroll) · GSAP + ScrollTrigger (scrubbed reveals) · SplitType (line split) -->
+<script src="vendor/lenis.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/split-type.min.js"></script>
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
+(function(){
+  const $  = (s,c)=> (c||document).querySelector(s);
+  const $$ = (s,c)=> Array.from((c||document).querySelectorAll(s));
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const yr = $('#yr'); if(yr) yr.textContent = new Date().getFullYear();
 
-/* Scroll reveal */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-},{rootMargin:'0px 0px -8% 0px',threshold:.08});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const LIBS = window.gsap && window.ScrollTrigger && window.Lenis && window.SplitType;
+
+  /* ── Safety: if libraries fail to load or motion is reduced, show all ── */
+  if(!LIBS || reduce){
+    document.body.classList.add('no-motion','loaded');
+    document.body.classList.remove('loading');
+    const pl=$('#preloader'); if(pl) pl.remove();
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── Smooth scroll ── */
+  const lenis = new Lenis({ lerp:.085, wheelMultiplier:1, smoothWheel:true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t=> lenis.raf(t*1000));
+  gsap.ticker.lagSmoothing(0);
+  lenis.stop();
+
+  /* anchor links → lenis */
+  $$('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id=a.getAttribute('href'); if(id.length<2) return;
+      const t=document.querySelector(id); if(!t) return;
+      e.preventDefault(); lenis.scrollTo(t,{offset:0,duration:1.3});
+    });
+  });
+
+  /* ── Line splitting helper (mask reveal) ── */
+  function splitToLines(el){
+    const st=new SplitType(el,{types:'lines'});
+    st.lines.forEach(line=>{
+      const inner=document.createElement('span');
+      inner.className='line__i';
+      while(line.firstChild) inner.appendChild(line.firstChild);
+      line.appendChild(inner);
+    });
+    return st;
+  }
+
+  /* ── Build reveals (run after fonts so line-splits are correct) ── */
+  function buildReveals(){
+    /* line-mask headings */
+    $$('[data-reveal="lines"]').forEach(el=>{
+      splitToLines(el);
+      gsap.set(el.querySelectorAll('.line__i'),{yPercent:118});
+      gsap.to(el.querySelectorAll('.line__i'),{
+        yPercent:0, duration:1.15, ease:'expo.out', stagger:.09,
+        scrollTrigger:{ trigger:el, start:'top 84%' }
+      });
+    });
+    /* generic reveals */
+    $$('.reveal').forEach(el=>{
+      gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',
+        scrollTrigger:{ trigger:el, start:'top 88%' }});
+    });
+    /* image clip reveal + scale-in (hero handled by its own intro) */
+    $$('.card .frame, .about__portrait .frame, .studio__item .frame').forEach(fr=>{
+      const img=fr.querySelector('img'); if(!img) return;
+      gsap.fromTo(fr,{clipPath:'inset(0% 0% 100% 0%)'},
+        {clipPath:'inset(0% 0% 0% 0%)',duration:1.25,ease:'expo.out',
+         scrollTrigger:{ trigger:fr, start:'top 90%' }});
+      gsap.fromTo(img,{scale:1.28},{scale:1,duration:1.5,ease:'expo.out',
+         scrollTrigger:{ trigger:fr, start:'top 90%' }});
+    });
+    ScrollTrigger.refresh();
+  }
+
+  /* ── Continuous parallax ── */
+  function buildParallax(){
+    /* hero image drifts, statement lifts & fades */
+    gsap.to('#heroMedia',{yPercent:16,ease:'none',
+      scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true }});
+    gsap.to('.hero__inner',{yPercent:-24,opacity:.15,ease:'none',
+      scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:.4 }});
+    /* interlude image parallax */
+    const im=$('.interlude__media img');
+    if(im){ gsap.fromTo(im,{yPercent:-9},{yPercent:9,ease:'none',
+      scrollTrigger:{ trigger:'.interlude', start:'top bottom', end:'bottom top', scrub:true }}); }
+  }
+
+  /* ── Nav: hide on scroll down, reveal on up ── */
+  function buildNav(){
+    const nav=$('.nav'); let last=0;
+    ScrollTrigger.create({
+      start:0, end:'max',
+      onUpdate:self=>{
+        const y=self.scroll();
+        if(y>140 && y>last) nav.classList.add('nav--hidden');
+        else nav.classList.remove('nav--hidden');
+        last=y;
+      }
+    });
+  }
+
+  /* ── Scroll progress ── */
+  function buildProgress(){
+    const bar=$('#progress');
+    ScrollTrigger.create({ start:0, end:'max',
+      onUpdate:self=> gsap.set(bar,{scaleX:self.progress}) });
+  }
+
+  /* ── Custom cursor ── */
+  function buildCursor(){
+    if(!matchMedia('(pointer:fine) and (min-width:760px)').matches) return;
+    const cur=$('#cursor'), dot=$('#cursorDot'), lab=$('#cursorLabel');
+    let cx=innerWidth/2, cy=innerHeight/2, tx=cx, ty=cy;
+    window.addEventListener('mousemove',e=>{ tx=e.clientX; ty=e.clientY; gsap.set(dot,{x:tx,y:ty}); },{passive:true});
+    gsap.ticker.add(()=>{ cx+=(tx-cx)*.18; cy+=(ty-cy)*.18; gsap.set(cur,{x:cx,y:cy}); });
+    document.addEventListener('mouseleave',()=>cur.classList.add('is-hidden'));
+    document.addEventListener('mouseenter',()=>cur.classList.remove('is-hidden'));
+    const label = el => el.closest('.card') ? 'View'
+                      : el.closest('summary') ? 'Read'
+                      : el.closest('.foot__big') ? 'Email' : '';
+    $$('a,button,summary,.card').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{
+        const l=label(el);
+        if(l){ lab.textContent=l; cur.classList.add('is-view'); }
+        else cur.classList.add('is-hover');
+      });
+      el.addEventListener('mouseleave',()=> cur.classList.remove('is-hover','is-view'));
+    });
+  }
+
+  /* ── Magnetic ── */
+  function buildMagnetic(){
+    if(!matchMedia('(pointer:fine)').matches) return;
+    $$('.magnetic, .foot__big a').forEach(el=>{
+      const s=el.classList.contains('foot__big')||el.closest('.foot__big')?.28:.4;
+      el.addEventListener('mousemove',e=>{
+        const r=el.getBoundingClientRect();
+        gsap.to(el,{x:(e.clientX-(r.left+r.width/2))*s, y:(e.clientY-(r.top+r.height/2))*s, duration:.5, ease:'power3.out'});
+      });
+      el.addEventListener('mouseleave',()=> gsap.to(el,{x:0,y:0,duration:.6,ease:'elastic.out(1,.4)'}));
+    });
+  }
+
+  /* ── Smooth accordion (measured height) ── */
+  function wireAccordion(){
+    $$('.award').forEach(d=>{
+      const panel=d.querySelector('.award__panel');
+      if(window.gsap){
+        d.addEventListener('toggle',()=>{
+          if(d.open) gsap.fromTo(panel.children,{y:16,opacity:0},{y:0,opacity:1,duration:.6,ease:'power3.out',stagger:.06,delay:.05});
+        });
+      }
+    });
+  }
+
+  /* ── Hero intro (after preloader) ── */
+  function heroIntro(){
+    const stmt=$('.hero__statement');
+    let lines=[];
+    if(stmt){ splitToLines(stmt); lines=stmt.querySelectorAll('.line__i'); gsap.set(lines,{yPercent:118}); }
+    const tl=gsap.timeline();
+    tl.fromTo('#heroMedia img',{scale:1.35},{scale:1,duration:1.8,ease:'expo.out'},0)
+      .to(lines,{yPercent:0,duration:1.25,ease:'expo.out',stagger:.12},.25)
+      .fromTo('.hero__meta span',{yPercent:120,opacity:0},{yPercent:0,opacity:1,duration:.9,ease:'expo.out',stagger:.06,clearProps:'transform,opacity'},'-=.7')
+      .fromTo('.hero__cue',{opacity:0},{opacity:1,duration:.8,clearProps:'opacity'},'-=.5')
+      .fromTo('.nav',{yPercent:-110,opacity:0},{yPercent:0,opacity:1,duration:.9,ease:'expo.out',clearProps:'transform,opacity'},'-=1.1');
+    return tl;
+  }
+
+  /* ── Preloader → reveal ── */
+  function runPreloader(){
+    const pl=$('#preloader');
+    if(!pl){ document.body.classList.remove('loading'); lenis.start(); heroIntro(); start(); return; }
+    const name=$('.preloader__name'), bar=$('.preloader__bar'), pct=$('.preloader__pct');
+    gsap.timeline({onComplete:start})
+      .to(name,{opacity:1,duration:.7,ease:'power2.out'})
+      .to(bar,{scaleX:1,duration:1.15,ease:'power1.inOut',
+        onUpdate:function(){ if(pct) pct.textContent=String(Math.round(this.progress()*100)).padStart(3,'0'); }},.15)
+      .to([name,'.preloader__track'],{opacity:0,duration:.4,ease:'power2.in'},'+=.05')
+      .to(pl,{yPercent:-100,duration:1.05,ease:'expo.inOut',
+        onStart:()=>{ document.body.classList.remove('loading'); lenis.start(); }},'-=.05')
+      .add(()=>{ pl.remove(); }, '-=.2')
+      .add(heroIntro,'-=.75');
+  }
+
+  function start(){ document.body.classList.add('loaded'); }
+
+  /* ── Boot ── */
+  gsap.set('.reveal',{opacity:0,y:30});
+  buildNav(); buildProgress(); buildCursor(); buildMagnetic(); buildParallax(); wireAccordion();
+  const kick=()=>{ buildReveals(); runPreloader(); };
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(kick); setTimeout(()=>{ if(!document.body.classList.contains('loaded')) kick(); },1200); }
+  else kick();
+
+  /* keep ScrollTrigger honest on resize */
+  let rt; window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(()=>ScrollTrigger.refresh(),200); });
+})();
 </script>
 </body>
 </html>
