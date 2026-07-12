@@ -541,11 +541,11 @@ body.loading .nav,body.loading .progress{opacity:0}
         <span class="wcard__cap"><span class="wcard__t">The Fall</span><span class="wcard__c">Exhibition — RHA</span></span>
       </a>
       <a class="wcard" data-slug="dysart" href="project.html?p=dysart">
-        <img src="img/dysart-01.jpg" alt="Dysart Drawings" loading="lazy">
+        <img src="img/dysart-02.jpg" alt="Dysart Drawings" loading="lazy">
         <span class="wcard__cap"><span class="wcard__t">Dysart Drawings</span><span class="wcard__c">Exhibition</span></span>
       </a>
       <a class="wcard" data-slug="kilmantin-road" href="project.html?p=kilmantin-road">
-        <img src="img/kilmantin-03.jpg" alt="Kilmantin Road" loading="lazy">
+        <img src="img/kilmantin-02.jpg" alt="Kilmantin Road" loading="lazy">
         <span class="wcard__cap"><span class="wcard__t">Kilmantin Road</span><span class="wcard__c">Residential — AAI 2025</span></span>
       </a>
       <a class="wcard" data-slug="the-old-boathouse" href="project.html?p=the-old-boathouse">
@@ -697,6 +697,11 @@ body.loading .nav,body.loading .progress{opacity:0}
   const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
   const yr = $('#yr'); if(yr) yr.textContent = new Date().getFullYear();
 
+  /* Always open at the hero — never restore a saved position or jump to a #hash */
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+  window.scrollTo(0,0);
+  window.addEventListener('load',()=>window.scrollTo(0,0));
+
   const LIBS = window.gsap && window.ScrollTrigger && window.Lenis && window.SplitType;
 
   /* ── Safety: if libraries fail to load or motion is reduced, show all ── */
@@ -704,6 +709,7 @@ body.loading .nav,body.loading .progress{opacity:0}
     document.body.classList.add('no-motion','loaded');
     document.body.classList.remove('loading');
     const pl=$('#preloader'); if(pl) pl.remove();
+    window.scrollTo(0,0);
     return;
   }
 
@@ -905,7 +911,7 @@ body.loading .nav,body.loading .progress{opacity:0}
         onUpdate:function(){ if(pct) pct.textContent=String(Math.round(this.progress()*100)).padStart(3,'0'); }},.15)
       .to([name,'.preloader__track'],{opacity:0,duration:.4,ease:'power2.in'},'+=.05')
       .to(pl,{yPercent:-100,duration:1.05,ease:'expo.inOut',
-        onStart:()=>{ document.body.classList.remove('loading'); lenis.start(); }},'-=.05')
+        onStart:()=>{ document.body.classList.remove('loading'); window.scrollTo(0,0); lenis.scrollTo(0,{immediate:true}); lenis.start(); }},'-=.05')
       .add(()=>{ pl.remove(); }, '-=.2')
       .add(heroIntro,'-=.75');
   }
