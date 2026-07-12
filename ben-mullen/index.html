@@ -892,7 +892,7 @@ body.loading .nav,body.loading .progress{opacity:0}
     let lines=[];
     if(stmt){ splitToLines(stmt); lines=stmt.querySelectorAll('.line__i'); gsap.set(lines,{yPercent:118}); }
     const tl=gsap.timeline();
-    tl.fromTo('#heroMedia img',{scale:1.35},{scale:1,duration:1.8,ease:'expo.out'},0)
+    tl.to('#heroMedia img',{scale:1,duration:1.9,ease:'expo.out'},0)
       .to(lines,{yPercent:0,duration:1.25,ease:'expo.out',stagger:.12},.25)
       .fromTo('.hero__meta span',{yPercent:120,opacity:0},{yPercent:0,opacity:1,duration:.9,ease:'expo.out',stagger:.06,clearProps:'transform,opacity'},'-=.7')
       .fromTo('.hero__cue',{opacity:0},{opacity:1,duration:.8,clearProps:'opacity'},'-=.5')
@@ -920,9 +920,11 @@ body.loading .nav,body.loading .progress{opacity:0}
 
   /* ── Boot ── */
   gsap.set('.reveal',{opacity:0,y:30});
+  gsap.set('#heroMedia img',{scale:1.12});   /* held zoom under the preloader, eases to 1 in the intro */
   buildNav(); buildProgress(); buildCursor(); buildMagnetic(); buildParallax(); buildWork(); wireAccordion();
-  const kick=()=>{ buildReveals(); runPreloader(); };
-  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(kick); setTimeout(()=>{ if(!document.body.classList.contains('loaded')) kick(); },1200); }
+  let kicked=false;
+  const kick=()=>{ if(kicked) return; kicked=true; buildReveals(); runPreloader(); };
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(kick); setTimeout(kick,1200); }
   else kick();
 
   /* keep ScrollTrigger honest on resize */
