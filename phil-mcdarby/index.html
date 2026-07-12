@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Phil McDarby — Digital Artist, Photographer &amp; Composer</title>
+<meta name="description" content="The portfolio of Phil McDarby, a Dublin-based digital artist, photographer and composer. High-fantasy digital art and Irish landscape photography — capturing a sense of magic and wonder. Fine-art prints available on enquiry.">
+<meta name="author" content="Phil McDarby">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://janet-cruise-halpin-xpgs.vercel.app/phil-mcdarby/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Phil McDarby">
+<meta property="og:title" content="Phil McDarby — Digital Artist, Photographer &amp; Composer">
+<meta property="og:description" content="High-fantasy digital art and Irish landscape photography — capturing a sense of magic and wonder. Fine-art prints available on enquiry.">
+<meta property="og:url" content="https://janet-cruise-halpin-xpgs.vercel.app/phil-mcdarby/">
+<meta property="og:image" content="https://janet-cruise-halpin-xpgs.vercel.app/phil-mcdarby/img/a-dance-of-light.jpg">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Phil McDarby",
+  "jobTitle": "Digital Artist, Photographer & Composer",
+  "description": "Dublin-based digital artist, photographer and composer. Winner of over 50 international awards, including multiple CG Choice Awards from the CGSociety and the Golden Torus Award.",
+  "url": "https://janet-cruise-halpin-xpgs.vercel.app/phil-mcdarby/",
+  "address": { "@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE" },
+  "knowsAbout": ["Digital art", "Photography", "Concept art", "Illustration", "Music composition"]
+}
+</script>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f0d0b'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23b99b5e' text-anchor='middle'%3EPM%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/CormorantGaramond.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/Inter.woff2" crossorigin>
+<link rel="stylesheet" href="/phil-mcdarby/css/site.css">
+<link rel="preload" as="image" href="/phil-mcdarby/img/a-dance-of-light.jpg">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="nav-mark" href="/phil-mcdarby/">Phil&nbsp;McDarby</a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="/phil-mcdarby/gallery/">Gallery</a>
+    <a href="/phil-mcdarby/about/">About</a>
+    <a href="/phil-mcdarby/contact/">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <!-- ── hero — one stunning image, minimal chrome, slow reveal ────── -->
+  <section class="hero" aria-label="Featured artwork">
+    <div class="hero-media">
+      <img src="/phil-mcdarby/img/a-dance-of-light.jpg"
+           alt="A Dance of Light — digital artwork by Phil McDarby: luminous figures of light dancing through a darkened faery forest"
+           fetchpriority="high">
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="label label--gold hero-kicker">Digital Artist&ensp;·&ensp;Photographer&ensp;·&ensp;Composer</p>
+      <h1 class="hero-title">Phil McDarby</h1>
+      <p class="hero-sub">Capturing a sense of magic and wonder</p>
+    </div>
+    <p class="hero-credit">A Dance of Light&ensp;—&ensp;detail</p>
+    <span class="hero-cue" aria-hidden="true"></span>
+  </section>
+
+  <!-- ── statement — his real words, set like a catalogue epigraph ─── -->
+  <section class="wrap">
+    <div class="statement reveal">
+      <span class="label">The work</span>
+      <p>At the heart of the work is a desire to capture <em>a sense of magic and wonder</em> — that feeling of child-like excitement and discovery that we can lose touch with as adults.</p>
+    </div>
+  </section>
+
+  <!-- ── selected works — editorial flow, each piece breathing ─────── -->
+  <section class="wrap featured" aria-label="Selected works">
+    <p class="label reveal" style="display:block;margin-bottom:clamp(40px,6vw,80px)">Selected works</p>
+    <div class="works-flow" id="featured-flow"></div>
+    <div class="home-cta reveal">
+      <span class="label">Sixty-two works · Digital art &amp; photography</span>
+      <a class="btn" href="/phil-mcdarby/gallery/">View the full gallery</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-mark">Phil McDarby</p>
+      <p class="footer-line">Digital artist, photographer &amp; composer — Dublin, Ireland</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/phil-mcdarby/gallery/">Gallery</a>
+      <a href="/phil-mcdarby/about/">About</a>
+      <a href="/phil-mcdarby/contact/">Contact</a>
+    </nav>
+    <p class="footer-copy">All imagery &copy; Phil McDarby. Fine-art prints of every work are available on enquiry.</p>
+  </div>
+</footer>
+
+<script src="/phil-mcdarby/js/works-data.js"></script>
+<script src="/phil-mcdarby/js/site.js"></script>
+<script>
+  // curated featured selection, laid out by the 6-step editorial cycle
+  (() => {
+    const flow = document.getElementById('featured-flow');
+    const picks = WORKS.filter((w) => w.featured);
+    picks.forEach((w, i) => flow.appendChild(workCard(w, { eager: i < 2, underCaption: true })));
+    observeReveals(flow);
+    watchArtworkLoads(flow);
+  })();
+</script>
+</body>
+</html>

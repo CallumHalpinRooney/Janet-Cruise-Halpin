@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Artwork — Phil McDarby</title>
+<meta name="description" content="An artwork by Phil McDarby — available as a fine-art print on enquiry.">
+<meta name="author" content="Phil McDarby">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Phil McDarby">
+<meta property="og:title" content="Artwork — Phil McDarby">
+<meta property="og:description" content="An artwork by Phil McDarby — available as a fine-art print on enquiry.">
+<!-- static fallback for link scrapers, which never run the per-work JS below -->
+<meta property="og:image" content="https://janet-cruise-halpin-xpgs.vercel.app/phil-mcdarby/img/a-dance-of-light.jpg">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f0d0b'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23b99b5e' text-anchor='middle'%3EPM%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/CormorantGaramond.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/Inter.woff2" crossorigin>
+<link rel="stylesheet" href="/phil-mcdarby/css/site.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav scrolled">
+  <a class="nav-mark" href="/phil-mcdarby/">Phil&nbsp;McDarby</a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="/phil-mcdarby/gallery/" aria-current="page">Gallery</a>
+    <a href="/phil-mcdarby/about/">About</a>
+    <a href="/phil-mcdarby/contact/">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <!-- the image dominates; everything else waits below -->
+  <section class="work-stage wrap" id="work-stage">
+    <button class="stage-frame" id="stage-frame" type="button" aria-label="View larger">
+      <img id="stage-img" alt="">
+    </button>
+    <p class="stage-hint">View larger</p>
+  </section>
+
+  <section class="work-body">
+    <span class="label label--gold" id="work-collection"></span>
+    <h1 class="work-heading" id="work-title"></h1>
+    <div class="work-note" id="work-note"></div>
+
+    <div class="enquiry-block">
+      <span class="label">Fine-art print</span>
+      <div class="size-row" id="size-row"></div>
+      <button class="btn btn--solid" id="enquire-btn" type="button">Enquire about a print</button>
+      <p class="enquiry-note">Each print is made to order and fulfilled personally by Phil
+      through his own fine-art printer. Send an enquiry and he will be in touch to
+      discuss sizes, papers, framing and pricing.</p>
+    </div>
+  </section>
+
+  <nav class="work-nav" aria-label="More works">
+    <a class="prev" id="nav-prev" hidden>
+      <span class="dir">&larr; Previous</span>
+      <span class="ttl"></span>
+    </a>
+    <a class="next" id="nav-next" hidden>
+      <span class="dir">Next &rarr;</span>
+      <span class="ttl"></span>
+    </a>
+  </nav>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-mark">Phil McDarby</p>
+      <p class="footer-line">Digital artist, photographer &amp; composer — Dublin, Ireland</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/phil-mcdarby/gallery/">Gallery</a>
+      <a href="/phil-mcdarby/about/">About</a>
+      <a href="/phil-mcdarby/contact/">Contact</a>
+    </nav>
+    <p class="footer-copy">All imagery &copy; Phil McDarby. Fine-art prints of every work are available on enquiry.</p>
+  </div>
+</footer>
+
+<script src="/phil-mcdarby/js/works-data.js"></script>
+<script src="/phil-mcdarby/js/site.js"></script>
+<script>
+  (() => {
+    const slug = new URLSearchParams(location.search).get('w');
+    const idx = WORKS.findIndex((w) => w.slug === slug);
+    if (idx === -1) { location.replace('/phil-mcdarby/gallery/'); return; }
+    const work = WORKS[idx];
+
+    document.title = `${work.title} — Phil McDarby`;
+    const desc = `${work.title} — ${COLLECTIONS[work.collection]} by Phil McDarby, available as a fine-art print on enquiry.`;
+    document.querySelector('meta[name="description"]').content = desc;
+    document.querySelector('meta[property="og:title"]').content = `${work.title} — Phil McDarby`;
+    document.querySelector('meta[property="og:description"]').content = desc;
+    const ogImg = document.createElement('meta');
+    ogImg.setAttribute('property', 'og:image');
+    ogImg.content = location.origin + BASE + work.image;
+    document.head.appendChild(ogImg);
+
+    // stage
+    const img = document.getElementById('stage-img');
+    const alt = `${work.title} — ${COLLECTIONS[work.collection]} by Phil McDarby`;
+    img.src = BASE + work.image;
+    img.alt = alt;
+    img.width = work.w;
+    img.height = work.h;
+    watchArtworkLoads(document.getElementById('work-stage'));
+    document.getElementById('stage-frame').addEventListener('click', () =>
+      lightbox.open(BASE + work.image, work.title));
+
+    // details
+    document.getElementById('work-collection').textContent = COLLECTIONS[work.collection];
+    document.getElementById('work-title').textContent = work.title;
+    const noteEl = document.getElementById('work-note');
+    if (work.note) {
+      work.note.split('\n\n').forEach((para) => {
+        const p = document.createElement('p');
+        p.textContent = para;
+        noteEl.appendChild(p);
+      });
+    } else {
+      noteEl.remove();
+    }
+
+    // print sizes + enquiry
+    const sizeRow = document.getElementById('size-row');
+    PRINT_SIZES.forEach((s) => {
+      const chip = document.createElement('span');
+      chip.className = 'size-chip';
+      chip.textContent = s;
+      sizeRow.appendChild(chip);
+    });
+    document.getElementById('enquire-btn').addEventListener('click', () => enquiryModal.open(work));
+
+    // quiet prev / next
+    const setNav = (id, target) => {
+      const a = document.getElementById(id);
+      if (!target) return;
+      a.hidden = false;
+      a.href = `${BASE}work/?w=${encodeURIComponent(target.slug)}`;
+      a.querySelector('.ttl').textContent = target.title;
+    };
+    setNav('nav-prev', WORKS[idx - 1]);
+    setNav('nav-next', WORKS[idx + 1]);
+  })();
+</script>
+</body>
+</html>
