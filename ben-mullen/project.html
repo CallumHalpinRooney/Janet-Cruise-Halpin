@@ -77,15 +77,62 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .foot__bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.74rem;letter-spacing:.06em;color:var(--grey-2)}
 .foot__bar a:hover{color:#fff}
 
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform 1s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+.reveal{opacity:0;transform:translateY(24px)}
+.no-motion .reveal{opacity:1;transform:none}
+.line{overflow:hidden;display:block}.line__i{display:block;will-change:transform}
+
+/* video gallery item — poster image always shows; video fades in when it plays */
+.g-video{position:relative}
+.g-video .g-media{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#111}
+.g-video .g-poster,.g-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.g-video video{opacity:0;transition:opacity .7s ease}
+.g-video.is-playing video{opacity:1}
+.g-cap{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;
+  background:linear-gradient(transparent,rgba(0,0,0,.55));pointer-events:none}
+
+/* Lenis */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+
+/* page-transition wipe */
+.page-wipe{position:fixed;inset:0;z-index:900;background:var(--black);transform:translateY(0);will-change:transform}
+
+/* scroll progress */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:var(--ink);z-index:200}
+
+/* custom cursor */
+.cursor,.cursor-dot{display:none}
+@media (pointer:fine) and (min-width:760px){
+  html{cursor:none} a,button,summary,.g-video{cursor:none}
+  .cursor{position:fixed;top:0;left:0;width:16px;height:16px;border:1px solid var(--ink);border-radius:50%;pointer-events:none;z-index:300;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;transition:width .4s var(--ease),height .4s var(--ease),background-color .4s,opacity .3s}
+  .cursor-dot{position:fixed;top:0;left:0;width:5px;height:5px;background:var(--ink);border-radius:50%;pointer-events:none;z-index:301;transform:translate(-50%,-50%)}
+  .cursor.is-hover{width:50px;height:50px;background:var(--ink)}
+  .cursor.is-view{width:78px;height:78px;background:var(--ink)}
+  .cursor__label{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;opacity:0;transition:opacity .3s;font-weight:500}
+  .cursor.is-view .cursor__label{opacity:1}
+  .cursor.is-hover ~ .cursor-dot,.cursor.is-view ~ .cursor-dot{opacity:0}
+}
+.magnetic{display:inline-block;will-change:transform}
+.nav{transition:transform .5s var(--ease),background-color .4s,opacity .4s}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal,.line__i{opacity:1!important;transform:none!important}
+  .page-wipe{display:none} html{cursor:auto}
+}
 </style>
 </head>
 <body>
 
+<noscript><style>.reveal,.line__i{opacity:1!important;transform:none!important}#wipe{display:none}</style></noscript>
+
+<div class="page-wipe" id="wipe"></div>
+<div class="progress" id="progress"></div>
+<div class="cursor" id="cursor"><span class="cursor__label" id="cursorLabel"></span></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
 <nav class="nav">
-  <a class="nav__brand" href="index.html">ben mullen architects</a>
+  <a class="nav__brand magnetic" href="index.html">ben mullen architects</a>
   <div class="nav__menu">
     <a href="index.html#work">Work</a>
     <a href="index.html#about">About</a>
@@ -121,6 +168,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   </div>
 </footer>
 
+<script src="vendor/lenis.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/split-type.min.js"></script>
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
@@ -136,7 +187,8 @@ const PROJECTS = [
       'External joinery is surface-mounted, producing subtle tensions between interior and exterior within the depth of the walls. All structural components are exposed — for economy, ornament and politic.'
     ],
     imgs:['kilmantin-03.jpg','kilmantin-01.jpg','kilmantin-02.jpg','kilmantin-04.jpg','kilmantin-05.jpg','kilmantin-06.jpg'],
-    wide:[0]
+    wide:[0],
+    video:{ src:'media/kilmantin-model.mp4', poster:'img/kilmantin-04.jpg', label:'Model — Kilmantin Road house' }
   },
   {
     slug:'the-fall', title:'The Fall', cat:'Exhibition',
@@ -160,7 +212,8 @@ const PROJECTS = [
       'The exhibition seeks to expand the theoretical framework and dominant methodologies of professional practice, reframing the building site as a place of sustained architectural experimentation where material culture, circular economics and the procurement of labour are re-evaluated under the geopolitical conditions of climate action.'
     ],
     imgs:['otium-02.jpg','otium-01.jpg','otium-03.jpg','otium-04.jpg','otium-05.jpg'],
-    wide:[0]
+    wide:[0],
+    video:{ src:'media/block-drawing.mp4', poster:'img/otium-01.jpg', label:'Untitled (block drawing) — rectified digital line drawing' }
   },
   {
     slug:'the-old-boathouse', title:'The Old Boathouse', cat:'Conservation',
@@ -211,21 +264,114 @@ function render(){
   document.getElementById('pText').innerHTML = p.body.map(t=>`<p>${esc(t)}</p>`).join('');
 
   const gal = document.getElementById('pGallery');
-  gal.innerHTML = p.imgs.map((src,j)=>{
+  let items = '';
+  if(p.video){
+    items += `<figure class="g-item g-video"><div class="g-media"><img class="g-poster" src="${esc(p.video.poster)}" alt="${esc(p.title)} — film"><video src="${esc(p.video.src)}" muted loop autoplay playsinline preload="metadata"></video></div><figcaption class="g-cap">${esc(p.video.label)}</figcaption></figure>`;
+  }
+  items += p.imgs.map((src,j)=>{
     const wide = (p.wide||[]).includes(j) ? ' g-wide' : '';
-    return `<figure class="reveal${wide}"><img src="img/${src}" alt="${esc(p.title)} — ${j+1}" loading="lazy"></figure>`;
+    return `<figure class="g-item${wide}"><img src="img/${src}" alt="${esc(p.title)} — ${j+1}" loading="lazy"></figure>`;
   }).join('');
+  gal.innerHTML = items;
+
+  /* video: reveal only when it can actually play, else the poster image stays */
+  $$('#pGallery video').forEach(v=>{
+    const fig=v.closest('.g-video');
+    const show=()=>fig&&fig.classList.add('is-playing');
+    v.addEventListener('playing',show);
+    v.addEventListener('canplay',()=>{ v.play().then(show).catch(()=>{}); });
+    v.addEventListener('error',()=>{});
+  });
 
   const prev = PROJECTS[(idx-1+PROJECTS.length)%PROJECTS.length];
   const next = PROJECTS[(idx+1)%PROJECTS.length];
   document.getElementById('pPager').innerHTML =
-    `<a href="project.html?p=${prev.slug}"><span class="label">Previous</span><span class="pager__name">${esc(prev.title)}</span></a>`+
-    `<a class="pager__next" href="project.html?p=${next.slug}"><span class="label">Next</span><span class="pager__name">${esc(next.title)}</span></a>`;
+    `<a href="project.html?p=${prev.slug}" data-cursor="Prev"><span class="label">Previous</span><span class="pager__name">${esc(prev.title)}</span></a>`+
+    `<a class="pager__next" href="project.html?p=${next.slug}" data-cursor="Next"><span class="label">Next</span><span class="pager__name">${esc(next.title)}</span></a>`;
 
-  const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -6% 0px',threshold:.06});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   window.scrollTo(0,0);
+  motion.reveal();          /* (re)build scroll reveals for the new content */
 }
+
+/* ══════════════ MOTION ══════════════ */
+const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const LIBS = window.gsap && window.ScrollTrigger && window.Lenis && window.SplitType;
+const $=(s,c)=>(c||document).querySelector(s), $$=(s,c)=>Array.from((c||document).querySelectorAll(s));
+
+const motion = {
+  triggers:[],
+  reveal(){
+    /* clear previous triggers (gallery re-rendered on nav) */
+    this.triggers.forEach(t=>t.kill&&t.kill()); this.triggers=[];
+    if(!LIBS || reduce){ $$('.reveal').forEach(e=>e.classList.add('in')); return; }
+    /* title line reveal */
+    const title=$('#pTitle');
+    if(title && !title.dataset.split){
+      title.dataset.split='1';
+      const st=new SplitType(title,{types:'lines'});
+      st.lines.forEach(l=>{const i=document.createElement('span');i.className='line__i';while(l.firstChild)i.appendChild(l.firstChild);l.appendChild(i);});
+      gsap.set(title.querySelectorAll('.line__i'),{yPercent:118});
+      this.triggers.push(gsap.to(title.querySelectorAll('.line__i'),{yPercent:0,duration:1.1,ease:'expo.out',stagger:.09,delay:.15}).scrollTrigger);
+    }
+    $$('.facts .fact, .pbody__lead, .pbody__text p, .pager a').forEach((el,i)=>{
+      this.triggers.push(gsap.fromTo(el,{opacity:0,y:26},{opacity:1,y:0,duration:1,ease:'expo.out',
+        scrollTrigger:{trigger:el,start:'top 90%'}}).scrollTrigger);
+    });
+    $$('#pGallery .g-item').forEach(fr=>{
+      const m=fr.querySelector('.g-poster, img, video');
+      gsap.set(fr,{clipPath:'inset(0% 0% 100% 0%)',opacity:1});
+      this.triggers.push(gsap.to(fr,{clipPath:'inset(0% 0% 0% 0%)',duration:1.25,ease:'expo.out',
+        scrollTrigger:{trigger:fr,start:'top 90%'}}).scrollTrigger);
+      if(m) this.triggers.push(gsap.fromTo(m,{scale:1.22},{scale:1,duration:1.4,ease:'expo.out',
+        scrollTrigger:{trigger:fr,start:'top 90%'}}).scrollTrigger);
+    });
+    ScrollTrigger.refresh();
+  }
+};
+
+/* smooth scroll + cursor + progress (once) */
+(function initChrome(){
+  if(!LIBS || reduce){
+    document.body.classList.add('no-motion');
+    const w=$('#wipe'); if(w) w.style.display='none';
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  const lenis=new Lenis({lerp:.09,smoothWheel:true});
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(t=>lenis.raf(t*1000)); gsap.ticker.lagSmoothing(0);
+  $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();lenis.scrollTo(t);}}));
+  /* progress */
+  const bar=$('#progress'); ScrollTrigger.create({start:0,end:'max',onUpdate:s=>gsap.set(bar,{scaleX:s.progress})});
+  /* page wipe out on internal project nav for continuity */
+  const wipe=$('#wipe');
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a'); if(!a) return;
+    const href=a.getAttribute('href')||'';
+    if(href.startsWith('project.html') || href==='index.html' || href.startsWith('index.html')){
+      e.preventDefault();
+      gsap.to(wipe,{yPercent:0,duration:.55,ease:'power3.inOut',onComplete:()=>location.href=a.href});
+    }
+  });
+  /* cursor */
+  if(matchMedia('(pointer:fine) and (min-width:760px)').matches){
+    const cur=$('#cursor'),dot=$('#cursorDot'),lab=$('#cursorLabel');
+    let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;
+    addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;gsap.set(dot,{x:tx,y:ty});},{passive:true});
+    gsap.ticker.add(()=>{cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;gsap.set(cur,{x:cx,y:cy});});
+    document.addEventListener('mouseover',e=>{
+      const el=e.target.closest('a,button,summary,.g-video');
+      if(!el){cur.classList.remove('is-hover','is-view');return;}
+      const l=el.dataset.cursor || (el.classList.contains('back')?'Back':el.closest('.g-video')?'':'');
+      if(l){lab.textContent=l;cur.classList.add('is-view');cur.classList.remove('is-hover');}
+      else {cur.classList.add('is-hover');cur.classList.remove('is-view');}
+    });
+    document.addEventListener('mouseout',e=>{ if(!e.relatedTarget||!e.relatedTarget.closest('a,button,summary')) cur.classList.remove('is-hover','is-view'); });
+  }
+  /* reveal wipe up on load */
+  gsap.set(wipe,{yPercent:0}); gsap.to(wipe,{yPercent:-100,duration:.7,ease:'power3.inOut',delay:.05});
+})();
+
 render();
 window.addEventListener('popstate', render);
 </script>
