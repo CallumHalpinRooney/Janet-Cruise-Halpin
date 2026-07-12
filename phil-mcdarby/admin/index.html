@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phil McDarby — Print Enquiries</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f0d0b'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23b99b5e' text-anchor='middle'%3EPM%3C/text%3E%3C/svg%3E">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PHIL McDARBY — PRINT ENQUIRIES DASHBOARD
+   Same viewing-room language as the public site: warm charcoal, Cormorant
+   Garamond + Inter, hairlines, gold used sparingly. Self-contained — like
+   Janet's /admin, this folder can deploy as its own private site, so all
+   artwork and fonts are referenced by absolute URL.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@font-face{
+  font-family:'Cormorant Garamond'; font-style:normal; font-weight:300 700; font-display:swap;
+  src:url('../fonts/CormorantGaramond.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Cormorant Garamond'; font-style:italic; font-weight:300 700; font-display:swap;
+  src:url('../fonts/CormorantGaramond-italic.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Inter'; font-style:normal; font-weight:100 900; font-display:swap;
+  src:url('../fonts/Inter.woff2') format('woff2');
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0 }
+:root{
+  --ink:#0f0d0b; --ink-2:#16130f; --ink-3:#1e1a15;
+  --line:rgba(233,227,215,.10); --line-strong:rgba(233,227,215,.22);
+  --text:#e9e3d7; --text-dim:#a2988a; --text-faint:#8d8375;
+  --gold:#b99b5e;
+  --green:#8fae8b; --amber:#c9a96a;
+  --serif:'Cormorant Garamond','Times New Roman',serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+body{
+  background:var(--ink); color:var(--text);
+  font-family:var(--sans); font-weight:300; font-size:15px; line-height:1.65;
+  min-height:100svh; -webkit-font-smoothing:antialiased;
+}
+img{ display:block } a{ color:inherit; text-decoration:none }
+button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer }
+::selection{ background:rgba(185,155,94,.28) }
+:focus-visible{ outline:1px solid var(--gold); outline-offset:3px }
+
+.grain{
+  position:fixed; inset:-50%; width:200%; height:200%; pointer-events:none; z-index:200; opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.label{
+  font-size:11px; font-weight:400; letter-spacing:.24em; text-transform:uppercase; color:var(--text-dim);
+}
+.label--gold{ color:var(--gold) }
+
+/* ── login — a private gallery door ─────────────────────────────────── */
+#gate{
+  position:fixed; inset:0; z-index:500; display:flex; align-items:center; justify-content:center;
+  padding:20px; transition:opacity .8s var(--ease), visibility 0s linear .8s;
+}
+#gate.hidden{ opacity:0; visibility:hidden; pointer-events:none }
+#gate .backdrop{ position:absolute; inset:0; overflow:hidden }
+#gate .backdrop img{ width:100%; height:100%; object-fit:cover }
+#gate .backdrop::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to bottom, rgba(15,13,11,.72), rgba(15,13,11,.9));
+}
+.gate-box{
+  position:relative; width:min(400px,94vw); text-align:center;
+  background:rgba(22,19,15,.9); border:1px solid var(--line);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  padding:52px 40px 44px;
+}
+.gate-box .label{ display:block; margin-bottom:14px }
+.gate-title{ font-family:var(--serif); font-size:34px; font-weight:300; letter-spacing:.03em; margin-bottom:6px }
+.gate-sub{ font-family:var(--serif); font-style:italic; font-size:15px; color:var(--text-dim); margin-bottom:34px }
+.gate-box input{
+  width:100%; background:transparent; border:0; border-bottom:1px solid var(--line-strong);
+  color:var(--text); font-family:var(--sans); font-size:15px; font-weight:300;
+  padding:9px 2px 11px; text-align:center; border-radius:0;
+}
+.gate-box input:focus{ outline:none; border-bottom-color:var(--gold) }
+.gate-btn{
+  margin-top:28px; width:100%;
+  font-size:11px; letter-spacing:.26em; text-transform:uppercase;
+  background:var(--text); color:var(--ink); padding:16px;
+  transition:background .5s var(--ease);
+}
+.gate-btn:hover{ background:var(--gold) }
+.gate-error{ min-height:1.4em; margin-top:16px; font-size:13px; color:#c98f7a }
+
+/* ── header — an art strip from the collection ──────────────────────── */
+#app{ display:none } #app.visible{ display:block }
+.strip{ position:relative; height:190px; display:flex; overflow:hidden }
+.strip img{ flex:1 1 0; min-width:0; object-fit:cover; filter:brightness(.62) saturate(.92); transition:filter 1.2s var(--ease) }
+.strip img:hover{ filter:brightness(.95) saturate(1) }
+.strip-overlay{
+  position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(to top, var(--ink) 2%, rgba(15,13,11,.35) 55%, rgba(15,13,11,.25));
+}
+.strip-content{
+  position:absolute; left:0; right:0; bottom:22px; pointer-events:none;
+  display:flex; align-items:baseline; justify-content:space-between; gap:20px;
+  padding-inline:clamp(20px,5vw,64px);
+}
+.strip-content h1{ font-family:var(--serif); font-size:clamp(30px,4.5vw,46px); font-weight:300; letter-spacing:.03em }
+.strip-content .label{ pointer-events:auto }
+
+.wrap{ max-width:1180px; margin-inline:auto; padding-inline:clamp(20px,5vw,64px) }
+
+/* ── stat tiles ─────────────────────────────────────────────────────── */
+.stats{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  border:1px solid var(--line); margin-top:38px;
+}
+.stat{ padding:24px 26px 20px; border-right:1px solid var(--line) }
+.stat:last-child{ border-right:0 }
+.stat .num{ font-family:var(--serif); font-size:42px; font-weight:300; line-height:1.1 }
+.stat .label{ font-size:10px }
+.stat.s-new .num{ color:var(--gold) }
+.stat.s-replied .num{ color:var(--amber) }
+.stat.s-fulfilled .num{ color:var(--green) }
+
+/* ── filters ────────────────────────────────────────────────────────── */
+.filters{
+  display:flex; flex-wrap:wrap; align-items:center; gap:14px 34px;
+  padding:24px 0; margin-top:26px;
+  border-bottom:1px solid var(--line);
+}
+.fgroup{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 22px }
+.fgroup .label{ font-size:10px; margin-right:2px }
+.fbtn{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-faint);
+  padding-bottom:4px; border-bottom:1px solid transparent;
+  transition:color .4s var(--ease), border-color .4s var(--ease);
+}
+.fbtn:hover{ color:var(--text) }
+.fbtn[aria-pressed="true"]{ color:var(--text); border-bottom-color:var(--gold) }
+.fselect{
+  background:transparent; border:0; border-bottom:1px solid var(--line-strong);
+  color:var(--text-dim); font-family:var(--sans); font-size:12px; font-weight:300;
+  letter-spacing:.06em; padding:4px 22px 6px 2px; border-radius:0; cursor:pointer;
+  appearance:none; -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a2988a' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 4px center;
+}
+.fselect option{ background:var(--ink-2); color:var(--text) }
+.fselect:focus{ outline:none; border-bottom-color:var(--gold) }
+
+/* ── notices ────────────────────────────────────────────────────────── */
+.notice{
+  margin-top:26px; padding:16px 20px; border:1px solid var(--line);
+  font-size:13px; color:var(--text-dim); background:var(--ink-2);
+}
+.notice strong{ color:var(--gold); font-weight:500 }
+.notice code{ font-size:12px; color:var(--text) }
+
+/* ── enquiry cards ──────────────────────────────────────────────────── */
+#list{ padding:34px 0 90px; display:grid; gap:22px }
+.enq{
+  display:grid; grid-template-columns:120px 1fr; gap:0;
+  background:var(--ink-2); border:1px solid var(--line);
+  transition:border-color .5s var(--ease);
+}
+.enq:hover{ border-color:var(--line-strong) }
+.enq-art{ position:relative; overflow:hidden; min-height:150px }
+.enq-art img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
+.enq-art .no-art{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif); font-style:italic; font-size:13px; color:var(--text-faint);
+  background:var(--ink-3); text-align:center; padding:10px;
+}
+.enq-body{ padding:22px 26px 20px; min-width:0 }
+.enq-top{ display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 16px }
+.enq-title{ font-family:var(--serif); font-size:23px; font-weight:400; letter-spacing:.02em }
+.enq-type{
+  font-size:9px; letter-spacing:.22em; text-transform:uppercase;
+  border:1px solid var(--line-strong); color:var(--text-dim); padding:4px 10px;
+}
+.enq-when{ margin-left:auto; font-size:11px; letter-spacing:.08em; color:var(--text-faint); white-space:nowrap }
+.enq-meta{
+  display:flex; flex-wrap:wrap; gap:4px 26px; margin-top:12px;
+  font-size:13px; color:var(--text-dim);
+}
+.enq-meta b{ font-weight:400; color:var(--text) }
+.enq-meta a{ border-bottom:1px solid var(--line-strong); transition:color .4s var(--ease), border-color .4s var(--ease) }
+.enq-meta a:hover{ color:var(--gold); border-color:var(--gold) }
+.enq-msg{
+  margin-top:14px; font-size:14px; line-height:1.7; color:var(--text-dim);
+  font-family:var(--serif); font-style:italic; font-size:16px;
+  border-left:1px solid var(--line-strong); padding-left:16px;
+  white-space:pre-line; overflow-wrap:break-word;
+}
+.enq-actions{
+  display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px;
+  margin-top:18px; padding-top:16px; border-top:1px solid var(--line);
+}
+.status-dot{ width:7px; height:7px; border-radius:50%; margin-right:4px }
+.st-new .status-dot{ background:var(--gold) }
+.st-replied .status-dot{ background:var(--amber) }
+.st-fulfilled .status-dot{ background:var(--green) }
+.status-name{ font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--text-dim); margin-right:14px; display:flex; align-items:center }
+.abtn{
+  font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--text-faint);
+  border:1px solid var(--line); padding:8px 16px;
+  transition:color .4s var(--ease), border-color .4s var(--ease);
+}
+.abtn:hover{ color:var(--gold); border-color:var(--gold) }
+.abtn.current{ color:var(--text); border-color:var(--line-strong); pointer-events:none }
+.abtn--reply{ margin-left:auto; color:var(--text-dim) }
+
+.empty{
+  padding:90px 20px; text-align:center;
+}
+.empty .big{ font-family:var(--serif); font-size:30px; font-weight:300; margin-bottom:12px }
+.empty p{ color:var(--text-dim); font-size:14px }
+
+.footer{
+  border-top:1px solid var(--line); padding:30px 0 40px;
+  font-size:12px; color:var(--text-faint); letter-spacing:.06em;
+}
+
+@media (max-width:640px){
+  .enq{ grid-template-columns:1fr }
+  .enq-art{ min-height:170px }
+  .strip img:nth-child(n+5){ display:none }
+  .enq-when{ margin-left:0; width:100% }
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ transition-duration:.01ms !important; animation-duration:.01ms !important }
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ── the door ─────────────────────────────────────────────────────── -->
+<div id="gate">
+  <div class="backdrop" aria-hidden="true">
+    <img src="../img/a-dance-of-light.jpg" alt="">
+  </div>
+  <div class="gate-box">
+    <span class="label label--gold">Private</span>
+    <h1 class="gate-title">Phil McDarby</h1>
+    <p class="gate-sub">Print enquiries &amp; commissions</p>
+    <input type="password" id="pw" placeholder="Password" autocomplete="current-password"
+           onkeydown="if(event.key==='Enter')tryLogin()">
+    <button class="gate-btn" onclick="tryLogin()">Enter</button>
+    <p class="gate-error" id="gate-error"></p>
+  </div>
+</div>
+
+<!-- ── the room ─────────────────────────────────────────────────────── -->
+<div id="app">
+  <header class="strip" aria-label="Selected works">
+    <img src="../img/the-amber-dragons-hoard.jpg" alt="">
+    <img src="../img/auri.jpg" alt="">
+    <img src="../img/the-wood-dragon-the-cricket.jpg" alt="">
+    <img src="../img/heart-of-the-glade.jpg" alt="">
+    <img src="../img/tomies-wood.jpg" alt="">
+    <img src="../img/the-green-man-awakens.jpg" alt="">
+    <div class="strip-overlay" aria-hidden="true"></div>
+    <div class="strip-content">
+      <h1>Print Enquiries</h1>
+      <a class="label" href="../" target="_blank" rel="noopener">View site →</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="stats" id="stats" role="status" aria-label="Enquiry counts"></div>
+    <div id="notice"></div>
+
+    <div class="filters">
+      <div class="fgroup" role="group" aria-label="Filter by status">
+        <span class="label">Status</span>
+        <button class="fbtn" data-status="all" aria-pressed="true">All</button>
+        <button class="fbtn" data-status="new" aria-pressed="false">New</button>
+        <button class="fbtn" data-status="replied" aria-pressed="false">Replied</button>
+        <button class="fbtn" data-status="fulfilled" aria-pressed="false">Fulfilled</button>
+      </div>
+      <div class="fgroup" role="group" aria-label="Filter by type">
+        <span class="label">Type</span>
+        <button class="fbtn" data-type="all" aria-pressed="true">All</button>
+        <button class="fbtn" data-type="print" aria-pressed="false">Prints</button>
+        <button class="fbtn" data-type="contact" aria-pressed="false">Messages</button>
+      </div>
+      <div class="fgroup">
+        <span class="label">Artwork</span>
+        <select class="fselect" id="artFilter" aria-label="Filter by artwork">
+          <option value="all">All works</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="list"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">All imagery © Phil McDarby · Enquiries stored in Supabase (<code>print_enquiries</code>)</div>
+  </footer>
+</div>
+
+<script>
+/* ── connection ───────────────────────────────────────────────────────
+   Same Supabase project the public site's enquiry form writes to.
+   Reading and status updates need RLS policies for the anon key —
+   SQL is in phil-mcdarby/README.md. Until the table exists, the
+   dashboard shows clearly-labelled sample data so the design can be
+   reviewed. */
+const SUPABASE_URL = 'https://lkwzyaygeqxfnmzekadj.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_m1fXPq2PNZ3JMjQDx05pqg_FT2UT0xH';
+const SITE = '..';
+
+/* Dashboard password — a soft gate, like Janet's dashboard. Change it
+   to something Phil will remember before handing over. */
+const DASHBOARD_PASSWORD = 'magicandwonder';
+
+const STATUSES = ['new', 'replied', 'fulfilled'];
+
+let rows = [];
+let demo = false;
+let fStatus = 'all', fType = 'all', fArt = 'all';
+/* fallback status store for when the status column / update policy
+   isn't in place yet — device-local, like Janet's replied list */
+let localStatus = JSON.parse(localStorage.getItem('pm_status') || '{}');
+
+const esc = (s = '') => String(s).replace(/[&<>"']/g, (c) => (
+  { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+));
+
+function tryLogin() {
+  if (document.getElementById('pw').value === DASHBOARD_PASSWORD) {
+    sessionStorage.setItem('pm_gate', '1');
+    openApp();
+  } else {
+    document.getElementById('gate-error').textContent = 'That isn’t it — try again.';
+  }
+}
+function openApp() {
+  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  load();
+}
+
+/* ── data ── */
+async function load() {
+  try {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/print_enquiries?select=*&order=created_at.desc&limit=500`, {
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` },
+    });
+    if (!r.ok) throw new Error(await r.text());
+    rows = await r.json();
+    demo = false;
+  } catch (e) {
+    rows = sampleRows();
+    demo = true;
+  }
+  render();
+}
+
+function statusOf(row) {
+  const s = row.status || localStatus[row.id] || 'new';
+  return STATUSES.includes(s) ? s : 'new';
+}
+
+async function setStatus(id, status) {
+  const row = rows.find((r) => String(r.id) === String(id));
+  if (!row) return;
+  row.status = status;
+  localStatus[id] = status;
+  localStorage.setItem('pm_status', JSON.stringify(localStatus));
+  render();
+  if (demo) return;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/print_enquiries?id=eq.${encodeURIComponent(id)}`, {
+      method: 'PATCH',
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status }),
+    });
+  } catch (_) { /* local fallback already saved */ }
+}
+
+/* ── render ── */
+function render() {
+  const counts = { all: rows.length, new: 0, replied: 0, fulfilled: 0 };
+  rows.forEach((r) => counts[statusOf(r)]++);
+
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="num">${counts.all}</div><span class="label">Total</span></div>
+    <div class="stat s-new"><div class="num">${counts.new}</div><span class="label">New</span></div>
+    <div class="stat s-replied"><div class="num">${counts.replied}</div><span class="label">Replied</span></div>
+    <div class="stat s-fulfilled"><div class="num">${counts.fulfilled}</div><span class="label">Fulfilled</span></div>`;
+
+  document.getElementById('notice').innerHTML = demo
+    ? `<div class="notice"><strong>Sample data.</strong> The <code>print_enquiries</code> table isn’t reachable yet,
+       so these enquiries are examples of how the room will look. Setup steps are in the site README.</div>`
+    : '';
+
+  // artwork filter options from the data itself
+  const works = [...new Set(rows.filter((r) => r.work_title).map((r) => r.work_title))].sort();
+  const sel = document.getElementById('artFilter');
+  const keep = fArt;
+  sel.innerHTML = '<option value="all">All works</option>' +
+    works.map((w) => `<option value="${esc(w)}">${esc(w)}</option>`).join('');
+  sel.value = works.includes(keep) ? keep : 'all';
+  fArt = sel.value;
+
+  const shown = rows.filter((r) =>
+    (fStatus === 'all' || statusOf(r) === fStatus) &&
+    (fType === 'all' || (fType === 'print' ? r.type === 'print' : r.type !== 'print')) &&
+    (fArt === 'all' || r.work_title === fArt)
+  );
+
+  const list = document.getElementById('list');
+  if (!shown.length) {
+    list.innerHTML = `<div class="empty"><p class="big">Nothing here.</p>
+      <p>${rows.length ? 'No enquiries match these filters.' : 'When someone enquires about a print, it will appear here.'}</p></div>`;
+    return;
+  }
+
+  list.innerHTML = shown.map((r) => {
+    const st = statusOf(r);
+    const when = r.created_at ? new Date(r.created_at).toLocaleDateString('en-IE', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+    const isPrint = r.type === 'print';
+    const img = r.work_image || (r.work_slug ? `${SITE}/img/${encodeURIComponent(r.work_slug)}.jpg` : '');
+    const art = img
+      ? `<img src="${esc(img)}" alt="" loading="lazy">`
+      : `<span class="no-art">General<br>message</span>`;
+    const meta = [
+      `<span>From <b>${esc(r.name || '—')}</b></span>`,
+      r.email ? `<span><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></span>` : '',
+      isPrint && r.size ? `<span>Size <b>${esc(r.size)}</b></span>` : '',
+      isPrint && r.framing ? `<span>Framing <b>${esc(r.framing)}</b></span>` : '',
+      !isPrint && r.subject ? `<span>Regarding <b>${esc(r.subject)}</b></span>` : '',
+    ].filter(Boolean).join('');
+    return `
+    <article class="enq st-${st}">
+      <div class="enq-art">${art}</div>
+      <div class="enq-body">
+        <div class="enq-top">
+          <span class="enq-title">${esc(isPrint ? (r.work_title || 'Print enquiry') : 'Message')}</span>
+          <span class="enq-type">${isPrint ? 'Print' : 'Contact'}</span>
+          <span class="enq-when">${esc(when)}</span>
+        </div>
+        <div class="enq-meta">${meta}</div>
+        ${r.message ? `<p class="enq-msg">${esc(r.message)}</p>` : ''}
+        <div class="enq-actions">
+          <span class="status-name"><span class="status-dot"></span>${st}</span>
+          ${STATUSES.map((s) =>
+            `<button class="abtn${s === st ? ' current' : ''}" onclick="setStatus('${esc(String(r.id))}','${s}')">${s}</button>`
+          ).join('')}
+          ${r.email ? `<a class="abtn abtn--reply" href="mailto:${esc(r.email)}?subject=${encodeURIComponent(isPrint ? `Your print enquiry — ${r.work_title || ''}` : 'Your message to Phil McDarby')}">Reply ↗</a>` : ''}
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+/* ── filters ── */
+document.querySelectorAll('.fbtn').forEach((btn) => btn.addEventListener('click', () => {
+  const group = btn.dataset.status ? 'status' : 'type';
+  document.querySelectorAll(`.fbtn[data-${group}]`).forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+  if (group === 'status') fStatus = btn.dataset.status; else fType = btn.dataset.type;
+  render();
+}));
+document.getElementById('artFilter').addEventListener('change', (e) => { fArt = e.target.value; render(); });
+
+/* ── sample data — clearly labelled, only shown until the table exists ── */
+function sampleRows() {
+  const day = 86400000, now = Date.now();
+  return [
+    { id: 's1', type: 'print', name: 'Sample — Aoife Byrne', email: 'sample@example.com',
+      work_title: 'The Amber Dragon’s Hoard', work_slug: 'the-amber-dragons-hoard',
+      size: 'A1', framing: 'Yes — framed',
+      message: 'I saw this piece years ago and never forgot it. Could you tell me more about papers and framing options?',
+      created_at: new Date(now - day).toISOString() },
+    { id: 's2', type: 'print', name: 'Sample — Daniel Hughes', email: 'sample@example.com',
+      work_title: 'A Dance of Light', work_slug: 'a-dance-of-light',
+      size: 'A2', framing: 'Not sure yet', message: '',
+      created_at: new Date(now - 3 * day).toISOString(), status: 'replied' },
+    { id: 's3', type: 'contact', name: 'Sample — Studio Northlight', email: 'sample@example.com',
+      subject: 'A commission',
+      message: 'We’re producing a fantasy audiobook series and would love to talk about cover art in the Wood Dragons style.',
+      created_at: new Date(now - 6 * day).toISOString() },
+    { id: 's4', type: 'print', name: 'Sample — Maria Keane', email: 'sample@example.com',
+      work_title: 'Tomie’s Wood', work_slug: 'tomies-wood',
+      size: 'Large format / custom', framing: 'No — print only',
+      message: 'Looking for something around 1.5m wide for a hallway — is that possible from this photograph?',
+      created_at: new Date(now - 9 * day).toISOString(), status: 'fulfilled' },
+  ];
+}
+
+/* remember the door for this tab */
+if (sessionStorage.getItem('pm_gate') === '1') openApp();
+else document.getElementById('pw').focus();
+</script>
+</body>
+</html>

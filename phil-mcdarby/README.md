@@ -39,6 +39,47 @@ the form shows a graceful "try again" — an honest failure, never a silently
 dropped lead. As long as at least one channel works, the visitor sees success
 and partial errors are only logged.
 
+## The enquiries dashboard (`admin/`)
+
+`admin/index.html` is Phil's private viewing room for the pipeline — every
+enquiry in one place, categorized. Same pattern as Janet's `/admin`: a
+self-contained page that talks straight to Supabase, deployable as its own
+private site (set the base directory to `phil-mcdarby/admin`; all artwork and
+fonts are absolute URLs so it works standalone).
+
+What it does:
+
+- **Stat tiles** — Total / New / Replied / Fulfilled at a glance
+- **Filters** — by status, by type (prints vs contact messages), by artwork
+- **Cards** — artwork thumbnail, buyer name + click-to-reply email, size,
+  framing, message, date
+- **Status pipeline** — one click moves an enquiry New → Replied → Fulfilled
+  (saved to the `status` column; falls back to this device's localStorage if
+  the column/policy isn't in place yet)
+- **Sample mode** — until the table is reachable it shows clearly-labelled
+  example enquiries so the design can be reviewed
+
+The password gate (`DASHBOARD_PASSWORD` in the file — change it before
+handing over) is a soft curtain, same as Janet's dashboard. The real access
+control is Supabase RLS. To wire it up, run the table SQL from
+`api/print-enquiry.js` plus:
+
+```sql
+alter table print_enquiries add column status text default 'new';
+alter table print_enquiries enable row level security;
+-- public site inserts enquiries:
+create policy "anon can insert" on print_enquiries for insert with check (true);
+-- dashboard reads and updates status:
+create policy "anon can read"   on print_enquiries for select using (true);
+create policy "anon can update status" on print_enquiries for update using (true);
+```
+
+Honest note: with these policies anyone holding the publishable key can read
+enquiries, so the password is presentation, not security — identical to the
+Janet dashboard's model. If Phil wants real privacy later, deploy `admin/`
+separately behind Vercel/Netlify password protection and swap the select/update
+policies to a dedicated authenticated role.
+
 ## Imagery
 
 `img/` holds the imagery stripped from the old philmcdarby.com — the 1200px
