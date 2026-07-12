@@ -302,45 +302,28 @@ section{position:relative}
 .shop .s-go span{transition:transform .4s var(--ease)}
 .shop:hover .s-go span{transform:translateX(6px)}
 
-/* ---- contact ----------------------------------------------------------- */
-.contact{background:var(--cream)}
-.contact-inner{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(34px,6vw,80px);
-  align-items:start;
-}
+/* ---- contact — straight to email --------------------------------------- */
+.contact{background:var(--cream);text-align:center}
+.contact-inner{max-width:640px;margin-inline:auto}
 .contact h2{
   font-family:'Fraunces',serif;font-weight:300;
-  font-size:clamp(2.4rem,6vw,5rem);line-height:.98;letter-spacing:-.02em;
+  font-size:clamp(2.4rem,6vw,4.4rem);line-height:.98;letter-spacing:-.02em;
   margin-bottom:22px;
 }
-.contact h2 em{font-style:italic;color:var(--rust)}
-.contact .lead{max-width:40ch;color:var(--ink-2);font-size:1.05rem;margin-bottom:30px}
-.email-big{
-  font-family:'Fraunces',serif;font-weight:300;
-  font-size:clamp(1.3rem,3vw,2.1rem);color:var(--ink);
-  border-bottom:1px solid var(--line);padding-bottom:8px;
-  display:inline-block;transition:color .4s var(--ease),border-color .4s var(--ease);
+.contact .lead{
+  max-width:48ch;margin:0 auto 38px;color:var(--ink-2);font-size:1.05rem;line-height:1.7;
 }
-.email-big:hover{color:var(--rust);border-color:var(--rust)}
-form{display:flex;flex-direction:column;gap:16px}
-.field label{
-  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-dim);display:block;margin-bottom:8px;
-}
-.field input,.field textarea{
-  width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);
-  padding:10px 2px;font-family:'Jost',sans-serif;font-size:1rem;color:var(--ink);
-  transition:border-color .4s var(--ease);
-}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--rust)}
-.field textarea{resize:vertical;min-height:90px}
-button.send{
-  align-self:flex-start;margin-top:12px;background:var(--ink);color:var(--dark-cream);
-  border:none;border-radius:2px;padding:16px 34px;cursor:pointer;
-  font-family:'Jost',sans-serif;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;
+.email-cta{
+  display:inline-block;background:var(--ink);color:var(--dark-cream);
+  padding:18px 46px;border-radius:2px;
+  font-family:'Jost',sans-serif;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;
   transition:background .4s var(--ease),transform .3s var(--ease);
 }
-button.send:hover{background:var(--rust);transform:translateY(-2px)}
+.email-cta:hover{background:var(--rust);transform:translateY(-2px)}
+.email-note{margin-top:20px;font-size:.92rem;color:var(--ink-dim)}
+.email-note a{color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:2px;
+  transition:color .4s var(--ease),border-color .4s var(--ease)}
+.email-note a:hover{color:var(--rust);border-color:var(--rust)}
 
 /* ---- footer ------------------------------------------------------------ */
 footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
@@ -488,7 +471,7 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
       <h2 class="serif">Where to find the work</h2>
       <span class="section-num">Shops and socials</span>
     </div>
-    <p class="find-lead serif reveal-up">Follow along, browse the shop, or send a message.</p>
+    <p class="find-lead serif reveal-up">Follow along, browse the shop, or get in touch.</p>
     <div class="shops reveal-up" id="shops">
       <!-- links populated from CONFIG below (easy to swap when the real URLs arrive) -->
     </div>
@@ -498,26 +481,10 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
 <!-- ══ CONTACT ══════════════════════════════════════════════════════════ -->
 <section class="contact pad" id="contact">
   <div class="wrap contact-inner">
-    <div class="reveal-up">
-      <h2 class="serif">Commission a piece.</h2>
-      <p class="lead">Most of Orla's work starts with a conversation. Tell her who it's for and what it should say, and she'll draw the meaning into the lines. Prints, stockist enquiries or just a hello are welcome too. Email is the best way to reach her.</p>
-      <a class="email-big serif" id="emailLink" href="#">email</a>
-    </div>
-    <form class="reveal-up" id="contactForm">
-      <div class="field">
-        <label for="cname">Your name</label>
-        <input type="text" id="cname" name="name" required>
-      </div>
-      <div class="field">
-        <label for="cemail">Your email</label>
-        <input type="email" id="cemail" name="email" required>
-      </div>
-      <div class="field">
-        <label for="cmsg">Message</label>
-        <textarea id="cmsg" name="message" required></textarea>
-      </div>
-      <button type="submit" class="send">Send message</button>
-    </form>
+    <h2 class="serif">Commission a piece.</h2>
+    <p class="lead">Most of Orla's work starts with a conversation. Tell her who it's for and what it should say, and she'll draw the meaning into the lines. Prints, stockist enquiries or just a hello are welcome too.</p>
+    <a class="email-cta" id="emailLink" href="#">Email Orla</a>
+    <p class="email-note">or write to <a id="emailPlain" href="#">her email</a></p>
   </div>
 </section>
 
@@ -541,7 +508,7 @@ footer{background:var(--dark);color:var(--dark-cream);padding:70px 0 40px}
    Everything on the page reads from here, so this is the only block to edit.
    ──────────────────────────────────────────────────────────────────────── */
 const CONFIG = {
-  email: "hello@orlagiury.com",          // ← replace with Orla's real email
+  email: "hello@orlaguiry.com",          // ← replace with Orla's real email
   socials: [
     { name: "Etsy",      sub: "Shop prints & cards", url: "https://www.etsy.com/" },
     { name: "Instagram", sub: "Daily work",          url: "https://www.instagram.com/" },
@@ -565,9 +532,10 @@ const CONFIG = {
     f.href=s.url;f.target='_blank';f.rel='noopener';f.textContent=s.name;
     foot.appendChild(f);
   });
-  const el = document.getElementById('emailLink');
-  el.textContent = CONFIG.email;
-  el.href = "mailto:"+CONFIG.email;
+  const mailto = "mailto:"+CONFIG.email+"?subject="+encodeURIComponent("Commission enquiry");
+  document.getElementById('emailLink').href = mailto;
+  const plain = document.getElementById('emailPlain');
+  plain.href = mailto; plain.textContent = CONFIG.email;
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
 
@@ -650,19 +618,6 @@ const HERO = [
   }));
 })();
 
-/* ---- contact form → opens email (no backend needed) -------------------- */
-(function(){
-  const form=document.getElementById('contactForm');
-  form.addEventListener('submit',e=>{
-    e.preventDefault();
-    const name=encodeURIComponent(form.name.value.trim());
-    const email=encodeURIComponent(form.email.value.trim());
-    const msg=encodeURIComponent(form.message.value.trim());
-    const subject=`Website enquiry from ${form.name.value.trim()}`;
-    const body=`Name: ${form.name.value.trim()}%0AEmail: ${form.email.value.trim()}%0A%0A${msg}`;
-    window.location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
-  });
-})();
 </script>
 </body>
 </html>
