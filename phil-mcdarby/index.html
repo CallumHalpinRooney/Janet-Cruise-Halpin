@@ -80,6 +80,14 @@
       </div>
     </section>
 
+    <!-- mood band — a full-bleed cinematic breather (not a gallery work) -->
+    <section class="mood-band reveal" aria-label="Photograph: an Irish mountain valley at dawn">
+      <img src="/phil-mcdarby/img/valley-band.jpg"
+           alt="Mist settling into an Irish mountain valley at sunrise" loading="lazy" decoding="async">
+      <div class="mood-scrim" aria-hidden="true"></div>
+      <p class="mood-line">Between the real woods<br>and the imagined ones.</p>
+    </section>
+
     <!-- selected works — two distinct bodies of work, joined grids -->
     <section class="featured" aria-label="Selected works">
       <div class="wrap"><span class="label label--gold reveal in" style="display:block">Selected — Photography</span></div>
@@ -114,13 +122,15 @@
 <script src="/phil-mcdarby/js/works-data.js"></script>
 <script src="/phil-mcdarby/js/site.js"></script>
 <script>
-  // curated selection per body of work, shown as joined justified strips
+  // curated selection per body of work — joined strips, always filling
+  // their rows (cap 3 + fillLast) so nothing looks cut off
   (() => {
     const pick = (slugs) => slugs.map((s) => WORKS.find((w) => w.slug === s)).filter(Boolean);
-    renderJustified(document.getElementById('feat-digital'),
-      pick(['the-amber-dragons-hoard', 'a-dance-of-light', 'the-green-man-awakens', 'auri', 'heart-of-the-glade']));
+    const opts = { maxPerRow: 3, fillLast: true };
     renderJustified(document.getElementById('feat-photo'),
-      pick(['stag-in-the-greenwood', 'the-blue-valley', 'red-squirrel', 'deer-at-dusk', 'pink-dawn', 'the-fawn']));
+      pick(['stag-in-the-greenwood', 'the-blue-valley', 'red-squirrel', 'deer-at-dusk', 'pink-dawn', 'the-fawn']), opts);
+    renderJustified(document.getElementById('feat-digital'),
+      pick(['the-amber-dragons-hoard', 'the-green-man-awakens', 'the-twins', 'auri', 'a-dance-of-light', 'heart-of-the-glade']), opts);
   })();
 </script>
 </body>
