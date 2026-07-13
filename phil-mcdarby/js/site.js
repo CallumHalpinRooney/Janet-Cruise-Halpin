@@ -113,6 +113,11 @@ function renderJustified(container, works, opts = {}) {
     const cw = container.clientWidth;
     if (!cw) return;
     const target = cw >= 1000 ? 400 : cw >= 640 ? 320 : 260;
+    // On phones a justified grid mixes 1-up/2-up rows and some images come
+    // out tiny — so below 560px show one image per row, full width.
+    const mobile = cw < 560;
+    const rowCap = mobile ? 1 : maxPerRow;
+    const alwaysFill = mobile || opts.fillLast;
     container.innerHTML = '';
     let i = 0;
     while (i < works.length) {
@@ -122,13 +127,13 @@ function renderJustified(container, works, opts = {}) {
         sumAR += works[k].w / works[k].h;
         row.push(works[k]); k++;
         if (sumAR * target >= cw) break;      // filled by width
-        if (row.length >= maxPerRow) break;    // filled by the per-row cap
+        if (row.length >= rowCap) break;       // filled by the per-row cap
       }
       const ranOut = k >= works.length;
       const filled = sumAR * target >= cw;
       // stretch to full width unless it's the leftover last row — but on
-      // curated strips (fillLast) always fill so nothing looks cut off
-      const full = filled || !ranOut || opts.fillLast;
+      // curated strips / mobile always fill so nothing looks cut off or tiny
+      const full = filled || !ranOut || alwaysFill;
       const h = full ? cw / sumAR : target;       // last row → natural target height
       const rowEl = document.createElement('div');
       rowEl.className = 'jrow' + (full ? '' : ' jrow-last');
