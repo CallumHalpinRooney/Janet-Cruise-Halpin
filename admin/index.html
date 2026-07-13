@@ -4,554 +4,368 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#1f3327">
-<title>Janet Cruise Halpin — Studio Dashboard</title>
+<meta name="theme-color" content="#ffffff">
+<title>Janet Cruise Halpin — Studio Enquiries</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f3327'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23d8b25a' text-anchor='middle' font-style='italic'%3EJ%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2317190f'/%3E%3Ctext x='16' y='22' font-family='Archivo,Arial,sans-serif' font-size='15' font-weight='600' fill='%23fff' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
 <style>
 /* ═══════════════════════════════════════════════════════════════
-   Janet Cruise Halpin — Studio Dashboard
-   A painterly, gallery-inspired workspace. Palette drawn from
-   Janet's oil work: forest greens, canopy ochre-gold, petal rose,
-   and warm parchment.
+   Janet Cruise Halpin — Studio Enquiries
+   A clean, gallery-grade workspace: white space, hairline rules,
+   a near-monochrome palette, and the paintings presented as works.
 ═══════════════════════════════════════════════════════════════ */
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  /* Greens — the structural, forest-floor tones */
-  --forest-deep:#1f3327;
-  --forest:#2c4a35;
-  --forest-soft:#3d6147;
-  --moss:#5f8468;
-  --sage:#8bab8d;
-  --sage-mist:#cddcce;
-
-  /* Warm light — ochre through the canopy */
-  --gold:#c99a3f;
-  --gold-soft:#d8b25a;
-  --gold-glow:rgba(201,154,63,.16);
-
-  /* Petal — from the floral paintings, used sparingly */
-  --petal:#cf7f8f;
-  --petal-soft:#e6b7c0;
-
-  /* Paper & ink */
-  --cream:#faf6ee;
-  --parchment:#f1e9db;
-  --parchment-deep:#e8ddca;
-  --ink:#22302a;
-  --ink-soft:#4c5a51;
-  --muted:#7d8a80;
-
-  --card:#fffdf9;
-  --border:rgba(44,74,53,.14);
-  --border-warm:rgba(201,154,63,.28);
-
-  --serif:'Fraunces','Hoefler Text',Georgia,serif;
-  --sans:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
-
-  --shadow-sm:0 2px 10px rgba(31,51,39,.06);
-  --shadow-md:0 12px 34px rgba(31,51,39,.12);
-  --shadow-lg:0 24px 60px rgba(31,51,39,.20);
+  --ink:#1a1c18;
+  --ink-2:#565a51;
+  --muted:#8b8f84;
+  --line:#e6e4dc;
+  --line-2:#d8d5c9;
+  --paper:#faf9f5;
+  --card:#ffffff;
+  --green:#20342a;
+  --green-hover:#152219;
+  --green-tint:#eef1ec;
+  --sans:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --wrap:1240px;
+  --pad:44px;
 }
-
-html{scroll-behavior:smooth}
-body{
-  font-family:var(--sans);
-  color:var(--ink);
-  min-height:100vh;
-  background-color:var(--parchment);
-  /* layered warm paper wash + fine grain */
-  background-image:
-    radial-gradient(1200px 600px at 12% -8%, rgba(139,171,141,.20), transparent 60%),
-    radial-gradient(1000px 620px at 105% 0%, rgba(201,154,63,.12), transparent 55%),
-    linear-gradient(180deg,#f5eee1 0%, var(--parchment) 40%, #ece2d1 100%);
-  background-attachment:fixed;
-  -webkit-font-smoothing:antialiased;
-}
-/* subtle canvas grain overlay */
-body::before{
-  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
-  mix-blend-mode:multiply;
-}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.5;font-size:15px}
 img{display:block;max-width:100%}
-a{color:inherit}
-::selection{background:var(--gold-glow);color:var(--forest-deep)}
+a{color:inherit;text-decoration:none}
+::selection{background:#dfe6dd}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
 
-/* ══════════════════════════════════════════════
-   LOGIN SCREEN
-══════════════════════════════════════════════ */
-#loginScreen{
-  position:fixed;inset:0;z-index:1000;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;padding:1.5rem;
-  transition:opacity .6s ease,visibility .6s ease;
-}
+/* ── Type helpers ── */
+.eyebrow{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.brand-name{font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+
+/* ── Buttons ── */
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+  background:var(--green);color:#f4f2e9;border:1px solid var(--green);
+  font-family:var(--sans);font-size:.82rem;font-weight:500;letter-spacing:.01em;
+  padding:.6rem 1.15rem;border-radius:3px;cursor:pointer;transition:background .18s,border-color .18s}
+.btn-primary:hover{background:var(--green-hover);border-color:var(--green-hover)}
+.btn-line{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+  background:transparent;color:var(--ink);border:1px solid var(--line-2);
+  font-family:var(--sans);font-size:.82rem;font-weight:500;letter-spacing:.01em;
+  padding:.6rem 1.05rem;border-radius:3px;cursor:pointer;transition:border-color .18s,background .18s,color .18s}
+.btn-line:hover{border-color:var(--ink);background:#fff}
+.btn-line.is-done{color:var(--green);border-color:var(--green);background:var(--green-tint)}
+.btn-text{background:transparent;border:none;color:var(--muted);font-family:var(--sans);
+  font-size:.82rem;font-weight:500;letter-spacing:.01em;cursor:pointer;padding:.6rem .4rem;transition:color .18s}
+.btn-text:hover{color:var(--ink)}
+.btn-block{width:100%}
+
+/* ═══════════════════ LOGIN ═══════════════════ */
+#loginScreen{position:fixed;inset:0;z-index:1000;display:grid;grid-template-columns:1.15fr 1fr;
+  background:var(--paper);transition:opacity .5s ease,visibility .5s ease}
 #loginScreen.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.login-gallery{position:absolute;inset:0;display:flex}
-.login-gallery img{flex:1 1 0;min-width:0;height:100%;object-fit:cover;
-  filter:brightness(.62)saturate(1.05);animation:kenburns 26s ease-in-out infinite alternate}
-.login-gallery img:nth-child(even){animation-duration:32s}
-@keyframes kenburns{from{transform:scale(1.06)}to{transform:scale(1.16)}}
-.login-wash{position:absolute;inset:0;
-  background:
-    radial-gradient(80% 90% at 50% 30%, rgba(31,51,39,.55), transparent 70%),
-    linear-gradient(180deg, rgba(20,33,25,.78), rgba(20,33,25,.62) 45%, rgba(20,33,25,.86));
-}
-.login-box{
-  position:relative;z-index:2;width:min(420px,94vw);
-  background:linear-gradient(180deg, rgba(255,253,249,.97), rgba(250,246,238,.94));
-  border:1px solid rgba(255,255,255,.5);
-  border-radius:16px;padding:2.8rem 2.6rem 2.5rem;text-align:center;
-  box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.7);
-  backdrop-filter:blur(6px);
-  animation:riseIn .8s cubic-bezier(.2,.7,0,1.1) both;
-}
-@keyframes riseIn{from{opacity:0;transform:translateY(26px) scale(.98)}to{opacity:1;transform:none}}
-.login-frames{display:flex;justify-content:center;gap:.7rem;margin-bottom:1.6rem}
-.login-frames img{
-  width:66px;height:82px;object-fit:cover;border-radius:3px;
-  border:3px solid #fff;box-shadow:0 8px 18px rgba(31,51,39,.24);
-  transform:rotate(-3deg);transition:transform .4s ease;
-}
-.login-frames img:nth-child(2){transform:rotate(1.5deg) translateY(-6px)}
-.login-frames img:nth-child(3){transform:rotate(4deg)}
-.login-box:hover .login-frames img{transform:rotate(0) translateY(-3px)}
-.login-eyebrow{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
-  color:var(--gold);font-weight:600;margin-bottom:.6rem}
-.login-title{font-family:var(--serif);font-size:2.5rem;font-weight:600;
-  color:var(--forest-deep);line-height:1.02;letter-spacing:.01em}
-.login-title em{font-style:italic;color:var(--forest-soft)}
-.login-rule{width:52px;height:2px;background:var(--gold-soft);margin:1rem auto 1.2rem;border-radius:2px}
-.login-sub{font-size:.82rem;color:var(--muted);margin-bottom:1.8rem;letter-spacing:.02em}
-.login-input{
-  width:100%;padding:.95rem 1.1rem;border:1px solid var(--border);
-  border-radius:10px;font-size:.98rem;font-family:var(--sans);
-  color:var(--ink);background:#fbf8f2;margin-bottom:1rem;
-  outline:none;transition:border-color .2s,box-shadow .2s;text-align:center;
-}
-.login-input::placeholder{color:#a9b1a6}
-.login-input:focus{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-glow)}
-.login-btn{
-  width:100%;padding:.95rem;border:1px solid var(--forest-deep);border-radius:8px;cursor:pointer;
-  background:var(--forest);color:#f5efe0;font-size:1rem;font-weight:500;font-family:var(--sans);
-  letter-spacing:.01em;transition:background .2s,color .2s;
-}
-.login-btn:hover{background:var(--forest-deep);color:#fff}
-.login-btn:active{background:#18271d}
-.login-error{font-size:.8rem;color:#b23a3a;margin-top:.7rem;min-height:1.2em;font-weight:500}
+.login-art{position:relative;overflow:hidden;background:#1a1c18}
+.login-art img{width:100%;height:100%;object-fit:cover}
+.login-art figcaption{position:absolute;left:0;bottom:0;padding:1.4rem 1.6rem;
+  color:rgba(255,255,255,.9);display:flex;flex-direction:column;gap:.15rem;
+  background:linear-gradient(0deg,rgba(0,0,0,.5),transparent)}
+.login-art .lc-title{font-size:.95rem;font-weight:500}
+.login-art .lc-meta{font-size:.72rem;letter-spacing:.06em;color:rgba(255,255,255,.7)}
+.login-panel{display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-inner{width:min(360px,90%)}
+.login-kicker{margin:.5rem 0 2.4rem;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.login-h{font-size:1.7rem;font-weight:600;letter-spacing:-.01em;margin-bottom:.5rem}
+.login-note{font-size:.9rem;color:var(--ink-2);margin-bottom:1.8rem;line-height:1.6}
+.login-input{width:100%;padding:.8rem .9rem;border:1px solid var(--line-2);border-radius:3px;
+  font-size:.95rem;font-family:var(--sans);color:var(--ink);background:#fff;margin-bottom:.9rem;
+  outline:none;transition:border-color .18s,box-shadow .18s}
+.login-input::placeholder{color:#a9ad9f}
+.login-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(32,52,42,.09)}
+.login-error{font-size:.82rem;color:#a23b34;margin-top:.7rem;min-height:1.1em}
 
-/* ══════════════════════════════════════════════
-   APP SHELL
-══════════════════════════════════════════════ */
-#app{display:none;position:relative;z-index:1}
-#app.visible{display:block;animation:fadeUp .7s ease both}
-@keyframes fadeUp{from{opacity:0}to{opacity:1}}
+/* ═══════════════════ APP ═══════════════════ */
+#app{display:none}
+#app.visible{display:block;animation:fade .5s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
 
-/* ── Hero banner ─────────────────────────────── */
-.hero{position:relative;overflow:hidden;min-height:300px;
-  border-bottom:3px solid var(--gold-soft)}
-.hero-gallery{position:absolute;inset:0;display:flex}
-.hero-gallery img{flex:1 1 0;min-width:0;height:100%;object-fit:cover;
-  filter:brightness(.72)saturate(1.08);transition:filter .6s,transform 6s ease}
-.hero:hover .hero-gallery img{filter:brightness(.8)saturate(1.15)}
-.hero-wash{position:absolute;inset:0;
-  background:
-    linear-gradient(180deg, rgba(20,33,25,.34) 0%, rgba(20,33,25,.30) 40%, rgba(20,33,25,.86) 100%),
-    radial-gradient(120% 100% at 0% 0%, rgba(31,51,39,.7), transparent 55%);
-}
-.hero-inner{position:relative;z-index:2;max-width:1440px;margin:0 auto;
-  padding:2.4rem 2.6rem 2rem;
-  display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap}
-.hero-brand{color:#fff}
-.hero-eyebrow{display:flex;align-items:center;gap:.6rem;
-  font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;
-  color:var(--gold-soft);font-weight:600;margin-bottom:.7rem}
-.hero-title{font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,6vw,4rem);
-  line-height:.98;letter-spacing:.01em;text-shadow:0 2px 24px rgba(0,0,0,.35)}
-.hero-title em{font-style:italic;color:var(--gold-soft)}
-.hero-tag{margin-top:.7rem;font-size:.9rem;color:rgba(255,255,255,.82);
-  max-width:34ch;line-height:1.5}
-.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;
-  background:#7ee6a0;box-shadow:0 0 0 0 rgba(126,230,160,.7);
-  animation:livePulse 2.2s ease-out infinite}
-@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(126,230,160,.6)}70%{box-shadow:0 0 0 8px rgba(126,230,160,0)}100%{box-shadow:0 0 0 0 rgba(126,230,160,0)}}
-.hero-count{position:relative;text-align:center;color:#fff;
-  padding:1.1rem 1.6rem;border-radius:14px;
-  background:rgba(20,33,25,.34);border:1px solid rgba(216,178,90,.4);
-  backdrop-filter:blur(4px);min-width:150px}
-.hero-count-n{font-family:var(--serif);font-weight:600;font-size:3.4rem;line-height:.9;
-  color:var(--gold-soft);text-shadow:0 2px 16px rgba(0,0,0,.35)}
-.hero-count-l{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(255,255,255,.72);margin-top:.5rem}
-.hero-date{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(255,255,255,.6);margin-top:.35rem}
+/* ── Masthead ── */
+.mast{position:sticky;top:0;z-index:50;background:rgba(250,249,245,.92);
+  backdrop-filter:saturate(1.1) blur(8px);border-bottom:1px solid var(--line)}
+.mast-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  height:64px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:.8rem}
+.brand-sub{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.mast-right{display:flex;align-items:center;gap:1.4rem}
+.live{display:inline-flex;align-items:center;gap:.45rem;font-size:.68rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-2);font-weight:500}
+.dot{width:6px;height:6px;border-radius:50%;background:#3f8f63;
+  box-shadow:0 0 0 0 rgba(63,143,99,.5);animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,143,99,.45)}70%{box-shadow:0 0 0 6px rgba(63,143,99,0)}100%{box-shadow:0 0 0 0 rgba(63,143,99,0)}}
+.mast-date{font-size:.72rem;letter-spacing:.05em;color:var(--muted)}
+.mast-actions{display:flex;align-items:center;gap:.5rem}
+@media(max-width:760px){.mast-date,.live{display:none}}
 
-/* ── Stats / toolbar band ───────────────────── */
-.toolbar{position:sticky;top:0;z-index:40;
-  background:linear-gradient(180deg,var(--forest-deep),var(--forest));
-  border-bottom:1px solid rgba(216,178,90,.22);
-  box-shadow:0 6px 20px rgba(31,51,39,.18)}
-.toolbar-inner{max-width:1440px;margin:0 auto;padding:.7rem 2.6rem;
-  display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
-.stat{display:flex;flex-direction:column;line-height:1;position:relative;padding-right:1.4rem}
-.stat:not(:last-of-type)::after{content:"";position:absolute;right:.5rem;top:8%;height:84%;
-  width:1px;background:rgba(255,255,255,.12)}
-.stat-n{font-family:var(--serif);font-weight:600;font-size:1.7rem;color:#fff}
-.stat-n.gold{color:var(--gold-soft)}
-.stat-l{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(255,255,255,.55);margin-top:.35rem}
-.stat-top .stat-n{font-family:var(--serif);font-style:italic;font-size:1.15rem;
-  max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.toolbar-actions{margin-left:auto;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-.btn{font-family:var(--sans);cursor:pointer;border-radius:7px;
-  font-size:.82rem;letter-spacing:.005em;font-weight:500;
-  padding:.55rem 1rem;transition:background .2s,color .2s,border-color .2s;
-  display:inline-flex;align-items:center;gap:.45rem}
-.btn-ghost{background:transparent;border:1px solid rgba(245,239,224,.28);color:#e9e3d4}
-.btn-ghost:hover{background:rgba(245,239,224,.1);border-color:rgba(245,239,224,.5)}
-.btn-gold{background:transparent;border:1px solid var(--gold-soft);color:var(--gold-soft)}
-.btn-gold:hover{background:var(--gold-soft);color:#3a2d0c}
-.btn-plain{background:transparent;border:1px solid transparent;color:rgba(245,239,224,.55)}
-.btn-plain:hover{color:#fff}
+/* ── Hero (single work) ── */
+.hero-img{width:100%;height:clamp(220px,32vw,360px);object-fit:cover;object-position:center 42%}
+.hero-cap{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  padding-top:.9rem;padding-bottom:.9rem;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.hc-work{display:flex;align-items:baseline;gap:.7rem}
+.hc-title{font-size:.95rem;font-weight:600}
+.hc-meta{font-size:.78rem;color:var(--muted);letter-spacing:.02em}
+.hc-count{font-size:.78rem;color:var(--muted)}
+.hc-count b{color:var(--ink);font-weight:600}
 
-/* ── Main ────────────────────────────────────── */
-.main{max-width:1440px;margin:0 auto;padding:2.2rem 2.6rem 1rem}
+/* ── Summary + stats ── */
+.summary{padding:2.6rem 0 1.6rem;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.summary h1{font-size:2rem;font-weight:600;letter-spacing:-.015em}
+.summary p{font-size:.9rem;color:var(--ink-2);margin-top:.35rem}
+.stats{display:flex;gap:2.6rem;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;gap:.3rem}
+.stat b{font-size:1.55rem;font-weight:600;letter-spacing:-.01em;line-height:1}
+.stat span{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.stat.wide b{font-size:1rem;font-weight:600;max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* Welcome note */
-.note{display:flex;align-items:center;gap:1.1rem;
-  background:linear-gradient(180deg,var(--card),#fbf6ec);
-  border:1px solid var(--border-warm);border-radius:14px;
-  padding:1.1rem 1.3rem;margin-bottom:1.8rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
-.note::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
-  background:linear-gradient(180deg,var(--gold-soft),var(--petal))}
-.note-swatch{flex-shrink:0;width:52px;height:52px;border-radius:10px;object-fit:cover;
-  border:2px solid #fff;box-shadow:0 4px 12px rgba(31,51,39,.16)}
-.note-text{font-size:.88rem;color:var(--ink-soft);line-height:1.6}
-.note-text strong{color:var(--forest);font-weight:600}
+/* ── Note ── */
+.note{border:1px solid var(--line);background:#fff;border-radius:4px;padding:.95rem 1.2rem;
+  margin-bottom:2rem;font-size:.86rem;color:var(--ink-2);line-height:1.6}
+.note b{color:var(--ink);font-weight:600}
 
-/* Section heading */
-.section-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.1rem}
-.section-head h2{font-family:var(--serif);font-weight:600;font-size:1.9rem;color:var(--forest-deep)}
-.section-head h2 em{font-style:italic;color:var(--gold)}
-.section-head .rule{flex:1;height:1px;background:var(--border);align-self:center}
+/* ── Controls ── */
+.controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding-bottom:1.3rem;border-bottom:1px solid var(--line);margin-bottom:1.8rem;flex-wrap:wrap}
+.tabs{display:flex;gap:.4rem}
+.filter-btn{background:transparent;border:1px solid transparent;border-radius:3px;
+  font-family:var(--sans);font-size:.85rem;font-weight:500;color:var(--muted);
+  padding:.42rem .85rem;cursor:pointer;transition:color .18s,background .18s}
+.filter-btn:hover{color:var(--ink)}
+.filter-btn.active{color:var(--ink);background:#fff;border-color:var(--line-2)}
+.select{padding:.5rem .8rem;border:1px solid var(--line-2);border-radius:3px;
+  font-size:.82rem;font-family:var(--sans);color:var(--ink-2);background:#fff;cursor:pointer;outline:none}
+.select:focus{border-color:var(--ink)}
 
-/* Filters */
-.filter-row{display:flex;gap:.5rem;margin-bottom:1.6rem;flex-wrap:wrap;align-items:center}
-.filter-btn{padding:.45rem 1rem;border:1px solid var(--border);border-radius:7px;
-  background:transparent;font-size:.86rem;letter-spacing:0;
-  cursor:pointer;transition:all .2s;font-family:var(--sans);color:var(--muted);font-weight:500}
-.filter-btn:hover{border-color:var(--sage);color:var(--forest)}
-.filter-btn.active{background:var(--forest);border-color:var(--forest);color:#f5efe0}
-.sort-select{margin-left:auto;padding:.55rem .9rem;border:1px solid var(--border);
-  border-radius:9px;font-size:.76rem;font-family:var(--sans);color:var(--ink-soft);
-  background:var(--card);cursor:pointer;outline:none}
-.sort-select:focus{border-color:var(--gold)}
-
-/* States */
+/* ── States ── */
 .state-msg{text-align:center;padding:5rem 2rem;color:var(--muted)}
-.state-msg h3{font-family:var(--serif);font-size:2rem;color:var(--forest);margin-bottom:.5rem;font-weight:600}
-.state-msg p{font-size:.92rem;max-width:44ch;margin:0 auto;line-height:1.6}
-.spinner{width:34px;height:34px;margin:0 auto 1.4rem;border-radius:50%;
-  border:3px solid var(--sage-mist);border-top-color:var(--gold);animation:spin 1s linear infinite}
+.state-msg h3{font-size:1.25rem;color:var(--ink);margin-bottom:.5rem;font-weight:600;letter-spacing:-.01em}
+.state-msg p{font-size:.9rem;max-width:42ch;margin:0 auto;line-height:1.6}
+.spinner{width:26px;height:26px;margin:0 auto 1.2rem;border-radius:50%;
+  border:2px solid var(--line-2);border-top-color:var(--green);animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── Inquiry cards ───────────────────────────── */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.5rem}
-.inq-card{position:relative;background:var(--card);border:1px solid var(--border);
-  border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm);
-  transition:box-shadow .3s,transform .3s;
-  animation:cardIn .5s cubic-bezier(.2,.7,0,1.15) both}
-.inq-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px)}
-@keyframes cardIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+/* ── Cards ── */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
+.inq-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+  border-radius:4px;overflow:hidden;transition:border-color .2s;
+  animation:cardin .4s ease both}
+.inq-card:hover{border-color:var(--line-2)}
+@keyframes cardin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card-media{height:190px;overflow:hidden;background:#f1efe8;border-bottom:1px solid var(--line)}
+.card-media img{width:100%;height:100%;object-fit:cover}
+.card-media--empty{display:flex;align-items:center;justify-content:center;color:#c3c1b6}
+.card-media--empty span{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+.card-body{padding:1.15rem 1.25rem 1rem;flex:1;display:flex;flex-direction:column}
+.card-workline{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;margin-bottom:.9rem}
+.card-work{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--green)}
+.card-work.general{color:var(--muted)}
+.card-new{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:var(--ink);border:1px solid var(--line-2);border-radius:100px;padding:.15rem .5rem}
+.card-name{font-size:1rem;font-weight:600;letter-spacing:-.01em}
+.card-email{font-size:.82rem;color:var(--ink-2);margin-top:.15rem}
+.card-email a{border-bottom:1px solid var(--line-2)}
+.card-email a:hover{border-color:var(--ink)}
+.card-msg{font-size:.9rem;line-height:1.6;color:var(--ink-2);margin-top:.85rem;
+  padding-top:.85rem;border-top:1px solid var(--line);flex:1}
+.card-time{font-size:.72rem;color:var(--muted);margin-top:.85rem}
+.card-actions{display:flex;gap:.6rem;padding:0 1.25rem 1.25rem}
+.card-actions .btn-primary{flex:1}
 
-/* Painting banner (framed like a canvas) */
-.card-painting{position:relative;height:172px;overflow:hidden;background:var(--forest-deep)}
-.card-painting img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
-.inq-card:hover .card-painting img{transform:scale(1.06)}
-.card-painting-placeholder{width:100%;height:100%;
-  background:radial-gradient(circle at 30% 30%,var(--moss),var(--forest-deep));
-  display:flex;align-items:center;justify-content:center}
-.card-painting-placeholder span{font-family:var(--serif);font-size:2.6rem;color:rgba(255,255,255,.5)}
-.card-painting::after{content:"";position:absolute;inset:0;pointer-events:none;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);
-  background:linear-gradient(180deg,transparent 45%,rgba(20,33,25,.82))}
-/* Gallery label plate */
-.card-label{position:absolute;left:.85rem;bottom:.75rem;right:.85rem;z-index:2;
-  display:flex;align-items:flex-end;justify-content:space-between;gap:.6rem}
-.card-painting-name{font-family:var(--serif);font-style:italic;font-weight:500;
-  font-size:1.28rem;color:#fff;line-height:1.1;text-shadow:0 2px 10px rgba(0,0,0,.5)}
-.card-painting-name.general{font-style:normal;font-size:.82rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--gold-soft);font-family:var(--sans);font-weight:600}
-.card-badge-new{flex-shrink:0;display:inline-flex;align-items:center;gap:.35rem;
-  background:var(--gold-soft);color:#3d2f0c;
-  font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  padding:.28rem .55rem;border-radius:100px;box-shadow:0 4px 10px rgba(0,0,0,.28)}
-.card-badge-new::before{content:"";width:5px;height:5px;border-radius:50%;background:#3d2f0c}
+/* ── Selected works ── */
+.works{padding:3.4rem 0 0}
+.works-head{display:flex;align-items:baseline;justify-content:space-between;
+  padding-bottom:1.2rem;border-bottom:1px solid var(--line);margin-bottom:1.6rem}
+.works-head h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+.works-head span{font-size:.72rem;letter-spacing:.05em;color:var(--muted)}
+.works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.6rem 1.4rem}
+.work figure{margin:0}
+.work-img{width:100%;aspect-ratio:4/5;object-fit:cover;background:#f1efe8;transition:opacity .3s}
+.work:hover .work-img{opacity:.9}
+.work figcaption{padding-top:.6rem;display:flex;flex-direction:column;gap:.15rem}
+.w-title{font-size:.85rem;font-weight:600;letter-spacing:-.005em}
+.w-meta{font-size:.72rem;color:var(--muted);letter-spacing:.02em}
 
-.card-body{padding:1.15rem 1.25rem .5rem;display:flex;gap:.85rem}
-.card-avatar{flex-shrink:0;width:42px;height:42px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,var(--sage),var(--forest));color:#fdf7e8;
-  font-family:var(--serif);font-weight:600;font-size:1.25rem;
-  box-shadow:0 3px 8px rgba(31,51,39,.2)}
-.card-who{min-width:0;flex:1}
-.card-name{font-weight:600;font-size:.98rem;color:var(--ink);line-height:1.2}
-.card-email{font-size:.8rem;margin-top:.15rem}
-.card-email a{color:var(--moss);text-decoration:none;border-bottom:1px solid transparent;
-  transition:border-color .2s;word-break:break-all}
-.card-email a:hover{border-color:var(--moss)}
-.card-time{font-size:.68rem;color:var(--muted);letter-spacing:.04em;margin-top:.05rem}
-.card-msg{margin:.4rem 1.25rem 1rem;font-size:.88rem;line-height:1.6;color:var(--ink-soft);
-  font-family:var(--serif);font-style:italic;font-size:1.02rem;
-  padding-left:.9rem;border-left:2px solid var(--border-warm)}
-.card-actions{padding:.85rem 1.25rem;border-top:1px solid var(--border);
-  display:flex;gap:.6rem;background:linear-gradient(180deg,transparent,#fbf6ec)}
-.card-reply-btn{flex:1;padding:.62rem;border:1px solid var(--forest);border-radius:7px;cursor:pointer;text-align:center;
-  background:var(--forest);color:#f5efe0;
-  font-size:.86rem;font-weight:500;letter-spacing:.005em;
-  font-family:var(--sans);text-decoration:none;transition:background .2s,color .2s;
-  display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
-.card-reply-btn:hover{background:var(--forest-deep);color:#fff}
-.card-mark-btn{padding:.62rem .95rem;border:1px solid var(--border);border-radius:7px;cursor:pointer;
-  background:transparent;color:var(--muted);font-size:.86rem;letter-spacing:0;
-  font-weight:500;font-family:var(--sans);transition:all .2s}
-.card-mark-btn:hover{background:var(--parchment);color:var(--forest)}
-.card-mark-btn.done{color:var(--forest);border-color:var(--sage);background:rgba(139,171,141,.14)}
+/* ── Footer ── */
+.foot{margin-top:4rem;border-top:1px solid var(--line);padding:2.2rem 0}
+.foot-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.foot-meta{font-size:.72rem;letter-spacing:.05em;color:var(--muted)}
 
-/* ── Studio gallery ribbon ───────────────────── */
-.studio{margin:3.2rem auto 0;max-width:1440px;padding:0 2.6rem}
-.gallery-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:.7rem;border-radius:16px;overflow:hidden}
-.gframe{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:10px;
-  box-shadow:var(--shadow-sm);cursor:default}
-.gframe img{width:100%;height:100%;object-fit:cover;transition:transform 1s ease,filter .4s}
-.gframe:hover img{transform:scale(1.08)}
-.gframe::after{content:attr(data-title);position:absolute;left:0;right:0;bottom:0;
-  padding:1.3rem .7rem .55rem;font-family:var(--serif);font-style:italic;font-size:.9rem;color:#fff;
-  background:linear-gradient(180deg,transparent,rgba(20,33,25,.9));
-  opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
-.gframe:hover::after{opacity:1;transform:translateY(0)}
-
-/* ── Footer ──────────────────────────────────── */
-.footer{margin-top:3rem;position:relative;overflow:hidden;height:210px;
-  display:flex;border-top:3px solid var(--gold-soft)}
-.footer img{flex:1 1 0;min-width:0;height:100%;object-fit:cover;filter:brightness(.66)saturate(1.05)}
-.footer-wash{position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(20,33,25,.35),rgba(20,33,25,.9));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.5rem;padding:1.5rem}
-.footer-title{font-family:var(--serif);font-weight:600;font-size:2.1rem;font-style:italic;color:#fff;
-  text-shadow:0 2px 18px rgba(0,0,0,.4)}
-.footer-sub{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-soft)}
-.footer-sig{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:.5rem;letter-spacing:.05em}
-
-/* ── Toast ───────────────────────────────────── */
-.new-toast{position:fixed;bottom:1.8rem;right:1.8rem;z-index:500;
-  background:linear-gradient(180deg,var(--forest-soft),var(--forest-deep));color:#fff;
-  padding:.9rem 1rem;border-radius:14px;border:1px solid rgba(216,178,90,.4);
-  box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:.85rem;
-  font-size:.85rem;max-width:340px;
-  transform:translateY(160%);transition:transform .5s cubic-bezier(.2,.7,0,1.15)}
+/* ── Toast ── */
+.new-toast{position:fixed;bottom:1.6rem;right:1.6rem;z-index:500;background:#fff;
+  border:1px solid var(--line-2);border-radius:5px;box-shadow:0 16px 40px rgba(26,28,24,.14);
+  display:flex;align-items:center;gap:.85rem;padding:.75rem .85rem;max-width:330px;
+  transform:translateY(150%);transition:transform .45s cubic-bezier(.2,.7,0,1.1)}
 .new-toast.show{transform:translateY(0)}
-.new-toast-art{width:52px;height:52px;object-fit:cover;border-radius:8px;flex-shrink:0;
-  border:2px solid rgba(216,178,90,.5)}
-.new-toast-text strong{display:block;font-size:.92rem;margin-bottom:.15rem}
-.new-toast-text span{font-size:.76rem;opacity:.75;font-family:var(--serif);font-style:italic;font-size:.95rem}
+.new-toast-art{width:46px;height:46px;object-fit:cover;border-radius:3px;flex-shrink:0;background:#f1efe8}
+.new-toast-text strong{display:block;font-size:.88rem;font-weight:600}
+.new-toast-text span{font-size:.74rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
 
-/* ── Email modal ─────────────────────────────── */
-.email-modal-bg{position:fixed;inset:0;background:rgba(20,33,25,.6);z-index:600;
-  display:none;align-items:center;justify-content:center;padding:1.25rem;backdrop-filter:blur(3px)}
-.email-modal-bg.open{display:flex;animation:fadeUp .3s ease both}
-.email-modal{background:var(--card);border-radius:16px;width:min(580px,96vw);max-height:88vh;
-  overflow-y:auto;padding:2.4rem;position:relative;box-shadow:var(--shadow-lg);
-  border:1px solid var(--border-warm)}
-.email-close{position:absolute;top:1.1rem;right:1.1rem;background:var(--parchment);
-  border:1px solid var(--border);width:32px;height:32px;cursor:pointer;color:var(--muted);
-  border-radius:8px;transition:all .2s}
-.email-close:hover{background:var(--parchment-deep);color:var(--forest)}
-.email-modal-title{font-family:var(--serif);font-weight:600;font-size:2rem;color:var(--forest-deep)}
-.email-modal-title em{font-style:italic;color:var(--gold)}
-.email-modal-sub{font-size:.84rem;color:var(--muted);margin:.2rem 0 1.3rem}
-.email-textarea{width:100%;height:180px;border:1px solid var(--border);border-radius:10px;
-  padding:.9rem;font-family:var(--sans);font-size:.82rem;color:var(--ink);resize:vertical;
-  background:#fbf8f2;outline:none;line-height:1.6}
-.email-textarea:focus{border-color:var(--gold)}
+/* ── Email modal ── */
+.email-modal-bg{position:fixed;inset:0;background:rgba(26,28,24,.4);z-index:600;
+  display:none;align-items:center;justify-content:center;padding:1.25rem}
+.email-modal-bg.open{display:flex;animation:fade .25s ease both}
+.email-modal{background:#fff;border-radius:6px;width:min(560px,96vw);max-height:88vh;overflow-y:auto;
+  padding:2.2rem;position:relative;border:1px solid var(--line-2)}
+.email-close{position:absolute;top:1rem;right:1rem;background:#fff;border:1px solid var(--line-2);
+  width:30px;height:30px;cursor:pointer;color:var(--muted);border-radius:3px;transition:border-color .18s}
+.email-close:hover{border-color:var(--ink);color:var(--ink)}
+.email-modal-title{font-size:1.35rem;font-weight:600;letter-spacing:-.01em}
+.email-modal-sub{font-size:.82rem;color:var(--muted);margin:.25rem 0 1.2rem}
+.email-textarea{width:100%;height:170px;border:1px solid var(--line-2);border-radius:4px;padding:.85rem;
+  font-family:var(--sans);font-size:.82rem;color:var(--ink);resize:vertical;background:#fbfaf6;outline:none;line-height:1.6}
+.email-textarea:focus{border-color:var(--green)}
 .email-actions{display:flex;gap:.6rem;margin-top:1rem}
-.email-note{font-size:.74rem;color:var(--ink-soft);margin-top:1.1rem;line-height:1.55;
-  background:var(--parchment);padding:.75rem .9rem;border-radius:10px;border-left:3px solid var(--sage)}
+.email-note{font-size:.74rem;color:var(--ink-2);margin-top:1.1rem;line-height:1.55;
+  background:var(--green-tint);padding:.7rem .85rem;border-radius:4px}
 
-/* ── Responsive ──────────────────────────────── */
-@media(max-width:820px){
-  .hero-inner{padding:1.8rem 1.4rem 1.6rem}
-  .toolbar-inner,.main,.studio{padding-left:1.4rem;padding-right:1.4rem}
-  .stat{padding-right:1rem}
-  .stat-top{display:none}
-}
-@media(max-width:640px){
-  .hero{min-height:240px}
-  .hero-count{padding:.8rem 1.1rem;min-width:120px}
-  .hero-count-n{font-size:2.6rem}
-  .toolbar-inner{gap:.9rem}
-  .toolbar-actions{width:100%;justify-content:flex-start}
+/* ── Responsive ── */
+@media(max-width:900px){:root{--pad:22px}.summary{padding-top:2rem}}
+@media(max-width:720px){
+  #loginScreen{grid-template-columns:1fr}
+  .login-art{display:none}
+  .stat.wide{display:none}
   .cards-grid{grid-template-columns:1fr}
-  .footer{height:170px}
-  .footer-title{font-size:1.5rem}
+  .stats{gap:1.8rem}
 }
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
-}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
 </style>
 </head>
 <body>
 
 <!-- ══════════ LOGIN ══════════ -->
 <div id="loginScreen">
-  <div class="login-gallery">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_500,h_900,c_fill/Canopy.png" alt="">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_500,h_900,c_fill/Mayloom.png" alt="">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_500,h_900,c_fill/Touching_Green.png" alt="">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_500,h_900,c_fill/Red_Leaf.png" alt="">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_500,h_900,c_fill/Moon_Tree.png" alt="">
-  </div>
-  <div class="login-wash"></div>
-  <div class="login-box">
-    <div class="login-frames">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_180,h_220,c_fill/Petals_on_Green.png" alt="Petals on Green">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_180,h_220,c_fill/Dancing.png" alt="Dancing">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_180,h_220,c_fill/Blue_Mantle.png" alt="Blue Mantle">
+  <figure class="login-art">
+    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_900,h_1200,c_fill,g_auto/Touching_Green.png" alt="Touching Green by Janet Cruise Halpin">
+    <figcaption>
+      <span class="lc-title">Touching Green</span>
+      <span class="lc-meta">Oil on canvas · 150 × 120 cm</span>
+    </figcaption>
+  </figure>
+  <div class="login-panel">
+    <div class="login-inner">
+      <div class="brand-name">Janet Cruise Halpin</div>
+      <div class="login-kicker">Studio Enquiries</div>
+      <h1 class="login-h">Sign in</h1>
+      <p class="login-note">Enter your password to view enquiries from your website.</p>
+      <input class="login-input" type="password" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')tryLogin()" autocomplete="current-password">
+      <button class="btn-primary btn-block" onclick="tryLogin()">Sign in</button>
+      <p class="login-error" id="loginError"></p>
     </div>
-    <div class="login-eyebrow">The Studio</div>
-    <h1 class="login-title">Janet Cruise <em>Halpin</em></h1>
-    <div class="login-rule"></div>
-    <p class="login-sub">Your private dashboard for gallery enquiries</p>
-    <input class="login-input" type="password" id="pwInput" placeholder="Enter your password" onkeydown="if(event.key==='Enter')tryLogin()" autocomplete="current-password">
-    <button class="login-btn" onclick="tryLogin()">Enter the Studio</button>
-    <p class="login-error" id="loginError"></p>
   </div>
 </div>
 
 <!-- ══════════ APP ══════════ -->
 <div id="app">
 
-  <!-- Hero -->
-  <header class="hero">
-    <div class="hero-gallery" id="artStrip">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_320,h_320,c_fill/Blue_Mantle.png" alt="Blue Mantle">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_320,h_320,c_fill/Canopy.png" alt="Canopy">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_320,h_320,c_fill/Red_Leaf.png" alt="Red Leaf">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_320,h_320,c_fill/Moon_Tree.png" alt="Moon Tree">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_320,h_320,c_fill/Touching_Green.png" alt="Touching Green">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_320,h_320,c_fill/Dancing.png" alt="Dancing">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_320,h_320,c_fill/Blue_Falls.png" alt="Blue Falls">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_320,h_320,c_fill/Mayloom.png" alt="Mayloom">
-      <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_320,h_320,c_fill/Petals_on_Green.png" alt="Petals on Green">
-    </div>
-    <div class="hero-wash"></div>
-    <div class="hero-inner">
-      <div class="hero-brand">
-        <div class="hero-eyebrow"><span class="live-dot"></span>Live · Studio Enquiries</div>
-        <h1 class="hero-title">Janet Cruise <em>Halpin</em></h1>
-        <p class="hero-tag">Every message from your website gathers here — each one beside the painting that moved someone to write.</p>
+  <!-- Masthead -->
+  <header class="mast">
+    <div class="wrap mast-row">
+      <div class="brand">
+        <span class="brand-name">Janet Cruise Halpin</span>
+        <span class="brand-sub">Studio Enquiries</span>
       </div>
-      <div class="hero-count">
-        <div class="hero-count-n" id="stripCount">0</div>
-        <div class="hero-count-l">Total Enquiries</div>
-        <div class="hero-date" id="stripDate"></div>
+      <div class="mast-right">
+        <span class="live"><i class="dot"></i>Live</span>
+        <span class="mast-date" id="stripDate"></span>
+        <nav class="mast-actions">
+          <button class="btn-line" onclick="openEmails()" title="Collect every customer's email to copy or download">Email list</button>
+          <button class="btn-line" onclick="loadInquiries()" title="Reload the latest enquiries">Refresh</button>
+          <button class="btn-text" onclick="logout()" title="Log out">Sign out</button>
+        </nav>
       </div>
     </div>
   </header>
 
-  <!-- Toolbar / stats -->
-  <div class="toolbar">
-    <div class="toolbar-inner">
-      <div class="stat"><span class="stat-n gold" id="statToday">0</span><span class="stat-l">Today</span></div>
-      <div class="stat"><span class="stat-n" id="statWeek">0</span><span class="stat-l">This Week</span></div>
-      <div class="stat"><span class="stat-n" id="statTotal">0</span><span class="stat-l">All Time</span></div>
-      <div class="stat stat-top"><span class="stat-n" id="statTop">—</span><span class="stat-l">Most Loved Painting</span></div>
-      <div class="toolbar-actions">
-        <button class="btn btn-gold" onclick="openEmails()" title="Collect every customer's email to copy or download">✉ Email List</button>
-        <button class="btn btn-ghost" onclick="loadInquiries()" title="Reload the latest enquiries">↺ Refresh</button>
-        <button class="btn btn-plain" onclick="logout()" title="Log out of the dashboard">Sign Out</button>
+  <!-- Hero: a single work -->
+  <section class="hero">
+    <img class="hero-img" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_1600,h_640,c_fill,g_auto/Canopy.png" alt="Canopy by Janet Cruise Halpin">
+    <div class="wrap hero-cap">
+      <div class="hc-work">
+        <span class="hc-title">Canopy</span>
+        <span class="hc-meta">Oil on canvas · 120 × 150 cm</span>
       </div>
+      <div class="hc-count"><b id="stripCount">0</b> enquiries to date</div>
     </div>
-  </div>
+  </section>
 
-  <!-- Main -->
-  <main class="main">
+  <!-- Summary + stats -->
+  <section class="wrap summary">
+    <div>
+      <h1>Enquiries</h1>
+      <p>Messages from your website, gathered here as they arrive.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="statTotal">0</b><span>All time</span></div>
+      <div class="stat"><b id="statToday">0</b><span>Today</span></div>
+      <div class="stat"><b id="statWeek">0</b><span>This week</span></div>
+      <div class="stat wide"><b id="statTop">—</b><span>Most enquired</span></div>
+    </div>
+  </section>
 
+  <!-- Working area -->
+  <main class="wrap">
     <div class="note">
-      <img class="note-swatch" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_110,h_110,c_fill/Sweet_Summer.png" alt="">
-      <p class="note-text">
-        <strong>Welcome back, Janet.</strong> New enquiries arrive here on their own — no refreshing needed.
-        Tap <strong>Reply</strong> to write back, then <strong>Mark replied</strong> to keep your place.
-        The gold <strong>✉ Email List</strong> button gathers everyone's address for a newsletter.
-      </p>
+      <b>Welcome back, Janet.</b> New enquiries appear here automatically. Select <b>Reply</b> to write back, then <b>Mark replied</b> to keep your place. <b>Email list</b> collects every address for a newsletter.
     </div>
 
-    <div class="section-head">
-      <h2>Recent <em>Enquiries</em></h2>
-      <span class="rule"></span>
-    </div>
-
-    <div class="filter-row">
-      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
-      <button class="filter-btn" onclick="setFilter('new',this)">New</button>
-      <button class="filter-btn" onclick="setFilter('replied',this)">Replied</button>
-      <select class="sort-select" onchange="setSortAndRender(this.value)">
+    <div class="controls">
+      <div class="tabs">
+        <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+        <button class="filter-btn" onclick="setFilter('new',this)">New</button>
+        <button class="filter-btn" onclick="setFilter('replied',this)">Replied</button>
+      </div>
+      <select class="select" onchange="setSortAndRender(this.value)">
         <option value="newest">Newest first</option>
         <option value="oldest">Oldest first</option>
-        <option value="painting">By painting</option>
+        <option value="painting">By work</option>
       </select>
     </div>
 
     <div id="loadingState" class="state-msg" style="display:none">
       <div class="spinner"></div>
-      <h3>Gathering enquiries…</h3>
+      <h3>Loading enquiries</h3>
     </div>
     <div id="emptyState" class="state-msg" style="display:none">
       <h3>No enquiries yet</h3>
-      <p>When someone writes through your website it will appear here instantly, framed beside their chosen painting.</p>
+      <p>When someone writes through your website it will appear here instantly.</p>
     </div>
     <div id="setupState" class="state-msg" style="display:none">
       <h3>Almost ready</h3>
-      <p>Add your <strong>SUPABASE_URL</strong> and <strong>SUPABASE_ANON_KEY</strong> in the script below to connect the dashboard to your database.</p>
+      <p>Add your <b>SUPABASE_URL</b> and <b>SUPABASE_ANON_KEY</b> in the script below to connect the dashboard to your database.</p>
     </div>
     <div class="cards-grid" id="cardsGrid"></div>
 
-    <!-- Studio gallery ribbon -->
-    <section class="studio">
-      <div class="section-head">
-        <h2>From the <em>Studio</em></h2>
-        <span class="rule"></span>
+    <!-- Selected works -->
+    <section class="works">
+      <div class="works-head">
+        <h2>Selected Works</h2>
+        <span>Oil on canvas · Original paintings</span>
       </div>
-      <div class="gallery-strip">
-        <div class="gframe" data-title="Mayloom"><img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_360,h_480,c_fill/Mayloom.png" alt="Mayloom" loading="lazy"></div>
-        <div class="gframe" data-title="Canopy"><img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_360,h_480,c_fill/Canopy.png" alt="Canopy" loading="lazy"></div>
-        <div class="gframe" data-title="Touching Green"><img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_360,h_480,c_fill/Touching_Green.png" alt="Touching Green" loading="lazy"></div>
-        <div class="gframe" data-title="Red Leaf"><img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_360,h_480,c_fill/Red_Leaf.png" alt="Red Leaf" loading="lazy"></div>
-        <div class="gframe" data-title="Moon Tree"><img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_360,h_480,c_fill/Moon_Tree.png" alt="Moon Tree" loading="lazy"></div>
-        <div class="gframe" data-title="Leaf and Water"><img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_360,h_480,c_fill/Leaf_and_Water.png" alt="Leaf and Water" loading="lazy"></div>
-        <div class="gframe" data-title="Petals on Green"><img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_360,h_480,c_fill/Petals_on_Green.png" alt="Petals on Green" loading="lazy"></div>
-        <div class="gframe" data-title="Blue Falls"><img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_360,h_480,c_fill/Blue_Falls.png" alt="Blue Falls" loading="lazy"></div>
+      <div class="works-grid">
+        <div class="work"><figure><img class="work-img" loading="lazy" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_460,h_575,c_fill,g_auto/Mayloom.png" alt="Mayloom"><figcaption><span class="w-title">Mayloom</span><span class="w-meta">120 × 150 cm</span></figcaption></figure></div>
+        <div class="work"><figure><img class="work-img" loading="lazy" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_460,h_575,c_fill,g_auto/Touching_Green.png" alt="Touching Green"><figcaption><span class="w-title">Touching Green</span><span class="w-meta">150 × 120 cm</span></figcaption></figure></div>
+        <div class="work"><figure><img class="work-img" loading="lazy" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_460,h_575,c_fill,g_auto/Red_Leaf.png" alt="Red Leaf"><figcaption><span class="w-title">Red Leaf</span><span class="w-meta">100 × 100 cm</span></figcaption></figure></div>
+        <div class="work"><figure><img class="work-img" loading="lazy" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_460,h_575,c_fill,g_auto/Moon_Tree.png" alt="Moon Tree"><figcaption><span class="w-title">Moon Tree</span><span class="w-meta">70 × 70 cm</span></figcaption></figure></div>
+        <div class="work"><figure><img class="work-img" loading="lazy" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_460,h_575,c_fill,g_auto/Petals_on_Green.png" alt="Petals on Green"><figcaption><span class="w-title">Petals on Green</span><span class="w-meta">80 × 80 cm</span></figcaption></figure></div>
+        <div class="work"><figure><img class="work-img" loading="lazy" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_460,h_575,c_fill,g_auto/Blue_Falls.png" alt="Blue Falls"><figcaption><span class="w-title">Blue Falls</span><span class="w-meta">100 × 70 cm</span></figcaption></figure></div>
+        <div class="work"><figure><img class="work-img" loading="lazy" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_460,h_575,c_fill,g_auto/Leaf_and_Water.png" alt="Leaf and Water"><figcaption><span class="w-title">Leaf and Water</span><span class="w-meta">100 × 100 cm</span></figcaption></figure></div>
+        <div class="work"><figure><img class="work-img" loading="lazy" src="https://res.cloudinary.com/dasjyomdb/image/upload/w_460,h_575,c_fill,g_auto/Sweet_Summer.png" alt="Sweet Summer"><figcaption><span class="w-title">Sweet Summer</span><span class="w-meta">100 × 100 cm</span></figcaption></figure></div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_300,h_300,c_fill/Last_Summer.png" alt="">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_300,h_300,c_fill/Sweet_Summer.png" alt="">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_300,h_300,c_fill/Holly_and_Beach.png" alt="">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_300,h_300,c_fill/Dancing.png" alt="">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_300,h_300,c_fill/Touching_Green.png" alt="">
-    <img src="https://res.cloudinary.com/dasjyomdb/image/upload/w_300,h_300,c_fill/Blue_Mantle.png" alt="">
-    <div class="footer-wash">
-      <div class="footer-title">Janet Cruise Halpin</div>
-      <div class="footer-sub">Original Paintings · Studio Enquiries</div>
-      <div class="footer-sig">Oil on canvas — Ireland</div>
+  <footer class="foot">
+    <div class="wrap foot-row">
+      <span class="brand-name">Janet Cruise Halpin</span>
+      <span class="foot-meta">Original paintings · Studio enquiries · Ireland</span>
     </div>
   </footer>
 </div>
@@ -560,12 +374,12 @@ a{color:inherit}
 <div class="email-modal-bg" id="emailModalBg" onclick="if(event.target===this)closeEmails()">
   <div class="email-modal">
     <button class="email-close" onclick="closeEmails()" aria-label="Close">✕</button>
-    <h2 class="email-modal-title">Customer <em>Emails</em></h2>
+    <h2 class="email-modal-title">Customer emails</h2>
     <p class="email-modal-sub" id="emailModalSub">—</p>
     <textarea class="email-textarea" id="emailList" readonly></textarea>
     <div class="email-actions">
-      <button class="card-reply-btn" id="copyEmailsBtn" onclick="copyEmails()">Copy all emails</button>
-      <button class="card-mark-btn" onclick="downloadEmailsCSV()">Download CSV</button>
+      <button class="btn-primary" id="copyEmailsBtn" onclick="copyEmails()">Copy all emails</button>
+      <button class="btn-line" onclick="downloadEmailsCSV()">Download CSV</button>
     </div>
     <p class="email-note">Only email people who have agreed to hear from you, and keep a record of their consent (GDPR). These are everyone who has contacted Janet through the site.</p>
   </div>
@@ -598,7 +412,7 @@ const configured = SUPABASE_URL !== 'YOUR_SUPABASE_URL';
 let sb, allInquiries = [], currentFilter = 'all', currentSort = 'newest';
 let replied = JSON.parse(localStorage.getItem('jch_replied') || '[]');
 
-const FALLBACK_ART = 'https://res.cloudinary.com/dasjyomdb/image/upload/w_88,h_88,c_fill/Canopy.png';
+const FALLBACK_ART = 'https://res.cloudinary.com/dasjyomdb/image/upload/w_92,h_92,c_fill/Canopy.png';
 
 /* ── Auth ─────────────────────────────────────────── */
 function tryLogin() {
@@ -609,7 +423,7 @@ function tryLogin() {
     document.getElementById('app').classList.add('visible');
     init();
   } else {
-    document.getElementById('loginError').textContent = 'That password doesn’t look right — try again.';
+    document.getElementById('loginError').textContent = 'That password doesn’t look right — please try again.';
     document.getElementById('pwInput').value = '';
   }
 }
@@ -714,44 +528,33 @@ function renderAll() {
   grid.innerHTML = list.map(inq => cardHTML(inq)).join('');
 }
 
-function initial(name){
-  const s = String(name||'').trim();
-  return s ? s[0].toUpperCase() : '✦';
-}
-
 function cardHTML(inq) {
   const isNew   = !replied.includes(inq.id);
   const date    = new Date(inq.created_at);
   const timeStr = date.toLocaleString('en-IE', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
   const painting = inq.painting || '';
-  const paintingBare = painting.replace(/\s*\(.*\)$/,'') || 'General Enquiry';
+  const paintingBare = painting.replace(/\s*\(.*\)$/,'') || 'General enquiry';
   const hasImg  = inq.painting_img && inq.painting_img.length > 0;
-  const replyLink = `mailto:${inq.email}?subject=Re: Your Enquiry — ${encodeURIComponent(paintingBare)}&body=Hi ${encodeURIComponent(inq.name)},%0A%0AThank you for your interest in "${encodeURIComponent(paintingBare)}"…`;
+  const replyLink = `mailto:${inq.email}?subject=Re: Your enquiry — ${encodeURIComponent(paintingBare)}&body=Hi ${encodeURIComponent(inq.name)},%0A%0AThank you for your interest in "${encodeURIComponent(paintingBare)}"…`;
 
   return `<article class="inq-card" id="card-${inq.id}">
-    <div class="card-painting">
-      ${hasImg
-        ? `<img src="${inq.painting_img}" alt="${paintingBare}" loading="lazy">`
-        : `<div class="card-painting-placeholder"><span>✦</span></div>`}
-      <div class="card-label">
-        <div class="card-painting-name ${!inq.painting?'general':''}">${paintingBare}</div>
-        ${isNew ? '<span class="card-badge-new">New</span>' : ''}
-      </div>
-    </div>
+    ${hasImg
+      ? `<div class="card-media"><img src="${inq.painting_img}" alt="${paintingBare}" loading="lazy"></div>`
+      : `<div class="card-media card-media--empty"><span>General enquiry</span></div>`}
     <div class="card-body">
-      <div class="card-avatar">${initial(inq.name)}</div>
-      <div class="card-who">
-        <div class="card-name">${esc(inq.name)}</div>
-        <div class="card-email"><a href="mailto:${esc(inq.email)}">${esc(inq.email)}</a></div>
-        <div class="card-time">${timeStr}</div>
+      <div class="card-workline">
+        <span class="card-work ${!inq.painting?'general':''}">${paintingBare}</span>
+        ${isNew ? '<span class="card-new">New</span>' : ''}
       </div>
+      <div class="card-name">${esc(inq.name)}</div>
+      <div class="card-email"><a href="mailto:${esc(inq.email)}">${esc(inq.email)}</a></div>
+      <div class="card-msg">${esc(inq.message)}</div>
+      <div class="card-time">${timeStr}</div>
     </div>
-    <div class="card-msg">${esc(inq.message)}</div>
     <div class="card-actions">
-      <a href="${replyLink}" class="card-reply-btn" onclick="markReplied('${inq.id}')">✎ Reply by Email</a>
-      <button class="card-mark-btn ${replied.includes(inq.id)?'done':''}"
-        onclick="markReplied('${inq.id}')">
-        ${replied.includes(inq.id) ? '✓ Replied' : 'Mark replied'}
+      <a href="${replyLink}" class="btn-primary" onclick="markReplied('${inq.id}')">Reply</a>
+      <button class="btn-line ${replied.includes(inq.id)?'is-done':''}" onclick="markReplied('${inq.id}')">
+        ${replied.includes(inq.id) ? 'Replied' : 'Mark replied'}
       </button>
     </div>
   </article>`;
@@ -782,7 +585,7 @@ function markReplied(id) {
 /* ── New inquiry toast ───────────────────────────── */
 function showNewToast(inq) {
   const toast = document.getElementById('newToast');
-  document.getElementById('newToastName').textContent = (inq.name || 'Someone') + ' just enquired';
+  document.getElementById('newToastName').textContent = (inq.name || 'Someone') + ' enquired';
   document.getElementById('newToastPainting').textContent = (inq.painting||'General enquiry').replace(/\s*\(.*\)$/,'');
   const img = document.getElementById('newToastImg');
   img.src = inq.painting_img || FALLBACK_ART;
@@ -821,7 +624,7 @@ function copyEmails() {
   const ta = document.getElementById('emailList');
   const btn = document.getElementById('copyEmailsBtn');
   ta.select();
-  const done = () => { const t = btn.textContent; btn.textContent = '✓ Copied'; setTimeout(() => btn.textContent = t, 1500); };
+  const done = () => { const t = btn.textContent; btn.textContent = 'Copied'; setTimeout(() => btn.textContent = t, 1500); };
   if (navigator.clipboard) navigator.clipboard.writeText(ta.value).then(done).catch(() => { document.execCommand('copy'); done(); });
   else { document.execCommand('copy'); done(); }
 }
