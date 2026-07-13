@@ -238,12 +238,22 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
 
 /* ═══ HOME ═══════════════════════════════════════════════════════════ */
 
-/* hero — full-bleed, minimal chrome, slow reveal */
+/* hero — full-bleed, minimal chrome, slow reveal.
+   Sticky + z-index 0 so the content below (.over-hero) scrolls up and
+   glides over it — the pinned-hero reveal, kept subtle. */
 .hero{
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 0;
   height: 100svh;
   min-height: 560px;
   overflow: hidden;
+}
+/* everything after the hero rides over it on a solid canvas */
+.over-hero{
+  position: relative;
+  z-index: 1;
+  background: var(--ink);
 }
 .hero-media{
   position: absolute; inset: 0;
@@ -415,8 +425,19 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
   font-size: 15px;
 }
 
+/* clickable jump-to-collection buttons */
+.section-jump{ display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.jump-btn{
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 11px 24px;
+  border: 1px solid var(--line-strong);
+  transition: color .5s var(--ease), border-color .5s var(--ease);
+}
+.jump-btn:hover{ color: var(--gold); border-color: var(--gold); }
+
 /* ── two distinct collections, each a gapless justified grid ──────── */
-.collection{ margin-top: clamp(64px, 9vw, 118px); }
+.collection{ margin-top: clamp(64px, 9vw, 118px); scroll-margin-top: 92px; }
 .collection:first-of-type{ margin-top: clamp(28px, 4vw, 54px); }
 .collection-head{ margin-bottom: clamp(22px, 3vw, 36px); }
 .collection-head .label{ display: block; margin-bottom: 12px; }
