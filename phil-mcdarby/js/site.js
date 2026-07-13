@@ -107,7 +107,8 @@ function justifiedCard(work) {
   return a;
 }
 
-function renderJustified(container, works) {
+function renderJustified(container, works, opts = {}) {
+  const maxPerRow = opts.maxPerRow || 4;   // cap so tall/portrait works stay generously sized
   const build = () => {
     const cw = container.clientWidth;
     if (!cw) return;
@@ -120,9 +121,12 @@ function renderJustified(container, works) {
       while (k < works.length) {
         sumAR += works[k].w / works[k].h;
         row.push(works[k]); k++;
-        if (sumAR * target >= cw) break;
+        if (sumAR * target >= cw) break;      // filled by width
+        if (row.length >= maxPerRow) break;    // filled by the per-row cap
       }
-      const full = sumAR * target >= cw;         // filled row → stretch to width
+      const ranOut = k >= works.length;
+      const filled = sumAR * target >= cw;
+      const full = filled || !ranOut;            // stretch to full width unless it's the leftover last row
       const h = full ? cw / sumAR : target;       // last row → natural target height
       const rowEl = document.createElement('div');
       rowEl.className = 'jrow' + (full ? '' : ' jrow-last');
