@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://janet-cruise-halpin-xpgs.vercel.app/phil-mcdarby/img/the-amber-dragons-hoard.jpg">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f0d0b'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23b99b5e' text-anchor='middle'%3EPM%3C/text%3E%3C/svg%3E">
-<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/CormorantGaramond.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/Fraunces.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/Inter.woff2" crossorigin>
 <link rel="stylesheet" href="/phil-mcdarby/css/site.css">
 </head>
@@ -33,22 +33,32 @@
   </nav>
 </header>
 
-<main class="wrap">
-  <div class="page-head">
+<main>
+  <div class="wrap page-head">
     <span class="label label--gold reveal in">The collection</span>
     <h1 class="page-title reveal in">The Work</h1>
-    <p class="page-intro reveal in" data-delay="1">Sixty-two works — hand-painted Wood Dragons
-    and the Irish woods that gave rise to them. Every piece is available as a fine-art print;
-    open any work to enquire.</p>
+    <p class="page-intro reveal in" data-delay="1">Two distinct bodies of work — the invented world
+    of the Wood Dragons, and photographs from the woods, wildlife and mountains of Ireland.
+    Every piece is available as a fine-art print; open any work to enquire.</p>
   </div>
 
-  <div class="filters" role="group" aria-label="Filter works by collection">
-    <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All works</button>
-    <button class="filter-btn" type="button" data-filter="digital-art" aria-pressed="false">Digital art</button>
-    <button class="filter-btn" type="button" data-filter="photography" aria-pressed="false">Photography</button>
-  </div>
+  <section class="collection" aria-labelledby="h-digital">
+    <div class="wrap collection-head reveal">
+      <span class="label label--gold" id="h-digital">Digital Art</span>
+      <p class="collection-note">High-fantasy worlds — dragons, faery woods and luminous myth,
+      built from painting and his own photography.</p>
+    </div>
+    <div class="jgrid" id="grid-digital"></div>
+  </section>
 
-  <div class="gallery-grid" id="gallery-grid"></div>
+  <section class="collection" aria-labelledby="h-photo">
+    <div class="wrap collection-head reveal">
+      <span class="label label--gold" id="h-photo">Photography</span>
+      <p class="collection-note">Fine-art photographs from Phil's wanderings — the woods, wildlife
+      and changing light of the Irish landscape.</p>
+    </div>
+    <div class="jgrid" id="grid-photo"></div>
+  </section>
 </main>
 
 <footer class="footer">
@@ -69,45 +79,12 @@
 <script src="/phil-mcdarby/js/works-data.js"></script>
 <script src="/phil-mcdarby/js/site.js"></script>
 <script>
-  /* Editorial grid: span decided by each work's own aspect ratio, with a
-     gentle vertical inset every few pieces so the rows never feel rigid. */
+  /* Two joined justified grids — one per body of work. */
   (() => {
-    const grid = document.getElementById('gallery-grid');
-    const buttons = document.querySelectorAll('.filter-btn');
-
-    const spanFor = (w, i) => {
-      const ar = w.w / w.h;
-      if (ar > 2.6) return 'span-6';                 // true panoramas run full width
-      if (ar > 1.9) return 'span-4';                 // wide landscapes
-      if (ar > 1.15) return i % 5 === 0 ? 'span-4' : 'span-3';
-      return '';                                     // portraits stay narrow (span 2)
-    };
-
-    const render = (filter) => {
-      grid.innerHTML = '';
-      const list = filter === 'all' ? WORKS : WORKS.filter((w) => w.collection === filter);
-      list.forEach((w, i) => {
-        const card = workCard(w, { eager: i < 3, underCaption: true });
-        const span = spanFor(w, i);
-        if (span) card.classList.add(span);
-        if (i % 4 === 1 && !span.includes('6')) card.classList.add('inset');
-        grid.appendChild(card);
-      });
-      observeReveals(grid);
-      watchArtworkLoads(grid);
-    };
-
-    buttons.forEach((btn) => btn.addEventListener('click', () => {
-      if (btn.getAttribute('aria-pressed') === 'true') return;
-      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-      grid.classList.add('switching');
-      setTimeout(() => {
-        render(btn.dataset.filter);
-        requestAnimationFrame(() => grid.classList.remove('switching'));
-      }, 500);
-    }));
-
-    render('all');
+    renderJustified(document.getElementById('grid-digital'),
+      WORKS.filter((w) => w.collection === 'digital-art'));
+    renderJustified(document.getElementById('grid-photo'),
+      WORKS.filter((w) => w.collection === 'photography'));
   })();
 </script>
 </body>
