@@ -322,8 +322,37 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
 
 /* large serif statement between sections */
 .statement{
-  padding: clamp(110px, 15vw, 210px) 0 clamp(70px, 9vw, 130px);
+  padding: clamp(96px, 13vw, 180px) 0 clamp(40px, 5vw, 70px);
   max-width: 1020px;
+}
+
+/* mood band — full-bleed cinematic breather; deliberately unlike the
+   gallery grid (no hover, no caption, not clickable) so it never reads
+   as a work you can open */
+.mood-band{
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 54vh, 620px);
+  overflow: hidden;
+  margin: clamp(24px, 4vw, 56px) 0 clamp(56px, 8vw, 110px);
+}
+.mood-band img{
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 58%;
+}
+.mood-scrim{
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to top, rgba(15,13,11,.6) 0%, rgba(15,13,11,0) 40%),
+    linear-gradient(to right, rgba(15,13,11,.5), rgba(15,13,11,0) 55%);
+}
+.mood-line{
+  position: absolute; left: var(--gutter); bottom: clamp(30px, 5vw, 58px);
+  max-width: 22ch;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: clamp(24px, 3.4vw, 44px); line-height: 1.16;
+  color: var(--text);
+  text-shadow: 0 1px 26px rgba(11, 10, 8, .72), 0 1px 6px rgba(11, 10, 8, .5);
 }
 .statement p{
   font-family: var(--serif);
@@ -402,7 +431,7 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
 
 .home-cta{
   text-align: center;
-  padding: clamp(80px, 11vw, 150px) 0 0;
+  padding: clamp(52px, 7vw, 96px) 0 0;
 }
 .home-cta .label{ display: block; margin-bottom: 26px; }
 

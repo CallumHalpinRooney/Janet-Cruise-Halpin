@@ -126,7 +126,9 @@ function renderJustified(container, works, opts = {}) {
       }
       const ranOut = k >= works.length;
       const filled = sumAR * target >= cw;
-      const full = filled || !ranOut;            // stretch to full width unless it's the leftover last row
+      // stretch to full width unless it's the leftover last row — but on
+      // curated strips (fillLast) always fill so nothing looks cut off
+      const full = filled || !ranOut || opts.fillLast;
       const h = full ? cw / sumAR : target;       // last row → natural target height
       const rowEl = document.createElement('div');
       rowEl.className = 'jrow' + (full ? '' : ' jrow-last');
