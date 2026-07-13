@@ -1,26 +1,26 @@
 /* ═══════════════════════════════════════════════════════════════════════
    PHIL McDARBY — private-gallery viewing room
    The images are the entire product. Everything here recedes: a deep warm
-   charcoal canvas, one refined serif (Cormorant Garamond) for the few
+   charcoal canvas, one characterful serif (Fraunces) for the few
    large statements, a quiet sans (Inter) for labels and UI, hairline
    rules, and slow confident motion. Nothing competes with the work.
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ── self-hosted variable fonts (latin) — no third-party requests ───── */
 @font-face{
-  font-family: 'Cormorant Garamond';
+  font-family: 'Fraunces';
   font-style: normal;
-  font-weight: 300 700;
+  font-weight: 300 600;
   font-display: swap;
-  src: url('../fonts/CormorantGaramond.woff2') format('woff2');
+  src: url('../fonts/Fraunces.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face{
-  font-family: 'Cormorant Garamond';
+  font-family: 'Fraunces';
   font-style: italic;
-  font-weight: 300 700;
+  font-weight: 300 500;
   font-display: swap;
-  src: url('../fonts/CormorantGaramond-italic.woff2') format('woff2');
+  src: url('../fonts/Fraunces-italic.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face{
@@ -45,7 +45,7 @@
   --gold:       #b99b5e;   /* used sparingly: labels, active states */
 
   /* type */
-  --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+  --serif: 'Fraunces', 'Times New Roman', serif;
   --sans:  'Inter', system-ui, -apple-system, sans-serif;
 
   /* motion — everything eases slowly and confidently */
@@ -263,45 +263,51 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
     linear-gradient(to bottom, rgba(15,13,11,.42) 0%, rgba(15,13,11,0) 30%),
     linear-gradient(to top,    rgba(15,13,11,.88) 0%, rgba(15,13,11,0) 52%);
 }
+/* bottom-left, editorial — not the dead-centre "template hero" */
 .hero-content{
-  position: absolute; left: 0; right: 0; bottom: clamp(56px, 11vh, 120px);
-  text-align: center;
+  position: absolute; left: 0; right: 0; bottom: clamp(48px, 8vh, 92px);
+  text-align: left;
   padding-inline: var(--gutter);
+  max-width: 900px;
   animation: hero-copy 2.4s var(--ease) .9s both;
-  text-shadow: 0 1px 30px rgba(11, 10, 8, .75), 0 1px 8px rgba(11, 10, 8, .5);
+  text-shadow: 0 1px 30px rgba(11, 10, 8, .7), 0 1px 8px rgba(11, 10, 8, .45);
 }
 @keyframes hero-copy{
   from{ opacity: 0; transform: translateY(22px); }
   to  { opacity: 1; transform: none; }
 }
-.hero-kicker{ margin-bottom: 22px; }
+.hero-kicker{ margin-bottom: 20px; }
 .hero-title{
   font-family: var(--serif);
-  font-size: clamp(52px, 9vw, 118px);
-  font-weight: 300;
-  line-height: 1.02;
-  letter-spacing: .04em;
+  font-optical-sizing: auto;
+  font-size: clamp(54px, 9.5vw, 122px);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.01em;
 }
 .hero-sub{
-  margin-top: 18px;
+  margin-top: 20px;
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(17px, 2vw, 22px);
+  font-size: clamp(19px, 2.3vw, 27px);
   font-weight: 300;
+  color: var(--text);
+  letter-spacing: .005em;
+}
+.hero-desc{
+  margin-top: 18px;
+  max-width: 54ch;
+  font-family: var(--sans);
+  font-size: clamp(14px, 1.4vw, 16px);
+  font-weight: 300;
+  line-height: 1.65;
   color: var(--text-dim);
-  letter-spacing: .04em;
 }
 .hero-credit{
   position: absolute; right: var(--gutter); bottom: 24px;
   font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
   color: rgba(233,227,215,.44);
   animation: hero-copy 2.4s var(--ease) 1.6s both;
-}
-.hero-cue{
-  position: absolute; left: 50%; bottom: 0;
-  width: 1px; height: 56px;
-  background: linear-gradient(to bottom, transparent, rgba(233,227,215,.5));
-  animation: hero-copy 2.4s var(--ease) 2s both;
 }
 
 /* large serif statement between sections */
@@ -407,6 +413,45 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
   max-width: 56ch;
   color: var(--text-dim);
   font-size: 15px;
+}
+
+/* ── two distinct collections, each a gapless justified grid ──────── */
+.collection{ margin-top: clamp(64px, 9vw, 118px); }
+.collection:first-of-type{ margin-top: clamp(28px, 4vw, 54px); }
+.collection-head{ margin-bottom: clamp(22px, 3vw, 36px); }
+.collection-head .label{ display: block; margin-bottom: 12px; }
+.collection-note{ color: var(--text-dim); font-size: 15px; max-width: 52ch; }
+
+/* justified grid — images joined edge to edge, no gutters */
+.jgrid{ width: 100%; }
+.jrow{ display: flex; width: 100%; }
+.jrow-last{ justify-content: flex-start; }
+.jcell{
+  position: relative; display: block; overflow: hidden;
+  min-width: 0; background: var(--ink-2);
+}
+.jcell .artwork{
+  width: 100%; height: 100%;
+  transition: opacity 1.2s var(--ease), transform 2.4s var(--ease);
+}
+.jcell:hover .artwork,
+.jcell:focus-visible .artwork{ transform: scale(1.045); }
+.jcell figcaption{
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 42px 18px 14px;
+  background: linear-gradient(to top, rgba(15,13,11,.85), transparent);
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+}
+.jcell:hover figcaption,
+.jcell:focus-visible figcaption{ opacity: 1; transform: none; }
+.jcell .jt{ font-family: var(--serif); font-size: clamp(17px, 1.5vw, 21px); font-weight: 400; letter-spacing: .01em; }
+.jcell .jc{ font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap; }
+/* touch devices can't hover — keep a faint always-on caption */
+@media (hover: none){
+  .jcell figcaption{ opacity: 1; transform: none; padding-top: 30px;
+    background: linear-gradient(to top, rgba(15,13,11,.7), transparent); }
 }
 
 .filters{
@@ -789,6 +834,7 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
   .work-card figcaption{ display: none; }  /* hover captions replaced by under-captions */
   .work-nav a{ max-width: 48%; }
   .filters{ flex-wrap: wrap; gap: 16px 26px; }
+  .hero-desc{ display: none; }   /* keep the mobile hero cinematic, not text-heavy */
 }
 /* touch devices never see hover captions — under-captions carry it */
 @media (hover: none){

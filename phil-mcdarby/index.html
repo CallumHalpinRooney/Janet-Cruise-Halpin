@@ -32,10 +32,10 @@
 </script>
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f0d0b'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23b99b5e' text-anchor='middle'%3EPM%3C/text%3E%3C/svg%3E">
-<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/CormorantGaramond.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/Fraunces.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/phil-mcdarby/fonts/Inter.woff2" crossorigin>
 <link rel="stylesheet" href="/phil-mcdarby/css/site.css">
-<link rel="preload" as="image" href="/phil-mcdarby/img/glencree-ii.jpg">
+<link rel="preload" as="image" href="/phil-mcdarby/img/the-golden-wood.jpg">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -53,18 +53,20 @@
   <!-- ── hero — one stunning image, minimal chrome, slow reveal ────── -->
   <section class="hero" aria-label="Featured artwork">
     <div class="hero-media">
-      <img src="/phil-mcdarby/img/glencree-ii.jpg"
-           alt="Glencree (II) — landscape photograph by Phil McDarby: a moss-covered river running through ancient woodland at Glencree"
+      <img src="/phil-mcdarby/img/the-golden-wood.jpg"
+           alt="The Golden Wood — photograph by Phil McDarby: low golden light and mist glowing through a bare winter woodland"
            fetchpriority="high">
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-content">
-      <p class="label label--gold hero-kicker">Digital Artist&ensp;·&ensp;Photographer&ensp;·&ensp;Composer</p>
+      <p class="label label--gold hero-kicker">Dublin, Ireland</p>
       <h1 class="hero-title">Phil McDarby</h1>
-      <p class="hero-sub">Capturing a sense of magic and wonder</p>
+      <p class="hero-sub">Capturing a sense of magic and wonder.</p>
+      <p class="hero-desc">A digital artist and photographer working in two worlds — high-fantasy
+      art of dragons and faery woods, and fine-art photographs of the Irish landscape.
+      Original prints of both, made to order.</p>
     </div>
-    <p class="hero-credit">Glencree (II)</p>
-    <span class="hero-cue" aria-hidden="true"></span>
+    <p class="hero-credit">The Golden Wood — photography</p>
   </section>
 
   <!-- ── statement — his real words, set like a catalogue epigraph ─── -->
@@ -76,12 +78,16 @@
     </div>
   </section>
 
-  <!-- ── selected works — editorial flow, each piece breathing ─────── -->
-  <section class="wrap featured" aria-label="Selected works">
-    <p class="label reveal" style="display:block;margin-bottom:clamp(40px,6vw,80px)">Selected works</p>
-    <div class="works-flow" id="featured-flow"></div>
-    <div class="home-cta reveal">
-      <span class="label">Sixty-two works · Every piece available as a fine-art print</span>
+  <!-- ── selected works — two distinct bodies of work, joined grids ── -->
+  <section class="featured" aria-label="Selected works">
+    <div class="wrap"><span class="label label--gold reveal in" style="display:block">Selected — Digital Art</span></div>
+    <div class="jgrid" id="feat-digital" style="margin-top:clamp(22px,3vw,38px)"></div>
+
+    <div class="wrap"><span class="label label--gold reveal" style="display:block;margin-top:clamp(56px,7vw,100px)">Selected — Photography</span></div>
+    <div class="jgrid" id="feat-photo" style="margin-top:clamp(22px,3vw,38px)"></div>
+
+    <div class="wrap home-cta reveal">
+      <span class="label">Seventy-nine works · Every piece available as a fine-art print</span>
       <a class="btn" href="/phil-mcdarby/gallery/">View the full gallery</a>
     </div>
   </section>
@@ -105,13 +111,13 @@
 <script src="/phil-mcdarby/js/works-data.js"></script>
 <script src="/phil-mcdarby/js/site.js"></script>
 <script>
-  // curated featured selection, laid out by the 6-step editorial cycle
+  // curated selection per body of work, shown as joined justified strips
   (() => {
-    const flow = document.getElementById('featured-flow');
-    const picks = WORKS.filter((w) => w.featured);
-    picks.forEach((w, i) => flow.appendChild(workCard(w, { eager: i < 2, underCaption: true })));
-    observeReveals(flow);
-    watchArtworkLoads(flow);
+    const pick = (slugs) => slugs.map((s) => WORKS.find((w) => w.slug === s)).filter(Boolean);
+    renderJustified(document.getElementById('feat-digital'),
+      pick(['the-amber-dragons-hoard', 'a-dance-of-light', 'the-green-man-awakens', 'auri', 'heart-of-the-glade']));
+    renderJustified(document.getElementById('feat-photo'),
+      pick(['stag-in-the-greenwood', 'the-blue-valley', 'red-squirrel', 'deer-at-dusk', 'pink-dawn', 'the-fawn']));
   })();
 </script>
 </body>

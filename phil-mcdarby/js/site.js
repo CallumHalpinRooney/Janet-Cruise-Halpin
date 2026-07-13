@@ -87,6 +87,63 @@ const escapeHtml = (s) => s.replace(/[&<>"']/g, (c) => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
 ));
 
+/* ── justified (gapless) layout — images edge-to-edge, no gutters ─────
+   Greedy rows scaled to fill the container's full width; each cell's
+   aspect ratio matches its image, so nothing is cropped and there are
+   no gaps ("all joined"). Rebuilds on resize. */
+function justifiedCard(work) {
+  const a = document.createElement('a');
+  a.className = 'jcell';
+  a.href = `${BASE}work/?w=${encodeURIComponent(work.slug)}`;
+  a.setAttribute('aria-label', `${work.title} — view artwork`);
+  a.innerHTML = `
+    <img class="artwork" src="${BASE}${work.image}"
+         alt="${escapeHtml(work.title)} — ${COLLECTIONS[work.collection]} by Phil McDarby"
+         width="${work.w}" height="${work.h}" loading="lazy" decoding="async">
+    <figcaption aria-hidden="true">
+      <span class="jt">${escapeHtml(work.title)}</span>
+      <span class="jc">${COLLECTIONS[work.collection]}</span>
+    </figcaption>`;
+  return a;
+}
+
+function renderJustified(container, works) {
+  const build = () => {
+    const cw = container.clientWidth;
+    if (!cw) return;
+    const target = cw >= 1000 ? 400 : cw >= 640 ? 320 : 260;
+    container.innerHTML = '';
+    let i = 0;
+    while (i < works.length) {
+      const row = [];
+      let sumAR = 0, k = i;
+      while (k < works.length) {
+        sumAR += works[k].w / works[k].h;
+        row.push(works[k]); k++;
+        if (sumAR * target >= cw) break;
+      }
+      const full = sumAR * target >= cw;         // filled row → stretch to width
+      const h = full ? cw / sumAR : target;       // last row → natural target height
+      const rowEl = document.createElement('div');
+      rowEl.className = 'jrow' + (full ? '' : ' jrow-last');
+      rowEl.style.height = h + 'px';
+      row.forEach((w) => {
+        const ar = w.w / w.h;
+        const cell = justifiedCard(w);
+        if (full) cell.style.flex = ar + ' 1 0';
+        else { cell.style.width = (h * ar) + 'px'; cell.style.flex = '0 0 auto'; }
+        rowEl.appendChild(cell);
+      });
+      container.appendChild(rowEl);
+      i = k;
+    }
+    watchArtworkLoads(container);
+  };
+  build();
+  let t;
+  window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(build, 160); });
+}
+
 /* ── lightbox — the piece, huge, on a dark backdrop, nothing else ───── */
 const lightbox = (() => {
   let el = null;
