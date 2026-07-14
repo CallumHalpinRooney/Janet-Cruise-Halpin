@@ -3,9 +3,6 @@
   "rewrites": [
     { "source": "/.netlify/functions/:fn", "destination": "/api/:fn" }
   ],
-  "redirects": [
-    { "source": "/admin/:path*", "destination": "/", "permanent": false }
-  ],
   "headers": [
     {
       "source": "/vintry/(.*)",
