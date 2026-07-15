@@ -10,8 +10,8 @@
 // No npm packages required — this calls Stripe's API directly.
 
 // ── Trusted price list (must match SIZE_PRICE in index.html) ─────────────────
-// Two standard sizes; square canvases use 50x50 instead of 50x70.
-const SIZE_PRICE = { '40x60': 49, '50x70': 59, '50x50': 55 };
+// Square canvases print at 30x30 or 40x40; rectangular works at a single 60x42.
+const SIZE_PRICE = { '30x30': 39, '40x40': 55, '60x42': 69 };
 const SHIPPING   = { IE: 5, GB: 8, EU: 7, US: 12, AU: 15, WW: 15 };
 
 exports.handler = async (event) => {
