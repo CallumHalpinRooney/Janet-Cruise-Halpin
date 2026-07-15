@@ -8,8 +8,8 @@
 //   STRIPE_SECRET_KEY = sk_live_...   (or sk_test_... while testing)
 
 // ── Trusted price list (must match SIZE_PRICE in index.html) ─────────────────
-// Square canvases print at 30x30 or 40x40; rectangular works at a single 60x42.
-const SIZE_PRICE = { '30x30': 60, '40x40': 70, '60x42': 95 };
+// Square canvases print at 30x30 or 40x40; rectangular works at a single 60x40.
+const SIZE_PRICE = { '30x30': 60, '40x40': 70, '60x40': 95 };
 const SHIPPING   = { IE: 5, GB: 8, EU: 7, US: 12, AU: 15, WW: 15 };
 
 module.exports = async (req, res) => {
