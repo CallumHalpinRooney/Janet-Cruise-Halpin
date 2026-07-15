@@ -3237,9 +3237,9 @@
         badge = `<div class="print-run-badge">Limited · ${total} remaining</div>`;
       } else if (d.printed && anyOut) {
         badge = `<div class="out-of-stock-badge" style="background:rgba(200,135,26,0.88)">Limited Sizes</div>`;
-      } else if (isOD) {
-        badge = `<div class="on-demand-badge">Print to Order</div>`;
       }
+      // On-demand prints intentionally get NO image sticker — the "Printed to
+      // order · ships in 5-7 days" note below the image communicates this instead.
 
       // Price label
       const priceLabel = notAvail
