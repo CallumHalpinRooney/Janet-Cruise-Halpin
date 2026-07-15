@@ -22,7 +22,9 @@ module.exports = async (req, res) => {
 
   try {
     const payload = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
-    const { items = [], shippingCode = 'IE', email = '' } = payload;
+    const { items = [], shippingCode = 'IE', email = '', name = '', phone = '', address = {} } = payload;
+    // Map the site's shipping code to an ISO-2 country for the Stripe shipping object.
+    const ISO = { IE: 'IE', GB: 'GB', EU: 'DE', US: 'US', AU: 'AU', WW: 'IE' };
 
     // Recompute the total from trusted per-size prices
     let total = 0;
@@ -47,8 +49,27 @@ module.exports = async (req, res) => {
     body.append('currency', 'eur');
     body.append('payment_method_types[]', 'card');
     if (email) body.append('receipt_email', email);
+
+    // Human-readable summary (shows in the Stripe dashboard).
     body.append('metadata[items]', items.map(i => `${i.id}:${i.size}x${i.qty}`).join(', ').slice(0, 480));
     body.append('metadata[shipping]', shippingCode);
+    if (email) body.append('metadata[email]', email.slice(0, 200));
+    if (name)  body.append('metadata[name]', name.slice(0, 200));
+    // Machine-readable cart the webhook uses to build the Gelato order.
+    // Format: id~size~qty|id~size~qty  (size may contain 'x', e.g. 30x30)
+    body.append('metadata[fulfil]', items.map(i => `${i.id}~${i.size}~${i.qty}`).join('|').slice(0, 480));
+
+    // Attach the shipping address to the PaymentIntent so the webhook can fulfil
+    // without the browser. (Stripe stores this as first-class shipping data.)
+    if (address && (address.line1 || name)) {
+      if (name)  body.append('shipping[name]', name);
+      if (phone) body.append('shipping[phone]', phone);
+      body.append('shipping[address][line1]', address.line1 || '');
+      if (address.line2) body.append('shipping[address][line2]', address.line2);
+      body.append('shipping[address][city]', address.city || '');
+      body.append('shipping[address][postal_code]', address.postcode || '');
+      body.append('shipping[address][country]', ISO[shippingCode] || 'IE');
+    }
 
     const stripeRes = await fetch('https://api.stripe.com/v1/payment_intents', {
       method: 'POST',

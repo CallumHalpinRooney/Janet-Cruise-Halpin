@@ -4741,7 +4741,19 @@ async function submitPayment() {
       piResp = await fetch('/.netlify/functions/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: payItems, shippingCode, email: buyerEmail }),
+        body: JSON.stringify({
+          items: payItems, shippingCode, email: buyerEmail,
+          name: buyerName,
+          phone: document.getElementById('co-phone')?.value.trim() || '',
+          // Full shipping address travels with the PaymentIntent so the Stripe
+          // webhook can create the Gelato order server-side (no browser needed).
+          address: {
+            line1:    document.getElementById('co-addr1')?.value.trim() || '',
+            line2:    document.getElementById('co-addr2')?.value.trim() || '',
+            city:     document.getElementById('co-city')?.value.trim() || '',
+            postcode: document.getElementById('co-postcode')?.value.trim() || '',
+          },
+        }),
       });
     } catch (netErr) {
       piResp = null; // network unreachable → demo fallback below
@@ -4770,125 +4782,21 @@ async function submitPayment() {
       paymentIntentId = result.paymentIntent.id;
     }
 
-    // ── STEP 2: Build + send Gelato order ─────────────────────────────────
-    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>&nbsp;Sending to Gelato…`;
+    // ── STEP 2: Show confirmation ─────────────────────────────────────────
+    // Fulfilment is handled SERVER-SIDE by the Stripe webhook (api/stripe-webhook.js):
+    // it creates the Gelato order the moment Stripe confirms payment, so nothing
+    // depends on this browser staying open, and there are no duplicate orders.
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>&nbsp;Confirming your order…`;
 
-    const fname    = document.getElementById('co-fname').value.trim();
-    const lname    = document.getElementById('co-lname').value.trim();
-    const email    = document.getElementById('co-email').value.trim();
-    const phone    = document.getElementById('co-phone').value.trim();
-    const addr1    = document.getElementById('co-addr1').value.trim();
-    const addr2    = document.getElementById('co-addr2').value.trim();
-    const city     = document.getElementById('co-city').value.trim();
-    const postcode = document.getElementById('co-postcode').value.trim();
-    const country  = document.getElementById('co-country').value;
-
-    // Gelato product UIDs, Museum-Quality Matte Paper Poster (250gsm uncoated archival)
-    // Full catalog: https://dashboard.gelato.com/docs/products/
-    // Gelato Museum-Quality Matte Paper Poster (250gsm uncoated archival)
-    // Verify UIDs in Gelato dashboard → Products → Catalog before going live
-    // '60x42' = Gelato A2 archival-matte poster (594×420 mm ≈ 60×42 cm, landscape).
-    // UID verified against the live Gelato catalog.
-    const PRODUCT_UIDS = {
-      '30x30': 'flat_300x300-mm-12x12-inch_250-gsm-100lb-uncoated-offwhite-archival_4-0_ver',
-      '40x40': 'flat_400x400-mm-16x16-inch_250-gsm-100lb-uncoated-offwhite-archival_4-0_ver',
-      '60x42': 'flat_a2_250-gsm-100lb-uncoated-offwhite-archival_4-0_ver',
-    };
-
-    // Artwork file URLs, upload 300dpi TIFFs/JPEGs to a CDN before going live
-    // e.g. Cloudinary, AWS S3, or any public URL. Gelato fetches directly.
-    const ARTWORK_FILES = {
-      // ── THE 7 FOR-SALE PRINTS, full-res 300 DPI masters on Cloudinary ───────
-      // These are the untouched originals (NO width/crop transform) so Gelato
-      // fetches the highest-quality file for printing.
-      'blue-mantel':      'https://res.cloudinary.com/dqguffxvg/image/upload/Blue_Mantel_100x70cm_12in_1_2_je2tuu',
-      'stone-gap':        'https://res.cloudinary.com/dqguffxvg/image/upload/Stone_at_Gap_70x70cm_9in_gp7hye',
-      'petals-on-green':  'https://res.cloudinary.com/dqguffxvg/image/upload/Petals_on_Green_80x80cm_9in_xity7b',
-      'breeze':           'https://res.cloudinary.com/dqguffxvg/image/upload/Breeze_70x70cm_9in_cgkkc2',
-      'leaf-and-water':   'https://res.cloudinary.com/dqguffxvg/image/upload/Leaf_and_Water_100x100cm_9in_tyy6qi',
-      'just-summer':      'https://res.cloudinary.com/dqguffxvg/image/upload/Just_Summer_M-100x100cm_Websize_yasi3v',
-      'blue-falls':       'https://res.cloudinary.com/dqguffxvg/image/upload/Blue_Falls_M-100x70cm_Websize_bhrlzm',
-    };
-
-    const countryMap = { IE:'IE', GB:'GB', EU:'DE', US:'US', AU:'AU', WW:'IE' };
-    const orderRef   = `JCH-${Date.now()}`;
-
-    // Gelato order payload (v4 API)
-    // Docs: https://dashboard.gelato.com/docs/orders/v4/create/
-    const gelatoPayload = {
-      orderReferenceId:  orderRef,
-      customerReferenceId: email,
-      currency:  'EUR',
-      orderType: 'draft',
-      shippingAddress: {
-        firstName:    fname,
-        lastName:     lname,
-        addressLine1: addr1,
-        addressLine2: addr2 || undefined,
-        city:         city,
-        postCode:     postcode,
-        country:      countryMap[country] || 'IE',
-        email:        email,
-        phone:        phone || undefined,
-      },
-      items: cartItems.map((item, i) => ({
-        itemReferenceId: `item-${i}-${item.id}-${item.size}`,
-        productUid:      PRODUCT_UIDS[item.size],
-        quantity:        item.qty,
-        files: [{ type: 'default', url: ARTWORK_FILES[item.id] || `https://res.cloudinary.com/dasjyomdb/image/upload/${item.id}.png` }],
-      })),
-      // Optional: pass Stripe payment ID as metadata for reconciliation
-      metadata: { paymentIntentId, source: 'janet-cruise-halpin.com' },
-    };
-
-    // POST to your server-side proxy, NEVER expose your Gelato API key client-side
-    // Server endpoint should: add X-API-KEY header, forward to https://order.gelatoapis.com/v4/orders
-    // Example Netlify function at /netlify/functions/gelato-order.js:
-    //
-    //   const fetch = require('node-fetch');
-    //   exports.handler = async (event) => {
-    //     const res = await fetch('https://order.gelatoapis.com/v4/orders', {
-    //       method: 'POST',
-    //       headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.GELATO_API_KEY },
-    //       body: event.body,
-    //     });
-    //     const data = await res.json();
-    //     return { statusCode: res.status, body: JSON.stringify(data) };
-    //   };
-
-    let gelatoOrderId = '';
-    let fulfillmentMsg = '';
-
-    try {
-      // Never let a slow/unreachable fulfilment call hang the button: cap it at
-      // 12s. The payment has already succeeded, so on timeout we still show the
-      // confirmation and Janet places the print order from the dashboard.
-      const ctrl = new AbortController();
-      const timeoutId = setTimeout(() => ctrl.abort(), 12000);
-      let res;
-      try {
-        res = await fetch('/.netlify/functions/gelato-order', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(gelatoPayload),
-          signal: ctrl.signal,
-        });
-      } finally {
-        clearTimeout(timeoutId);
-      }
-      if (!res.ok) throw new Error(`Gelato ${res.status}`);
-      const data = await res.json();
-      gelatoOrderId = data.id;
-      fulfillmentMsg = `Your prints are now in production. Printed on 250gsm acid-free archival matte paper and dispatched from the nearest local hub, typically 2-4 working days.`;
-    } catch (gelatoErr) {
-      console.error('Gelato failed/slow, handle manually:', gelatoPayload, gelatoErr);
-      fulfillmentMsg = `Your payment was successful. Janet's team will be in touch to confirm your order.`;
-    }
+    const fname   = document.getElementById('co-fname').value.trim();
+    const email   = document.getElementById('co-email').value.trim();
+    const total   = cartSubtotalValue() + selectedShipping.cost;
+    const orderRef = (paymentIntentId && paymentIntentId.indexOf('pi_') === 0)
+      ? paymentIntentId : `JCH-${Date.now()}`;
 
     // ── STEP 3: Show confirmation ──────────────────────────────────────────
-    const total = cartSubtotalValue() + selectedShipping.cost;
     document.getElementById('confirmed-message').textContent =
-      `Thank you, ${fname}! A confirmation is on its way to ${email}. ${fulfillmentMsg}`;
+      `Thank you, ${fname}! A confirmation is on its way to ${email}. Your order is confirmed and your prints are going into production, printed on 250gsm acid-free archival matte paper and dispatched from the nearest local hub, typically 2-4 working days.`;
 
     document.getElementById('confirmed-order-box').innerHTML =
       `<strong style="font-family:'Cormorant Garamond',serif;font-size:1rem;display:block;margin-bottom:.5rem">Order ${orderRef}</strong>` +
@@ -4900,11 +4808,7 @@ async function submitPayment() {
       ).join('') +
       `<span style="display:flex;justify-content:space-between;padding-top:.5rem;font-weight:500">
         <span>Total paid</span><span>€${total.toLocaleString()}</span>
-      </span>
-      <span style="display:block;margin-top:.75rem;font-size:.62rem;color:var(--slate);letter-spacing:.05em">
-        Gelato ref: ${gelatoOrderId}
       </span>`;
-
     setStep(4);
 
   } catch (err) {
