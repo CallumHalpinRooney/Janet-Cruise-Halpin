@@ -4860,17 +4860,28 @@ async function submitPayment() {
     let fulfillmentMsg = '';
 
     try {
-      const res = await fetch('/.netlify/functions/gelato-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(gelatoPayload),
-      });
+      // Never let a slow/unreachable fulfilment call hang the button: cap it at
+      // 12s. The payment has already succeeded, so on timeout we still show the
+      // confirmation and Janet places the print order from the dashboard.
+      const ctrl = new AbortController();
+      const timeoutId = setTimeout(() => ctrl.abort(), 12000);
+      let res;
+      try {
+        res = await fetch('/.netlify/functions/gelato-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(gelatoPayload),
+          signal: ctrl.signal,
+        });
+      } finally {
+        clearTimeout(timeoutId);
+      }
       if (!res.ok) throw new Error(`Gelato ${res.status}`);
       const data = await res.json();
       gelatoOrderId = data.id;
       fulfillmentMsg = `Your prints are now in production. Printed on 250gsm acid-free archival matte paper and dispatched from the nearest local hub, typically 2-4 working days.`;
     } catch (gelatoErr) {
-      console.error('Gelato failed, handle manually:', gelatoPayload, gelatoErr);
+      console.error('Gelato failed/slow, handle manually:', gelatoPayload, gelatoErr);
       fulfillmentMsg = `Your payment was successful. Janet's team will be in touch to confirm your order.`;
     }
 
