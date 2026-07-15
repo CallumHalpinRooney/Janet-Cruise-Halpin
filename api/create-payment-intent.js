@@ -9,7 +9,7 @@
 
 // ── Trusted price list (must match SIZE_PRICE in index.html) ─────────────────
 // Square canvases print at 30x30 or 40x40; rectangular works at a single 60x42.
-const SIZE_PRICE = { '30x30': 39, '40x40': 55, '60x42': 69 };
+const SIZE_PRICE = { '30x30': 60, '40x40': 70, '60x42': 95 };
 const SHIPPING   = { IE: 5, GB: 8, EU: 7, US: 12, AU: 15, WW: 15 };
 
 module.exports = async (req, res) => {
