@@ -3229,7 +3229,10 @@
       // Badge
       let badge = '';
       if (notAvail) {
-        badge = `<div class="out-of-stock-badge" style="background:rgba(107,114,128,0.9)">Not currently available</div>`;
+        // Not-yet-available prints get NO image sticker — the "Coming soon" price
+        // label and the note below the image communicate this instead. (Kept as a
+        // guard so the limited/sold badges below never apply to these cards.)
+        badge = '';
       } else if (isSold) {
         badge = `<div class="out-of-stock-badge">Sold</div>`;
       } else if (d.printed && !anyOut) {
