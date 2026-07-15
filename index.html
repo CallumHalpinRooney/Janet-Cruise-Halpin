@@ -416,43 +416,6 @@
     50% { transform: translateY(6px); }
   }
 
-  /* ── CREDENTIAL TICKER ── */
-  .ticker-wrap {
-    background: var(--forest);
-    padding: 0.85rem 0;
-    overflow: hidden;
-    position: relative;
-  }
-  .ticker-track {
-    display: flex;
-    width: max-content;
-    animation: tickerScroll 42s linear infinite;
-  }
-  .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
-  @keyframes tickerScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .ticker-item {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 0 2.5rem;
-    white-space: nowrap;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(245,240,232,0.7);
-  }
-  .ticker-dot {
-    width: 3px; height: 3px;
-    border-radius: 50%;
-    background: var(--ochre-light);
-    flex-shrink: 0;
-  }
-
   /* ── STUDIO JOURNAL QUOTE ── */
   .studio-quote {
     background: #0f1a12;
@@ -2448,29 +2411,6 @@
     </svg>
   </a>
 </section>
-
-<!-- CREDENTIAL TICKER -->
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-track" id="tickerTrack">
-    <div class="ticker-item">Tyrone Guthrie Centre Residency 2018<span class="ticker-dot"></span></div>
-    <div class="ticker-item">30+ Years Painting<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Laragh Studio · Co. Wicklow, Ireland<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Works Held in International Collections<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Flora · Land · Sea · Abstract<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Original Oil on Canvas<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Giclée Fine-Art Editions<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Glendalough, Ancient Oak Woodland<span class="ticker-dot"></span></div>
-    <!-- Duplicate for seamless loop -->
-    <div class="ticker-item">Tyrone Guthrie Centre Residency 2018<span class="ticker-dot"></span></div>
-    <div class="ticker-item">30+ Years Painting<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Laragh Studio · Co. Wicklow, Ireland<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Works Held in International Collections<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Flora · Land · Sea · Abstract<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Original Oil on Canvas<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Giclée Fine-Art Editions<span class="ticker-dot"></span></div>
-    <div class="ticker-item">Glendalough, Ancient Oak Woodland<span class="ticker-dot"></span></div>
-  </div>
-</div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
