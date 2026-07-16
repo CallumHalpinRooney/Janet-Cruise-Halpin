@@ -4355,6 +4355,16 @@
 #stripe-card-element { min-height: 22px; }
 .stripe-errors { font-size: .75rem; color: #c0392b; margin-top: .5rem; min-height: 1rem; }
 
+/* On narrow phones the big modal padding squeezed the card row — tighten it up
+   so the payment fields fit comfortably. */
+@media (max-width: 560px) {
+  #checkoutBg { padding: .5rem; }
+  #checkoutModal { padding: 1.6rem 1.1rem 1.4rem; }
+  .stripe-card-wrap { padding: .85rem .8rem; }
+  .cf-row { gap: .55rem; }
+  .payment-amount-banner { padding-left: 1rem; padding-right: 1rem; }
+}
+
 /* Simulated card input for demo */
 .demo-card-input {
   border: none; outline: none; width: 100%;
@@ -4668,6 +4678,10 @@ function renderPaymentStep() {
       });
       window._stripeInstance = stripe;
       window._stripeCard = elements.create('card', {
+        // Postcode is already collected in the shipping step (billing defaults to
+        // same as shipping), so hide it here — it also frees space so the card
+        // row fits comfortably on narrow phones.
+        hidePostalCode: true,
         style: {
           base: {
             fontFamily: 'Jost, sans-serif', fontSize: '15px', fontWeight: '300',
