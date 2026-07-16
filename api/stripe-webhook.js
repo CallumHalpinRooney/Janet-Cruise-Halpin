@@ -38,9 +38,10 @@ const ARTWORK_FILES = {
 };
 const COUNTRY_MAP = { IE: 'IE', GB: 'GB', EU: 'DE', US: 'US', AU: 'AU', WW: 'IE' };
 
-// Set to 'order' to auto-produce (charges Janet's Gelato card immediately).
-// 'draft' lets Janet review + click produce for each order in the Gelato dashboard.
-const GELATO_ORDER_TYPE = 'draft';
+// 'order' auto-produces on payment (charges Janet's Gelato card immediately) —
+// Janet does nothing, prints ship automatically. 'draft' would require her to
+// click produce for each order in the Gelato dashboard.
+const GELATO_ORDER_TYPE = 'order';
 
 const SIG_TOLERANCE_SECONDS = 300; // reject events older than 5 minutes (replay guard)
 
