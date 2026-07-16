@@ -4710,7 +4710,7 @@ function renderPaymentStep() {
   // Render Stripe Elements if loaded, else show demo input
   if (window.Stripe) {
     if (!window._stripeCard) {
-      const stripe = Stripe('pk_test_51TjmMM2Or4Zv1HCsvaIufGqJLSsUzu67FknS38ejxtBZoPKkevJMYlBqggeDML2ViLWVSf1gpjU6zJN8gqBkANlg00fGhzP7rO');
+      const stripe = Stripe('pk_live_51TtpjfFEHsNphTvobhaLxddH6eQB2KElRtRwJXO1HCTS2kt5Xqf34jTAyekCub1lMKD6olAGlygIr3FXHZrV0VUz00HAmipfHG');
       const elements = stripe.elements({
         fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap' }]
       });
