@@ -42,14 +42,15 @@ module.exports = async (req, res) => {
       return res.status(400).json({ error: 'Empty or invalid order.' });
     }
 
-    // ── €1 TEST OVERRIDE ─────────────────────────────────────────────────────
-    // When TEST_PAY_TOKEN is set in Vercel AND the checkout sent the matching
-    // token (site opened with ?testpay=<token>), charge €1 instead of the real
-    // total so the whole flow can be tested cheaply. Everything else — metadata,
-    // shipping, the Gelato webhook — is unchanged. Delete the TEST_PAY_TOKEN env
-    // var (or just don't use the URL) to switch this off completely.
-    const testToken = process.env.TEST_PAY_TOKEN;
-    if (testToken && payload.testToken && payload.testToken === testToken) {
+    // ── €1 TEST OVERRIDE (TEMPORARY) ─────────────────────────────────────────
+    // When the checkout sends the matching token (site opened with
+    // ?testpay=<token>), charge €1 instead of the real total so the whole flow
+    // can be tested cheaply. This token lives ONLY here on the server — it is
+    // never sent to the browser, so shoppers can't see or guess it. Everything
+    // else (metadata, shipping, the Gelato webhook) is unchanged.
+    // >>> REMOVE this block once testing is done so €1 checkout is impossible. <<<
+    const TEST_PAY_TOKEN = 'euro1-fe5a601465a1';
+    if (payload.testToken && payload.testToken === TEST_PAY_TOKEN) {
       total = 1;
     }
 
