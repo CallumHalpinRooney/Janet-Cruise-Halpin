@@ -4541,6 +4541,17 @@ function cartSubtotalValue() {
   return cartItems.reduce((s, i) => s + i.price * i.qty, 0);
 }
 
+// €1 TEST MODE — active when the site is opened with ?testpay=<token>. The token
+// is validated on the SERVER (that's what actually forces the €1 charge); here we
+// just detect it so the on-screen prices match. Reads the query string OR the
+// hash, because the site uses #-routing which can carry the param after the '#'.
+function testPayToken() {
+  const fromSearch = new URLSearchParams(location.search).get('testpay');
+  if (fromSearch) return fromSearch;
+  const hashQ = location.hash.includes('?') ? location.hash.split('?')[1] : '';
+  return new URLSearchParams(hashQ).get('testpay') || '';
+}
+
 function updateCartUI() {
   const count    = cartItems.reduce((s, i) => s + i.qty, 0);
   const subtotal = cartSubtotalValue();
@@ -4805,10 +4816,11 @@ async function submitPayment() {
         body: JSON.stringify({
           items: payItems, shippingCode, email: buyerEmail,
           name: buyerName,
-          // €1 TEST MODE: only active when the URL carries ?testpay=… AND the
-          // matching TEST_PAY_TOKEN env var is set in Vercel. Customers never see
-          // this, so full prices are always charged normally.
-          testToken: new URLSearchParams(location.search).get('testpay') || '',
+          // €1 TEST MODE: only charges €1 when the URL carries the exact
+          // ?testpay=<token> the server expects. Read from query OR hash so the
+          // site's #-routing can't swallow it. Customers never have this token,
+          // so full prices are always charged normally.
+          testToken: testPayToken(),
           phone: document.getElementById('co-phone')?.value.trim() || '',
           // Full shipping address travels with the PaymentIntent so the Stripe
           // webhook can create the Gelato order server-side (no browser needed).
