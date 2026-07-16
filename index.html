@@ -4805,6 +4805,10 @@ async function submitPayment() {
         body: JSON.stringify({
           items: payItems, shippingCode, email: buyerEmail,
           name: buyerName,
+          // €1 TEST MODE: only active when the URL carries ?testpay=… AND the
+          // matching TEST_PAY_TOKEN env var is set in Vercel. Customers never see
+          // this, so full prices are always charged normally.
+          testToken: new URLSearchParams(location.search).get('testpay') || '',
           phone: document.getElementById('co-phone')?.value.trim() || '',
           // Full shipping address travels with the PaymentIntent so the Stripe
           // webhook can create the Gelato order server-side (no browser needed).
