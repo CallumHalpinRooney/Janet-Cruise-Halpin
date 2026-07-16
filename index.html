@@ -3959,13 +3959,6 @@
           <input type="tel" id="co-phone" placeholder="+353 1 234 5678" autocomplete="tel">
         </div>
       </div>
-      <div class="checkout-order-summary">
-        <p class="checkout-order-label">Order Summary</p>
-        <ul id="checkout-order-list"></ul>
-        <div class="checkout-order-total">
-          <span>Total</span><span id="checkout-order-total-val">€0</span>
-        </div>
-      </div>
       <button class="btn-checkout-next" onclick="goToStep(2)">
         Continue to Shipping
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -4010,6 +4003,15 @@
           <span id="shippingRateLabel">Standard shipping within Ireland · €5</span>
         </div>
       </div>
+      <div class="checkout-order-summary">
+        <p class="checkout-order-label">Order Summary</p>
+        <ul id="checkout-order-list"></ul>
+        <div class="checkout-order-line"><span>Subtotal</span><span id="checkout-order-subtotal">€0</span></div>
+        <div class="checkout-order-line"><span id="checkout-order-shipping-label">Shipping</span><span id="checkout-order-shipping">€0</span></div>
+        <div class="checkout-order-total">
+          <span>Total</span><span id="checkout-order-total-val">€0</span>
+        </div>
+      </div>
       <div class="checkout-nav-row">
         <button class="btn-checkout-back" onclick="goToStep(1)">← Back</button>
         <button class="btn-checkout-next" onclick="goToStep(3)">
@@ -4028,7 +4030,11 @@
       </div>
       <div class="stripe-card-wrap">
         <p class="stripe-card-label">Card Details</p>
-        <div id="stripe-card-element"></div>
+        <div id="card-number" class="stripe-field"></div>
+        <div class="stripe-field-row">
+          <div id="card-expiry" class="stripe-field"></div>
+          <div id="card-cvc" class="stripe-field"></div>
+        </div>
         <div id="stripe-card-errors" class="stripe-errors"></div>
       </div>
       <div class="billing-same-row">
@@ -4299,6 +4305,14 @@
   font-size: .8rem; color: var(--charcoal);
 }
 #checkout-order-list li span:last-child { font-weight: 500; }
+.checkout-order-line {
+  display: flex; justify-content: space-between;
+  font-size: .78rem; color: var(--slate-dark); padding-top: .45rem;
+}
+.checkout-order-line:first-of-type {
+  margin-top: .5rem; padding-top: .6rem;
+  border-top: 1px solid rgba(44,74,53,0.12);
+}
 .checkout-order-total {
   display: flex; justify-content: space-between;
   border-top: 1px solid rgba(44,74,53,0.15);
@@ -4343,16 +4357,19 @@
 .payment-amount-banner span { font-size: .72rem; color: var(--slate); letter-spacing: .08em; text-transform: uppercase; }
 .payment-amount-banner strong { font-family:'Cormorant Garamond',serif; font-size: 1.6rem; font-weight: 400; color: var(--charcoal); }
 
-.stripe-card-wrap {
+.stripe-card-wrap { margin-bottom: 1rem; }
+.stripe-field {
   border: 1px solid rgba(44,74,53,0.22);
-  padding: 1rem 1.1rem; margin-bottom: 1rem;
   background: var(--white);
+  padding: .85rem .9rem;
 }
+.stripe-field-row { display: flex; gap: .6rem; margin-top: .6rem; }
+.stripe-field-row > * { flex: 1; min-width: 0; }
 .stripe-card-label {
   font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
   color: var(--slate); margin-bottom: .65rem; font-weight: 500;
 }
-#stripe-card-element { min-height: 22px; }
+.stripe-field { min-height: 22px; }
 .stripe-errors { font-size: .75rem; color: #c0392b; margin-top: .5rem; min-height: 1rem; }
 
 /* On narrow phones the big modal padding squeezed the card row — tighten it up
@@ -4360,7 +4377,7 @@
 @media (max-width: 560px) {
   #checkoutBg { padding: .5rem; }
   #checkoutModal { padding: 1.6rem 1.1rem 1.4rem; }
-  .stripe-card-wrap { padding: .85rem .8rem; }
+  .stripe-field { padding: .75rem .8rem; }
   .cf-row { gap: .55rem; }
   .payment-amount-banner { padding-left: 1rem; padding-right: 1rem; }
 }
@@ -4648,11 +4665,18 @@ function validateStep(n) {
 
 function renderCheckoutSummary() {
   const ul = document.getElementById('checkout-order-list');
-  ul.innerHTML = cartItems.map(item =>
+  if (ul) ul.innerHTML = cartItems.map(item =>
     `<li><span>${item.name} · ${item.size}${item.qty > 1 ? ' ×'+item.qty : ''}</span><span>€${(item.price*item.qty).toLocaleString()}</span></li>`
   ).join('');
-  const total = cartSubtotalValue() + selectedShipping.cost;
-  document.getElementById('checkout-order-total-val').textContent = `€${total.toLocaleString()}`;
+  const subtotal = cartSubtotalValue();
+  const shipping = selectedShipping.cost;
+  const sel = document.getElementById('co-country');
+  const countryName = sel ? sel.options[sel.selectedIndex].text : '';
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('checkout-order-subtotal', `€${subtotal.toLocaleString()}`);
+  set('checkout-order-shipping-label', countryName ? `Shipping · ${countryName}` : 'Shipping');
+  set('checkout-order-shipping', `€${shipping.toLocaleString()}`);
+  set('checkout-order-total-val', `€${(subtotal + shipping).toLocaleString()}`);
 }
 
 function updateShipping() {
@@ -4669,7 +4693,6 @@ function renderPaymentStep() {
   document.getElementById('btn-pay-amount').textContent = `€${total.toLocaleString()}`;
 
   // Render Stripe Elements if loaded, else show demo input
-  const wrapper = document.getElementById('stripe-card-element');
   if (window.Stripe) {
     if (!window._stripeCard) {
       const stripe = Stripe('pk_test_51TjmMM2Or4Zv1HCsvaIufGqJLSsUzu67FknS38ejxtBZoPKkevJMYlBqggeDML2ViLWVSf1gpjU6zJN8gqBkANlg00fGhzP7rO');
@@ -4677,27 +4700,35 @@ function renderPaymentStep() {
         fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap' }]
       });
       window._stripeInstance = stripe;
-      window._stripeCard = elements.create('card', {
-        // Postcode is already collected in the shipping step (billing defaults to
-        // same as shipping), so hide it here — it also frees space so the card
-        // row fits comfortably on narrow phones.
-        hidePostalCode: true,
-        style: {
-          base: {
-            fontFamily: 'Jost, sans-serif', fontSize: '15px', fontWeight: '300',
-            color: '#1a1714', '::placeholder': { color: '#a09484' }
-          }
+      const style = {
+        base: {
+          fontFamily: 'Jost, sans-serif', fontSize: '15px', fontWeight: '300',
+          color: '#1a1714', '::placeholder': { color: '#a09484' }
         }
-      });
-      window._stripeCard.mount('#stripe-card-element');
-      window._stripeCard.on('change', e => {
+      };
+      // Split fields (number / expiry / CVC) so the card row can never overlap on
+      // narrow phones — number sits on its own line, expiry + CVC share the next.
+      window._stripeCard = elements.create('cardNumber', { style, showIcon: true });
+      window._cardExpiry = elements.create('cardExpiry', { style });
+      window._cardCvc    = elements.create('cardCvc', { style });
+      window._stripeCard.mount('#card-number');
+      window._cardExpiry.mount('#card-expiry');
+      window._cardCvc.mount('#card-cvc');
+      const showErr = e => {
         document.getElementById('stripe-card-errors').textContent = e.error ? e.error.message : '';
-      });
+      };
+      window._stripeCard.on('change', showErr);
+      window._cardExpiry.on('change', showErr);
+      window._cardCvc.on('change', showErr);
     }
   } else {
-    // Demo mode, show simulated card field
-    if (!wrapper.querySelector('.demo-card-input')) {
-      wrapper.innerHTML = `
+    // Demo mode (Stripe.js blocked): collapse to a single simulated input.
+    const demoHost = document.getElementById('card-number');
+    const row = document.querySelector('.stripe-field-row');
+    if (row) row.style.display = 'none';
+    if (demoHost && !document.getElementById('demoCard')) {
+      demoHost.classList.remove('stripe-field');
+      demoHost.innerHTML = `
         <input class="demo-card-input" id="demoCard" placeholder="4242 4242 4242 4242   MM/YY   CVC" maxlength="22"
           oninput="formatDemoCard(this)">
         <p style="font-size:.62rem;color:var(--slate);margin-top:.5rem">
