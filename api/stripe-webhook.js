@@ -48,6 +48,11 @@ const GELATO_ORDER_TYPE = 'draft';
 const SIG_TOLERANCE_SECONDS = 300; // reject events older than 5 minutes (replay guard)
 
 async function readRawBody(req) {
+  // If Vercel already handed us the raw body as a Buffer/string, use it as-is —
+  // re-reading the stream after parsing would yield nothing and break signature
+  // verification. Only fall back to draining the stream when body is absent.
+  if (Buffer.isBuffer(req.body)) return req.body;
+  if (typeof req.body === 'string') return Buffer.from(req.body, 'utf8');
   const chunks = [];
   for await (const chunk of req) {
     chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
@@ -111,7 +116,14 @@ async function handler(req, res) {
   }
 
   if (!verifySignature(raw, req.headers['stripe-signature'], secret)) {
-    return res.status(400).send('Invalid signature');
+    // Diagnostic (safe — no secret leaked). bodyBytes ~0 means Vercel parsed the
+    // body and the raw bytes were lost; a full bodyBytes with a header present
+    // means the STRIPE_WEBHOOK_SECRET doesn't match this endpoint.
+    return res.status(400).json({
+      error: 'Invalid signature',
+      bodyBytes: Buffer.isBuffer(raw) ? raw.length : String(raw).length,
+      hasSigHeader: !!req.headers['stripe-signature'],
+    });
   }
 
   let event;
@@ -195,10 +207,12 @@ async function handler(req, res) {
   }
 }
 
-// Tell Vercel not to pre-parse the body — we need raw bytes for signature checks.
-handler.config = { api: { bodyParser: false } };
 // Exposed for offline unit tests.
 handler.verifySignature = verifySignature;
 handler.parseFulfil = parseFulfil;
 
 module.exports = handler;
+// Tell Vercel not to pre-parse the body — we need the raw bytes Stripe signed.
+// This MUST be set on module.exports directly (not just on `handler`) for
+// Vercel's build to statically detect it and actually disable body parsing.
+module.exports.config = { api: { bodyParser: false } };
