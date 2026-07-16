@@ -3,6 +3,9 @@
   "rewrites": [
     { "source": "/.netlify/functions/:fn", "destination": "/api/:fn" }
   ],
+  "crons": [
+    { "path": "/api/keep-alive", "schedule": "0 8 * * *" }
+  ],
   "headers": [
     {
       "source": "/vintry/(.*)",
