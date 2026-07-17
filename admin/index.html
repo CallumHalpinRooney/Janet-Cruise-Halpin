@@ -393,8 +393,7 @@ body{
     <p class="login-eyebrow">Studio Access</p>
     <h1 class="login-title">Janet Cruise Halpin</h1>
     <p class="login-sub">Inquiries Dashboard</p>
-    <input class="login-input" type="email" id="emailInput" placeholder="Email" autocomplete="username" onkeydown="if(event.key==='Enter')tryLogin()">
-    <input class="login-input" type="password" id="pwInput" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')tryLogin()">
+    <input class="login-input" type="password" id="pwInput" placeholder="Enter your password" autocomplete="current-password" onkeydown="if(event.key==='Enter')tryLogin()">
     <button class="login-btn" onclick="tryLogin()">Enter Dashboard</button>
     <p class="login-error" id="loginError"></p>
   </div>
@@ -556,6 +555,12 @@ body{
 const SUPABASE_URL      = 'https://lkwzyaygeqxfnmzekadj.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_m1fXPq2PNZ3JMjQDx05pqg_FT2UT0xH';
 
+/* The dashboard's single login identity. Janet only ever types the password;
+   this email is just the internal account name Supabase Auth checks the
+   password against. It is NOT secret. Create a Supabase user with exactly this
+   email (see setup notes) and give it the password you want Janet to use. */
+const ADMIN_EMAIL = 'callum.l.rooney@gmail.com';
+
 /* ═══════════════════════════════════════════════════ */
 
 const configured = SUPABASE_URL !== 'YOUR_SUPABASE_URL';
@@ -572,21 +577,20 @@ if (configured && window.supabase) {
 
 /* ── Auth ─────────────────────────────────────────── */
 async function tryLogin() {
-  const email = document.getElementById('emailInput').value.trim();
   const pw    = document.getElementById('pwInput').value;
   const errEl = document.getElementById('loginError');
   errEl.textContent = '';
   if (!sb) { errEl.textContent = 'Dashboard is not configured.'; return; }
-  if (!email || !pw) { errEl.textContent = 'Enter your email and password'; return; }
+  if (!pw) { errEl.textContent = 'Enter your password'; return; }
 
   const btn = document.querySelector('.login-btn');
   const orig = btn.textContent;
   btn.disabled = true; btn.textContent = 'Signing in…';
-  const { error } = await sb.auth.signInWithPassword({ email, password: pw });
+  const { error } = await sb.auth.signInWithPassword({ email: ADMIN_EMAIL, password: pw });
   btn.disabled = false; btn.textContent = orig;
 
   if (error) {
-    errEl.textContent = 'Incorrect email or password';
+    errEl.textContent = 'Incorrect password';
     document.getElementById('pwInput').value = '';
     return;
   }
