@@ -4483,8 +4483,21 @@ function addToCart(btn, name) {
   const card   = btn.closest('.print-card');
   const id     = card?.dataset?.id || name.toLowerCase().replace(/\s+/g,'-');
   const activePill = card?.querySelector('.size-pill.active');
-  const size   = activePill?.dataset?.size || 'A3';
-  const price  = parseInt(activePill?.dataset?.price) || (window.SIZE_PRICE ? window.SIZE_PRICE['30x40'] : 45);
+
+  // No active pill means every size is sold out (see `allOut` in renderGrid) —
+  // there's no valid size/price to add. Bail with the same "Sold Out" feedback
+  // used below, instead of falling back to an invalid size + undefined price,
+  // which would corrupt the cart total and break checkout for the whole cart.
+  if (!activePill) {
+    const orig = btn.textContent;
+    btn.textContent = 'Sold Out';
+    btn.style.background = 'var(--slate)';
+    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 2000);
+    return;
+  }
+
+  const size   = activePill.dataset.size;
+  const price  = parseInt(activePill.dataset.price, 10);
   const img    = card?.querySelector('img')?.src || '';
   const isOD   = !!card?.dataset?.onDemand;
   const slug   = id + '-' + size;
