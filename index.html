@@ -4235,7 +4235,7 @@
 #checkoutModal {
   background: var(--cream);
   width: 100%; max-width: 560px;
-  max-height: 92vh; overflow-y: auto;
+  max-height: 92vh; overflow-y: auto; overflow-x: hidden;
   position: relative;
   transform: translateY(20px) scale(.98);
   transition: transform .35s cubic-bezier(.4,0,.2,1);
@@ -4291,12 +4291,16 @@
 .checkout-form { display: flex; flex-direction: column; gap: .85rem; margin-bottom: 1.4rem; }
 .cf-row { display: flex; gap: .7rem; }
 .cf-row-2 > * { flex: 1; }
-.cf-group { display: flex; flex-direction: column; gap: 4px; }
+/* Let columns shrink below the input's default ~20-char intrinsic width so a
+   two-field row never forces the checkout wider than the screen. */
+.cf-row > * { min-width: 0; }
+.cf-group { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .cf-group label {
   font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
   color: var(--slate); font-weight: 500;
 }
 .cf-group input, .cf-group select {
+  width: 100%;
   padding: .7rem .85rem;
   font-family: 'Jost', sans-serif; font-size: .88rem; font-weight: 300;
   color: var(--charcoal); background: var(--white);
@@ -4381,6 +4385,13 @@
 }
 .stripe-field-row { display: flex; gap: .6rem; margin-top: .6rem; }
 .stripe-field-row > * { flex: 1; min-width: 0; }
+/* Stripe mounts an <iframe> inside each field — pin it to the container width so
+   the card entry can never spill past the screen edge on any phone. */
+.stripe-field { max-width: 100%; overflow: hidden; }
+.stripe-field iframe { width: 100% !important; min-width: 0 !important; }
+/* Let every checkout panel shrink inside the modal rather than force it wider. */
+.checkout-panel { min-width: 0; }
+.checkout-panel, .checkout-panel * { max-width: 100%; }
 .stripe-card-label {
   font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
   color: var(--slate); margin-bottom: .65rem; font-weight: 500;
@@ -4403,7 +4414,8 @@
   .stripe-field { padding: .75rem .8rem; }
   /* Stack expiry + CVC on their own lines so nothing needs horizontal scrolling. */
   .stripe-field-row { flex-direction: column; gap: .6rem; }
-  .cf-row { gap: .55rem; }
+  /* Stack the two-field rows (name, city/postcode) so each is full-width and legible. */
+  .cf-row { flex-direction: column; gap: .55rem; }
   .payment-amount-banner { padding-left: 1rem; padding-right: 1rem; }
 }
 
