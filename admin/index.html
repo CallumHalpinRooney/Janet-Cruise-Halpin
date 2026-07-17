@@ -393,7 +393,8 @@ body{
     <p class="login-eyebrow">Studio Access</p>
     <h1 class="login-title">Janet Cruise Halpin</h1>
     <p class="login-sub">Inquiries Dashboard</p>
-    <input class="login-input" type="password" id="pwInput" placeholder="Enter your password" onkeydown="if(event.key==='Enter')tryLogin()">
+    <input class="login-input" type="email" id="emailInput" placeholder="Email" autocomplete="username" onkeydown="if(event.key==='Enter')tryLogin()">
+    <input class="login-input" type="password" id="pwInput" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')tryLogin()">
     <button class="login-btn" onclick="tryLogin()">Enter Dashboard</button>
     <p class="login-error" id="loginError"></p>
   </div>
@@ -555,38 +556,62 @@ body{
 const SUPABASE_URL      = 'https://lkwzyaygeqxfnmzekadj.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_m1fXPq2PNZ3JMjQDx05pqg_FT2UT0xH';
 
-/* Dashboard password — change this to something Janet will remember */
-const DASHBOARD_PASSWORD = 'janet2026';
-
 /* ═══════════════════════════════════════════════════ */
 
 const configured = SUPABASE_URL !== 'YOUR_SUPABASE_URL';
 let sb, allInquiries = [], currentFilter = 'all', currentSort = 'newest';
 let replied = JSON.parse(localStorage.getItem('jch_replied') || '[]');
 
-/* ── Auth ─────────────────────────────────────────── */
-function tryLogin() {
-  const pw = document.getElementById('pwInput').value;
-  if (pw === DASHBOARD_PASSWORD) {
-    sessionStorage.setItem('jch_auth', '1');
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('app').classList.add('visible');
-    init();
-  } else {
-    document.getElementById('loginError').textContent = 'Incorrect password';
-    document.getElementById('pwInput').value = '';
-  }
+/* Create the Supabase client up front so we can authenticate against it.
+   Real sign-in is handled by Supabase Auth: the password is verified on
+   Supabase's servers (never in this page), and a valid session is a signed
+   token that cannot be faked by editing the page or local storage. */
+if (configured && window.supabase) {
+  sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
-function logout() {
-  sessionStorage.removeItem('jch_auth');
+
+/* ── Auth ─────────────────────────────────────────── */
+async function tryLogin() {
+  const email = document.getElementById('emailInput').value.trim();
+  const pw    = document.getElementById('pwInput').value;
+  const errEl = document.getElementById('loginError');
+  errEl.textContent = '';
+  if (!sb) { errEl.textContent = 'Dashboard is not configured.'; return; }
+  if (!email || !pw) { errEl.textContent = 'Enter your email and password'; return; }
+
+  const btn = document.querySelector('.login-btn');
+  const orig = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  const { error } = await sb.auth.signInWithPassword({ email, password: pw });
+  btn.disabled = false; btn.textContent = orig;
+
+  if (error) {
+    errEl.textContent = 'Incorrect email or password';
+    document.getElementById('pwInput').value = '';
+    return;
+  }
+  showApp();
+}
+
+function showApp() {
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  init();
+}
+
+async function logout() {
+  if (sb) await sb.auth.signOut();
   location.reload();
 }
 
-/* Check if already logged in */
-if (sessionStorage.getItem('jch_auth') === '1') {
-  document.getElementById('loginScreen').classList.add('hidden');
-  document.getElementById('app').classList.add('visible');
-}
+/* On load, reveal the dashboard only if there is a valid Supabase session. */
+(async () => {
+  if (!sb) return;
+  try {
+    const { data } = await sb.auth.getSession();
+    if (data && data.session) showApp();
+  } catch (e) { /* not signed in → login screen stays */ }
+})();
 
 /* ── Init ─────────────────────────────────────────── */
 function init() {
@@ -598,7 +623,6 @@ function init() {
     return;
   }
 
-  sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   loadInquiries();
   subscribeRealtime();
 }
@@ -796,9 +820,6 @@ function downloadEmailsCSV() {
   URL.revokeObjectURL(url);
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeEmails(); });
-
-/* Auto-init if already authenticated */
-if (sessionStorage.getItem('jch_auth') === '1') init();
 </script>
 </body>
 </html>
