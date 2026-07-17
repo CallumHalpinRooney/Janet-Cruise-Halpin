@@ -46,8 +46,12 @@ body{
 /* ── Login screen ── */
 #loginScreen{
   position:fixed;inset:0;
+  /* Janet's artwork fills the screen, under a translucent forest-green wash so
+     it stays on-brand and the login box remains readable. */
   background:
-    radial-gradient(120% 90% at 50% -10%,rgba(122,158,132,.22),transparent 60%),
+    radial-gradient(120% 90% at 50% -10%,rgba(122,158,132,.18),transparent 60%),
+    linear-gradient(rgba(18,38,26,.62),rgba(14,30,20,.78)),
+    url('/Janets_art_1_.jpg.jpg') center center / cover no-repeat,
     var(--forest-deep);
   display:flex;align-items:center;justify-content:center;padding:1.5rem;
   z-index:1000;transition:opacity .6s ease,visibility .6s ease;
