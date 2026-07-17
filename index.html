@@ -866,6 +866,10 @@
     margin-bottom: 4rem;
   }
   .prints-header-left { max-width: 500px; }
+  .prints-header-note {
+    font-size: 0.82rem; font-weight: 300; color: var(--slate);
+    max-width: 260px; text-align: right; line-height: 1.7;
+  }
   .category-tabs {
     display: flex;
     gap: 0.5rem;
@@ -2298,6 +2302,7 @@
     .prints-grid { grid-template-columns: repeat(2, 1fr); }
     .originals-grid { grid-template-columns: repeat(2, 1fr); }
     .prints-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .prints-header-note { text-align: left; max-width: 100%; }
     .contact-section { grid-template-columns: 1fr; }
     .contact-image { height: 55vw; }
     .contact-content { padding: 3.5rem 2rem; }
@@ -2826,7 +2831,7 @@
         <button class="tab-btn" data-cat="seascape">Seascapes</button>
       </div>
     </div>
-    <p class="reveal" style="font-size:0.82rem;font-weight:300;color:var(--slate);max-width:260px;text-align:right;line-height:1.7;">
+    <p class="reveal prints-header-note">
       Giclée fine-art prints on 250gsm acid-free archival matte paper, uncoated, natural white and FSC-certified. Produced to order.
     </p>
   </div>
@@ -3271,7 +3276,7 @@
         ${paintingSizes.map(s => {
           const oos = !isOD && d.stock[s] === 'out';
           const isFirst = s === firstIn;
-          return `<option value="${s}"${isFirst && !allOut ? ' selected' : ''}>${SIZE_LABEL[s]} · €${SIZE_PRICE[s]}${oos ? ' · sold out' : ''}</option>`;
+          return `<option value="${s}"${isFirst && !allOut ? ' selected' : ''}>${SIZE_LABEL[s]}${oos ? ' · sold out' : ''}</option>`;
         }).join('')}
       </select>`;
 
@@ -3300,11 +3305,10 @@
           </button>
           <p class="print-card-title">${d.title}</p>
           <p class="print-card-price" id="${d.id}-price">${priceLabel}</p>
-          ${notAvail ? `<p class="sold-note">A fine-art print of this work isn’t available to order just yet. Register your interest and Janet will let you know the moment it’s ready.</p>`
-            : isSold ? `<p class="sold-note">This edition is sold. Register your interest and Janet will be in touch. She may have related works available.</p>`
+          ${notAvail ? `<p class="sold-note">Not available to order just yet — register your interest and Janet will let you know the moment it’s ready.</p>`
+            : isSold ? `<p class="sold-note">This edition is sold — register your interest and Janet will be in touch.</p>`
             : `<div class="print-sizes" id="${d.id}-pills">${sizePills}</div>
-          ${sizeSelect}
-          <p class="size-dims" id="${d.id}-dims">${SIZE_DIMS[firstIn]}</p>`}
+          ${sizeSelect}`}
           ${locked ? '' : odNote}
           <div class="inline-notify" id="${d.id}-inline-notify" style="display:none">
             <span class="inline-notify-label">
@@ -4387,7 +4391,7 @@
     border-radius: 0;
     padding: 1.5rem 1.1rem 2rem;
   }
-  .checkout-steps { margin-bottom: 1.3rem; }
+  .checkout-steps { margin-bottom: 1.3rem; padding-right: 2.4rem; }
   .stripe-field { padding: .75rem .8rem; }
   /* Stack expiry + CVC on their own lines so nothing needs horizontal scrolling. */
   .stripe-field-row { flex-direction: column; gap: .6rem; }
