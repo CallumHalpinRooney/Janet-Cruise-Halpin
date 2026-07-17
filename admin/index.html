@@ -555,11 +555,8 @@ body{
 const SUPABASE_URL      = 'https://lkwzyaygeqxfnmzekadj.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_m1fXPq2PNZ3JMjQDx05pqg_FT2UT0xH';
 
-/* The dashboard's single login identity. Janet only ever types the password;
-   this email is just the internal account name Supabase Auth checks the
-   password against. It is NOT secret. Create a Supabase user with exactly this
-   email (see setup notes) and give it the password you want Janet to use. */
-const ADMIN_EMAIL = 'callum.l.rooney@gmail.com';
+/* The one password Janet uses to open the dashboard. */
+const DASHBOARD_PASSWORD = 'janet2026';
 
 /* ═══════════════════════════════════════════════════ */
 
@@ -567,34 +564,15 @@ const configured = SUPABASE_URL !== 'YOUR_SUPABASE_URL';
 let sb, allInquiries = [], currentFilter = 'all', currentSort = 'newest';
 let replied = JSON.parse(localStorage.getItem('jch_replied') || '[]');
 
-/* Create the Supabase client up front so we can authenticate against it.
-   Real sign-in is handled by Supabase Auth: the password is verified on
-   Supabase's servers (never in this page), and a valid session is a signed
-   token that cannot be faked by editing the page or local storage. */
-if (configured && window.supabase) {
-  sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-}
-
 /* ── Auth ─────────────────────────────────────────── */
-async function tryLogin() {
-  const pw    = document.getElementById('pwInput').value;
-  const errEl = document.getElementById('loginError');
-  errEl.textContent = '';
-  if (!sb) { errEl.textContent = 'Dashboard is not configured.'; return; }
-  if (!pw) { errEl.textContent = 'Enter your password'; return; }
-
-  const btn = document.querySelector('.login-btn');
-  const orig = btn.textContent;
-  btn.disabled = true; btn.textContent = 'Signing in…';
-  const { error } = await sb.auth.signInWithPassword({ email: ADMIN_EMAIL, password: pw });
-  btn.disabled = false; btn.textContent = orig;
-
-  if (error) {
-    errEl.textContent = 'Incorrect password';
+function tryLogin() {
+  const pw = document.getElementById('pwInput').value;
+  if (pw === DASHBOARD_PASSWORD) {
+    showApp();
+  } else {
+    document.getElementById('loginError').textContent = 'Incorrect password';
     document.getElementById('pwInput').value = '';
-    return;
   }
-  showApp();
 }
 
 function showApp() {
@@ -603,19 +581,10 @@ function showApp() {
   init();
 }
 
-async function logout() {
-  if (sb) await sb.auth.signOut();
-  location.reload();
-}
-
-/* On load, reveal the dashboard only if there is a valid Supabase session. */
-(async () => {
-  if (!sb) return;
-  try {
-    const { data } = await sb.auth.getSession();
-    if (data && data.session) showApp();
-  } catch (e) { /* not signed in → login screen stays */ }
-})();
+/* Sign out = reload back to the password screen. The password is always
+   required on a fresh visit (nothing is remembered), so the dashboard can no
+   longer be opened without entering it. */
+function logout() { location.reload(); }
 
 /* ── Init ─────────────────────────────────────────── */
 function init() {
@@ -627,6 +596,7 @@ function init() {
     return;
   }
 
+  sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   loadInquiries();
   subscribeRealtime();
 }
