@@ -27,11 +27,13 @@ const config: Config = {
       },
       fontFamily: {
         // wired to next/font CSS variables (see app/layout.tsx)
-        sans: ["var(--font-grotesque)", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         serif: ["var(--font-serif)", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       letterSpacing: {
-        label: "0.18em",
+        label: "0.16em",
+        block: "0.24em",
       },
       maxWidth: {
         page: "1600px",

@@ -41,22 +41,24 @@ export default function ProjectCard({
           className="object-cover transition-transform duration-[1200ms] ease-arch group-hover:scale-[1.03]"
         />
       </div>
-      <div className="mt-4 flex items-baseline justify-between gap-4">
-        <h3 className="text-[0.98rem] font-medium tracking-tight">
-          {index != null && (
-            <span className="mr-3 text-stone tabular-nums">
-              {String(index).padStart(2, "0")}
-            </span>
-          )}
-          {project.title}
-        </h3>
-        <span className="label whitespace-nowrap text-stone">
-          {project.category}
-        </span>
+      <div className="mt-3.5 border-t border-line pt-3">
+        <div className="flex items-baseline justify-between gap-4">
+          <h3 className="flex items-baseline gap-3 text-[0.98rem] font-medium tracking-tight">
+            {index != null && (
+              <span className="figure translate-y-px">
+                {String(index).padStart(2, "0")}
+              </span>
+            )}
+            <span>{project.title}</span>
+          </h3>
+          <span className="label whitespace-nowrap">{project.category}</span>
+        </div>
+        {project.award && (
+          <p className="mt-1.5 pl-8 text-[0.78rem] text-stone">
+            {project.award}
+          </p>
+        )}
       </div>
-      {project.award && (
-        <p className="mt-1 text-[0.8rem] text-stone">{project.award}</p>
-      )}
     </Link>
   );
 }

@@ -23,15 +23,20 @@ export default function HomePage() {
           <h1 className="max-w-[19ch] font-serif text-3xl font-light leading-[1.06] tracking-tight text-paper sm:text-5xl lg:text-[3.4rem]">
             {site.positioning}
           </h1>
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
-            {site.disciplines.map((d) => (
-              <span
-                key={d}
-                className="text-[0.72rem] uppercase tracking-label text-paper/70"
-              >
-                {d}
-              </span>
-            ))}
+          <div className="mt-8 flex items-end justify-between gap-6 border-t border-line-inv pt-4">
+            <div className="flex flex-wrap gap-x-6 gap-y-1">
+              {site.disciplines.map((d) => (
+                <span
+                  key={d}
+                  className="font-mono text-[0.68rem] uppercase tracking-label text-paper/70"
+                >
+                  {d}
+                </span>
+              ))}
+            </div>
+            <span className="hidden whitespace-nowrap font-mono text-[0.68rem] uppercase tracking-label text-paper/55 sm:block">
+              Fig. 01 · Kilmantin Road
+            </span>
           </div>
         </div>
       </section>

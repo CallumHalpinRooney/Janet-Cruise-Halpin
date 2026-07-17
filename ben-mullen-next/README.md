@@ -9,7 +9,8 @@ the hero.
 - **Next.js 14** (App Router) + **TypeScript**
 - **Tailwind CSS** — a custom architectural system (see `tailwind.config.ts`)
 - **next/image** for all photography
-- **next/font** — Archivo (neo-grotesque) + Spectral (serif), deliberately not Inter
+- **next/font** — a three-register system: Spectral (serif statements) + IBM
+  Plex Sans (body/UI) + IBM Plex Mono (technical labels & figures). Not Inter.
 - **Resend** for the enquiry form (`/api/contact`)
 - One subtle scroll reveal (`components/Reveal.tsx`); no carousels, no
   slideshows, respects `prefers-reduced-motion`

@@ -58,11 +58,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-line-inv pt-6 text-xs tracking-wide text-stone-2">
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-line-inv pt-6 font-mono text-[0.66rem] uppercase tracking-label text-stone-2">
           <span>
             © {year} {site.name} · {site.location}
           </span>
           <span>{site.credentials}</span>
+          <span className="text-stone-2/70">
+            Typeset in Spectral &amp; IBM Plex
+          </span>
         </div>
       </div>
     </footer>

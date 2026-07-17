@@ -41,12 +41,14 @@ export default function ProjectDetailPage({
 
   return (
     <article className="section-x mx-auto max-w-page py-14 sm:py-20">
-      <Link
-        href="/projects"
-        className="link-underline text-sm tracking-wide text-stone hover:text-ink"
-      >
-        ← Work
-      </Link>
+      <div className="titleblock border-b border-line pb-3 text-stone">
+        <Link href="/projects" className="link-underline hover:text-ink">
+          ← Work
+        </Link>
+        <span className="tabular-nums">
+          Sheet {String(index + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+        </span>
+      </div>
 
       {/* ── Header: title + facts panel ─────────────────────────────── */}
       <header className="mt-10 grid gap-8 border-b border-line pb-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-end lg:gap-14">
@@ -59,7 +61,7 @@ export default function ProjectDetailPage({
         <dl className="grid grid-cols-2 gap-x-6 gap-y-5">
           {project.facts.map((fact) => (
             <div key={fact.label} className="flex flex-col gap-1">
-              <dt className="text-[0.62rem] uppercase tracking-label text-stone">
+              <dt className="font-mono text-[0.62rem] uppercase tracking-label text-stone">
                 {fact.label}
               </dt>
               <dd

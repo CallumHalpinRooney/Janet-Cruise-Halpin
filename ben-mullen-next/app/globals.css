@@ -10,8 +10,23 @@
 
   body {
     @apply bg-paper text-ink font-sans antialiased;
-    font-feature-settings: "kern", "liga";
+    font-feature-settings: "kern", "liga", "calt";
     text-rendering: optimizeLegibility;
+  }
+
+  /* Statements are set in the serif — give it proper ligatures and let long
+     display lines break on sense, not on width. */
+  .font-serif {
+    font-feature-settings: "kern", "liga", "dlig";
+  }
+  h1,
+  h2 {
+    text-wrap: balance;
+  }
+
+  /* Figures — years, counts, sheet numbers — always line up. */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 
   ::selection {
@@ -27,9 +42,19 @@
 }
 
 @layer components {
-  /* Small tracked-out grotesque label — the practice's structural voice. */
+  /* The technical hand — set in the mono, the way a drawing is annotated. */
   .label {
-    @apply font-sans text-[0.68rem] font-medium uppercase tracking-label text-stone;
+    @apply font-mono text-[0.68rem] font-medium uppercase tracking-label text-stone;
+  }
+
+  /* Drawing-style title block: a hairline strip of mono metadata. */
+  .titleblock {
+    @apply flex items-center justify-between gap-4 font-mono text-[0.68rem] uppercase tracking-label;
+  }
+
+  /* A quiet ordinal / sheet number set in the mono. */
+  .figure {
+    @apply font-mono text-[0.72rem] tabular-nums text-stone;
   }
 
   /* Underline-on-hover for nav and inline links. */
