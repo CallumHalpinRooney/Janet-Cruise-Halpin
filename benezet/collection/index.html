@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Collection — Benezet Antiques</title>
+  <meta name="description" content="Browse the Benezet collection — fine antiques and objets d'art. Furniture, paintings, mirrors, silver, lighting, sculpture and objets. Every piece price on application.">
+  <link rel="canonical" href="https://benezet.ie/benezet/collection/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Benezet Antiques">
+  <meta property="og:title" content="The Collection — Benezet Antiques">
+  <meta property="og:description" content="Fine antiques and objets d'art, each one vetted and honestly described. Price on application.">
+  <meta property="og:image" content="https://benezet.ie/benezet/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#2E3133">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232E3133'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23EFEAE0' text-anchor='middle' font-style='italic'%3EB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/benezet/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#grid">Skip to the collection</a>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="/benezet/" aria-label="Benezet Antiques — home">
+        <span data-wordmark></span>
+        <span class="est">Est. Dublin</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="nav" aria-label="Primary">
+        <a href="/benezet/collection/" aria-current="page">Collection</a>
+        <a href="/benezet/about/">The gallery</a>
+        <a href="/benezet/visit/">Visit</a>
+        <a class="nav-enquire" href="#" data-enquire>Enquire</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap pageintro">
+      <a class="crumb" href="/benezet/">Benezet</a>
+      <div class="section-head" style="margin-top:1.2rem">
+        <p class="eyebrow">The collection</p>
+        <h2>Every piece, price on application.</h2>
+        <p>Furniture, paintings, mirrors, silver, lighting, sculpture and objets — each vetted and honestly described. Enquire about any piece to arrange a viewing or click &amp; collect.</p>
+      </div>
+    </section>
+
+    <section class="wrap section" style="padding-top:2.4rem">
+      <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
+      <div class="grid" id="grid" aria-live="polite">
+        <div class="grid-empty"><p>Bringing the collection through…</p></div>
+      </div>
+      <p class="mono" id="demoNote" style="display:none;margin-top:2.5rem;font-size:.62rem;color:var(--ash);letter-spacing:.14em"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <hr class="rule">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <span data-wordmark data-wordmark-class="wordmark--gilt"></span>
+          <p style="margin-top:1.2rem;max-width:24rem">Fine antiques &amp; objets d'art. Every piece vetted, honestly described, and offered price on application.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Gallery</h4>
+          <a href="/benezet/collection/">The collection</a>
+          <a href="/benezet/about/">The gallery</a>
+          <a href="/benezet/visit/">Visit &amp; collect</a>
+          <a href="#" data-enquire>Make an enquiry</a>
+        </div>
+        <div class="footer-col">
+          <h4>Find us</h4>
+          <p>Benezet Antiques</p>
+          <p>Dublin, Ireland</p>
+          <p><a href="tel:+35312830000">+353 1 283 0000</a></p>
+          <a href="https://instagram.com" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <span>© <span data-year>2026</span> Benezet Antiques</span>
+        <span>Price on application · Viewings by appointment · Click &amp; collect</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/benezet/js/wordmark.js"></script>
+  <script src="/benezet/js/data.js"></script>
+  <script src="/benezet/js/site.js"></script>
+  <script>
+    (function () {
+      var grid = document.getElementById("grid");
+      var filters = document.getElementById("filters");
+      var allPieces = [];
+      var active = "All";
+
+      function render() {
+        var shown = active === "All"
+          ? allPieces
+          : allPieces.filter(function (p) { return p.category === active; });
+        if (!shown.length) {
+          grid.innerHTML = '<div class="grid-empty"><p>New pieces arrive regularly.</p>' +
+            '<p class="muted">Enquire about what you’re looking for and we’ll keep an eye out.</p>' +
+            '<p style="margin-top:1.4rem"><a class="btn btn--line" href="#" data-enquire>Make an enquiry</a></p></div>';
+          return;
+        }
+        grid.innerHTML = shown.map(function (p, i) { return window.BENEZET.pieceCard(p, i); }).join("");
+        window.BENEZET.injectWordmarks();
+        window.BENEZET.initReveals();
+      }
+
+      function buildFilters(cats) {
+        var all = ["All"].concat(cats);
+        filters.innerHTML = all.map(function (c) {
+          return '<button class="filter" data-cat="' + window.BENEZET.attr(c) + '" aria-pressed="' +
+            (c === active) + '">' + window.BENEZET.esc(c) + "</button>";
+        }).join("");
+        filters.querySelectorAll(".filter").forEach(function (b) {
+          b.addEventListener("click", function () {
+            active = b.getAttribute("data-cat");
+            filters.querySelectorAll(".filter").forEach(function (x) {
+              x.setAttribute("aria-pressed", String(x === b));
+            });
+            render();
+            history.replaceState(null, "", active === "All" ? location.pathname : "?category=" + encodeURIComponent(active));
+          });
+        });
+      }
+
+      window.BENEZET_DATA.loadPieces().then(function (res) {
+        allPieces = res.pieces;
+        var cats = window.BENEZET_DATA.categoriesFrom(allPieces);
+        // honour ?category= deep link
+        var q = new URLSearchParams(location.search).get("category");
+        if (q && cats.indexOf(q) !== -1) active = q;
+        buildFilters(cats);
+        render();
+        if (res.demo) {
+          var note = document.getElementById("demoNote");
+          note.style.display = "block";
+          note.textContent = "Showing sample catalogue entries — the live Supabase table isn't connected yet. Setup steps are in benezet/README.md.";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
