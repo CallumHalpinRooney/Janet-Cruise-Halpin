@@ -23,6 +23,7 @@
   --display: "Cormorant Garamond", Georgia, serif;
   --body: "Newsreader", Georgia, serif;
   --mono: "Space Mono", "SFMono-Regular", ui-monospace, monospace;
+  --wordmark: "Cinzel", "Cormorant Garamond", Georgia, serif;
 
   /* ── measure ── */
   --page: 1240px;
@@ -100,21 +101,30 @@ h1, h2, h3, h4 { font-weight: 500; margin: 0; }
 /* ============================================================
    Wordmark
    ============================================================ */
-.wordmark { display: inline-block; line-height: 0; }
-.wordmark svg { display: block; height: auto; overflow: visible; }
-.wordmark path { fill: none; stroke: var(--bone); stroke-linecap: round; stroke-linejoin: round; }
-.wordmark--ink path { stroke: var(--ink); }
-.wordmark--gilt path { stroke: var(--gilt); }
-
-/* draw-in animation for the hero wordmark */
-.wordmark--draw path {
-  stroke-dasharray: var(--len, 1200);
-  stroke-dashoffset: var(--len, 1200);
-  animation: draw 2200ms var(--reveal-ease) forwards;
+.wordmark {
+  display: inline-block;
+  font-family: var(--wordmark);
+  font-weight: 500;
+  color: var(--bone);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  white-space: nowrap;
 }
-@keyframes draw { to { stroke-dashoffset: 0; } }
+.wordmark--ink { color: var(--ink); }
+.wordmark--gilt { color: var(--gilt); }
+
+/* reveal for the hero wordmark: settles in from wide, blurred tracking */
+.wordmark--draw {
+  opacity: 0;
+  animation: wm-reveal 1200ms var(--reveal-ease) forwards;
+}
+@keyframes wm-reveal {
+  from { opacity: 0; letter-spacing: 0.6em; filter: blur(5px); }
+  to   { opacity: 1; letter-spacing: 0.14em; filter: blur(0); }
+}
 @media (prefers-reduced-motion: reduce) {
-  .wordmark--draw path { stroke-dashoffset: 0; animation: none; }
+  .wordmark--draw { opacity: 1; animation: none; }
 }
 
 /* ============================================================
@@ -133,7 +143,7 @@ h1, h2, h3, h4 { font-weight: 500; margin: 0; }
   gap: 1.5rem; padding-block: 0.9rem;
 }
 .brand { display: inline-flex; align-items: center; gap: 0.9rem; text-decoration: none; }
-.brand .wordmark svg { height: 30px; }
+.brand .wordmark { font-size: 1.15rem; letter-spacing: 0.2em; }
 .brand .est {
   font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.28em;
   text-transform: uppercase; color: var(--bone-dim);
@@ -193,8 +203,11 @@ h1, h2, h3, h4 { font-weight: 500; margin: 0; }
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.035'/></svg>");
 }
 .hero__inner { text-align: center; padding: 6rem var(--gutter); max-width: 60rem; }
-.hero .wordmark { margin: 1.6rem auto 1.9rem; }
-.hero .wordmark svg { height: clamp(84px, 15vw, 168px); }
+.hero .wordmark {
+  display: block; margin: 1.9rem auto 2.1rem;
+  font-size: clamp(3rem, 11vw, 7rem);
+  letter-spacing: 0.14em;
+}
 .hero__eyebrow { color: var(--gilt); opacity: 0; }
 .hero__lede {
   font-family: var(--display); font-weight: 300;
@@ -205,9 +218,9 @@ h1, h2, h3, h4 { font-weight: 500; margin: 0; }
 .hero__ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; }
 
 /* staged fade-ins after the wordmark draws */
-.hero--in .hero__eyebrow { animation: rise 700ms var(--reveal-ease) 400ms forwards; }
-.hero--in .hero__lede    { animation: rise 700ms var(--reveal-ease) 2000ms forwards; }
-.hero--in .hero__ctas    { animation: rise 700ms var(--reveal-ease) 2300ms forwards; }
+.hero--in .hero__eyebrow { animation: rise 700ms var(--reveal-ease) 300ms forwards; }
+.hero--in .hero__lede    { animation: rise 700ms var(--reveal-ease) 1150ms forwards; }
+.hero--in .hero__ctas    { animation: rise 700ms var(--reveal-ease) 1400ms forwards; }
 @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   .hero__eyebrow, .hero__lede, .hero__ctas { opacity: 1 !important; animation: none !important; }
@@ -394,7 +407,7 @@ h1, h2, h3, h4 { font-weight: 500; margin: 0; }
 .site-footer .rule { opacity: 0.4; margin-bottom: 2.6rem; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; }
 @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
-.footer-grid .wordmark svg { height: 34px; }
+.footer-grid .wordmark { font-size: 1.5rem; letter-spacing: 0.18em; }
 .footer-col h4 { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gilt); margin-bottom: 1rem; }
 .footer-col a { color: var(--bone-dim); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 180ms ease; }
 .footer-col a:hover { color: var(--bone); }
