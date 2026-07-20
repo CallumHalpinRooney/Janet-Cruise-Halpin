@@ -16,7 +16,7 @@
     // one circular topic tile mid-feed, like the original
     if (i === 18) {
       li.innerHTML =
-        '<a class="feed_card_link no-underline" href="#">' +
+        '<a class="feed_card_link no-underline" href="#project/c' + i + '" data-card-id="c' + i + '">' +
         '<div class="topic-circle"><span data-edit>Topic Title</span></div>' +
         '<div class="card_text"><p class="card_kicker" data-edit>Topic</p></div>' +
         '</a>';
@@ -31,7 +31,7 @@
     // portraits get a ~square normalized frame, like the original feed grid
     var frame = ratio < 1 ? ' media-box--contain" style="--frame-ratio: 1; ' : '" style="';
     li.innerHTML =
-      '<a class="feed_card_link no-underline" href="#">' +
+      '<a class="feed_card_link no-underline" href="#project/c' + i + '" data-card-id="c' + i + '">' +
       '<figure class="media-box' + frame + '--aspect-ratio: ' + ratio + '">' +
       '<div class="media-box_frame">' +
       '<div class="media-box_media media-box_media--primary">' +
@@ -131,6 +131,7 @@
   }
 
   document.querySelectorAll('.js-words').forEach(revealWords);
+  window.__replicaWords = revealWords;
 
   /* --------------------------- menu overlay ----------------------------- */
 

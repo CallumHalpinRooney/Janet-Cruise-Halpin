@@ -41,7 +41,7 @@
     body.classList.toggle('edit-mode', on);
     toggleBtn.textContent = on ? 'Done' : 'Edit';
     toggleBtn.classList.toggle('is-active', on);
-    document.querySelectorAll('[data-edit]').forEach(function (el) {
+    document.querySelectorAll('[data-edit], [data-detail-field]').forEach(function (el) {
       if (on) el.setAttribute('contenteditable', 'plaintext-only');
       else el.removeAttribute('contenteditable');
     });
@@ -50,6 +50,8 @@
   toggleBtn.addEventListener('click', function () {
     setEditMode(!body.classList.contains('edit-mode'));
   });
+
+  window.__replicaEditorMedia = { set: setBoxImage, clear: clearBoxImage };
 
   /* While editing, links must not navigate (or jump to top via href="#"). */
   document.addEventListener('click', function (e) {
@@ -114,7 +116,9 @@
 
     var remove = e.target.closest('.editor-remove-img');
     if (remove) {
-      clearBoxImage(remove.closest('.media-box'));
+      var removedBox = remove.closest('.media-box');
+      clearBoxImage(removedBox);
+      if (window.__replicaDetail) window.__replicaDetail.noteImage(removedBox, null);
       e.preventDefault();
       return;
     }
@@ -132,26 +136,35 @@
     if (!file || !currentBox) return;
     fileToDataURI(file, function (src) {
       setBoxImage(currentBox, src);
+      if (window.__replicaDetail) window.__replicaDetail.noteImage(currentBox, src);
       fileInput.value = '';
     });
   });
 
   /* --------------------- shared state (gather/apply) -------------------- */
 
+  /* detail-view boxes/fields are stored per card, not by DOM order */
+  function contentBoxes() {
+    return [].filter.call(document.querySelectorAll('.media-box'), function (box) {
+      return !box.closest('#project-detail');
+    });
+  }
+
   function gatherState() {
     var texts = [].map.call(document.querySelectorAll('[data-edit]'), function (el) {
       return el.textContent;
     });
     var images = {};
-    [].forEach.call(document.querySelectorAll('.media-box'), function (box, i) {
+    contentBoxes().forEach(function (box, i) {
       var img = box.querySelector('.editor-img');
       if (img) images[i] = img.src;
     });
     return {
-      v: 1,
+      v: 2,
       feedCount: document.querySelectorAll('.feed_item').length,
       texts: texts,
       images: images,
+      details: window.__replicaDetail ? window.__replicaDetail.get() : {},
     };
   }
 
@@ -166,12 +179,13 @@
     (state.texts || []).forEach(function (t, i) {
       if (els[i] && els[i].textContent !== t) els[i].textContent = t;
     });
-    var boxes = document.querySelectorAll('.media-box');
-    [].forEach.call(boxes, function (box, i) {
+    var boxes = contentBoxes();
+    boxes.forEach(function (box, i) {
       var src = state.images && state.images[i];
       if (src) setBoxImage(box, src);
       else if (box.classList.contains('img-set')) clearBoxImage(box);
     });
+    if (state.details && window.__replicaDetail) window.__replicaDetail.set(state.details);
   }
 
   /* --------------------------- publish / sync --------------------------- */
@@ -249,6 +263,15 @@
     if (tb) { tb.textContent = 'Edit'; tb.classList.remove('is-active'); }
     var st = clone.querySelector('#editor-status');
     if (st) st.textContent = '';
+    // export always reopens on the home view, carrying the detail store along
+    var detail = clone.querySelector('#project-detail');
+    if (detail) {
+      detail.setAttribute('hidden', '');
+      if (window.__replicaDetail) detail.setAttribute('data-details', JSON.stringify(window.__replicaDetail.get()));
+    }
+    clone.querySelectorAll('.site-main > .module').forEach(function (m) {
+      if (m.id !== 'project-detail') m.removeAttribute('hidden');
+    });
 
     var html = '<!DOCTYPE html>\n' + clone.outerHTML;
     var a = document.createElement('a');

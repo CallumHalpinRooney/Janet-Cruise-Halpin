@@ -115,7 +115,7 @@
   <section class="module module-large-teasers" aria-label="Featured">
 
     <article class="large-teaser">
-      <a class="large-teaser_link no-underline" href="#" data-cursor>
+      <a class="large-teaser_link no-underline" href="#project/t1" data-card-id="t1" data-cursor>
         <figure class="media-box" style="--aspect-ratio: 1.3333">
           <div class="media-box_frame">
             <div class="media-box_media media-box_media--primary">
@@ -134,7 +134,7 @@
     </article>
 
     <article class="large-teaser">
-      <a class="large-teaser_link no-underline" href="#" data-cursor>
+      <a class="large-teaser_link no-underline" href="#project/t2" data-card-id="t2" data-cursor>
         <figure class="media-box" style="--aspect-ratio: 1.3333">
           <div class="media-box_frame">
             <div class="media-box_media media-box_media--primary">
@@ -153,7 +153,7 @@
     </article>
 
     <article class="large-teaser">
-      <a class="large-teaser_link no-underline" href="#" data-cursor>
+      <a class="large-teaser_link no-underline" href="#project/t3" data-card-id="t3" data-cursor>
         <figure class="media-box" style="--aspect-ratio: 0.75">
           <div class="media-box_frame">
             <div class="media-box_media media-box_media--primary">
@@ -179,6 +179,53 @@
     <div class="feed_sentinel" aria-hidden="true"></div>
   </section>
 
+
+  <!-- Project detail view (opened from any card; replica-only routing) -->
+  <section class="module project-detail" id="project-detail" hidden>
+    <div class="project-detail_inner">
+      <p class="project-detail_back"><a class="btn no-underline" href="#">&larr; Back</a></p>
+      <header class="project-detail_head">
+        <p class="card_kicker" data-detail-field="kicker">Project</p>
+        <h2 class="project-detail_title" data-detail-field="title">Project Title Placeholder</h2>
+        <p class="project-detail_subtitle" data-detail-field="subtitle">City Placeholder, Country Placeholder</p>
+      </header>
+      <figure class="media-box" data-detail-slot="hero" style="--aspect-ratio: 1.3333">
+        <div class="media-box_frame">
+          <div class="media-box_media media-box_media--primary">
+            <span class="ph-label">IMAGE PLACEHOLDER &mdash; project-hero 2300&times;1725 (4:3)</span>
+          </div>
+        </div>
+      </figure>
+      <div class="project-detail_text">
+        <p class="project-detail_intro" data-detail-field="intro">Intro paragraph placeholder &mdash; a short standfirst describing the project in one or two sentences.</p>
+        <p data-detail-field="body1">Body text placeholder. Replace this with a paragraph about the project: the brief, the site, the design approach and the materials. This copy is here to hold the layout at the correct measure and rhythm.</p>
+        <p data-detail-field="body2">Second body paragraph placeholder. More detail about the process, the collaborators and the outcome can live here. Click any of this text in Edit mode to replace it.</p>
+      </div>
+      <div class="project-detail_gallery">
+        <figure class="media-box" data-detail-slot="g1" style="--aspect-ratio: 1.3333">
+          <div class="media-box_frame"><div class="media-box_media media-box_media--primary"><span class="ph-label">IMAGE PLACEHOLDER &mdash; project-gallery-1 (4:3)</span></div></div>
+        </figure>
+        <figure class="media-box" data-detail-slot="g2" style="--aspect-ratio: 0.75">
+          <div class="media-box_frame"><div class="media-box_media media-box_media--primary"><span class="ph-label">IMAGE PLACEHOLDER &mdash; project-gallery-2 (3:4 portrait)</span></div></div>
+        </figure>
+        <figure class="media-box" data-detail-slot="g3" style="--aspect-ratio: 1">
+          <div class="media-box_frame"><div class="media-box_media media-box_media--primary"><span class="ph-label">IMAGE PLACEHOLDER &mdash; project-gallery-3 (1:1)</span></div></div>
+        </figure>
+        <figure class="media-box" data-detail-slot="g4" style="--aspect-ratio: 1.3333">
+          <div class="media-box_frame"><div class="media-box_media media-box_media--primary"><span class="ph-label">IMAGE PLACEHOLDER &mdash; project-gallery-4 (4:3)</span></div></div>
+        </figure>
+      </div>
+      <dl class="project-detail_facts">
+        <div><dt data-detail-field="f1l">Client</dt><dd data-detail-field="f1v">Client name placeholder</dd></div>
+        <div><dt data-detail-field="f2l">Status</dt><dd data-detail-field="f2v">Status placeholder</dd></div>
+        <div><dt data-detail-field="f3l">Year</dt><dd data-detail-field="f3v">0000&ndash;0000</dd></div>
+        <div><dt data-detail-field="f4l">Location</dt><dd data-detail-field="f4v">Location placeholder</dd></div>
+        <div><dt data-detail-field="f5l">Program</dt><dd data-detail-field="f5v">Program placeholder</dd></div>
+      </dl>
+      <p class="project-detail_back project-detail_back--bottom"><a class="btn no-underline" href="#">&larr; Back</a></p>
+    </div>
+  </section>
+
 </main>
 
 <div class="custom-cursor" aria-hidden="true">
@@ -197,5 +244,6 @@
 
 <script src="js/app.js"></script>
 <script src="js/editor.js"></script>
+<script src="js/detail.js"></script>
 </body>
 </html>
