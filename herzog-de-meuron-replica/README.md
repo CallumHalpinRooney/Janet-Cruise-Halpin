@@ -22,3 +22,30 @@ The floating **Edit** button (bottom-right) toggles edit mode:
 
 The editor toolbar is a replica-only addition — it is not part of the
 original site's design.
+
+## Shared editing (both people see the same version)
+
+The **Publish** button saves the page's text and images to the shared store
+(the same Supabase project this repo already uses). Anyone opening the page —
+hosted or as the downloaded single file — automatically loads the latest
+published version, and the page re-checks for updates every minute while not
+in edit mode. Last publish wins; there is no live co-editing.
+
+**One-time setup:** in the Supabase dashboard (project `lkwzyaygeqxfnmzekadj`),
+open SQL Editor and run:
+
+```sql
+create table if not exists replica_state (
+  id bigint generated always as identity primary key,
+  state jsonb not null,
+  created_at timestamptz not null default now()
+);
+alter table replica_state enable row level security;
+create policy "replica anon read"  on replica_state for select to anon using (true);
+create policy "replica anon write" on replica_state for insert to anon with check (true);
+```
+
+Until that table exists, Publish shows "Shared saving not set up yet" and the
+page simply works locally. Uploaded photos are downscaled to ≤1600px JPEG
+before publishing to keep saves small. Every publish adds a row (older rows
+are kept as history); clear old rows in Supabase if the table grows large.

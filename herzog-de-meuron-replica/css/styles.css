@@ -444,8 +444,15 @@ body.navigation-open .navigation_toggle_label--close { display: inline; }
   right: var(--gap);
   z-index: 50;
   display: flex;
+  align-items: center;
   gap: 0.5rem;
   font-size: var(--size-chip);
+}
+.editor-status {
+  font-size: 0.8rem;
+  color: var(--color-gray);
+  max-width: 20em;
+  text-align: right;
 }
 
 body.edit-mode [data-edit] {

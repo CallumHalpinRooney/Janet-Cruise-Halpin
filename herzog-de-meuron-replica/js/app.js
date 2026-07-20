@@ -80,11 +80,15 @@
   // a page exported by the inline editor ships with its feed already in the DOM
   if (feed.hasAttribute('data-prebuilt') || feed.children.length) {
     batches = MAX_BATCHES;
+    feedCount = feed.children.length;
     observeMedia();
   } else {
     appendBatch(40);
     batches++;
   }
+
+  // used by the shared-editing sync (editor.js) to align feed length
+  window.__replicaFeed = { append: appendBatch };
 
   var sentinel = document.querySelector('.feed_sentinel');
   var feedObserver = new IntersectionObserver(function (entries) {
