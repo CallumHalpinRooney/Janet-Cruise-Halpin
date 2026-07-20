@@ -17,8 +17,8 @@
     if (i === 18) {
       li.innerHTML =
         '<a class="feed_card_link no-underline" href="#">' +
-        '<div class="topic-circle"><span>Topic Title</span></div>' +
-        '<div class="card_text"><p class="card_kicker">Topic</p></div>' +
+        '<div class="topic-circle"><span data-edit>Topic Title</span></div>' +
+        '<div class="card_text"><p class="card_kicker" data-edit>Topic</p></div>' +
         '</a>';
       return li;
     }
@@ -40,8 +40,8 @@
       '<span class="ph-label">IMAGE PLACEHOLDER — feed-card-' + n + '-hover</span></div>' +
       '</div></figure>' +
       '<div class="card_text">' +
-      '<p class="card_kicker">' + kicker + '</p>' +
-      '<div class="card_title">' + (kicker === 'Project' ? '000 ' : '') +
+      '<p class="card_kicker" data-edit>' + kicker + '</p>' +
+      '<div class="card_title" data-edit>' + (kicker === 'Project' ? '000 ' : '') +
       'Placeholder Title ' + n + (i % 3 === 0 ? ' With a Second Line of Text' : '') + '</div>' +
       '</div></a>';
     return li;
@@ -77,8 +77,14 @@
 
   var MAX_BATCHES = 3;
   var batches = 0;
-  appendBatch(40);
-  batches++;
+  // a page exported by the inline editor ships with its feed already in the DOM
+  if (feed.hasAttribute('data-prebuilt') || feed.children.length) {
+    batches = MAX_BATCHES;
+    observeMedia();
+  } else {
+    appendBatch(40);
+    batches++;
+  }
 
   var sentinel = document.querySelector('.feed_sentinel');
   var feedObserver = new IntersectionObserver(function (entries) {
