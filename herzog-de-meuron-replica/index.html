@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  Design-study replica of the herzogdemeuron.com homepage (layout/typography/
+  behavior only). All images and editorial text are placeholders; commercial
+  fonts are substituted with system stacks. Not affiliated with the studio.
+  See DESIGN_NOTES.md for the measured spec this implements.
+-->
+<title>H&amp;dM homepage replica (design study)</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-header_link no-underline" href="#" aria-label="Home">
+    <h1 class="sr-only">Studio Name Placeholder</h1>
+    <span class="wordmark" aria-hidden="true">H&amp;dM</span>
+  </a>
+</header>
+
+<nav class="navigation" aria-label="Main">
+  <div class="navigation_buttons">
+    <button class="navigation_toggle" type="button" aria-expanded="false" aria-controls="menu-overlay">
+      <span class="navigation_toggle_label navigation_toggle_label--menu js-words">Menu</span>
+      <span class="navigation_toggle_label navigation_toggle_label--close">Close</span>
+    </button>
+  </div>
+
+  <div class="navigation_modal" id="menu-overlay" hidden>
+    <div class="navigation_modal_backdrop"></div>
+    <div class="navigation_panel">
+      <div class="navigation_panel_content">
+        <section class="navigation_module">
+          <ul class="menu-list">
+            <li><a href="#">Menu Item One</a></li>
+            <li><a href="#">Menu Item Two</a></li>
+            <li><a href="#">Menu Item Three</a></li>
+            <li><a href="#">Menu Item Four</a></li>
+          </ul>
+        </section>
+        <section class="navigation_module">
+          <ul class="menu-list">
+            <li><a href="#">Menu Item Five</a></li>
+            <li><a href="#">Menu Item Six</a></li>
+            <li><a href="#">Menu Item Seven</a></li>
+          </ul>
+        </section>
+        <section class="navigation_module">
+          <ul class="menu-list">
+            <li><a href="#">Menu Item Eight</a></li>
+            <li><a href="#">Menu Item Nine</a></li>
+          </ul>
+        </section>
+        <section class="navigation_module navigation_module--text">
+          <p>Address line placeholder<br>City placeholder</p>
+        </section>
+        <section class="navigation_module navigation_module--text">
+          <p><a href="#">Contact placeholder</a><br><a href="#">Legal placeholder</a></p>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="site-main">
+
+  <!-- Chip navigation -->
+  <section class="module module-page-links" aria-label="Sections">
+    <ul class="page-links">
+      <li class="page-links_item"><a class="btn" href="#">News</a></li>
+      <li class="page-links_item"><a class="btn" href="#">Projects</a></li>
+      <li class="page-links_item"><a class="btn" href="#">Practice</a></li>
+      <li class="page-links_item"><a class="btn" href="#">Exhibitions</a></li>
+      <li class="page-links_item"><a class="btn" href="#">Monographs</a></li>
+      <li class="page-links_item"><a class="btn" href="#">Writings</a></li>
+      <li class="page-links_item"><a class="btn" href="#">Lectures &amp; Talks</a></li>
+      <li class="page-links_item"><a class="btn" href="#">Kabinett</a></li>
+      <li class="page-links_item"><a class="btn" data-style="secondary" href="#">Sustainabil&shy;ity</a></li>
+      <li class="page-links_item"><a class="btn" data-style="secondary" href="#">Sport</a></li>
+      <li class="page-links_item"><a class="btn" data-style="secondary" href="#">Design Technologies</a></li>
+      <li class="page-links_item"><a class="btn" data-style="secondary" href="#">Academy</a></li>
+      <li class="page-links_item"><a class="btn" data-style="secondary" href="#">Interiors</a></li>
+      <li class="page-links_item"><a class="btn" data-style="secondary" href="#">Objects</a></li>
+      <li class="page-links_item"><a class="btn" data-style="secondary" href="#">Art Spaces</a></li>
+      <li class="page-links_item page-links_item--hidden"><a class="btn" data-style="secondary" href="#">Hidden Link One</a></li>
+      <li class="page-links_item page-links_item--hidden"><a class="btn" data-style="secondary" href="#">Hidden Link Two</a></li>
+      <li class="page-links_item page-links_item--hidden"><a class="btn" data-style="secondary" href="#">Hidden Link Three</a></li>
+      <li class="page-links_item page-links_item--toggle">
+        <button class="btn" data-style="secondary" type="button" aria-label="Show more sections">&hellip;</button>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Global search -->
+  <section class="module module-global-search" aria-label="Search">
+    <div class="global-search">
+      <div class="global-search_input is-h1">
+        <button class="global-search_clear" type="button" aria-label="Clear search" hidden>&times;</button>
+        <label class="global-search_sizer">
+          <span class="sr-only">Search</span>
+          <input class="global-search_field" type="search" autocomplete="off">
+        </label>
+        <div class="global-search_placeholder" aria-hidden="true">
+          <svg class="global-search_arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          <span class="js-words">Search for something...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Large teasers -->
+  <section class="module module-large-teasers" aria-label="Featured">
+
+    <article class="large-teaser">
+      <a class="large-teaser_link no-underline" href="#" data-cursor>
+        <figure class="media-box" style="--aspect-ratio: 1.3333">
+          <div class="media-box_frame">
+            <div class="media-box_media media-box_media--primary">
+              <span class="ph-label">IMAGE PLACEHOLDER — large-teaser-1 2300×1725 (4:3)</span>
+            </div>
+            <div class="media-box_media media-box_media--secondary">
+              <span class="ph-label">IMAGE PLACEHOLDER — large-teaser-1-hover 2300×1725 (4:3)</span>
+            </div>
+          </div>
+        </figure>
+        <div class="card_text">
+          <p class="card_kicker">Project</p>
+          <div class="card_title">000 Project Title Placeholder, Venue Name</div>
+        </div>
+      </a>
+    </article>
+
+    <article class="large-teaser">
+      <a class="large-teaser_link no-underline" href="#" data-cursor>
+        <figure class="media-box" style="--aspect-ratio: 1.3333">
+          <div class="media-box_frame">
+            <div class="media-box_media media-box_media--primary">
+              <span class="ph-label">IMAGE PLACEHOLDER — large-teaser-2 2300×1725 (4:3)</span>
+            </div>
+            <div class="media-box_media media-box_media--secondary">
+              <span class="ph-label">IMAGE PLACEHOLDER — large-teaser-2-hover 2300×1725 (4:3)</span>
+            </div>
+          </div>
+        </figure>
+        <div class="card_text">
+          <p class="card_kicker">Project Update</p>
+          <div class="card_title">News Headline Placeholder Opens</div>
+        </div>
+      </a>
+    </article>
+
+    <article class="large-teaser">
+      <a class="large-teaser_link no-underline" href="#" data-cursor>
+        <figure class="media-box" style="--aspect-ratio: 0.75">
+          <div class="media-box_frame">
+            <div class="media-box_media media-box_media--primary">
+              <span class="ph-label">IMAGE PLACEHOLDER — large-teaser-3 1725×2300 (portrait 3:4)</span>
+            </div>
+            <div class="media-box_media media-box_media--secondary">
+              <span class="ph-label">IMAGE PLACEHOLDER — large-teaser-3-hover 1725×2300 (portrait 3:4)</span>
+            </div>
+          </div>
+        </figure>
+        <div class="card_text">
+          <p class="card_kicker">Project</p>
+          <div class="card_title">000 Project Title Placeholder, Building Name</div>
+        </div>
+      </a>
+    </article>
+
+  </section>
+
+  <!-- Feed grid -->
+  <section class="module module-feed" aria-label="Latest">
+    <ul class="feed_items" id="feed"></ul>
+    <div class="feed_sentinel" aria-hidden="true"></div>
+  </section>
+
+</main>
+
+<div class="custom-cursor" aria-hidden="true">
+  <span class="custom-cursor_content">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+  </span>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

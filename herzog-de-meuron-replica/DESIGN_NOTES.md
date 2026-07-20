@@ -192,3 +192,31 @@ the document stops. (Legal/contact links live in the Menu overlay.)
 3. Search results view (needs live backend).
 4. Menu overlay item lists content beyond structure (three menu lists + two text blocks) — text content replaced with placeholders anyway.
 5. Commercial fonts (ABC Gravity, HdM Geometric, Suisse Works) — identified exactly but not redistributable; system fallbacks used.
+
+---
+
+## Phase 3 QA — replica vs. original (measured side-by-side, same viewports)
+
+| Metric | Original | Replica | Match |
+|---|---|---|---|
+| Header height / padding (1440) | 128px / 32 32 64 | 127px / 32 32 64 | ✓ |
+| Wordmark size/weight | 23.2px / 700 | 23.2px / 700 | ✓ |
+| Chip pill (1440) | 91×40, 20.16px, pad 9.08/19.16 | 91×40, 20.16px, pad 9.08/19.16 | ✓ exact |
+| Chip pill (768/390) | 79×35, 17.6px | 79×35, 17.6px | ✓ exact |
+| Search line (1440) | y=284, 23.2px/700 | y=284, 23.2px/700 | ✓ exact |
+| Teaser 1 (1440) | x70 y380 1300×1042 | x70 y379 1300×1042 | ✓ |
+| Teaser 1 (768) | x32 y459 704×595 | x32 y459 704×595 | ✓ exact |
+| Feed columns (1440) | 281.594px ×5 | 281.594px ×5 | ✓ exact |
+| Feed columns (768 / 390) | 245.33 ×3 / 183 ×2 | 245.33 ×3 / 183 ×2 | ✓ exact |
+| Feed item padding | 32 16 (desktop), 24 12 (mobile) | same | ✓ |
+| Mobile header | 104px / 24 24 48 | 103px / 24 24 48 | ✓ |
+
+**Known deviations (accepted, font-metric-driven):**
+* Without the commercial HdM Geometric/ABC Gravity faces, fallback glyph widths
+  differ slightly: at 390px the chip rows wrap one extra line (~45px taller
+  chips block); wordmark box is 67×26 vs 79×32. Everything token-driven
+  (sizes, weights, spacing) is exact.
+* Feed row heights vary with placeholder title length rather than real titles;
+  column geometry and card anatomy are exact. Portrait tiles use a square
+  normalized frame with the true-ratio "image" letterboxed inside, mirroring
+  the original's NormalizedGrid output.
