@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Benezet — Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232E3133'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23EFEAE0' text-anchor='middle' font-style='italic'%3EB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --fascia:#2E3133;--ink:#1A1C1D;--bone:#EFEAE0;--gilt:#B08D57;--ash:#8A857A;--claret:#6E3B34;
+      --panel:#26292b;--line:rgba(176,141,87,.22);--display:"Cormorant Garamond",Georgia,serif;
+      --body:"Newsreader",Georgia,serif;--mono:"Space Mono",monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+    a{color:var(--gilt)}
+    .mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em}
+    button{font-family:var(--mono);cursor:pointer}
+    :focus-visible{outline:2px solid var(--gilt);outline-offset:2px}
+
+    /* gate */
+    .gate{min-height:100vh;display:grid;place-items:center;padding:2rem;background:var(--fascia)}
+    .gate form{width:min(92vw,360px);text-align:center}
+    .gate .mark{font-family:var(--display);font-style:italic;font-size:2.4rem;color:var(--bone)}
+    .gate .sub{font-family:var(--mono);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gilt);margin:.4rem 0 2rem}
+    .gate input{width:100%;background:transparent;border:1px solid var(--line);color:var(--bone);padding:.85rem 1rem;font-family:var(--body);font-size:1rem;border-radius:1px}
+    .gate input:focus{outline:none;border-color:var(--gilt)}
+    .gate button{width:100%;margin-top:1rem;background:var(--gilt);color:var(--ink);border:0;padding:.9rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;border-radius:1px}
+    .gate .err{color:#d99;font-size:.85rem;margin-top:.8rem;min-height:1em;font-family:var(--body)}
+    .hidden{display:none!important}
+
+    /* shell */
+    .top{position:sticky;top:0;z-index:10;background:var(--fascia);border-bottom:1px solid var(--line);padding:1rem clamp(1rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .top .brand{font-family:var(--display);font-style:italic;font-size:1.5rem;color:var(--bone)}
+    .top .brand small{font-family:var(--mono);font-style:normal;font-size:.56rem;letter-spacing:.24em;color:var(--gilt);text-transform:uppercase;margin-left:.6rem}
+    .top .actions{display:flex;gap:.6rem;align-items:center}
+    .btn{border:1px solid var(--line);background:transparent;color:var(--bone);padding:.6rem 1rem;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;border-radius:1px}
+    .btn:hover{border-color:var(--gilt)}
+    .btn--gilt{background:var(--gilt);color:var(--ink);border-color:var(--gilt)}
+    .btn--danger{color:#d99;border-color:rgba(217,153,153,.3)}
+    .wrap{max-width:1080px;margin:auto;padding:clamp(1.2rem,4vw,2.5rem)}
+
+    .notice{border:1px solid var(--line);background:var(--panel);padding:1rem 1.2rem;border-radius:2px;margin-bottom:1.5rem;font-size:.92rem;color:var(--bone)}
+    .notice code{font-family:var(--mono);color:var(--gilt);font-size:.82em}
+
+    .rowline{display:flex;align-items:center;gap:1rem;padding:.9rem;border:1px solid var(--line);border-radius:2px;background:var(--panel);margin-bottom:.7rem}
+    .rowline .thumb{width:52px;height:65px;flex:0 0 auto;background:var(--fascia);border:1px solid var(--line);border-radius:1px;overflow:hidden;display:grid;place-items:center}
+    .rowline .thumb img{width:100%;height:100%;object-fit:cover}
+    .rowline .thumb span{font-family:var(--mono);font-size:.4rem;letter-spacing:.12em;color:var(--ash);text-align:center;text-transform:uppercase}
+    .rowline .meta{flex:1;min-width:0}
+    .rowline .t{font-family:var(--display);font-size:1.25rem;line-height:1.1}
+    .rowline .s{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:var(--gilt);text-transform:uppercase;margin-top:.15rem}
+    .rowline .tags{display:flex;gap:.4rem;margin-top:.4rem;flex-wrap:wrap}
+    .pill{font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid var(--line);border-radius:1px;color:var(--ash)}
+    .pill.available{color:#a9c5a0;border-color:rgba(169,197,160,.3)}
+    .pill.reserved{color:var(--bone)}
+    .pill.sold{color:#d99;border-color:rgba(217,153,153,.3)}
+    .pill.featured{color:var(--gilt);border-color:var(--line)}
+    .pill.imgs{color:var(--gilt)}
+    .rowline .ops{display:flex;gap:.4rem;flex-wrap:wrap}
+    @media(max-width:640px){.rowline{flex-wrap:wrap}.rowline .ops{width:100%}}
+
+    /* drawer editor */
+    .drawer{position:fixed;inset:0;z-index:50;display:none}
+    .drawer.open{display:block}
+    .drawer .scrim{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+    .drawer .panel{position:absolute;top:0;right:0;height:100%;width:min(96vw,560px);background:var(--fascia);border-left:1px solid var(--line);overflow-y:auto;padding:clamp(1.2rem,4vw,2rem)}
+    .drawer h2{font-family:var(--display);font-weight:400;font-size:1.8rem;margin:.2rem 0 1.2rem}
+    .fld{margin-bottom:1rem}
+    .fld label{display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);margin-bottom:.35rem}
+    .fld input,.fld textarea,.fld select{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--bone);padding:.6rem .7rem;font-family:var(--body);font-size:.95rem;border-radius:1px}
+    .fld input:focus,.fld textarea:focus,.fld select:focus{outline:none;border-color:var(--gilt)}
+    .fld textarea{min-height:78px;resize:vertical}
+    .fld.row2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .fld.row2 > div{min-width:0}
+    .check{display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone)}
+    .check input{width:auto}
+    .drawer .save-row{display:flex;gap:.6rem;margin-top:1.4rem;flex-wrap:wrap}
+
+    /* image manager */
+    .drop{border:1px dashed var(--line);border-radius:2px;padding:1.4rem;text-align:center;color:var(--ash);background:var(--panel);transition:border-color .15s}
+    .drop.hover{border-color:var(--gilt);color:var(--bone)}
+    .drop input{display:none}
+    .imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:.7rem;margin-top:1rem}
+    .imgcard{position:relative;aspect-ratio:4/5;border:1px solid var(--line);border-radius:1px;overflow:hidden;background:var(--ink)}
+    .imgcard img{width:100%;height:100%;object-fit:cover}
+    .imgcard .cover{position:absolute;top:0;left:0;background:var(--gilt);color:var(--ink);font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;padding:.15rem .35rem;text-transform:uppercase}
+    .imgcard .ic-ops{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-between;background:rgba(0,0,0,.55)}
+    .imgcard .ic-ops button{background:none;border:0;color:var(--bone);font-size:.62rem;padding:.25rem .3rem}
+    .imgcard .ic-ops button:hover{color:var(--gilt)}
+    .toast{position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%);background:var(--panel);border:1px solid var(--gilt);color:var(--bone);padding:.7rem 1.2rem;border-radius:2px;font-size:.9rem;z-index:80;opacity:0;transition:opacity .2s;pointer-events:none}
+    .toast.show{opacity:1}
+    .muted{color:var(--ash)}
+    .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--gilt);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
+    @keyframes sp{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- ── gate ── -->
+  <div class="gate" id="gate">
+    <form onsubmit="tryLogin(event)">
+      <div class="mark">Benezet</div>
+      <div class="sub">Dashboard</div>
+      <input type="password" id="pw" placeholder="Password" autocomplete="current-password" autofocus>
+      <button type="submit">Enter</button>
+      <div class="err" id="gateErr" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <!-- ── app ── -->
+  <div id="app" class="hidden">
+    <div class="top">
+      <div class="brand">Benezet <small>The collection</small></div>
+      <div class="actions">
+        <button class="btn btn--gilt" onclick="openEditor()">+ New piece</button>
+        <button class="btn" onclick="lock()">Lock</button>
+      </div>
+    </div>
+    <div class="wrap">
+      <div id="notice"></div>
+      <div id="list"><p class="muted"><span class="spin"></span> Loading the collection…</p></div>
+    </div>
+  </div>
+
+  <!-- ── editor drawer ── -->
+  <div class="drawer" id="drawer">
+    <div class="scrim" onclick="closeEditor()"></div>
+    <div class="panel">
+      <button class="btn" style="float:right" onclick="closeEditor()">Close ✕</button>
+      <h2 id="drawerTitle">New piece</h2>
+      <input type="hidden" id="fId">
+      <div class="fld"><label for="fTitle">Title</label><input id="fTitle" placeholder="e.g. Serpentine commode"></div>
+      <div class="fld"><label for="fMaker">Maker / attribution</label><input id="fMaker" placeholder="e.g. In the manner of Gillows of Lancaster"></div>
+      <div class="fld row2">
+        <div><label for="fPeriod">Period</label><input id="fPeriod" placeholder="George III, c. 1785"></div>
+        <div><label for="fCategory">Category</label>
+          <select id="fCategory">
+            <option>Furniture</option><option>Paintings</option><option>Mirrors</option>
+            <option>Silver</option><option>Lighting</option><option>Sculpture</option><option>Objets</option>
+          </select>
+        </div>
+      </div>
+      <div class="fld"><label for="fMaterials">Materials</label><input id="fMaterials" placeholder="Mahogany, oak-lined drawers…"></div>
+      <div class="fld"><label for="fDimensions">Dimensions</label><input id="fDimensions" placeholder="H 84 · W 112 · D 58 cm"></div>
+      <div class="fld"><label for="fProvenance">Provenance</label><textarea id="fProvenance" placeholder="From a private collection…"></textarea></div>
+      <div class="fld"><label for="fCondition">Condition note</label><textarea id="fCondition" placeholder="Excellent colour and patina…"></textarea></div>
+      <div class="fld row2">
+        <div><label for="fStock">Stock no.</label><input id="fStock" placeholder="0417"></div>
+        <div><label for="fStatus">Status</label>
+          <select id="fStatus"><option value="available">Available</option><option value="reserved">Reserved</option><option value="sold">Sold</option></select>
+        </div>
+      </div>
+      <div class="fld"><label for="fSlug">Slug (URL) — leave blank to generate</label><input id="fSlug" placeholder="serpentine-commode"></div>
+      <label class="check"><input type="checkbox" id="fFeatured"> Feature on the home page</label>
+
+      <!-- images -->
+      <h2 style="font-size:1.3rem;margin-top:2rem">Photographs</h2>
+      <p class="muted" style="font-size:.85rem;margin-top:-.6rem">Drag &amp; drop or choose files. The first image is the cover. Reorder or remove below. Save the piece first if it's brand new.</p>
+      <label class="drop" id="drop">
+        <input type="file" id="file" accept="image/*" multiple>
+        <span id="dropText">Drop images here, or click to choose</span>
+      </label>
+      <div class="imgs" id="imgs"></div>
+
+      <div class="save-row">
+        <button class="btn btn--gilt" onclick="savePiece()">Save piece</button>
+        <button class="btn btn--danger" id="deleteBtn" onclick="deletePiece()">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/benezet/js/data.js"></script>
+  <script>
+    var SUPABASE_URL = window.BENEZET_DATA.SUPABASE_URL;
+    var SUPABASE_KEY = window.BENEZET_DATA.SUPABASE_KEY;
+    var BUCKET = "pieces";
+    /* Soft gate — same approach as the sibling Lonrú dashboards.
+       Change before handing over. Not a hard auth boundary. */
+    var DASHBOARD_PASSWORD = "leobenezet";
+
+    var H = {
+      apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY,
+      "Content-Type": "application/json"
+    };
+    var pieces = [], editing = null, liveDB = false;
+
+    var esc = window.BENEZET_DATA ? function (s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    } : String;
+
+    /* ── gate ── */
+    function tryLogin(e) {
+      e.preventDefault();
+      if (document.getElementById("pw").value === DASHBOARD_PASSWORD) {
+        sessionStorage.setItem("bz_gate", "1"); openApp();
+      } else {
+        document.getElementById("gateErr").textContent = "That isn’t it — try again.";
+      }
+    }
+    function openApp() {
+      document.getElementById("gate").classList.add("hidden");
+      document.getElementById("app").classList.remove("hidden");
+      load();
+    }
+    function lock() { sessionStorage.removeItem("bz_gate"); location.reload(); }
+
+    function toast(msg) {
+      var t = document.getElementById("toast");
+      t.innerHTML = msg; t.classList.add("show");
+      clearTimeout(t._t); t._t = setTimeout(function () { t.classList.remove("show"); }, 2600);
+    }
+
+    /* ── load ── */
+    async function load() {
+      var list = document.getElementById("list");
+      try {
+        var ctrl = new AbortController();
+        var timer = setTimeout(function () { ctrl.abort(); }, 8000);
+        var r = await fetch(SUPABASE_URL + "/rest/v1/pieces?select=*&order=featured.desc,created_at.desc", { headers: H, signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!r.ok) throw new Error(await r.text());
+        pieces = (await r.json()).map(window.BENEZET_DATA.normalise);
+        liveDB = true;
+        document.getElementById("notice").innerHTML = "";
+      } catch (err) {
+        liveDB = false;
+        pieces = window.BENEZET_DATA.SEED.map(window.BENEZET_DATA.normalise);
+        document.getElementById("notice").innerHTML =
+          '<div class="notice"><strong>The <code>pieces</code> table isn’t reachable yet.</strong> ' +
+          'You’re seeing sample entries and can’t save changes until the table, storage bucket and ' +
+          'anon policies are set up. The exact SQL is in <code>benezet/README.md</code>.</div>';
+      }
+      render();
+    }
+
+    function render() {
+      var list = document.getElementById("list");
+      if (!pieces.length) { list.innerHTML = '<p class="muted">No pieces yet. Add your first with “+ New piece”.</p>'; return; }
+      list.innerHTML = pieces.map(function (p, i) {
+        var cover = p.images && p.images.length
+          ? '<img src="' + esc(p.images[0]) + '" alt="">'
+          : '<span>Photo<br>to<br>follow</span>';
+        var tags = '<span class="pill ' + esc(p.status) + '">' + esc(p.status) + '</span>' +
+          (p.featured ? '<span class="pill featured">Featured</span>' : '') +
+          '<span class="pill imgs">' + (p.images ? p.images.length : 0) + ' img</span>' +
+          '<span class="pill">' + esc(p.category) + '</span>';
+        return '<div class="rowline">' +
+          '<div class="thumb">' + cover + '</div>' +
+          '<div class="meta"><div class="t">' + esc(p.title) + '</div>' +
+          '<div class="s">No. ' + esc(p.stock_no) + '</div><div class="tags">' + tags + '</div></div>' +
+          '<div class="ops"><button class="btn" onclick="openEditor(' + i + ')">Edit</button></div></div>';
+      }).join("");
+    }
+
+    /* ── editor ── */
+    function val(id) { return document.getElementById(id).value.trim(); }
+    function setVal(id, v) { document.getElementById(id).value = v == null ? "" : v; }
+
+    function openEditor(i) {
+      editing = (typeof i === "number") ? pieces[i] : { images: [], status: "available", category: "Objets", featured: false };
+      document.getElementById("drawerTitle").textContent = (typeof i === "number") ? "Edit piece" : "New piece";
+      setVal("fId", editing.id || "");
+      setVal("fTitle", editing.title); setVal("fMaker", editing.maker);
+      setVal("fPeriod", editing.period); document.getElementById("fCategory").value = editing.category || "Objets";
+      setVal("fMaterials", editing.materials); setVal("fDimensions", editing.dimensions);
+      setVal("fProvenance", editing.provenance); setVal("fCondition", editing.condition_note);
+      setVal("fStock", editing.stock_no); document.getElementById("fStatus").value = editing.status || "available";
+      setVal("fSlug", editing.slug); document.getElementById("fFeatured").checked = !!editing.featured;
+      document.getElementById("deleteBtn").style.display = editing.id ? "" : "none";
+      renderImgs();
+      document.getElementById("drawer").classList.add("open");
+    }
+    function closeEditor() { document.getElementById("drawer").classList.remove("open"); editing = null; }
+
+    function slugify(s) {
+      return String(s).toLowerCase().normalize("NFKD").replace(/[^\w\s-]/g, "").trim().replace(/[\s_]+/g, "-").replace(/-+/g, "-");
+    }
+
+    function gather() {
+      var title = val("fTitle");
+      var slug = val("fSlug") || slugify(title) || slugify(val("fStock")) || ("piece-" + Date.now());
+      return {
+        title: title, maker: val("fMaker"), period: val("fPeriod"),
+        category: document.getElementById("fCategory").value,
+        materials: val("fMaterials"), dimensions: val("fDimensions"),
+        provenance: val("fProvenance"), condition_note: val("fCondition"),
+        stock_no: val("fStock"), status: document.getElementById("fStatus").value,
+        slug: slug, featured: document.getElementById("fFeatured").checked,
+        images: (editing && editing.images) || []
+      };
+    }
+
+    async function savePiece() {
+      if (!liveDB) { toast("Read-only — set up Supabase first (see README)."); return; }
+      var body = gather();
+      if (!body.title) { toast("A title is needed."); return; }
+      try {
+        var id = val("fId");
+        if (id) {
+          var r = await fetch(SUPABASE_URL + "/rest/v1/pieces?id=eq." + encodeURIComponent(id), {
+            method: "PATCH", headers: Object.assign({ Prefer: "return=representation" }, H), body: JSON.stringify(body)
+          });
+          if (!r.ok) throw new Error(await r.text());
+        } else {
+          var r2 = await fetch(SUPABASE_URL + "/rest/v1/pieces", {
+            method: "POST", headers: Object.assign({ Prefer: "return=representation" }, H), body: JSON.stringify(body)
+          });
+          if (!r2.ok) throw new Error(await r2.text());
+          var created = (await r2.json())[0];
+          if (created) { editing = window.BENEZET_DATA.normalise(created); setVal("fId", editing.id); document.getElementById("deleteBtn").style.display = ""; }
+        }
+        toast("Saved.");
+        await load();
+      } catch (e) { toast("Couldn’t save: " + esc(String(e.message).slice(0, 120))); }
+    }
+
+    async function deletePiece() {
+      var id = val("fId");
+      if (!id) { closeEditor(); return; }
+      if (!confirm("Delete this piece permanently?")) return;
+      try {
+        var r = await fetch(SUPABASE_URL + "/rest/v1/pieces?id=eq." + encodeURIComponent(id), { method: "DELETE", headers: H });
+        if (!r.ok) throw new Error(await r.text());
+        toast("Deleted."); closeEditor(); await load();
+      } catch (e) { toast("Couldn’t delete: " + esc(String(e.message).slice(0, 120))); }
+    }
+
+    /* ── images ── */
+    function renderImgs() {
+      var wrap = document.getElementById("imgs");
+      var imgs = (editing && editing.images) || [];
+      if (!imgs.length) { wrap.innerHTML = '<p class="muted" style="grid-column:1/-1;font-size:.85rem">No photographs yet. The public site shows an elegant “Photograph to follow” panel until you add one.</p>'; return; }
+      wrap.innerHTML = imgs.map(function (u, i) {
+        return '<div class="imgcard">' + (i === 0 ? '<span class="cover">Cover</span>' : '') +
+          '<img src="' + esc(u) + '" alt="">' +
+          '<div class="ic-ops">' +
+          '<button title="Move left" onclick="moveImg(' + i + ',-1)" ' + (i === 0 ? 'disabled style="opacity:.3"' : '') + '>◀</button>' +
+          '<button title="Remove" onclick="removeImg(' + i + ')">✕</button>' +
+          '<button title="Move right" onclick="moveImg(' + i + ',1)" ' + (i === imgs.length - 1 ? 'disabled style="opacity:.3"' : '') + '>▶</button>' +
+          '</div></div>';
+      }).join("");
+    }
+
+    async function persistImages() {
+      if (!liveDB) return;
+      var id = val("fId");
+      if (!id) return; // brand-new unsaved piece; images kept in memory until save
+      await fetch(SUPABASE_URL + "/rest/v1/pieces?id=eq." + encodeURIComponent(id), {
+        method: "PATCH", headers: H, body: JSON.stringify({ images: editing.images })
+      });
+    }
+    async function moveImg(i, d) {
+      var a = editing.images, j = i + d;
+      if (j < 0 || j >= a.length) return;
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+      renderImgs(); await persistImages(); toast("Order updated.");
+    }
+    async function removeImg(i) {
+      editing.images.splice(i, 1);
+      renderImgs(); await persistImages(); toast("Image removed.");
+    }
+
+    // compress to a sensible max width; falls back to the raw file on any error
+    function compress(file) {
+      return new Promise(function (resolve) {
+        if (!/^image\//.test(file.type)) return resolve(file);
+        var url = URL.createObjectURL(file);
+        var img = new Image();
+        img.onload = function () {
+          try {
+            var max = 1600, scale = Math.min(1, max / img.width);
+            var w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+            var c = document.createElement("canvas"); c.width = w; c.height = h;
+            c.getContext("2d").drawImage(img, 0, 0, w, h);
+            c.toBlob(function (blob) {
+              URL.revokeObjectURL(url);
+              resolve(blob && blob.size < file.size ? blob : file);
+            }, "image/jpeg", 0.85);
+          } catch (e) { URL.revokeObjectURL(url); resolve(file); }
+        };
+        img.onerror = function () { URL.revokeObjectURL(url); resolve(file); };
+        img.src = url;
+      });
+    }
+
+    async function uploadFiles(files) {
+      if (!liveDB) { toast("Read-only — set up Supabase Storage first (see README)."); return; }
+      var slug = val("fSlug") || slugify(val("fTitle")) || "piece";
+      var dropText = document.getElementById("dropText");
+      for (var k = 0; k < files.length; k++) {
+        var file = files[k];
+        if (!/^image\//.test(file.type)) continue;
+        dropText.innerHTML = '<span class="spin"></span> Uploading ' + esc(file.name) + '…';
+        try {
+          var blob = await compress(file);
+          var safe = file.name.replace(/[^\w.\-]+/g, "-").replace(/\.[^.]+$/, "");
+          var path = slug + "/" + Date.now() + "-" + safe + ".jpg";
+          var up = await fetch(SUPABASE_URL + "/storage/v1/object/" + BUCKET + "/" + encodeURI(path), {
+            method: "POST",
+            headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": blob.type || "image/jpeg", "x-upsert": "true" },
+            body: blob
+          });
+          if (!up.ok) throw new Error(await up.text());
+          var publicUrl = SUPABASE_URL + "/storage/v1/object/public/" + BUCKET + "/" + encodeURI(path);
+          editing.images = editing.images || [];
+          editing.images.push(publicUrl);
+          renderImgs();
+          await persistImages();
+        } catch (e) {
+          toast("Upload failed: " + esc(String(e.message).slice(0, 120)));
+        }
+      }
+      dropText.textContent = "Drop images here, or click to choose";
+      toast("Photographs updated.");
+    }
+
+    /* drag & drop wiring */
+    var drop = document.getElementById("drop"), fileInput = document.getElementById("file");
+    fileInput.addEventListener("change", function () { if (fileInput.files.length) uploadFiles(fileInput.files); fileInput.value = ""; });
+    ["dragenter", "dragover"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add("hover"); }); });
+    ["dragleave", "drop"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove("hover"); }); });
+    drop.addEventListener("drop", function (e) { if (e.dataTransfer && e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files); });
+
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeEditor(); });
+
+    if (sessionStorage.getItem("bz_gate") === "1") openApp();
+  </script>
+</body>
+</html>
