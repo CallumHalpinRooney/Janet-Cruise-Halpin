@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Janet Cruise Halpin — Inquiries Dashboard</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -110,17 +114,18 @@ body{
 }
 .art-strip img{
   flex:1 1 0;min-width:0;width:calc(100% / 8);
-  object-fit:cover;filter:brightness(.62)saturate(.92);
-  transition:filter .5s ease,transform .5s ease;
+  object-fit:cover;
+  transition:transform .5s ease;
 }
-.art-strip:hover img{filter:brightness(.5)saturate(.85)}
-.art-strip img:hover{filter:brightness(1)saturate(1.05);transform:scale(1.03)}
+.art-strip img:hover{transform:scale(1.03)}
 .art-strip-overlay{
   position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(105deg,rgba(16,30,20,.9) 0%,rgba(22,38,27,.62) 42%,rgba(22,38,27,.12) 100%);
   display:flex;align-items:center;justify-content:space-between;
   padding:0 clamp(1.25rem,4vw,3.25rem);
 }
+.art-strip-overlay .strip-eyebrow,
+.art-strip-overlay .strip-title,
+.art-strip-overlay .strip-status{text-shadow:0 1px 3px rgba(16,30,20,.75),0 2px 12px rgba(16,30,20,.6)}
 .strip-brand{max-width:60%}
 .strip-eyebrow{
   font-size:.64rem;letter-spacing:.34em;text-transform:uppercase;
@@ -328,13 +333,14 @@ body{
   overflow:hidden;height:170px;border-radius:4px;
   box-shadow:var(--shadow-lift);background:var(--forest-deep);
 }
-.art-footer img{flex:1 1 0;min-width:0;object-fit:cover;filter:brightness(.62)saturate(.92)}
+.art-footer img{flex:1 1 0;min-width:0;object-fit:cover}
 .art-footer-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(16,30,20,.94) 0%,rgba(22,38,27,.55) 55%,rgba(22,38,27,.2) 100%);
+  position:absolute;inset:0;pointer-events:none;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;gap:.6rem;padding:1rem;
 }
+.art-footer-overlay .art-footer-title,
+.art-footer-overlay .art-footer-sub{text-shadow:0 1px 3px rgba(16,30,20,.8),0 2px 14px rgba(16,30,20,.65)}
 .art-footer-title{
   font-family:var(--serif);font-size:1.9rem;font-style:italic;
   color:var(--cream);letter-spacing:.02em;line-height:1;font-weight:500;
