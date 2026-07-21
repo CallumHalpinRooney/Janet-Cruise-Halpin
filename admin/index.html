@@ -706,7 +706,10 @@ function cardHTML(inq) {
   const painting = inq.painting || '';
   const paintingBare = painting.replace(/\s*\(.*\)$/,'') || 'General Inquiry';
   const hasImg  = inq.painting_img && inq.painting_img.length > 0;
-  const replyLink = `mailto:${inq.email}?subject=Re: Your Inquiry — ${encodeURIComponent(paintingBare)}&body=Hi ${encodeURIComponent(inq.name)},%0A%0AThank you for your interest in "${encodeURIComponent(paintingBare)}"…`;
+  const replySubject = `Re: Your Inquiry — ${paintingBare}`;
+  const replyBody    = `Hi ${inq.name},\n\nThank you for your interest in "${paintingBare}"…`;
+  const replyLink = gmailCompose(inq.email, replySubject, replyBody);
+  const emailLink = gmailCompose(inq.email);
 
   return `<div class="inq-card" id="card-${inq.id}">
     <div class="card-painting">
@@ -721,11 +724,11 @@ function cardHTML(inq) {
     </div>
     <div class="card-body">
       <div class="card-name">${esc(inq.name)}</div>
-      <div class="card-email"><a href="mailto:${esc(inq.email)}">${esc(inq.email)}</a></div>
+      <div class="card-email"><a href="${emailLink}" target="_blank" rel="noopener">${esc(inq.email)}</a></div>
       <div class="card-msg">"${esc(inq.message)}"</div>
     </div>
     <div class="card-actions">
-      <a href="${replyLink}" class="card-reply-btn" onclick="markReplied('${inq.id}')">Reply by Email</a>
+      <a href="${replyLink}" target="_blank" rel="noopener" class="card-reply-btn" onclick="markReplied('${inq.id}')">Reply by Email</a>
       <button class="card-mark-btn ${replied.includes(inq.id)?'done':''}"
         onclick="markReplied('${inq.id}')">
         ${replied.includes(inq.id) ? '✓ Replied' : 'Mark replied'}
@@ -736,6 +739,15 @@ function cardHTML(inq) {
 
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Gmail compose link (from janet.c.halpin@gmail.com) ── */
+const SENDER_EMAIL = 'janet.c.halpin@gmail.com';
+function gmailCompose(to, subject, body) {
+  const p = new URLSearchParams({ view:'cm', fs:'1', to: to || '' });
+  if (subject) p.set('su', subject);
+  if (body)    p.set('body', body);
+  return `https://mail.google.com/mail/?authuser=${encodeURIComponent(SENDER_EMAIL)}&${p.toString()}`;
 }
 
 /* ── Filter / sort controls ──────────────────────── */
